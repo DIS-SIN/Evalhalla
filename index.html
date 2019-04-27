@@ -387,7 +387,7 @@
                         src +
                         '<div class="row">' +
                         '<div class="col s12 center">' +
-                        '<a id="evalhalla_submit" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>SUBMIT</a>' +
+                        '<a id="evalhalla_submit" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i><span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>' +
                         '</div>' +
                         '</div>' +
                         '</form>' +
@@ -447,7 +447,7 @@
                             '<div class="row">' +
                             '<div class="input-field col s12" >' +
                             '<select id="scale_qid_%qid" name="scale_qid_%qid">' +
-                            '<option value="" disabled selected>Choose your rating</option>' +
+                            '<option value="" disabled selected>--</option>' +
                             '<option value="1">1 %low</option>' +
                             '<option value="2">2</option>' +
                             '<option value="3">3</option>' +
@@ -460,7 +460,7 @@
                             '<option value="10">10 %high</option>' +
                             '<option value="77">%unsure</option>' +
                             '</select>' +
-                            '<label>Rating</label>' +
+                            '<label><span class="en">Choose your rating</span><span class="fr">Chosir s.v.p.</span></label>' +
                             '</div> ' +
                             '</div> ' +
                             '';
@@ -472,7 +472,7 @@
                             '<div class="row">' +
                             '<div class="row">' +
                             '<div class="input-field col s12">' +
-                            '<label for="textarea_qid_%qid">Enter your answer</label>' +
+                            '<label for="textarea_qid_%qid"><span class="en">Enter your answer</span><span class="fr">Provir votre reponse</span></label>' +
                             '<textarea id="textarea_qid_%qid" name="textarea_qid_%qid" class="materialize-textarea"></textarea>' +
                             '</div>' +
                             '</div>' +
@@ -756,10 +756,11 @@
                         snip = g_control_flags["question"]["form"];
                         var scale = get_template_snip("scale").replace(/\%qid/g, g_control_flags["question"]["qid"]);
                         var opts = src.split(",")
+                        // clean opts
                         opts[0] = opts[0]
                             .replace("[SCALE]", "")
-                            .replace("/SCALE", "")
-                            .replace("/ÉCHELLE", "")
+                            .replace(/(\/SCALE|\/scale)/g, "")
+                            .replace(/(\/ÉCHELLE|\/échelle)/g, "")
                             .replace("|", "")
                             .trim();
                         // handle json
@@ -922,6 +923,16 @@
                 //
 
                 // lang
+                var refresh_lang = function () {
+                    if (g_state["ui"]["lang"] == "en") {
+                        $("span.en").show();
+                        $("span.fr").hide();
+                    } else if (g_state["ui"]["lang"] == "fr") {
+                        $("span.en").hide();
+                        $("span.fr").show();
+                    }
+                    ui_resize_textareas();
+                };
                 g_state["el"]["lang"].on("change", function () {
                     if (g_state["ui"]["lang"] == "en") {
                         g_state["el"]["en"].hide();
@@ -963,8 +974,9 @@
                     var survey_html = raise_src_to_evalhalla(src);
                     // load render
                     g_state["el"]["c_render"].html(form_wrap(survey_html));
-                    // reinit submit
+                    // reinit submit, lang refresh
                     $("#evalhalla_submit").on("click", evalhalla_submit);
+                    refresh_lang();
                     // load json
                     try {
                         g_state["el"]["c_json"].val(JSON.stringify(JSON.parse(
