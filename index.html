@@ -258,7 +258,7 @@
                     "[RANK]": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/RANK": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/TAUX": { "type": "rank", "html": "<rank>%v</rank>" },
-                    "/": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "$": { "type": "rank", "html": "<rank>%v</rank>" },
                     "[RATE]": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/RATE": { "type": "rank", "html": "<rank>%v</rank>" },
                     "[ENDRANK]": { "type": "end rank", "html": "<rank>%v</rank>" },
@@ -521,13 +521,25 @@
                             '<div class="row">' +
                             '<div class="col s12">' +
                             '<div class="input-field s12">' +
-                            '<input id="inline_qid_%qid" name="inline_qid_%qid" type="text">' +
+                            '<input id="inline_qid_%qid" name="inline_qid_%qid_oid_%oid" type="text">' +
                             '<label for="inline_qid_%qid">%pick</label>' +
                             '</div>' +
                             '</div>' +
                             '</div>' +
                             '';
                     } else if (snip == "instruction") {
+                        if (format == "json") {
+                            return '{' +
+                                '"qid": "none",' +
+                                '"question": "%instruction",' +
+                                '"description": "%instruction",' +
+                                '"language": "%lang",' + // en or fr
+                                '"questionType": "instruction",' + //mcq 'text' , 'dropdown',
+                                '"randomOrder": "%rand_order",' +
+                                '"randomOptions": "%rand_options",' +
+                                '"options": []' +
+                                '}';
+                        }
                         return '' +
                             '<div class="card-panel">' +
                             '<span class="blue-text text-darken-2">%instruction</span>' +
@@ -748,7 +760,14 @@
                     var snip = get_template_snip("instruction");
                     snip = snip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
                     // handle json
-                    // ?
+                    var jsonsnip = get_template_snip("instruction", "json");
+                    jsonsnip = jsonsnip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
+                    g_control_flags["json"] = g_control_flags["json"]
+                        .replace("%questions", jsonsnip + ",%questions")
+                        .replace("%rand_order", g_control_flags["question"]["random"]["order"])
+                        .replace("%rand_options", g_control_flags["question"]["random"]["options"])
+                        .replace("%lang", g_state["ui"]["lang"])
+                        ;
                     return snip;
                 }
                 var handle_cmd_question = function (cmd, src) {
@@ -831,7 +850,9 @@
                         for (var opti = 0; opti < opts.length; opti++) {
                             temp_snip = get_template_snip(cmd)
                                 .replace(/\%qid/g, g_control_flags["question"]["qid"])
-                                .replace(/\%pick/g, opts[opti].trim());
+                                .replace(/\%pick/g, opts[opti].trim())
+                                .replace(/\%oid/g, opti)
+                                ;
                             form += temp_snip;
                             random_shuffle.push(temp_snip);
 
@@ -842,7 +863,10 @@
                             shuffle_array(random_shuffle);
                             form = random_shuffle.join(" ");
                         }
-                        snip = snip.replace(/\%form/g, form);
+                        if (typeof snip !== "undefined" && snip != false) {
+                            snip = snip.replace(/\%form/g, form);
+                        }
+
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "mcq");
@@ -934,7 +958,45 @@
                             }
                         }
                     }
-                    return evalhalla.join("");
+                    // random order handling
+                    var return_evalhalla = "";
+                    try {
+                        var new_evalhalla = [];
+                        var new_evalhalla_rand = [];
+                        var q_index = JSON.parse(g_control_flags["json"]
+                            .replace(/\,\%questions/g, "")
+                            .replace(/\%options/g, "")
+                            .replace(/\%questions/g, "")
+                        );
+                        var qs = q_index["questions"];
+                        new_evalhalla.push(evalhalla[0]);
+
+                        if (typeof qs !== "undefined") {
+                            for (var k = 0; k < qs.length; k++) {
+                                if (qs[k].randomOrder == "false") {
+                                    if (new_evalhalla_rand.length != 0) {
+                                        shuffle_array(new_evalhalla_rand);
+                                        new_evalhalla.push(new_evalhalla_rand.join(""));
+                                        new_evalhalla_rand = [];
+                                    }
+                                    new_evalhalla.push(evalhalla[k + 1]);
+                                } else {
+                                    new_evalhalla_rand.push(evalhalla[k + 1]);
+                                }
+                            }
+                        }
+                        shuffle_array(new_evalhalla_rand);
+                        new_evalhalla.push(new_evalhalla_rand.join());
+                        new_evalhalla_rand = [];
+                        return_evalhalla = new_evalhalla.join("");
+                    } catch (e) {
+                        return_evalhalla = evalhalla.join("");
+                        //M.toast({ html: 'JSON ' + e.toString(), classes: 'rounded' });
+                    }
+                    return return_evalhalla
+                        .replace(/\,\%questions/g, "")
+                        .replace(/\%options/g, "")
+                        .replace(/\%questions/g, "")
                 };
 
                 // 
@@ -1013,7 +1075,7 @@
                                 .replace(/\%questions/g, "")
                         ), null, 4));
                     } catch (e) {
-                        M.toast({ html: 'JSON ' + e.toString(), classes: 'rounded' });
+                        M.toast({ html: 'Hint: Use single quotes, JSON ' + e.toString(), classes: 'rounded' });
                     }
                     $('select').formSelect();
                 });
@@ -1028,6 +1090,7 @@
                         JSON.stringify(JSON.parse(
                             g_control_flags["json"]
                                 .replace(/\,\%questions/g, "")
+                                .replace(/\%questions/g, "")
                                 .replace(/\%options/g, "")
                         ), null, 4)
                     );
