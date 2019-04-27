@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evalhalla - Surveys and Evaluations done right</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
+        rel="stylesheet" media="screen,projection">
+    <style>
+        nav ul a,
+        nav .brand-logo {
+            color: #444;
+        }
+
+        p {
+            line-height: 2rem;
+        }
+
+        .sidenav-trigger {
+            color: #26a69a;
+        }
+
+        .parallax-container {
+            min-height: 380px;
+            line-height: 0;
+            height: auto;
+            color: rgba(255, 255, 255, .9);
+        }
+
+        .parallax-container .section {
+            width: 100%;
+        }
+
+        @media only screen and (max-width : 992px) {
+            .parallax-container .section {
+                position: absolute;
+                top: 40%;
+            }
+
+            #index-banner .section {
+                top: 10%;
+            }
+        }
+
+        @media only screen and (max-width : 600px) {
+            #index-banner .section {
+                top: 0;
+            }
+        }
+
+        .icon-block {
+            padding: 0 15px;
+        }
+
+        .icon-block .material-icons {
+            font-size: inherit;
+        }
+
+        footer.page-footer {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="white" role="navigation" id="root" name="root">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
+            <ul class="right">
+                <li><a href="#" id="show_me_how">Tutorial</a></li>
+                <li><a href="#" class="survista_send">Send Form to Survista</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="editor" name="editor" class="container">
+        <div class="section">
+            <div class="row">
+                <div id="editor_window" class="col s4">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="editor_target" class="materialize-textarea"
+                                    data-original-height=0></textarea>
+                                <label for="editor_target">Survey Source (TYPE HERE)</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="render_window" class="col s4">
+                    <div class="row">
+                        <div id="render_target"></div>
+                    </div>
+                </div>
+                <div id="json_window" class="col s4">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col s12">
+                                <textarea id="json_target" class="materialize-textarea"
+                                    data-original-height=0></textarea>
+                                <label for="json_target">Survey JSON (auto-generated)</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h5 class="header col s12 light">Evaluate More. Build Less.</h5>
+                    <h6 class="header col s12 light">Just type to build your survey</h6>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="static/images/background3.jpg" alt="Unsplashed background img 3"></div>
+    </div>
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Evalhalla</h5>
+                    <p class="grey-text text-lighten-4">
+                        Alpha. Evalhalla is an experiment in making form creation easier.
+                    </p>
+                    <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Forms that function
+            </div>
+        </div>
+    </footer>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li><a id="hs_render_window" class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+            <li><a id="hs_json_window" class="btn-floating yellow darken-1"><i class="material-icons">code</i></a></li>
+            <li><a id="hs_editor_window" class="btn-floating orange darken-1"><i class="material-icons">list</i></a>
+            </li>
+            <li><a class="survista_send btn-floating green"><i class="material-icons">cloud_upload</i></a></li>
+            <li><a class="btn-floating blue" href="#root"><i class="material-icons">arrow_upward</i></a></li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        (function ($) {
+            $(function () {
+                //
+                // EVALHALLA
+                //
+                // Just type. It will make your form HTML and JSON
+                // Think more code less.
+                //
+
+                //
+                // HTML, JSON, and EVALESE snips
+                //
+
+                const g_cmd = {
+                    "[SURVEY]": { "type": "survey", "html": "<survey>%v</survey>" },
+                    "#": { "type": "survey", "html": "<survey>%v</survey>" },
+                    "[TITLE]": { "type": "title", "html": "<title>%v</title>" },
+                    "##": { "type": "title", "html": "<title>%v</title>" },
+                    "[INTRO]": { "type": "intro", "html": "<intro>%v</intro>" },
+                    "###": { "type": "intro", "html": "<intro>%v</intro>" },
+                    "[QUESTION]": { "type": "question", "html": "<question>%v</question>" },
+                    "Q:": { "type": "question", "html": "<question>%v</question>" },
+                    "[SCALE]": { "type": "scale", "html": "<scale>%v</scale>" },
+                    "/SCALE": { "type": "scale", "html": "<scale>%v</scale>" },
+                    "|": { "type": "scale", "html": "<scale>%v</scale>" },
+                    "[OPEN]": { "type": "open", "html": "<open>%v</open>" },
+                    "/OPEN": { "type": "open", "html": "<open>%v</open>" },
+                    "@": { "type": "open", "html": "<open>%v</open>" },
+                    "[INSTRUCTION]": { "type": "instruction", "html": "<instruction>%v</instruction>" },
+                    "//": { "type": "instruction", "html": "<instruction>%v</instruction>" },
+                    "[END]": { "type": "end", "html": "<end>%v</end>" },
+                    ";": { "type": "end", "html": "<end>%v</end>" },
+                    "[RANDOMORDER]": { "type": "random order", "html": "<rand>%v</rand>" },
+                    "[RANDOMIZEORDER]": { "type": "random order", "html": "<rand>%v</rand>" },
+                    "[ENDRANDOMORDER]": { "type": "end random order", "html": "<rand>%v</rand>" },
+                    "[ENDRANDOMIZEORDER]": { "type": "end random order", "html": "<rand>%v</rand>" },
+                    "[RANDOMOPTIONS]": { "type": "random options", "html": "<rand>%v</rand>" },
+                    "[RANDOMIZEOPTIONS]": { "type": "random options", "html": "<rand>%v</rand>" },
+                    "[ENDRANDOMOPTIONS]": { "type": "end random options", "html": "<rand>%v</rand>" },
+                    "[ENDRANDOMIZEOPTIONS]": { "type": "end random options", "html": "<rand>%v</rand>" },
+                    "[PICKONE]": { "type": "pick one", "html": "<pick>%v</pick>" },
+                    "/ONE": { "type": "pick one", "html": "<pick>%v</pick>" },
+                    ".": { "type": "pick one", "html": "<pick>%v</pick>" },
+                    "[PICKANY]": { "type": "pick any", "html": "<pick>%v</pick>" },
+                    "/ANY": { "type": "pick any", "html": "<pick>%v</pick>" },
+                    "*": { "type": "pick any", "html": "<pick>%v</pick>" },
+                    "[ENDPICK]": { "type": "end pick", "html": "<pick>%v</pick>" },
+                    "[RANK]": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "/RANK": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "/": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "[RATE]": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "/RATE": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "[ENDRANK]": { "type": "end rank", "html": "<rank>%v</rank>" },
+                    "[ENDRATE]": { "type": "end rank", "html": "<rank>%v</rank>" }
+                };
+                const g_intro_script = "" +
+                    "[SURVEY] 123\n" +
+                    "[TITLE] Evalhalla Survey\n" +
+                    "[INTRO] It's easy to make survey. There's stuff in square brackets that tell Evalhalla where\n" +
+                    "to focus, and it makes a form. JSON too.\n" +
+                    "\n" +
+                    "[QUESTION] Have you clicked on 'tutorial' yet? \n" +
+                    "[PICKONE]\n" +
+                    "Yes\n" +
+                    "Not yet\n" +
+                    "[END]\n" +
+                    "\n" +
+                    "[INSTRUCTION] Or you can try short hand using #, ##, ### for survey, title, and intro.\n" +
+                    "\n" +
+                    "Q: Have you clicked on 'tutorial' yet? \n" +
+                    "/ONE\n" +
+                    "Yes\n" +
+                    "Not yet\n" +
+                    ";\n" +
+                    "\n" +
+                    "// Thanks!\n" +
+                    "";
+                const g_tutorial_script = "" +
+                    "[SURVEY] 1234 \n" +
+                    "[TITLE] This is my title \n" +
+                    "[INTRO] This is a cool survey, you should fill it out. \n" +
+                    "\n" +
+                    "[QUESTION] How about them apples \n" +
+                    "[PICKONE] \n" +
+                    "Red \n" +
+                    "Green \n" +
+                    "Gala \n" +
+                    "[END] \n" +
+                    "\n" +
+                    "[QUESTION] How cool was that ? \n" +
+                    "[SCALE] Meh, Cool! , Unsure \n" +
+                    "\n" +
+                    "[INSTRUCTION] 3 is good 1 is bad \n" +
+                    "[QUESTION] Rate the following from 1 to 3 \n" +
+                    "[RATE] \n" +
+                    "Apples \n" +
+                    "Oranges \n" +
+                    "[END] \n" +
+                    "\n" +
+                    "[QUESTION] Ok, you in right ? \n" +
+                    "[PICKANY] \n" +
+                    "Yes \n" +
+                    "YUSSSS \n" +
+                    "OMG \n" +
+                    "[END] \n" +
+                    "\n" +
+                    "[QUESTION] Parting thoughts ? \n" +
+                    "[OPEN] \n" +
+                    "\n" +
+                    "[INSTRUCTION] Thank you!\n";
+                var g_shorthand_script = "" +
+                    "# 1234 \n" +
+                    "## This is my title \n" +
+                    "### This is a cool survey, you should fill it out. \n" +
+                    "\n" +
+                    "Q: How about them apples \n" +
+                    "/ONE \n" +
+                    "Red \n" +
+                    "Green \n" +
+                    "Gala \n" +
+                    "; \n" +
+                    "\n" +
+                    "Q: How cool was that ? \n" +
+                    "/SCALE Meh, Cool! , Unsure \n" +
+                    "\n" +
+                    "// 3 is good 1 is bad \n" +
+                    "Q: Rate the following from 1 to 3 \n" +
+                    "/RATE \n" +
+                    "Apples \n" +
+                    "Oranges \n" +
+                    "; \n" +
+                    "\n" +
+                    "Q: Ok, you in right ? \n" +
+                    "/ANY \n" +
+                    "Yes \n" +
+                    "YUSSSS \n" +
+                    "OMG \n" +
+                    "; \n" +
+                    "\n" +
+                    "Q: Parting thoughts ? \n" +
+                    "/OPEN \n" +
+                    "\n" +
+                    "// Thank you!\n";
+                var form_wrap = function (src) {
+                    return '' +
+                        '<form id="evalhalla_form" action="#">' +
+                        src +
+                        '<div class="row">' +
+                        '<div class="col s12 center">' +
+                        '<a id="evalhalla_submit" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>SUBMIT</a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</form>' +
+                        '';
+                };
+                var get_template_snip = function (snip, format = "html") {
+                    if (snip == "header") {
+                        if (format == "json") {
+                            return '{' +
+                                '"title": "%title",' +
+                                '"description": "%intro",' +
+                                '"language": "%lang",' +
+                                '"questions": [%questions]' +
+                                '}';
+                        }
+                        return '' +
+                            '<div class="row">' +
+                            '<div class="col s12 center">' +
+                            '<h3><i class="mdi-content-send brown-text"></i></h3>' +
+                            '<h4>%title (%survey)</h4>' +
+                            '<p class="flow-text left-align light">%intro</p>' +
+                            '</div>' +
+                            '</div>';
+                    } else if (snip == "question") {
+                        if (format == "json") {
+                            return '{' +
+                                '"qid": "%qid",' +
+                                '"question": "%question",' +
+                                '"description": "%question",' +
+                                '"language": "%lang",' + // en or fr
+                                '"questionType": "%type",' + //mcq 'text' , 'dropdown',
+                                '"randomOrder": "%rand_order",' +
+                                '"randomOptions": "%rand_options",' +
+                                '"options": [%options]' +
+                                '}';
+                        }
+                        return '' +
+                            '<div class="card-panel">' +
+                            '<blockquote><span class="badge" style="font-size:1.5em;"><strong>#%qid</strong></span> %question</blockquote>%form' +
+                            '</div>' +
+                            '';
+                    } else if (snip == "scale") {
+                        if (format == "json") {
+                            return '"1 %low",' +
+                                '"2",' +
+                                '"3",' +
+                                '"4",' +
+                                '"5",' +
+                                '"6",' +
+                                '"7",' +
+                                '"8",' +
+                                '"9",' +
+                                '"10 %high",' +
+                                '"%unsure"';
+                        }
+                        return '' +
+                            '<div class="row">' +
+                            '<div class="input-field col s12" >' +
+                            '<select id="scale_qid_%qid" name="scale_%qid">' +
+                            '<option value="" disabled selected>Choose your rating</option>' +
+                            '<option value="1">1 %low</option>' +
+                            '<option value="2">2</option>' +
+                            '<option value="3">3</option>' +
+                            '<option value="4">4</option>' +
+                            '<option value="5">5</option>' +
+                            '<option value="6">6</option>' +
+                            '<option value="7">7</option>' +
+                            '<option value="8">8</option>' +
+                            '<option value="9">9</option>' +
+                            '<option value="10">10 %high</option>' +
+                            '<option value="77">%unsure</option>' +
+                            '</select>' +
+                            '<label>Rating</label>' +
+                            '</div> ' +
+                            '</div> ' +
+                            '';
+                    } else if (snip == "open") {
+                        if (format == "json") {
+                            return "";
+                        }
+                        return '' +
+                            '<div class="row">' +
+                            '<form class="col s12">' +
+                            '<div class="row">' +
+                            '<div class="input-field col s12">' +
+                            '<textarea id="textarea_%qid" name="textarea_%qid" class="materialize-textarea"></textarea>' +
+                            '<label for="textarea_qid_%qid">Enter your answer</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</form>' +
+                            '</div>' +
+                            '';
+                    } else if (snip == "pick one") {
+                        if (format == "json") {
+                            return '"%pick"';
+                        }
+                        return '' +
+                            '<div class="row">' +
+                            '<label>' +
+                            '<input class="with-gap" name="rgroup_qid_%qid" type="radio" value="%pick" />' +
+                            '<span>%pick</span>' +
+                            '</label>' +
+                            '</div>' +
+                            '';
+                    } else if (snip == "pick any") {
+                        if (format == "json") {
+                            return '"%pick"';
+                        }
+                        return '' +
+                            '<div class="row">' +
+                            '<label>' +
+                            '<input name="cgroup_qid_%qid[]" type="checkbox" value="%pick" />' +
+                            '<span>%pick</span>' +
+                            '</label>' +
+                            '</div>' +
+                            '';
+                    } else if (snip == "rank") {
+                        if (format == "json") {
+                            return '"%pick"';
+                        }
+                        return '' +
+                            '<div class="row">' +
+                            '<div class="col s12">' +
+                            '<div class="input-field s12">' +
+                            '<input id="inline_qid_%qid" name="inline_%qid" type="text">' +
+                            '<label for="inline_qid_%qid">%pick</label>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '';
+                    } else if (snip == "instruction") {
+                        return '' +
+                            '<div class="card-panel">' +
+                            '<span class="blue-text text-darken-2">%instruction</span>' +
+                            '</div>' +
+                            '';
+                    }
+
+                    return "";
+                };
+
+                //
+                // State Controls
+                //
+
+                // app state details, ui, handle to jq elems
+                var g_state = {
+                    "tut": {
+                        "type_it": g_tutorial_script.split(""),
+                        "type_it_short": g_shorthand_script.split(""),
+                        "char_at": 0,
+                        "typer": null,
+                    },
+                    "ui": {
+                        "hs_editor_window": false,
+                        "hs_json_window": false,
+                        "hs_render_window": false
+                    },
+                    "el": {
+                        // buttons
+                        "btn_upload": $(".survista_send"),
+                        "btn_tutorial": $("#show_me_how"),
+                        "btn_tutorial_short": $("#show_me_how_short"),
+                        "btn_hs_editor": $("#hs_editor_window"),
+                        "btn_hs_json": $("#hs_json_window"),
+                        "btn_hs_render": $("#hs_render_window"),
+                        // content
+                        "c_editor": $("#editor_target"),
+                        "c_json": $("#json_target"),
+                        "c_render": $("#render_target"),
+                        // ui panels
+                        "ui_editor": $("#editor_window"),
+                        "ui_json": $("#json_window"),
+                        "ui_render": $("#render_window")
+                    }
+                };
+                // parser state, headers, questions, json
+                var g_control_flags = {
+                    "json": "{}",
+                    "header": {
+                        "survey": false,
+                        "title": false,
+                        "intro": false
+                    },
+                    "question": {
+                        "text": false,
+                        "qid": 0,
+                        "form": false,
+                        "random": {
+                            "order": false,
+                            "options": false
+                        }
+                    }
+                }
+                var reset_control_flags = function (hard = false) {
+                    g_control_flags["question"] = {
+                        "text": false,
+                        "qid": 0,
+                        "form": false,
+                        "random": {
+                            "order": false,
+                            "options": false
+                        }
+                    };
+                    g_control_flags["json"] = "{}";
+                    if (hard == true) {
+                        g_control_flags["header"] = {
+                            "survey": "",
+                            "title": "",
+                            "intro": ""
+                        };
+                    }
+                }
+
+                //
+                // Helper functions
+                //
+
+                var evalhalla_submit = function () {
+                    // make some form data
+                    var formElement = document.getElementById("evalhalla_form");
+                    var formData = new FormData(formElement);
+                    console.log(formData);
+                    // query string would be
+                    var query_string = $("#evalhalla_form").serialize();
+                    console.log(query_string);
+                    // let em know
+                    alert("Check the console for details");
+                };
+
+                var pack_text = function (src_a, i, pack, join = " ") {
+                    var nextcmd = "null";
+                    while (nextcmd == "null") {
+                        if (i + 1 < src_a.length) {
+                            nextcmd = detect_command(src_a[i + 1]);
+                            if (nextcmd == "null") {
+                                pack += join + src_a[i + 1];
+                                i++;
+                            } else {
+                                // do nothing
+                            }
+                        } else {
+                            nextcmd = "exit";
+                        }
+                    }
+                    return { "pack": pack, "i": i };
+                }
+
+                var ui_resize_textareas = function () {
+                    M.textareaAutoResize(g_state["el"]["c_editor"]);
+                    M.textareaAutoResize(g_state["el"]["c_json"]);
+                }
+
+                //
+                // Command Handlers
+                //
+
+                var detect_command = function (src) {
+                    var first_word = src.split(" ")[0];
+                    if (first_word == "" || typeof first_word === "undefined") {
+                        return "null";
+                    } else if (first_word == "\n") {
+                        return "newline";
+                    } else if (typeof g_cmd[first_word.toUpperCase().trim()] !== "undefined") {
+                        return g_cmd[first_word.toUpperCase().trim()];
+                    }
+                    return "null";
+                }
+                var handle_cmd_header = function (cmd, src) {
+                    g_control_flags["header"][cmd] = src.replace(src.split(" ")[0], "").trim();
+                    // handle html
+                    var snip = get_template_snip("header");
+                    snip = snip.replace(/\%title/g, g_control_flags["header"]["title"]);
+                    snip = snip.replace(/\%survey/g, g_control_flags["header"]["survey"]);
+                    snip = snip.replace(/\%intro/g, g_control_flags["header"]["intro"]);
+                    reset_control_flags();
+                    // handle json
+                    var jsonsnip = get_template_snip("header", "json");
+                    jsonsnip = jsonsnip.replace(/\%title/g, g_control_flags["header"]["title"]);
+                    jsonsnip = jsonsnip.replace(/\%survey/g, g_control_flags["header"]["survey"]);
+                    jsonsnip = jsonsnip.replace(/\%intro/g, g_control_flags["header"]["intro"]);
+                    g_control_flags["json"] = jsonsnip;
+
+                    return snip;
+                }
+                var handle_cmd_instruction = function (cmd, src) {
+                    // handle html
+                    var snip = get_template_snip("instruction");
+                    snip = snip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
+                    // handle json
+                    // ?
+                    return snip;
+                }
+                var handle_cmd_question = function (cmd, src) {
+                    var snip = get_template_snip("question");
+                    if (cmd == "question") {
+                        // handle html
+                        g_control_flags["question"]["text"] = src.replace(src.split(" ")[0], "").trim();
+                        g_control_flags["question"]["qid"] = g_control_flags["question"]["qid"] + 1;
+                        snip = snip.replace(/\%question/g, g_control_flags["question"]["text"]);
+                        snip = snip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                        g_control_flags["question"]["form"] = snip;
+                        // handle json
+                        var jsonsnip = get_template_snip("question", "json");
+                        jsonsnip = jsonsnip.replace(/\%question/g, g_control_flags["question"]["text"]);
+                        jsonsnip = jsonsnip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                        g_control_flags["json"] = g_control_flags["json"]
+                            .replace("%questions", jsonsnip + ",%questions")
+                            .replace("%rand_order", g_control_flags["question"]["random"]["order"])
+                            .replace("%rand_options", g_control_flags["question"]["random"]["options"])
+                            ;
+                    } else if (cmd == "scale") {
+                        // handle html
+                        snip = g_control_flags["question"]["form"];
+                        var scale = get_template_snip("scale").replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                        var opts = src.split(",")
+                        opts[0] = opts[0]
+                            .replace("[SCALE]", "")
+                            .replace("/SCALE", "")
+                            .replace("|", "")
+                            .trim();
+                        // handle json
+                        var jsonsnip = get_template_snip("scale", "json");
+                        jsonsnip = jsonsnip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                        g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "dropdown");
+
+                        for (var opti = 0; opti < opts.length; opti++) {
+                            if (opti == 0) {
+                                scale = scale.replace(/\%low/g, opts[opti]);
+                                jsonsnip = jsonsnip.replace(/\%low/g, opts[opti].trim());
+                            } else if (opti == 1) {
+                                scale = scale.replace(/\%high/g, opts[opti]);
+                                jsonsnip = jsonsnip.replace(/\%high/g, opts[opti].trim());
+                            } else if (opti == 2) {
+                                scale = scale.replace(/\%unsure/g, opts[opti]);
+                                jsonsnip = jsonsnip.replace(/\%unsure/g, opts[opti].trim());
+                            }
+                            else {
+                                // do nothing
+                            }
+                        }
+                        // cleanup unused replacement symbol targets
+                        scale = scale.replace(/\%low/g, "")
+                            .replace(/\%high/g, "")
+                            .replace(/\%unsure/g, "");
+                        jsonsnip = jsonsnip.replace(/\%low/g, "")
+                            .replace(/\%high/g, "")
+                            .replace(/\%unsure/g, "");
+
+                        g_control_flags["json"] = g_control_flags["json"].replace("%options", jsonsnip);
+                        snip = snip.replace(/\%form/g, scale);
+                        g_control_flags["question"]["form"] = snip;
+                    } else if (cmd == "open") {
+                        // handle html
+                        snip = g_control_flags["question"]["form"];
+                        snip = snip.replace(/\%form/g, get_template_snip("open").replace(/\%qid/g, g_control_flags["question"]["qid"]));
+                        g_control_flags["question"]["form"] = snip;
+                        // handle json
+                        g_control_flags["json"] = g_control_flags["json"].replace("%options", "").replace(/\%type/g, "text");
+                    } else if (cmd == "pick one" || cmd == "pick any" || cmd == "rank") {
+                        snip = g_control_flags["question"]["form"];
+                        var opts = src.split("[OPT]")
+                        opts.shift(); // remove first null item
+                        var form = "";
+                        var jsonsnip = '""';
+                        // handle html+json same time
+                        for (var opti = 0; opti < opts.length; opti++) {
+                            form += get_template_snip(cmd)
+                                .replace(/\%qid/g, g_control_flags["question"]["qid"])
+                                .replace(/\%pick/g, opts[opti].trim());
+
+                            jsonsnip += "," + get_template_snip(cmd, "json")
+                                .replace(/\%pick/g, opts[opti].trim());
+                        }
+                        snip = snip.replace(/\%form/g, form);
+                        g_control_flags["question"]["form"] = snip;
+                        // handle json
+                        g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "mcq");
+                        g_control_flags["json"] = g_control_flags["json"].replace("%options", jsonsnip);
+                    }
+                    // TODO: Lang override, replace with actual language control
+                    g_control_flags["json"] = g_control_flags["json"].replace(/\%lang/g, "en");
+
+                    return snip;
+                }
+
+                //
+                // Main proc loop
+                //
+
+                var raise_src_to_evalhalla = function (src) {
+                    var src_a = src.split("\n");
+                    var i = 0;
+                    var evalhalla = [];
+                    var cmd = "";
+
+                    for (i = 0; i < src_a.length; i++) {
+                        cmd = detect_command(src_a[i]);
+                        if (cmd != "null") {
+                            if (
+                                cmd["type"] == "survey"
+                                || cmd["type"] == "intro"
+                                || cmd["type"] == "title"
+                            ) {
+                                var pack = src_a[i];
+                                if (cmd["type"] == "intro") {
+                                    var pkg = pack_text(src_a, i, pack);
+                                    pack = pkg["pack"];
+                                    i = pkg["i"];
+                                }
+                                evalhalla = [handle_cmd_header(cmd["type"], pack)];
+                            } else if (cmd["type"] == "question"
+                                || cmd["type"] == "scale"
+                                || cmd["type"] == "open"
+                                || cmd["type"] == "pick one"
+                                || cmd["type"] == "pick any"
+                                || cmd["type"] == "rank"
+                            ) {
+                                var pack = src_a[i];
+                                var pkg = (
+                                    cmd["type"] == "pick one"
+                                    || cmd["type"] == "pick any"
+                                    || cmd["type"] == "rank"
+                                ) ? pack_text(src_a, i, pack, "[OPT] ") : pack_text(src_a, i, pack);
+                                pack = pkg["pack"];
+                                i = pkg["i"];
+
+                                if (cmd["type"] == "scale"
+                                    || cmd["type"] == "open"
+                                    || cmd["type"] == "pick one"
+                                    || cmd["type"] == "pick any"
+                                    || cmd["type"] == "rank") {
+                                    evalhalla.pop();
+                                }
+                                evalhalla.push(handle_cmd_question(cmd["type"], pack));
+                            } else if (cmd["type"] == "instruction") {
+                                var pack = src_a[i];
+                                var pkg = pack_text(src_a, i, pack);
+                                pack = pkg["pack"];
+                                i = pkg["i"];
+                                evalhalla.push(handle_cmd_instruction(cmd["type"], pack));
+                            } else if (cmd["type"] == "random order" || cmd["type"] == "end random order") {
+                                // handle randomize order
+                                if (cmd["type"] == "random order") {
+                                    g_control_flags["question"]["random"]["order"] = true;
+                                } else if (cmd["type"] == "end random order") {
+                                    g_control_flags["question"]["random"]["order"] = false;
+                                }
+                            } else if (cmd["type"] == "random options" || cmd["type"] == "end random options") {
+                                // handle random options
+                                if (cmd["type"] == "random options") {
+                                    g_control_flags["question"]["random"]["options"] = true;
+                                } else if (cmd["type"] == "end random options") {
+                                    g_control_flags["question"]["random"]["options"] = false;
+                                }
+                            } else if (cmd["type"] == "end") {
+                                // handle generic end, custom for random
+                            } else if (cmd["type"] == "end pick" || cmd["type"] == "end rank") {
+                                // skip end tag for now
+                            } else {
+                                // generic handler, use basic tag wrapping from g_cmd
+                                evalhalla.push(cmd["html"].replace(/\%v/g, src_a[i]));
+                            }
+                        }
+                    }
+                    return evalhalla.join("");
+                };
+
+                // 
+                // Material UI General
+                //
+
+                $(".sidenav").sidenav();
+                $(".parallax").parallax();
+                $('.fixed-action-btn').floatingActionButton();
+
+                //
+                // Non-Material UI general
+                //
+
+                // load intro content
+                g_state["el"]["c_editor"].val(
+                    g_intro_script
+                );
+
+                g_state["el"]["c_editor"].on("change keyup paste", function () {
+                    // get source
+                    var src = g_state["el"]["c_editor"].val().replace(/\t/g, "");
+                    // prep
+                    reset_control_flags();
+                    // E V A L H A L L A
+                    var survey_html = raise_src_to_evalhalla(src);
+                    // load render
+                    g_state["el"]["c_render"].html(form_wrap(survey_html));
+                    // reinit submit
+                    $("#evalhalla_submit").on("click", evalhalla_submit);
+                    // load json
+                    try {
+                        g_state["el"]["c_json"].val(JSON.stringify(JSON.parse(
+                            g_control_flags["json"]
+                                .replace(/\,\%questions/g, "")
+                                .replace(/\%options/g, "")
+                                .replace(/\%questions/g, "")
+                        ), null, 4));
+                    } catch (e) {
+                        M.toast({ html: 'JSON ' + e.toString(), classes: 'rounded' });
+                    }
+                    $('select').formSelect();
+                });
+                // render
+                g_state["el"]["c_editor"].trigger("change");
+                // resize
+                ui_resize_textareas();
+
+                // upload to survista: stub
+                g_state["el"]["btn_upload"].on("click", function () {
+                    alert(
+                        JSON.stringify(JSON.parse(
+                            g_control_flags["json"]
+                                .replace(/\,\%questions/g, "")
+                                .replace(/\%options/g, "")
+                        ), null, 4)
+                    );
+                });
+
+                //
+                // UI Hide Show
+                //
+
+                ui_reset_panels = function () {
+                    g_state["el"]["ui_render"].addClass("s4").removeClass("s12");
+                    g_state["el"]["ui_render"].show();
+                    g_state["el"]["ui_editor"].addClass("s4").removeClass("s12");
+                    g_state["el"]["ui_editor"].show();
+                    g_state["el"]["ui_json"].addClass("s4").removeClass("s12");
+                    g_state["el"]["ui_json"].show();
+                    g_state["ui"]["hs_render_window"] = false;
+                    g_state["ui"]["hs_editor_window"] = false;
+                    g_state["ui"]["hs_json_window"] = false;
+                };
+                g_state["el"]["btn_hs_render"].on("click", function () {
+                    if (g_state["ui"]["hs_render_window"] == true) {
+                        ui_reset_panels();
+                    } else {
+                        g_state["el"]["ui_render"].removeClass("s4").addClass("s12");
+                        g_state["el"]["ui_render"].show();
+                        g_state["el"]["ui_editor"].hide();
+                        g_state["el"]["ui_json"].hide();
+                        g_state["ui"]["hs_render_window"] = true;
+                    }
+                });
+                g_state["el"]["btn_hs_editor"].on("click", function () {
+                    if (g_state["ui"]["hs_editor_window"] == true) {
+                        ui_reset_panels();
+                    } else {
+                        g_state["el"]["ui_editor"].removeClass("s4").addClass("s12");
+                        g_state["el"]["ui_editor"].show();
+                        g_state["el"]["ui_json"].hide();
+                        g_state["el"]["ui_render"].hide();
+                        g_state["ui"]["hs_editor_window"] = true;
+                    }
+                });
+                g_state["el"]["btn_hs_json"].on("click", function () {
+                    if (g_state["ui"]["hs_json_window"] == true) {
+                        ui_reset_panels();
+                    } else {
+                        g_state["el"]["c_json"].val(JSON.stringify(JSON.parse(g_control_flags["json"]
+                            .replace(/\,\%questions/g, "")
+                            .replace(/\%options/g, "")
+                        ), null, 4));
+                        g_state["el"]["ui_json"].removeClass("s4").addClass("s12");
+                        g_state["el"]["ui_json"].show();
+                        g_state["el"]["ui_editor"].hide();
+                        g_state["el"]["ui_render"].hide();
+                        g_state["ui"]["hs_json_window"] = true;
+                    }
+                });
+
+                //
+                // Tutorial runner setup
+                //
+
+                var run_type_it = function (type_this = "type_it_short") {
+                    g_state["tut"]["char_at"] = 0;
+                    g_state["el"]["c_editor"].val("");
+                    reset_control_flags(true);
+                    g_state["tut"]["typer"] = setInterval(function () {
+                        if (g_state["tut"]["char_at"] > g_state["tut"]["" + type_this].length) {
+                            g_state["tut"]["typer"] = clearInterval(g_state["tut"]["typer"]);
+                        } else {
+                            try {
+                                if (typeof g_state["tut"]["" + type_this][g_state["tut"]["char_at"]] !== "undefined") {
+                                    g_state["el"]["c_editor"].val(
+                                        g_state["el"]["c_editor"].val() + g_state["tut"]["" + type_this][g_state["tut"]["char_at"]]
+                                    );
+                                    g_state["el"]["c_editor"].trigger("keyup");
+                                    g_state["tut"]["char_at"] = g_state["tut"]["char_at"] + 1;
+                                    ui_resize_textareas();
+                                }
+                            } catch (e) {
+                                // do nothing
+                            }
+                        }
+                    }, 80);
+                };
+
+                g_state["el"]["btn_tutorial"].on("click", function () {
+                    run_type_it();
+                });
+
+            });
+        })(jQuery);
+    </script>
+</body>
+
+</html>
