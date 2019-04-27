@@ -231,13 +231,21 @@
                     "[END]": { "type": "end", "html": "<end>%v</end>" },
                     ";": { "type": "end", "html": "<end>%v</end>" },
                     "[RANDOMORDER]": { "type": "random order", "html": "<rand>%v</rand>" },
+                    "~": { "type": "random order", "html": "<rand>%v</rand>" },
+                    "/RAND": { "type": "random order", "html": "<rand>%v</rand>" },
                     "[RANDOMIZEORDER]": { "type": "random order", "html": "<rand>%v</rand>" },
                     "[ENDRANDOMORDER]": { "type": "end random order", "html": "<rand>%v</rand>" },
                     "[ENDRANDOMIZEORDER]": { "type": "end random order", "html": "<rand>%v</rand>" },
+                    ";~": { "type": "end random order", "html": "<rand>%v</rand>" },
+                    ";RAND": { "type": "end random order", "html": "<rand>%v</rand>" },
                     "[RANDOMOPTIONS]": { "type": "random options", "html": "<rand>%v</rand>" },
+                    "~~": { "type": "random options", "html": "<rand>%v</rand>" },
+                    "/RANDO": { "type": "random options", "html": "<rand>%v</rand>" },
                     "[RANDOMIZEOPTIONS]": { "type": "random options", "html": "<rand>%v</rand>" },
                     "[ENDRANDOMOPTIONS]": { "type": "end random options", "html": "<rand>%v</rand>" },
                     "[ENDRANDOMIZEOPTIONS]": { "type": "end random options", "html": "<rand>%v</rand>" },
+                    ";~~": { "type": "end random options", "html": "<rand>%v</rand>" },
+                    ";RANDO": { "type": "end random options", "html": "<rand>%v</rand>" },
                     "[PICKONE]": { "type": "pick one", "html": "<pick>%v</pick>" },
                     "/ONE": { "type": "pick one", "html": "<pick>%v</pick>" },
                     "/UN": { "type": "pick one", "html": "<pick>%v</pick>" },
@@ -613,7 +621,14 @@
                 // Helper functions
                 //
 
-                var get_params_as_object = function (query) {
+                const shuffle_array = function (array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                };
+
+                const get_params_as_object = function (query) {
                     query = query.substring(query.indexOf('?') + 1);
                     var re = /([^&=]+)=?([^&]*)/g;
                     var decodeRE = /\+/g;
@@ -658,7 +673,7 @@
                     return params;
                 };
 
-                var evalhalla_submit = function () {
+                const evalhalla_submit = function () {
                     // make some form data
                     var formElement = document.getElementById("evalhalla_form");
                     var formData = new FormData(formElement);
@@ -673,7 +688,7 @@
                     //alert("Check the console for details");
                 };
 
-                var pack_text = function (src_a, i, pack, join = " ") {
+                const pack_text = function (src_a, i, pack, join = " ") {
                     var nextcmd = "null";
                     while (nextcmd == "null") {
                         if (i + 1 < src_a.length) {
@@ -811,13 +826,21 @@
                         var form = "";
                         var jsonsnip = '""';
                         // handle html+json same time
+                        var random_shuffle = [];
+                        var temp_snip = "";
                         for (var opti = 0; opti < opts.length; opti++) {
-                            form += get_template_snip(cmd)
+                            temp_snip = get_template_snip(cmd)
                                 .replace(/\%qid/g, g_control_flags["question"]["qid"])
                                 .replace(/\%pick/g, opts[opti].trim());
+                            form += temp_snip;
+                            random_shuffle.push(temp_snip);
 
                             jsonsnip += "," + get_template_snip(cmd, "json")
                                 .replace(/\%pick/g, opts[opti].trim());
+                        }
+                        if (g_control_flags["question"]["random"]["options"] == true) {
+                            shuffle_array(random_shuffle);
+                            form = random_shuffle.join(" ");
                         }
                         snip = snip.replace(/\%form/g, form);
                         g_control_flags["question"]["form"] = snip;
