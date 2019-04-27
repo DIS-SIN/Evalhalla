@@ -470,14 +470,12 @@
                         }
                         return '' +
                             '<div class="row">' +
-                            '<form class="col s12">' +
                             '<div class="row">' +
                             '<div class="input-field col s12">' +
-                            '<textarea id="textarea_%qid" name="textarea_qid_%qid" class="materialize-textarea"></textarea>' +
                             '<label for="textarea_qid_%qid">Enter your answer</label>' +
+                            '<textarea id="textarea_qid_%qid" name="textarea_qid_%qid" class="materialize-textarea"></textarea>' +
                             '</div>' +
                             '</div>' +
-                            '</form>' +
                             '</div>' +
                             '';
                     } else if (snip == "pick one") {
@@ -662,11 +660,11 @@
                     var formElement = document.getElementById("evalhalla_form");
                     var formData = new FormData(formElement);
                     console.log(formData);
+                    // can use that to post
                     // query string would be
                     var query_string = $("#evalhalla_form").serialize();
                     console.log(query_string);
                     // let em know
-                    //var json_o = JSON.parse('{"' + query_string.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) });
                     var json_o = get_params_as_object(query_string);
                     alert(JSON.stringify(json_o, null, 4));
                     //alert("Check the console for details");
@@ -824,7 +822,7 @@
                         g_control_flags["json"] = g_control_flags["json"].replace("%options", jsonsnip);
                     }
                     // TODO: Lang override, replace with actual language control
-                    g_control_flags["json"] = g_control_flags["json"].replace(/\%lang/g, "en");
+                    g_control_flags["json"] = g_control_flags["json"].replace(/\%lang/g, g_state["ui"]["lang"]);
 
                     return snip;
                 }
