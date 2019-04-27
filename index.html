@@ -68,18 +68,21 @@
     <nav class="white" role="navigation" id="root" name="root">
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right">
                 <li>
                     <div class="switch">
                         <label>
                             EN
-                            <input id="lang" type="checkbox">
+                            <input class="lang" type="checkbox">
                             <span class="lever"></span>
                             FR
                         </label>
                     </div>
                 </li>
-                <li><a href="#" id="show_me_how">
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#" class="show_me_how">
                         <span class="en">
                             Tutorial
                         </span>
@@ -89,12 +92,27 @@
                     </a></li>
                 <li><a href="#" class="survista_send">+Survista</a></li>
             </ul>
+            </ul>
         </div>
     </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#" class="show_me_how">
+                <span class="en">
+                    Tutorial
+                </span>
+                <span class="fr">
+                    Explication
+                </span>
+            </a></li>
+        <li><a href="#" class="survista_send">+Survista</a></li>
+    </ul>
+    </ul>
+
     <div id="editor" name="editor" class="container">
         <div class="section">
             <div class="row">
-                <div id="editor_window" class="col s4">
+                <div id="editor_window" class="col s12 m4">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
@@ -112,12 +130,12 @@
                         </div>
                     </form>
                 </div>
-                <div id="render_window" class="col s4">
+                <div id="render_window" class="col s12 m4">
                     <div class="row">
                         <div id="render_target"></div>
                     </div>
                 </div>
-                <div id="json_window" class="col s4">
+                <div id="json_window" class="col s12 m4">
                     <div class="row">
                         <form class="col s12">
                             <div class="input-field col s12">
@@ -564,20 +582,20 @@
                         "typer": null,
                     },
                     "ui": {
-                        "lang": "fr",
+                        "lang": "en",
                         "hs_editor_window": false,
                         "hs_json_window": false,
                         "hs_render_window": false
                     },
                     "el": {
                         // lang
-                        "lang": $("#lang"),
+                        "lang": $(".lang"),
                         "en": $(".en"),
                         "fr": $(".fr"),
                         // buttons
                         "btn_upload": $(".survista_send"),
-                        "btn_tutorial": $("#show_me_how"),
-                        "btn_tutorial_short": $("#show_me_how_short"),
+                        "btn_tutorial": $(".show_me_how"),
+                        "btn_tutorial_short": $(".show_me_how_short"),
                         "btn_hs_editor": $("#hs_editor_window"),
                         "btn_hs_json": $("#hs_json_window"),
                         "btn_hs_render": $("#hs_render_window"),
@@ -1047,7 +1065,7 @@
                         ui_resize_textareas();
                     }
                 });
-                g_state["el"]["lang"].trigger("change");
+                //g_state["el"]["lang"].trigger("change");
 
                 // load intro content
                 g_state["el"]["c_editor"].val(
@@ -1101,11 +1119,11 @@
                 //
 
                 ui_reset_panels = function () {
-                    g_state["el"]["ui_render"].addClass("s4").removeClass("s12");
+                    g_state["el"]["ui_render"].addClass("m4").removeClass("m12");
                     g_state["el"]["ui_render"].show();
-                    g_state["el"]["ui_editor"].addClass("s4").removeClass("s12");
+                    g_state["el"]["ui_editor"].addClass("m4").removeClass("m12");
                     g_state["el"]["ui_editor"].show();
-                    g_state["el"]["ui_json"].addClass("s4").removeClass("s12");
+                    g_state["el"]["ui_json"].addClass("m4").removeClass("m12");
                     g_state["el"]["ui_json"].show();
                     g_state["ui"]["hs_render_window"] = false;
                     g_state["ui"]["hs_editor_window"] = false;
@@ -1115,7 +1133,7 @@
                     if (g_state["ui"]["hs_render_window"] == true) {
                         ui_reset_panels();
                     } else {
-                        g_state["el"]["ui_render"].removeClass("s4").addClass("s12");
+                        g_state["el"]["ui_render"].removeClass("m4").addClass("m12");
                         g_state["el"]["ui_render"].show();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_json"].hide();
@@ -1126,7 +1144,7 @@
                     if (g_state["ui"]["hs_editor_window"] == true) {
                         ui_reset_panels();
                     } else {
-                        g_state["el"]["ui_editor"].removeClass("s4").addClass("s12");
+                        g_state["el"]["ui_editor"].removeClass("m4").addClass("m12");
                         g_state["el"]["ui_editor"].show();
                         g_state["el"]["ui_json"].hide();
                         g_state["el"]["ui_render"].hide();
@@ -1141,7 +1159,7 @@
                             .replace(/\,\%questions/g, "")
                             .replace(/\%options/g, "")
                         ), null, 4));
-                        g_state["el"]["ui_json"].removeClass("s4").addClass("s12");
+                        g_state["el"]["ui_json"].removeClass("m4").addClass("m12");
                         g_state["el"]["ui_json"].show();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_render"].hide();
