@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Evalhalla - Surveys and Evaluations done right</title>
+    <title>Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
         rel="stylesheet" media="screen,projection">
@@ -69,8 +69,25 @@
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
             <ul class="right">
-                <li><a href="#" id="show_me_how">Tutorial</a></li>
-                <li><a href="#" class="survista_send">Send Form to Survista</a></li>
+                <li>
+                    <div class="switch">
+                        <label>
+                            EN
+                            <input id="lang" type="checkbox">
+                            <span class="lever"></span>
+                            FR
+                        </label>
+                    </div>
+                </li>
+                <li><a href="#" id="show_me_how">
+                        <span class="en">
+                            Tutorial
+                        </span>
+                        <span class="fr">
+                            Explication
+                        </span>
+                    </a></li>
+                <li><a href="#" class="survista_send">+Survista</a></li>
             </ul>
         </div>
     </nav>
@@ -83,7 +100,14 @@
                             <div class="input-field col s12">
                                 <textarea id="editor_target" class="materialize-textarea"
                                     data-original-height=0></textarea>
-                                <label for="editor_target">Survey Source (TYPE HERE)</label>
+                                <label for="editor_target">
+                                    <span class="en">
+                                        Survey Source (TYPE HERE).
+                                    </span>
+                                    <span class="fr">
+                                        Source d'enquête (TYPE ICI).
+                                    </span>
+                                </label>
                             </div>
                         </div>
                     </form>
@@ -99,7 +123,14 @@
                             <div class="input-field col s12">
                                 <textarea id="json_target" class="materialize-textarea"
                                     data-original-height=0></textarea>
-                                <label for="json_target">Survey JSON (auto-generated)</label>
+                                <label for="json_target">
+                                    <span class="en">
+                                        Survey JSON (auto-generated).
+                                    </span>
+                                    <span class="fr">
+                                        Survey JSON (généré automatiquement).
+                                    </span>
+                                </label>
                             </div>
                         </form>
                     </div>
@@ -112,8 +143,17 @@
         <div class="section no-pad-bot">
             <div class="container">
                 <div class="row center">
-                    <h5 class="header col s12 light">Evaluate More. Build Less.</h5>
-                    <h6 class="header col s12 light">Just type to build your survey</h6>
+                    <h5 class="header col s12 light">
+                        <span class="en">Evaluate More. Build Less.</span>
+                        <span class="fr">Évaluer plus. Construire moins.</span></h5>
+                    <h6 class="header col s12 light">
+                        <span class="en">
+                            Just type to build your survey.
+                        </span>
+                        <span class="fr">
+                            Il suffit de taper pour construire votre enquête.
+                        </span>
+                    </h6>
                 </div>
             </div>
         </div>
@@ -125,7 +165,9 @@
                 <div class="col l6 s12">
                     <h5 class="white-text">Evalhalla</h5>
                     <p class="grey-text text-lighten-4">
-                        Alpha. Evalhalla is an experiment in making form creation easier.
+                        <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
+                        <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
+                            formulaires.</span>
                     </p>
                     <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
                 </div>
@@ -133,7 +175,8 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                Forms that function
+                <span class="en">Forms that function.</span>
+                <span class="fr">Des formes qui fonctionnent.</span>
             </div>
         </div>
     </footer>
@@ -177,9 +220,11 @@
                     "Q:": { "type": "question", "html": "<question>%v</question>" },
                     "[SCALE]": { "type": "scale", "html": "<scale>%v</scale>" },
                     "/SCALE": { "type": "scale", "html": "<scale>%v</scale>" },
+                    "/ÉCHELLE": { "type": "scale", "html": "<scale>%v</scale>" },
                     "|": { "type": "scale", "html": "<scale>%v</scale>" },
                     "[OPEN]": { "type": "open", "html": "<open>%v</open>" },
                     "/OPEN": { "type": "open", "html": "<open>%v</open>" },
+                    "/OUVRIR": { "type": "open", "html": "<open>%v</open>" },
                     "@": { "type": "open", "html": "<open>%v</open>" },
                     "[INSTRUCTION]": { "type": "instruction", "html": "<instruction>%v</instruction>" },
                     "//": { "type": "instruction", "html": "<instruction>%v</instruction>" },
@@ -195,13 +240,16 @@
                     "[ENDRANDOMIZEOPTIONS]": { "type": "end random options", "html": "<rand>%v</rand>" },
                     "[PICKONE]": { "type": "pick one", "html": "<pick>%v</pick>" },
                     "/ONE": { "type": "pick one", "html": "<pick>%v</pick>" },
+                    "/UN": { "type": "pick one", "html": "<pick>%v</pick>" },
                     ".": { "type": "pick one", "html": "<pick>%v</pick>" },
                     "[PICKANY]": { "type": "pick any", "html": "<pick>%v</pick>" },
                     "/ANY": { "type": "pick any", "html": "<pick>%v</pick>" },
+                    "/TOUT": { "type": "pick any", "html": "<pick>%v</pick>" },
                     "*": { "type": "pick any", "html": "<pick>%v</pick>" },
                     "[ENDPICK]": { "type": "end pick", "html": "<pick>%v</pick>" },
                     "[RANK]": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/RANK": { "type": "rank", "html": "<rank>%v</rank>" },
+                    "/TAUX": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/": { "type": "rank", "html": "<rank>%v</rank>" },
                     "[RATE]": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/RATE": { "type": "rank", "html": "<rank>%v</rank>" },
@@ -209,26 +257,30 @@
                     "[ENDRATE]": { "type": "end rank", "html": "<rank>%v</rank>" }
                 };
                 const g_intro_script = "" +
-                    "[SURVEY] 123\n" +
-                    "[TITLE] Evalhalla Survey\n" +
-                    "[INTRO] It's easy to make survey. There's stuff in square brackets that tell Evalhalla where\n" +
-                    "to focus, and it makes a form. JSON too.\n" +
+                    "# 123\n" +
+                    "## Evalhalla Survey\n" +
+                    "### It's easy to make survey. \n" +
                     "\n" +
-                    "[QUESTION] Have you clicked on 'tutorial' yet? \n" +
-                    "[PICKONE]\n" +
-                    "Yes\n" +
-                    "Not yet\n" +
-                    "[END]\n" +
-                    "\n" +
-                    "[INSTRUCTION] Or you can try short hand using #, ##, ### for survey, title, and intro.\n" +
-                    "\n" +
-                    "Q: Have you clicked on 'tutorial' yet? \n" +
+                    "Q: Have you clicked on 'tutorial' yet?\n" +
                     "/ONE\n" +
                     "Yes\n" +
-                    "Not yet\n" +
+                    "No\n" +
                     ";\n" +
                     "\n" +
-                    "// Thanks!\n" +
+                    "// Thanks\n" +
+                    "";
+                const g_intro_script_fr = "" +
+                    "# 123\n" +
+                    "## Enquête Evalhalla \n" +
+                    "### Il est facile de faire une enquête. \n" +
+                    "\n" +
+                    "Q: Avez-vous déjà cliqué sur 'tutorial'?\n" +
+                    "/UN\n" +
+                    "Oui\n" +
+                    "Non\n" +
+                    ";\n" +
+                    "\n" +
+                    "// Merci!\n" +
                     "";
                 const g_tutorial_script = "" +
                     "[SURVEY] 1234 \n" +
@@ -296,6 +348,39 @@
                     "/OPEN \n" +
                     "\n" +
                     "// Thank you!\n";
+                var g_shorthand_script_fr = "" +
+                    "# 1234\n" +
+                    "## c'est mon titre\n" +
+                    "### Ceci est une bonne enquête, vous devriez le remplir.\n" +
+                    "\n" +
+                    "Q: Et les pommes\n" +
+                    "/UN\n" +
+                    "rouge\n" +
+                    "vert\n" +
+                    "Gala\n" +
+                    "; \n" +
+                    "\n" +
+                    "Q: Comment était-ce cool?\n" +
+                    "/ÉCHELLE Meh, Cool! , Incertain\n" +
+                    "\n" +
+                    "// 3 est bon 1 est mauvais\n" +
+                    "Q: Évaluez ce qui suit de 1 à 3\n" +
+                    "/TAUX\n" +
+                    "Pommes\n" +
+                    "Des oranges\n" +
+                    "; \n" +
+                    "\n" +
+                    "Q: Ok, vous avez raison?\n" +
+                    "/TOUT\n" +
+                    "Oui\n" +
+                    "YUSSSS\n" +
+                    "OMG\n" +
+                    "; \n" +
+                    "\n" +
+                    "Q: pensées de séparation?\n" +
+                    "/OUVRIR\n" +
+                    "";
+                // Je vous remercie!
                 var form_wrap = function (src) {
                     return '' +
                         '<form id="evalhalla_form" action="#">' +
@@ -449,19 +534,25 @@
                 //
 
                 // app state details, ui, handle to jq elems
-                var g_state = {
+                const g_state = {
                     "tut": {
                         "type_it": g_tutorial_script.split(""),
                         "type_it_short": g_shorthand_script.split(""),
+                        "type_it_short_fr": g_shorthand_script_fr.split(""),
                         "char_at": 0,
                         "typer": null,
                     },
                     "ui": {
+                        "lang": "fr",
                         "hs_editor_window": false,
                         "hs_json_window": false,
                         "hs_render_window": false
                     },
                     "el": {
+                        // lang
+                        "lang": $("#lang"),
+                        "en": $(".en"),
+                        "fr": $(".fr"),
                         // buttons
                         "btn_upload": $(".survista_send"),
                         "btn_tutorial": $("#show_me_how"),
@@ -622,6 +713,7 @@
                         opts[0] = opts[0]
                             .replace("[SCALE]", "")
                             .replace("/SCALE", "")
+                            .replace("/ÉCHELLE", "")
                             .replace("|", "")
                             .trim();
                         // handle json
@@ -783,6 +875,34 @@
                 // Non-Material UI general
                 //
 
+                // lang
+                g_state["el"]["lang"].on("change", function () {
+                    if (g_state["ui"]["lang"] == "en") {
+                        g_state["el"]["en"].hide();
+                        g_state["el"]["fr"].show();
+                        g_state["ui"]["lang"] = "fr";
+                        g_state["el"]["c_editor"].val(
+                            g_intro_script_fr
+                        );
+                        // render
+                        g_state["el"]["c_editor"].trigger("change");
+                        // resize
+                        ui_resize_textareas();
+                    } else if (g_state["ui"]["lang"] == "fr") {
+                        g_state["el"]["en"].show();
+                        g_state["el"]["fr"].hide();
+                        g_state["ui"]["lang"] = "en";
+                        g_state["el"]["c_editor"].val(
+                            g_intro_script
+                        );
+                        // render
+                        g_state["el"]["c_editor"].trigger("change");
+                        // resize
+                        ui_resize_textareas();
+                    }
+                });
+                g_state["el"]["lang"].trigger("change");
+
                 // load intro content
                 g_state["el"]["c_editor"].val(
                     g_intro_script
@@ -889,9 +1009,12 @@
                     g_state["tut"]["char_at"] = 0;
                     g_state["el"]["c_editor"].val("");
                     reset_control_flags(true);
+                    clearInterval(g_state["tut"]["typer"]);
+                    g_state["tut"]["typer"] = null;
                     g_state["tut"]["typer"] = setInterval(function () {
                         if (g_state["tut"]["char_at"] > g_state["tut"]["" + type_this].length) {
-                            g_state["tut"]["typer"] = clearInterval(g_state["tut"]["typer"]);
+                            clearInterval(g_state["tut"]["typer"]);
+                            g_state["tut"]["typer"] = null;
                         } else {
                             try {
                                 if (typeof g_state["tut"]["" + type_this][g_state["tut"]["char_at"]] !== "undefined") {
@@ -910,7 +1033,11 @@
                 };
 
                 g_state["el"]["btn_tutorial"].on("click", function () {
-                    run_type_it();
+                    if (g_state["ui"]["lang"] == "en") {
+                        run_type_it("type_it_short");
+                    } else {
+                        run_type_it("type_it_short_fr");
+                    }
                 });
 
             });
