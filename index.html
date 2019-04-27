@@ -446,7 +446,7 @@
                         return '' +
                             '<div class="row">' +
                             '<div class="input-field col s12" >' +
-                            '<select id="scale_qid_%qid" name="scale_%qid">' +
+                            '<select id="scale_qid_%qid" name="scale_qid_%qid">' +
                             '<option value="" disabled selected>Choose your rating</option>' +
                             '<option value="1">1 %low</option>' +
                             '<option value="2">2</option>' +
@@ -473,7 +473,7 @@
                             '<form class="col s12">' +
                             '<div class="row">' +
                             '<div class="input-field col s12">' +
-                            '<textarea id="textarea_%qid" name="textarea_%qid" class="materialize-textarea"></textarea>' +
+                            '<textarea id="textarea_%qid" name="textarea_qid_%qid" class="materialize-textarea"></textarea>' +
                             '<label for="textarea_qid_%qid">Enter your answer</label>' +
                             '</div>' +
                             '</div>' +
@@ -512,7 +512,7 @@
                             '<div class="row">' +
                             '<div class="col s12">' +
                             '<div class="input-field s12">' +
-                            '<input id="inline_qid_%qid" name="inline_%qid" type="text">' +
+                            '<input id="inline_qid_%qid" name="inline_qid_%qid" type="text">' +
                             '<label for="inline_qid_%qid">%pick</label>' +
                             '</div>' +
                             '</div>' +
@@ -612,6 +612,51 @@
                 // Helper functions
                 //
 
+                var get_params_as_object = function (query) {
+                    query = query.substring(query.indexOf('?') + 1);
+                    var re = /([^&=]+)=?([^&]*)/g;
+                    var decodeRE = /\+/g;
+
+                    var decode = function (str) {
+                        return decodeURIComponent(str.replace(decodeRE, " "));
+                    };
+
+                    var params = {}, e;
+                    while (e = re.exec(query)) {
+                        var k = decode(e[1]), v = decode(e[2]);
+                        if (k.substring(k.length - 2) === '[]') {
+                            k = k.substring(0, k.length - 2);
+                            (params[k] || (params[k] = [])).push(v);
+                        }
+                        else params[k] = v;
+                    }
+
+                    var assign = function (obj, keyPath, value) {
+                        var lastKeyIndex = keyPath.length - 1;
+                        for (var i = 0; i < lastKeyIndex; ++i) {
+                            var key = keyPath[i];
+                            if (!(key in obj))
+                                obj[key] = {}
+                            obj = obj[key];
+                        }
+                        obj[keyPath[lastKeyIndex]] = value;
+                    }
+
+                    for (var prop in params) {
+                        var structure = prop.split('[');
+                        if (structure.length > 1) {
+                            var levels = [];
+                            structure.forEach(function (item, i) {
+                                var key = item.replace(/[?[\]\\ ]/g, '');
+                                levels.push(key);
+                            });
+                            assign(params, levels, params[prop]);
+                            delete (params[prop]);
+                        }
+                    }
+                    return params;
+                };
+
                 var evalhalla_submit = function () {
                     // make some form data
                     var formElement = document.getElementById("evalhalla_form");
@@ -621,7 +666,10 @@
                     var query_string = $("#evalhalla_form").serialize();
                     console.log(query_string);
                     // let em know
-                    alert("Check the console for details");
+                    //var json_o = JSON.parse('{"' + query_string.replace(/&/g, '","').replace(/=/g, '":"') + '"}', function (key, value) { return key === "" ? value : decodeURIComponent(value) });
+                    var json_o = get_params_as_object(query_string);
+                    alert(JSON.stringify(json_o, null, 4));
+                    //alert("Check the console for details");
                 };
 
                 var pack_text = function (src_a, i, pack, join = " ") {
