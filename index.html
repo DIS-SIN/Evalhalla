@@ -824,7 +824,7 @@
                         var opts = src.split("[OPT]")
                         opts.shift(); // remove first null item
                         var form = "";
-                        var jsonsnip = '""';
+                        var jsonsnip = '';
                         // handle html+json same time
                         var random_shuffle = [];
                         var temp_snip = "";
@@ -846,7 +846,8 @@
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "mcq");
-                        g_control_flags["json"] = g_control_flags["json"].replace("%options", jsonsnip);
+                        g_control_flags["json"] = g_control_flags["json"].replace("%options", jsonsnip
+                            .replace(/(^[,\s]+)|([,\s]+$)/g, ''));
                     }
                     // TODO: Lang override, replace with actual language control
                     g_control_flags["json"] = g_control_flags["json"].replace(/\%lang/g, g_state["ui"]["lang"]);
