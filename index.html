@@ -82,30 +82,57 @@
                 </li>
             </ul>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#" class="show_me_how">
+                <li>
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <span class="en">
+                            Insert
+                        </span>
+                        <span class="fr">
+                            Adjouter
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="show_me_how">
                         <span class="en">
                             Tutorial
                         </span>
                         <span class="fr">
                             Explication
                         </span>
-                    </a></li>
+                    </a>
+                </li>
                 <li><a href="#" class="survista_send">+Survista</a></li>
+                <li><a href="#" class="audit_json_render">.Audit</a></li>
             </ul>
             </ul>
         </div>
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="#" class="show_me_how">
+        <!-- Modal Trigger -->
+        <li>
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+                <span class="en">
+                    Insert
+                </span>
+                <span class="fr">
+                    Adjouter
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="show_me_how">
                 <span class="en">
                     Tutorial
                 </span>
                 <span class="fr">
                     Explication
                 </span>
-            </a></li>
+            </a>
+        </li>
         <li><a href="#" class="survista_send">+Survista</a></li>
+        <li><a href="#" class="audit_json_render">.Audit</a></li>
     </ul>
     </ul>
 
@@ -210,6 +237,57 @@
             <li><a class="survista_send btn-floating green"><i class="material-icons">cloud_upload</i></a></li>
             <li><a class="btn-floating blue" href="#root"><i class="material-icons">arrow_upward</i></a></li>
         </ul>
+    </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4><span class="en">+ "Evalese"</span><span class="fr">+ "Evalese"</span></h4>
+            <p>
+
+                <span class="en">Use these to quickly insert commands to help you build your survey fast.</span>
+                <span class="fr">Utilisez-les pour insérer rapidement des commandes pour votre enquête.</span>
+            </p>
+            <div class="collection">
+                <a href="#!" class="ev-add-header collection-item waves-effect waves-green btn">
+                    <span class="en">Add survey header</span>
+                    <span class="fr">Ajouter un en-tête d'enquête</span>
+                </a>
+                <a href="#!" class="ev-add-instr collection-item waves-effect waves-green btn">
+                    <span class="en">Add Instruction</span>
+                    <span class="fr">Ajouter une instruction</span>
+                </a>
+                <a href="#!" class="ev-add-qfree collection-item waves-effect waves-green btn">
+
+                    <span class="en">Add Question (Free Text)</span>
+                    <span class="fr">Ajouter une question (texte libre)</span>
+                </a>
+                <a href="#!" class="ev-add-qone collection-item waves-effect waves-green btn">
+                    <span class="en">Add Question (Pick One)</span>
+                    <span class="fr">Ajouter une question (Choisissez-en une)</span>
+                </a>
+                <a href="#!" class="ev-add-qany collection-item waves-effect waves-green btn">
+                    <span class="en">Add Question (Pick Any)</span>
+                    <span class="fr">Ajouter une question (choisir)</span>
+                </a>
+                <a href="#!" class="ev-add-qscale collection-item waves-effect waves-green btn">
+                    <span class="en">Add Question (Scale 1-10)</span>
+                    <span class="fr">Ajouter une question (échelle 1-10)</span>
+                </a>
+                <a href="#!" class="ev-add-qrank collection-item waves-effect waves-green btn">
+                    <span class="en">Add Question (Rank/Rate)</span>
+                    <span class="fr">Ajouter une question (classement / taux)</span>
+                </a>
+            </div>
+            <hr>
+            <a href="#!" class="ev-add-erase waves-effect waves-red btn red darken-2">
+                <span class="en">Clear</span>
+                <span class="fr">Effacer</span>
+            </a>
+            <a href="#!" class="modal-close waves-effect waves-green btn">
+                <span class="en">Close Editor</span>
+                <span class="fr">Fermer Editeur</span>
+            </a>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -599,6 +677,17 @@
                         "btn_hs_editor": $("#hs_editor_window"),
                         "btn_hs_json": $("#hs_json_window"),
                         "btn_hs_render": $("#hs_render_window"),
+                        "btn_audit": $(".audit_json_render"),
+                        // add cmms editor
+                        "edt_erase": $(".ev-add-erase"),
+                        "edt_header": $(".ev-add-header"),
+                        "edt_instr": $(".ev-add-instr"),
+                        "edt_qany": $(".ev-add-qany"),
+                        "edt_qfree": $(".ev-add-qfree"),
+                        "edt_qone": $(".ev-add-qone"),
+                        "edt_qrank": $(".ev-add-qrank"),
+                        "edt_qscale": $(".ev-add-qscale"),
+
                         // content
                         "c_editor": $("#editor_target"),
                         "c_json": $("#json_target"),
@@ -1024,6 +1113,7 @@
                 $(".sidenav").sidenav();
                 $(".parallax").parallax();
                 $('.fixed-action-btn').floatingActionButton();
+                $('.modal').modal();
 
                 //
                 // Non-Material UI general
@@ -1166,6 +1256,60 @@
                         g_state["ui"]["hs_json_window"] = true;
                     }
                 });
+                g_state["el"]["btn_audit"].on("click", function () {
+                    alert("Auditing Evalhalla to Survista Render. Note there may be differences until both systems are fully aligned.");
+                    audit_json();
+                });
+
+                //
+                // Editor buttons
+                //
+                var get_editor_tmpl = function (cmd) {
+                    if (cmd == "header") {
+                        return "# 1234\n## Survey Title\n### Survey introduction text\n\n";
+                    } else if (cmd == "instr") {
+                        return "// Explanatory text note\n\n";
+                    } else if (cmd == "qany") {
+                        return "Q: This is my question?\n/any\nOption\nOption\nOption\n;\n\n";
+                    } else if (cmd == "qfree") {
+                        return "Q: This is my question?\n/open\n\n";
+                    } else if (cmd == "qone") {
+                        return "Q: This is my question?\n/one\nOption\nOption\nOption\n;\n\n";
+                    } else if (cmd == "qrank") {
+                        return "Q: This is my question?\n/rank\nOption\nOption\nOption\n;\n\n";
+                    } else if (cmd == "qscale") {
+                        return "Q: This is my question?\n/scale Low, High, Unsure\n\n";
+                    } else {
+                        return "";
+                    }
+                }
+                var editor_add_template = function (cmd) {
+                    g_state["el"]["c_editor"].val(
+                        g_state["el"]["c_editor"].val() + get_editor_tmpl(cmd)
+                    );
+                    g_state["el"]["c_editor"].trigger("keyup");
+                }
+                var trigger_action = function (curr_action) {
+                    console.log(curr_action);
+                    editor_add_template(curr_action);
+                };
+                var enable_editor_buttons = function (actions) {
+                    g_state["el"]["edt_" + "header"].on("click", function () { trigger_action("header"); });
+                    g_state["el"]["edt_" + "instr"].on("click", function () { trigger_action("instr"); });
+                    g_state["el"]["edt_" + "qany"].on("click", function () { trigger_action("qany"); });
+                    g_state["el"]["edt_" + "qfree"].on("click", function () { trigger_action("qfree"); });
+                    g_state["el"]["edt_" + "qone"].on("click", function () { trigger_action("qone"); });
+                    g_state["el"]["edt_" + "qrank"].on("click", function () { trigger_action("qrank"); });
+                    g_state["el"]["edt_" + "qscale"].on("click", function () { trigger_action("qscale"); });
+                    //
+                    g_state["el"]["edt_erase"].on("click", function () {
+                        // probs should confirm here. TODO
+                        g_state["el"]["c_editor"].val("");
+                        g_state["el"]["c_editor"].trigger("keyup");
+                    });
+                };
+                enable_editor_buttons();
+
 
                 //
                 // Tutorial runner setup
@@ -1205,6 +1349,92 @@
                         run_type_it("type_it_short_fr");
                     }
                 });
+
+                // 
+                // JSON Render
+                //
+
+                var audit_json = function () {
+                    var src = JSON.parse(
+                        g_control_flags["json"]
+                            .replace(/\,\%questions/g, "")
+                            .replace(/\%options/g, "")
+                    );
+                    var render = [];
+
+                    //alert(JSON.stringify(src));
+                    var snip = get_template_snip("header");
+                    snip = snip.replace(/\%title/g, src["title"]);
+                    snip = snip.replace(/\%survey/g, src["language"]);
+                    snip = snip.replace(/\%intro/g, src["description"]);
+                    render.push(snip);
+
+                    var qs = src["questions"];
+                    for (var k = 0; k < qs.length; k++) {
+                        qsnip = "";
+                        if (qs[k]["questionType"] == "instruction") {
+                            qsnip = get_template_snip("instruction");
+                        } else {
+                            qsnip = get_template_snip("question");
+                        }
+
+                        qsnip = qsnip.replace(/\%question/g, qs[k]["question"]);
+                        qsnip = qsnip.replace(/\%instruction/g, qs[k]["question"]);
+                        qsnip = qsnip.replace(/\%qid/g, qs[k]["qid"]);
+                        //src["language"]
+                        //src["randomOrder"] // TODO
+                        //src["randomOptions"] // TODO
+                        var opts = qs[k]["options"];
+                        var render_opts = [];
+                        var opts_snip = "";
+                        if (qs[k]["questionType"] == "dropdown") {
+                            opts_snip = get_template_snip("scale")
+                                .replace(/\%qid/g, qs[k]["qid"])
+                                .replace(/\%low/g, "Low")
+                                .replace(/\%high/g, "High")
+                                .replace(/\%unsure/g, "Unsure")
+                                ;
+                        } else if (qs[k]["questionType"] == "text") {
+                            opts_snip = get_template_snip("open")
+                                .replace(/\%qid/g, qs[k]["qid"])
+                                ;
+                        }
+                        if (qs[k]["questionType"] == "mcq") {
+                            for (var l = 0; l < opts.length; l++) {
+
+                                opts_snip = get_template_snip("pick one");
+                                //opts_snip = get_template_snip("pick any"); // survista handles it?
+                                //opts_snip = get_template_snip("rank"); // survista handles it?
+
+                                console.log(qs[k]["questionType"]);
+                                // render_opts.push(opts[l]);                          
+                                opts_snip = opts_snip
+                                    .replace(/\%qid/g, qs[k]["qid"])
+                                    .replace(/\%pick/g, opts[l].trim())
+                                    .replace(/\%oid/g, l)
+                                    ;
+                                render_opts.push(opts_snip);
+                                console.log(opts_snip);
+                                //random_shuffle.push(opts_snip);
+                            }
+                        } else {
+                            render_opts.push(opts_snip);
+                        }
+
+                        qsnip = qsnip.replace(/\%form/g, render_opts.join(""));
+                        //snip = snip.replace(/\%form/g, qsnip);
+                        render.push(qsnip);
+                    }
+
+                    render = form_wrap(render.join(""));
+                    g_state["el"]["btn_hs_render"].trigger("click");
+                    g_state["el"]["c_render"].html(render);
+                    // reinit submit, lang refresh
+                    refresh_lang();
+                    $("#evalhalla_submit").on("click", evalhalla_submit);
+                    $("select").formSelect();
+
+                };
 
             });
         })(jQuery);
