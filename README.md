@@ -6,6 +6,8 @@ Evalhalla - and experiment in making form generation easy as writing an email.
 
 A little bit of HTML, JS, and CSS. Nice styles by Materialize. 
 
+See it in action: https://dis-sin.github.io/Evalhalla/ 
+
 # Getting it Running
 
 This is the shorthand code:
