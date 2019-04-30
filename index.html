@@ -964,6 +964,8 @@
                         ls_show_local_storage();
                         ui_resize_textareas();
                         alert("Thank you!");
+                        // clear responses
+                        g_state["el"]["c_editor"].trigger("change");
                     } else {
                         warn_user_alert();
                     }
