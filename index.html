@@ -858,8 +858,9 @@
                                     q = survey["questions"].find(function (element) {
                                         return element["qid"] == qid;
                                     });
-                                    answer_text += "(Q" + qid + ") " + q["question"] + " (A) " + answer[k] + "<br>";
-
+                                    if(typeof q !== "undefined") {
+                                        answer_text += "(Q" + qid + ") " + q["question"] + " (A) " + answer[k] + "<br>";
+                                    }
                                 }
 
                                 tbody += "<tr><td>" +
