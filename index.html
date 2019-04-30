@@ -207,7 +207,7 @@
     <div id="editor" name="editor" class="container">
         <div class="section">
             <div class="row">
-                <div id="editor_window" class="col s12 m4">
+                <div id="editor_window" class="col s12 m6">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
@@ -225,27 +225,9 @@
                         </div>
                     </form>
                 </div>
-                <div id="render_window" class="col s12 m4">
+                <div id="render_window" class="col s12 m6">
                     <div class="row">
                         <div id="render_target"></div>
-                    </div>
-                </div>
-                <div id="json_window" class="col s12 m4">
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="input-field col s12">
-                                <textarea id="json_target" class="materialize-textarea"
-                                    data-original-height=0></textarea>
-                                <label for="json_target">
-                                    <span class="en">
-                                        Survey JSON (auto-generated).
-                                    </span>
-                                    <span class="fr">
-                                        Survey JSON (généré automatiquement).
-                                    </span>
-                                </label>
-                            </div>
-                        </form>
                     </div>
                 </div>
                 <div id="ls_window" class="col s12 m12">
@@ -261,6 +243,24 @@
                                     </span>
                                 </h5>
                                 <div id="ls_target"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="json_window" class="col s12 m12">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col s12">
+                                <textarea id="json_target" class="materialize-textarea"
+                                    data-original-height=0></textarea>
+                                <label for="json_target">
+                                    <span class="en">
+                                        Survey JSON (auto-generated).
+                                    </span>
+                                    <span class="fr">
+                                        Survey JSON (généré automatiquement).
+                                    </span>
+                                </label>
                             </div>
                         </form>
                     </div>
@@ -742,6 +742,12 @@
                             '</tbody>' +
                             '</table>' +
                             '';
+                    } else if (snip == "ls_header") {
+                        return '' +
+                            '<nav><div class="nav-wrapper light-blue darken-1"><div class="col s12">' +
+                            '<span class="en">%en</span><span class="fr">%fr</span>' +
+                            '</div></div></nav>' +
+                            '';
                     }
 
                     return "";
@@ -789,7 +795,7 @@
                         var display_str = "";
                         var tbody = "";
 
-                        display_str += '<nav><div class="nav-wrapper"><div class="col s12"><span class="en">Working Survey</span><span class="fr">Enquête en cours</span></div></div></nav>';
+                        display_str += get_template_snip("ls_header").replace(/\%en/g, "Working Survey").replace(/\%fr/g, "Enquête en cours").replace(/\%count/g, "");
                         display_str += get_template_snip("ls");
                         tbody = "";
                         if (ev_ls["working_survey"] != null) {
@@ -808,7 +814,7 @@
                         }
                         display_str = display_str.replace(/\%tbody/g, tbody);
 
-                        display_str += '<nav><div class="nav-wrapper"><div class="col s12"><span class="en">Saved Surveys</span><span class="fr">Enquête Sauvegardées</span> (%count)</div></div></nav>';
+                        display_str += get_template_snip("ls_header").replace(/\%en/g, "Saved Survey").replace(/\%fr/g, "Enquête Sauvegardées");
                         display_str += get_template_snip("ls");
                         tbody = "";
                         if (ev_ls["saved_survey_signatures"] != null
@@ -834,7 +840,7 @@
                         display_str = display_str.replace(/\%count/g, "0");
                         display_str = display_str.replace(/\%tbody/g, tbody);
 
-                        display_str += '<nav><div class="nav-wrapper"><div class="col s12"><span class="en">Saved Responses</span><span class="fr">Réponses Sauvegardées</span> (%count)</h6></div></div></nav>';
+                        display_str += get_template_snip("ls_header").replace(/\%en/g, "Saved Responses").replace(/\%fr/g, "Réponses Sauvegardées");
                         display_str += get_template_snip("ls");
                         tbody = "";
                         if (ev_ls["saved_filled_survey_responses"] != null && ev_ls["saved_filled_survey_responses"].length > 0) {
@@ -1570,12 +1576,12 @@
                 //
 
                 ui_reset_panels = function () {
-                    g_state["el"]["ui_render"].addClass("m4").removeClass("m12");
+                    g_state["el"]["ui_render"].addClass("m6").removeClass("m12");
                     g_state["el"]["ui_render"].show();
-                    g_state["el"]["ui_editor"].addClass("m4").removeClass("m12");
+                    g_state["el"]["ui_editor"].addClass("m6").removeClass("m12");
                     g_state["el"]["ui_editor"].show();
-                    g_state["el"]["ui_json"].addClass("m4").removeClass("m12");
-                    g_state["el"]["ui_json"].show();
+                    g_state["el"]["ui_json"].addClass("m6").removeClass("m12");
+                    g_state["el"]["ui_json"].hide();
                     // g_state["el"]["ui_ls"].addClass("m4").removeClass("m12");
                     g_state["el"]["ui_ls"].show();
                     g_state["ui"]["hs_render_window"] = false;
@@ -1599,7 +1605,7 @@
                     if (g_state["ui"]["hs_render_window"] == true) {
                         ui_reset_panels();
                     } else {
-                        g_state["el"]["ui_render"].removeClass("m4").addClass("m12");
+                        g_state["el"]["ui_render"].removeClass("m6").addClass("m12");
                         g_state["el"]["ui_render"].show();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_json"].hide();
@@ -1611,7 +1617,7 @@
                     if (g_state["ui"]["hs_editor_window"] == true) {
                         ui_reset_panels();
                     } else {
-                        g_state["el"]["ui_editor"].removeClass("m4").addClass("m12");
+                        g_state["el"]["ui_editor"].removeClass("m6").addClass("m12");
                         g_state["el"]["ui_editor"].show();
                         g_state["el"]["ui_json"].hide();
                         g_state["el"]["ui_render"].hide();
@@ -1627,7 +1633,7 @@
                             .replace(/\,\%questions/g, "")
                             .replace(/\%options/g, "")
                         ), null, 4));
-                        g_state["el"]["ui_json"].removeClass("m4").addClass("m12");
+                        //g_state["el"]["ui_json"].removeClass("m6").addClass("m12");
                         g_state["el"]["ui_json"].show();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_render"].hide();
