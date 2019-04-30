@@ -844,7 +844,7 @@
                         tbody = "";
                         if (ev_ls["saved_filled_survey_responses"] != null && ev_ls["saved_filled_survey_responses"].length > 0) {
                             display_str = display_str.replace(/\%count/g, ev_ls["saved_filled_survey_responses"].length);
-                            var survey = "", answer = "", answer_text = "", keys = "", qid = "", q = "";
+                            var survey = "", answer = "", answer_text = "", keys = "", qida = [], qid = "", oid = "", q = "";
                             for (var l = 0; l < ev_ls["saved_filled_survey_responses"].length; l++) {
                                 answer_text = [];
                                 survey = ev_ls["saved_filled_survey_responses"][l]["survey"];
@@ -853,7 +853,15 @@
                                 // key = Object.keys(answer);
                                 if (typeof survey["questions"] !== "undefined") {
                                     for (k in answer) {
-                                        qid = k.split("_").pop();
+                                        // TODO fix qid oid pull
+                                        qida = k.split("_");
+                                        for (var n = 0; n < qida.length; n++) {
+                                            if (qida[n] == "qid") {
+                                                qid = qida[n + 1];
+                                            } else if (qida[n] == "oid") {
+                                                oid = qida[n + 1];
+                                            }
+                                        }
                                         q = survey["questions"].find(function (element) {
                                             return element["qid"] == qid;
                                         });
@@ -870,7 +878,9 @@
                                     "</td><td>" +
                                     answer_text.join(" ") + //JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) +
                                     "</td><td>" +
+                                    //"<input value='" + JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) + "'/>" +
                                     "-</td><td>" +
+                                    //<input value='" + JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["survey"], null, 4) + "'/>" +
                                     "-</td><tr>" +
                                     "";
                             }
