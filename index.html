@@ -101,49 +101,55 @@
                         </span>
                     </a>
                 </li>
-            </ul>
-            </ul>
-        </div>
-        <div class="nav-content hide-on-small-only">
-            <ul class="tabs center">
-                <li class="tab">
-                    <a href="#" class="show_me_how">
-                        <i class="material-icons">help</i>
-                        <span class="en">
-                            Tutorial
-                        </span>
-                        <span class="fr">
-                            Explication
-                        </span>
-
+                <li class="hide-on-small-only">
+                    <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                        Menu <i class="material-icons right">arrow_drop_down</i>
                     </a>
                 </li>
-                <li class="tab">
-                    <a href="#" class="adm_save_working_survey">
-                        <i class="material-icons">save</i>
-                        <span class="en">
-                            Save
-                        </span>
-                        <span class="fr">
-                            Enregistrer
-                        </span>
-                    </a>
-                </li>
-                <li class="tab"><a href="#" class="survista_send">
-                        <i class="material-icons">cloud_upload</i>Survista</a>
-                </li>
-                <li class="tab"><a href="#" class="audit_json_render">
-                        <i class="material-icons">gavel</i>
-                        <span class="en">Audit</span><span class="fr">Vérification</span></a>
-                </li>
-                <li class="tab"><a href="#" class="adm_clear_ls">
-                        <i class="material-icons">flip_to_back</i>
-                        <span class="en">Reset</span><span class="fr">Réinitialiser</span></a>
-                </li>
+            </ul>
             </ul>
         </div>
     </nav>
-
+    <ul id="dropdown1" class="dropdown-content hide-on-small-only">
+        <li>
+            <a href="#" class="show_me_how">
+                <i class="material-icons">help</i>
+                <span class="en">
+                    Tutorial
+                </span>
+                <span class="fr">
+                    Explication
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="adm_save_working_survey">
+                <i class="material-icons">save</i>
+                <span class="en">
+                    Save
+                </span>
+                <span class="fr">
+                    Enregistrer
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="survista_send">
+                <i class="material-icons">cloud_upload</i>Survista
+            </a>
+        </li>
+        <li><a href="#" class="audit_json_render">
+                <i class="material-icons">gavel</i>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="adm_clear_ls">
+                <i class="material-icons">flip_to_back</i>
+                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
+            </a>
+        </li>
+    </ul>
     <ul class="sidenav" id="mobile-demo">
         <!-- Modal Trigger -->
         <li>
@@ -179,16 +185,22 @@
                 </span>
             </a>
         </li>
-        <li><a href="#" class="survista_send">
-                <i class="material-icons">cloud_upload</i> Survista</a>
+        <li>
+            <a href="#" class="survista_send">
+                <i class="material-icons">cloud_upload</i> Survista
+            </a>
         </li>
-        <li><a href="#" class="audit_json_render">
+        <li>
+            <a href="#" class="audit_json_render">
                 <i class="material-icons">gavel</i>
-                <span class="en">Audit</span><span class="fr">Vérification</span></a>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
         </li>
-        <li><a href="#" class="adm_clear_ls">
+        <li>
+            <a href="#" class="adm_clear_ls">
                 <i class="material-icons">flip_to_back</i>
-                <span class="en">Reset</span><span class="fr">Réinitialiser</span></a>
+                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
+            </a>
         </li>
     </ul>
 
@@ -1446,6 +1458,7 @@
                 $(".parallax").parallax();
                 $('.fixed-action-btn').floatingActionButton();
                 $('.modal').modal();
+                $(".dropdown-trigger").dropdown();
 
                 //
                 // Non-Material UI general
