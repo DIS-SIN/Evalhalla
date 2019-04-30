@@ -61,11 +61,19 @@
         footer.page-footer {
             margin: 0;
         }
+
+        nav ul .waves-effect i {
+            display: inline;
+        }
+
+        nav ul .tab i {
+            display: inline;
+        }
     </style>
 </head>
 
 <body>
-    <nav class="white" role="navigation" id="root" name="root">
+    <nav class="white nav-extended" role="navigation" id="root" name="root">
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -81,9 +89,10 @@
                     </div>
                 </li>
             </ul>
-            <ul class="right hide-on-med-and-down">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
                     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <!--<i class="material-icons">build</i>-->
                         <span class="en">
                             Insert
                         </span>
@@ -92,19 +101,45 @@
                         </span>
                     </a>
                 </li>
-                <li>
+            </ul>
+            </ul>
+        </div>
+        <div class="nav-content hide-on-small-only">
+            <ul class="tabs center">
+                <li class="tab">
                     <a href="#" class="show_me_how">
+                        <i class="material-icons">help</i>
                         <span class="en">
                             Tutorial
                         </span>
                         <span class="fr">
                             Explication
                         </span>
+
                     </a>
                 </li>
-                <li><a href="#" class="survista_send">+Survista</a></li>
-                <li><a href="#" class="audit_json_render">.Audit</a></li>
-            </ul>
+                <li class="tab">
+                    <a href="#" class="adm_save_working_survey">
+                        <i class="material-icons">save</i>
+                        <span class="en">
+                            Save
+                        </span>
+                        <span class="fr">
+                            Enregistrer
+                        </span>
+                    </a>
+                </li>
+                <li class="tab"><a href="#" class="survista_send">
+                        <i class="material-icons">cloud_upload</i>Survista</a>
+                </li>
+                <li class="tab"><a href="#" class="audit_json_render">
+                        <i class="material-icons">gavel</i>
+                        <span class="en">Audit</span><span class="fr">Vérification</span></a>
+                </li>
+                <li class="tab"><a href="#" class="adm_clear_ls">
+                        <i class="material-icons">flip_to_back</i>
+                        <span class="en">Reset</span><span class="fr">Réinitialiser</span></a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -113,6 +148,7 @@
         <!-- Modal Trigger -->
         <li>
             <a class="waves-effect waves-light btn modal-trigger" href="#modal1">
+                <!--<i class="material-icons">build</i>-->
                 <span class="en">
                     Insert
                 </span>
@@ -123,6 +159,7 @@
         </li>
         <li>
             <a href="#" class="show_me_how">
+                <i class="material-icons">help</i>
                 <span class="en">
                     Tutorial
                 </span>
@@ -131,9 +168,28 @@
                 </span>
             </a>
         </li>
-        <li><a href="#" class="survista_send">+Survista</a></li>
-        <li><a href="#" class="audit_json_render">.Audit</a></li>
-    </ul>
+        <li>
+            <a href="#" class="adm_save_working_survey">
+                <i class="material-icons">save</i>
+                <span class="en">
+                    Save
+                </span>
+                <span class="fr">
+                    Enregistrer
+                </span>
+            </a>
+        </li>
+        <li><a href="#" class="survista_send">
+                <i class="material-icons">cloud_upload</i> Survista</a>
+        </li>
+        <li><a href="#" class="audit_json_render">
+                <i class="material-icons">gavel</i>
+                <span class="en">Audit</span><span class="fr">Vérification</span></a>
+        </li>
+        <li><a href="#" class="adm_clear_ls">
+                <i class="material-icons">flip_to_back</i>
+                <span class="en">Reset</span><span class="fr">Réinitialiser</span></a>
+        </li>
     </ul>
 
     <div id="editor" name="editor" class="container">
@@ -176,6 +232,23 @@
                                         Survey JSON (généré automatiquement).
                                     </span>
                                 </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="ls_window" class="col s12 m12">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col s12">
+                                <h5>
+                                    <span class="en">
+                                        Local Storage (in browser)
+                                    </span>
+                                    <span class="fr">
+                                        Storage Locale (en browser)
+                                    </span>
+                                </h5>
+                                <div id="ls_target"></div>
                             </div>
                         </form>
                     </div>
@@ -230,11 +303,11 @@
             <i class="large material-icons">mode_edit</i>
         </a>
         <ul>
-            <li><a id="hs_render_window" class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+            <li><a id="hs_render_window" class="btn-floating red"><i class="material-icons">assignment</i></a></li>
             <li><a id="hs_json_window" class="btn-floating yellow darken-1"><i class="material-icons">code</i></a></li>
-            <li><a id="hs_editor_window" class="btn-floating orange darken-1"><i class="material-icons">list</i></a>
+            <li><a id="hs_editor_window" class="btn-floating orange darken-1"><i class="material-icons">create</i></a>
             </li>
-            <li><a class="survista_send btn-floating green"><i class="material-icons">cloud_upload</i></a></li>
+            <li><a id="hs_ls_window" class="btn-floating green"><i class="material-icons">how_to_vote</i></a></li>
             <li><a class="btn-floating blue" href="#root"><i class="material-icons">arrow_upward</i></a></li>
         </ul>
     </div>
@@ -363,7 +436,7 @@
                 const g_intro_script = "" +
                     "# 123\n" +
                     "## Evalhalla Survey\n" +
-                    "### It's easy to make survey. \n" +
+                    "### It's easy to make a survey. \n" +
                     "\n" +
                     "Q: Have you clicked on 'tutorial' yet?\n" +
                     "/ONE\n" +
@@ -641,10 +714,249 @@
                             '<span class="blue-text text-darken-2">%instruction</span>' +
                             '</div>' +
                             '';
+                    } else if (snip == "ls") {
+                        return '' +
+                            '<table class="highlight responsive-table">' +
+                            '<thead>' +
+                            '<tr>' +
+                            '<th><span class="en">Survey</span><span class="fr">Enquête</span></th>' +
+                            '<th><span class="en">Details</span><span class="fr">Details</span></th>' +
+                            '<th><span class="en">Lang</span><span class="fr">Lang</span></th>' +
+                            '<th><span class="en">Items</span><span class="fr">Articles</span></th>' +
+                            '</tr>' +
+                            '</thead>' +
+                            '<tbody>' +
+                            '%tbody' +
+                            '</tbody>' +
+                            '</table>' +
+                            '';
                     }
 
                     return "";
                 };
+
+                //
+                // LocalStorage for client side info store
+                //
+                var ls_storageAvailable = function (type) {
+                    var storage;
+                    try {
+                        storage = window[type];
+                        var x = '__storage_test__';
+                        storage.setItem(x, x);
+                        storage.removeItem(x);
+                        return true;
+                    }
+                    catch (e) {
+                        return e instanceof DOMException && (
+                            // everything except Firefox
+                            e.code === 22 ||
+                            // Firefox
+                            e.code === 1014 ||
+                            // test name field too, because code might not be present
+                            // everything except Firefox
+                            e.name === 'QuotaExceededError' ||
+                            // Firefox
+                            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+                            // acknowledge QuotaExceededError only if there's something already stored
+                            (storage && storage.length !== 0);
+                    }
+                }
+
+                var warn_user_no_storage = false;
+                var warn_user_alert = function () {
+                    // Too bad, no localStorage for us
+                    if (warn_user_no_storage == false) {
+                        alert("This device does not support local storage. Save feature disabled.");
+                        warn_user_no_storage = true;
+                    }
+                }
+                var ls_show_local_storage = function () {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = ls_get_lsobject();
+                        var display_str = "";
+                        var tbody = "";
+
+                        display_str += '<nav><div class="nav-wrapper"><div class="col s12"><span class="en">Working Survey</span><span class="fr">Enquête en cours</span></div></div></nav>';
+                        display_str += get_template_snip("ls");
+                        tbody = "";
+                        if (ev_ls["working_survey"] != null) {
+                            tbody += "<tr><td>" +
+                                (ev_ls["working_survey"]["title"] != null ? ev_ls["working_survey"]["title"] : "") +
+                                "</td><td>" +
+                                (ev_ls["working_survey"]["description"] != null ? ev_ls["working_survey"]["description"] : "") +
+                                "</td><td>" +
+                                (ev_ls["working_survey"]["language"] != null ? ev_ls["working_survey"]["language"] : "") +
+                                "</td><td>" +
+                                (ev_ls["working_survey"]["questions"] != null ? ev_ls["working_survey"]["questions"].length : "") +
+                                "</td><tr>" +
+                                "";
+                        } else {
+                            tbody = "<tr><td>None</td><td></td><td></td><td></td>";
+                        }
+                        display_str = display_str.replace(/\%tbody/g, tbody);
+
+                        display_str += '<nav><div class="nav-wrapper"><div class="col s12"><span class="en">Saved Surveys</span><span class="fr">Enquête Sauvegardées</span> (%count)</div></div></nav>';
+                        display_str += get_template_snip("ls");
+                        tbody = "";
+                        if (ev_ls["saved_survey_signatures"] != null
+                            && ev_ls["saved_survey_signatures"].length > 0) {
+                            display_str = display_str.replace(/\%count/g, ev_ls["saved_survey_signatures"].length);
+                            var cs = null;
+                            for (var l = 0; l < ev_ls["saved_survey_signatures"].length; l++) {
+                                cs = ev_ls["saved_survey_signatures"][l]["survista"];
+                                tbody += '<tr><td><a href="#" id="sv_sr_' + l + '" class="adm_load_survey">' +
+                                    (cs["title"] != null ? cs["title"] : "") +
+                                    "</a></td><td>" +
+                                    (cs["description"] != null ? cs["description"] : "") +
+                                    "</td><td>" +
+                                    (cs["language"] != null ? cs["language"] : "") +
+                                    "</td><td>" +
+                                    (cs["questions"] != null ? cs["questions"].length : "") +
+                                    "</td><tr>" +
+                                    "";
+                            }
+                        } else {
+                            tbody = "<tr><td>-</td><td></td><td></td><td></td>";
+                        }
+                        display_str = display_str.replace(/\%count/g, "0");
+                        display_str = display_str.replace(/\%tbody/g, tbody);
+
+                        display_str += '<nav><div class="nav-wrapper"><div class="col s12"><span class="en">Saved Responses</span><span class="fr">Réponses Sauvegardées</span> (%count)</h6></div></div></nav>';
+                        display_str += get_template_snip("ls");
+                        tbody = "";
+                        if (ev_ls["saved_filled_survey_responses"] != null && ev_ls["saved_filled_survey_responses"].length > 0) {
+                            display_str = display_str.replace(/\%count/g, ev_ls["saved_filled_survey_responses"].length);
+                            for (var l = 0; l < ev_ls["saved_filled_survey_responses"].length; l++) {
+                                tbody += "<tr><td>" +
+                                    ev_ls["saved_filled_survey_responses"][l]["survey"]["title"] +
+                                    "</td><td>" +
+                                    JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) +
+                                    "</td><td>" +
+                                    "-</td><td>" +
+                                    "-</td><tr>" +
+                                    "";
+                            }
+                        } else {
+                            tbody = "<tr><td>-</td><td></td><td></td><td></td>";
+                        }
+                        display_str = display_str.replace(/\%count/g, "0");
+                        display_str = display_str.replace(/\%tbody/g, tbody);
+
+                        g_state["el"]["c_ls"].html("" +
+                            display_str +
+                            ""
+                        );
+                        $(".adm_load_survey").on("click", function () {
+                            ls_load_survey($(this).attr("id"), "sv_sr_");
+                        });
+                        refresh_lang();
+                        ui_resize_textareas();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_load_survey = function (id, trim) {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ls_index = parseInt(id.replace(trim, ""), 10);
+                        var ev_ls = ls_get_lsobject();
+
+                        g_state["el"]["c_editor"].val(
+                            ev_ls["saved_survey_signatures"][ls_index]["evalhalla"]
+                        );
+
+                        g_state["el"]["c_editor"].trigger("change");
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_clear_saved_entries = function () {
+                    if (ls_storageAvailable('localStorage')) {
+                        localStorage.clear();
+                        ls_init_local_storage();
+                        g_state["el"]["c_editor"].trigger("change");
+                        ls_show_local_storage();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                /*
+                ev_ls = {
+                    "working_survey": "", // json source curr survey
+                    "saved_survey_signature": [{"survista":{}, "evalhalla": ""}], // array of json src
+                    "saved_filled_survey_responses": [{},{}], //array of answerjson + survey sig
+                }
+                */
+                var ls_init_local_storage = function () {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = {
+                            "working_survey": {}, // json source curr survey
+                            "saved_survey_signatures": [], // array of json src
+                            "saved_filled_survey_responses": [], //array of answerjson + survey sig
+                        };
+                        localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_get_lsobject = function () {
+                    var ev_ls = localStorage.getItem('ev_ls');
+                    if (ev_ls == null) {
+                        ls_init_local_storage();
+                        ev_ls = localStorage.getItem('ev_ls');
+                    }
+                    ev_ls = JSON.parse(ev_ls);
+                    return ev_ls;
+                }
+                var ls_save_survey_signature = function (signature, src) {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = ls_get_lsobject();
+                        //console.log(ev_ls);
+                        ev_ls["saved_survey_signatures"].push({ "survista": JSON.parse(signature), "evalhalla": src });
+                        localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+                        ls_show_local_storage();
+                        ui_resize_textareas();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_update_working_survey = function (signature) {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = ls_get_lsobject();
+                        ev_ls["working_survey"] = JSON.parse(signature);
+                        localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+                        ls_show_local_storage();
+                        ui_resize_textareas();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_save_survey_response = function (response) {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = ls_get_lsobject();
+
+                        ev_ls["saved_filled_survey_responses"].push(
+                            {
+                                "response": JSON.parse(response),
+                                "survey": ev_ls["working_survey"]
+                            }
+                        );
+
+                        localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+                        ls_show_local_storage();
+                        ui_resize_textareas();
+                        alert("Thank you!");
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_view_saved_entries = function () {
+                    if (ls_storageAvailable('localStorage')) {
+                        ls_show_local_storage();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
 
                 //
                 // State Controls
@@ -663,7 +975,8 @@
                         "lang": "en",
                         "hs_editor_window": false,
                         "hs_json_window": false,
-                        "hs_render_window": false
+                        "hs_render_window": false,
+                        "hs_ls_window": false
                     },
                     "el": {
                         // lang
@@ -677,7 +990,11 @@
                         "btn_hs_editor": $("#hs_editor_window"),
                         "btn_hs_json": $("#hs_json_window"),
                         "btn_hs_render": $("#hs_render_window"),
+                        "btn_hs_ls": $("#hs_ls_window"),
                         "btn_audit": $(".audit_json_render"),
+                        // admin buttons
+                        "adm_clear_ls": $(".adm_clear_ls"),
+                        "adm_save_working_survey": $(".adm_save_working_survey"),
                         // add cmms editor
                         "edt_erase": $(".ev-add-erase"),
                         "edt_header": $(".ev-add-header"),
@@ -692,10 +1009,12 @@
                         "c_editor": $("#editor_target"),
                         "c_json": $("#json_target"),
                         "c_render": $("#render_target"),
+                        "c_ls": $("#ls_target"),
                         // ui panels
                         "ui_editor": $("#editor_window"),
                         "ui_json": $("#json_window"),
-                        "ui_render": $("#render_window")
+                        "ui_render": $("#render_window"),
+                        "ui_ls": $("#ls_window")
                     }
                 };
                 // parser state, headers, questions, json
@@ -803,7 +1122,12 @@
                     console.log(query_string);
                     // let em know
                     var json_o = get_params_as_object(query_string);
-                    alert(JSON.stringify(json_o, null, 4));
+                    var json_o_string = (JSON.stringify(json_o, null, 4));
+                    // save response to local storage
+                    ls_save_survey_response(json_o_string);
+                    // show local storage items
+                    ls_view_saved_entries();
+                    //alert(json_o_string);
                     //alert("Check the console for details");
                 };
 
@@ -1100,6 +1424,14 @@
                         return_evalhalla = evalhalla.join("");
                         //M.toast({ html: 'JSON ' + e.toString(), classes: 'rounded' });
                     }
+
+
+                    // save current survey signature
+                    ls_update_working_survey(g_control_flags["json"]
+                        .replace(/\,\%questions/g, "")
+                        .replace(/\%options/g, "")
+                        .replace(/\%questions/g, ""));
+
                     return return_evalhalla
                         .replace(/\,\%questions/g, "")
                         .replace(/\%options/g, "")
@@ -1193,6 +1525,7 @@
                 ui_resize_textareas();
 
                 // upload to survista: stub
+                // TODO: Fix with correct code (right now just obj/deobj for test)
                 g_state["el"]["btn_upload"].on("click", function () {
                     alert(
                         JSON.stringify(JSON.parse(
@@ -1202,6 +1535,21 @@
                                 .replace(/\%options/g, "")
                         ), null, 4)
                     );
+                });
+
+                // Local storage
+                g_state["el"]["adm_clear_ls"].on("click", function () {
+                    alert("Clearing LocalStorage...");
+                    ls_clear_saved_entries();
+                    g_state["el"]["c_ls"].val("");
+                });
+
+                g_state["el"]["adm_save_working_survey"].on("click", function () {
+                    alert("Saving Working Survey...");
+                    ls_save_survey_signature(g_control_flags["json"]
+                        .replace(/\,\%questions/g, "")
+                        .replace(/\%questions/g, "")
+                        .replace(/\%options/g, ""), g_state["el"]["c_editor"].val());
                 });
 
                 //
@@ -1215,10 +1563,25 @@
                     g_state["el"]["ui_editor"].show();
                     g_state["el"]["ui_json"].addClass("m4").removeClass("m12");
                     g_state["el"]["ui_json"].show();
+                    // g_state["el"]["ui_ls"].addClass("m4").removeClass("m12");
+                    g_state["el"]["ui_ls"].show();
                     g_state["ui"]["hs_render_window"] = false;
                     g_state["ui"]["hs_editor_window"] = false;
                     g_state["ui"]["hs_json_window"] = false;
+                    g_state["ui"]["hs_ls_window"] = false;
                 };
+                g_state["el"]["btn_hs_ls"].on("click", function () {
+                    if (g_state["ui"]["hs_ls_window"] == true) {
+                        ui_reset_panels();
+                    } else {
+                        //g_state["el"]["ui_ls"].removeClass("m4").addClass("m12");
+                        g_state["el"]["ui_ls"].show();
+                        g_state["el"]["ui_render"].hide();
+                        g_state["el"]["ui_editor"].hide();
+                        g_state["el"]["ui_json"].hide();
+                        g_state["ui"]["hs_ls_window"] = true;
+                    }
+                });
                 g_state["el"]["btn_hs_render"].on("click", function () {
                     if (g_state["ui"]["hs_render_window"] == true) {
                         ui_reset_panels();
@@ -1227,6 +1590,7 @@
                         g_state["el"]["ui_render"].show();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_json"].hide();
+                        g_state["el"]["ui_ls"].hide();
                         g_state["ui"]["hs_render_window"] = true;
                     }
                 });
@@ -1238,6 +1602,7 @@
                         g_state["el"]["ui_editor"].show();
                         g_state["el"]["ui_json"].hide();
                         g_state["el"]["ui_render"].hide();
+                        g_state["el"]["ui_ls"].hide();
                         g_state["ui"]["hs_editor_window"] = true;
                     }
                 });
@@ -1253,6 +1618,7 @@
                         g_state["el"]["ui_json"].show();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_render"].hide();
+                        g_state["el"]["ui_ls"].hide();
                         g_state["ui"]["hs_json_window"] = true;
                     }
                 });
@@ -1290,7 +1656,7 @@
                     g_state["el"]["c_editor"].trigger("keyup");
                 }
                 var trigger_action = function (curr_action) {
-                    console.log(curr_action);
+                    //console.log(curr_action);
                     editor_add_template(curr_action);
                 };
                 var enable_editor_buttons = function (actions) {
@@ -1309,7 +1675,6 @@
                     });
                 };
                 enable_editor_buttons();
-
 
                 //
                 // Tutorial runner setup
@@ -1406,7 +1771,7 @@
                                 //opts_snip = get_template_snip("pick any"); // survista handles it?
                                 //opts_snip = get_template_snip("rank"); // survista handles it?
 
-                                console.log(qs[k]["questionType"]);
+                                //console.log(qs[k]["questionType"]);
                                 // render_opts.push(opts[l]);                          
                                 opts_snip = opts_snip
                                     .replace(/\%qid/g, qs[k]["qid"])
@@ -1414,7 +1779,7 @@
                                     .replace(/\%oid/g, l)
                                     ;
                                 render_opts.push(opts_snip);
-                                console.log(opts_snip);
+                                //console.log(opts_snip);
                                 //random_shuffle.push(opts_snip);
                             }
                         } else {
