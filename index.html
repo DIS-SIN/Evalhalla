@@ -845,11 +845,27 @@
                         tbody = "";
                         if (ev_ls["saved_filled_survey_responses"] != null && ev_ls["saved_filled_survey_responses"].length > 0) {
                             display_str = display_str.replace(/\%count/g, ev_ls["saved_filled_survey_responses"].length);
+                            var survey = "", answer = "", answer_text = "", keys = "", qid = "", q = "";
                             for (var l = 0; l < ev_ls["saved_filled_survey_responses"].length; l++) {
+                                answer_text = "";
+                                survey = ev_ls["saved_filled_survey_responses"][l]["survey"];
+                                answer = ev_ls["saved_filled_survey_responses"][l]["response"];
+
+                                // key = Object.keys(answer);
+
+                                for (k in answer) {
+                                    qid = k.split("_").pop();
+                                    q = survey["questions"].find(function (element) {
+                                        return element["qid"] == qid;
+                                    });
+                                    answer_text += "(Q" + qid + ") " + q["question"] + " (A) " + answer[k] + "<br>";
+
+                                }
+
                                 tbody += "<tr><td>" +
                                     ev_ls["saved_filled_survey_responses"][l]["survey"]["title"] +
                                     "</td><td>" +
-                                    JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) +
+                                    answer_text + //JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) +
                                     "</td><td>" +
                                     "-</td><td>" +
                                     "-</td><tr>" +
