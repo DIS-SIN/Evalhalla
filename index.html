@@ -1045,7 +1045,7 @@
                                 );
                                 display_str += '<svg class="hnpie" id="' + slugify(index + "_" + rindex + "_" + "chart") + '" viewBox="-1 -1 2 2" style="transform: rotate(-90deg)"></svg>';
                                 for (var metric in metrics) {
-                                    display_str += " <strong>" + metric + "</strong>: " + metrics[metric] + ", ";
+                                    display_str += " <strong>" + (metric == "" ? "Blank Response" : metric) + "</strong>: " + metrics[metric] + ", ";
                                 }
                                 display_str += "</li>";
                             }
