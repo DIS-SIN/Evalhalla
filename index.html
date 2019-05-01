@@ -844,7 +844,7 @@
                         tbody = "";
                         if (ev_ls["saved_filled_survey_responses"] != null && ev_ls["saved_filled_survey_responses"].length > 0) {
                             display_str = display_str.replace(/\%count/g, ev_ls["saved_filled_survey_responses"].length);
-                            var survey = "", answer = "", answer_text = "", keys = "", qida = [], qid = "", oid = "", q = "";
+                            var survey = "", answer = "", answer_text = "", keys = "", qid = "", q = "", qida = [], opt_text = "", type = "";
                             for (var l = 0; l < ev_ls["saved_filled_survey_responses"].length; l++) {
                                 answer_text = [];
                                 survey = ev_ls["saved_filled_survey_responses"][l]["survey"];
@@ -854,19 +854,27 @@
                                 if (typeof survey["questions"] !== "undefined") {
                                     for (k in answer) {
                                         // TODO fix qid oid pull
-                                        qida = k.split("_");
-                                        for (var n = 0; n < qida.length; n++) {
-                                            if (qida[n] == "qid") {
-                                                qid = qida[n + 1];
-                                            } else if (qida[n] == "oid") {
-                                                oid = qida[n + 1];
-                                            }
-                                        }
+                                        type = (k.split("_"))[0];
+                                        qida = (k.match(/\d+/g));
+                                        qid = qida[0];
+                                        oid = "";
+
+                                        console.log(qid, k);
+
                                         q = survey["questions"].find(function (element) {
                                             return element["qid"] == qid;
                                         });
+                                        opt_text = "";
+                                        if (typeof qida[1] !== "undefined") {
+                                            oid = qida[1];
+                                            opt_text = q["options"][oid];
+                                        }
                                         if (typeof q !== "undefined") {
-                                            answer_text.push("(Q" + qid + ") " + q["question"] + " (A) " + answer[k] + "<br>");
+                                            answer_text.push(
+                                                "(Q" + qid + ", " + type + ") " +
+                                                q["question"] + " " + opt_text +
+                                                " (A) " + answer[k] + "<br>"
+                                            );
                                         }
 
                                     }
