@@ -69,6 +69,28 @@
         nav ul .tab i {
             display: inline;
         }
+
+        .pie-chart {
+            padding: 0 5px 0 10px;
+            width: 39px;
+        }
+
+        .pie-chart svg {
+            transform: rotate(-90deg);
+            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+        }
+
+        .pie-chart path,
+        .pie-chart circle {
+            fill: #cccccc;
+        }
+
+        .hnpie {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
 
@@ -754,6 +776,69 @@
                 };
 
                 //
+                // Basic Pre-Survista Charting
+                //
+
+                // Random HSL Color value generation
+                const randomHsl = () => `hsla(${Math.random() * 360}, 70%, 70%, 1)`;
+
+                // svg basic pie chart
+                var hackernoon_pie = function (elid, slices) {
+                    // just read this. trust me: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
+                    var svgEls = [document.getElementById(elid)];
+                    if (slices == null) {
+                        slices = [
+                            { percent: 0.1, color: randomHsl() },
+                            { percent: 0.65, color: randomHsl() },
+                            { percent: 0.2, color: randomHsl() },
+                        ];
+                    }
+                    let cumulativePercent = 0;
+
+                    function getCoordinatesForPercent(percent) {
+                        const x = Math.cos(2 * Math.PI * percent);
+                        const y = Math.sin(2 * Math.PI * percent);
+                        return [x, y];
+                    }
+
+                    for (var i = 0; i < svgEls.length; i++) {
+                        slices.forEach(slice => {
+                            // destructuring assignment sets the two variables at once
+                            const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
+                            // each slice starts where the last slice ended, so keep a cumulative percent
+                            cumulativePercent += slice.percent;
+                            const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
+                            // if the slice is more than 50%, take the large arc (the long way around)
+                            const largeArcFlag = slice.percent > .5 ? 1 : 0;
+                            // create an array and join it just for code readability
+                            const pathData = [
+                                `M ${startX} ${startY}`, // Move
+                                `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
+                                `L 0 0`, // Line
+                            ].join(' ');
+                            // create a <path> and append it to the <svg> element
+                            const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                            pathEl.setAttribute('d', pathData);
+                            pathEl.setAttribute('fill', slice.color);
+                            svgEls[i].appendChild(pathEl);
+                        })
+                    }
+                }
+                // slug all the things
+                function slugify(string) {
+                    const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
+                    const b = 'aaaaaaaaceeeeghiiiimnnnoooooprssstuuuuuwxyz------'
+                    const p = new RegExp(a.split('').join('|'), 'g')
+                    return string.toString().toLowerCase()
+                        .replace(/\s+/g, '-') // Replace spaces with -
+                        .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+                        .replace(/&/g, '-and-') // Replace & with ‘and’
+                        .replace(/[^\w\-]+/g, '') // Remove all non-word characters
+                        .replace(/\-\-+/g, '-') // Replace multiple - with single -
+                        .replace(/^-+/, '') // Trim - from start of text
+                        .replace(/-+$/, '') // Trim - from end of text
+                }
+                //
                 // LocalStorage for client side info store
                 //
                 var ls_storageAvailable = function (type) {
@@ -788,6 +873,7 @@
                         warn_user_no_storage = true;
                     }
                 }
+                // TODO: Pull out template code into snips
                 var ls_show_local_storage = function () {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -918,15 +1004,21 @@
                         display_str = display_str.replace(/\%count/g, "0");
                         display_str = display_str.replace(/\%tbody/g, tbody);
 
-                        display_str += get_template_snip("ls_header").replace(/\%en/g, "Tabulated Results (Basic)").replace(/\%fr/g, "Resultats Tabulé (Simple)");
+                        var regen_color_btn = '<a href="#" class="regen_color btn light-blue lighten-2"><i class="material-icons">refresh</i> Color</a>';
+                        display_str += get_template_snip("ls_header")
+                            .replace(/\%en/g, "Tabulated Results (Basic)")
+                            .replace(/\%fr/g, "Resultats Tabulé (Simple)");
 
-
+                        display_str += regen_color_btn;
                         var metrics = {};
+                        var charts = [];
+                        var slices = [];
                         for (var index in tabulation) {
                             metrics = {};
                             display_str += "" + "<div><strong>" + index + "</strong></div>";// + JSON.stringify(tabulation[index]) + "</div><hr>";
                             for (var rindex in tabulation[index]) {
                                 metrics = {};
+                                slices = [];
                                 display_str += "<li><strong>" + rindex + "</strong> <em>" +
                                     tabulation[index][rindex]["question"] +
                                     "</em><br>";
@@ -938,10 +1030,24 @@
                                     }
                                 }
                                 for (var metric in metrics) {
-                                    metrics[metric] = ((parseFloat(metrics[metric]) / parseFloat(tabulation[index][rindex]["values"].length)) * 100).toFixed(1) + "%";
+                                    metrics[metric] = (parseFloat(metrics[metric]) / parseFloat(tabulation[index][rindex]["values"].length));
+
+                                    slices.push(
+                                        { percent: metrics[metric], color: randomHsl() }
+                                    );
+                                    metrics[metric] = (metrics[metric] * 100).toFixed(1) + "%";
                                 }
-                                display_str += JSON.stringify(metrics) +
-                                    "</li>";
+                                charts.push(
+                                    {
+                                        "chart_id": slugify("" + index + "_" + rindex + "_" + "chart"),
+                                        "slices": slices
+                                    }
+                                );
+                                display_str += '<svg class="hnpie" id="' + slugify(index + "_" + rindex + "_" + "chart") + '" viewBox="-1 -1 2 2" style="transform: rotate(-90deg)"></svg>';
+                                for (var metric in metrics) {
+                                    display_str += " <strong>" + metric + "</strong>: " + metrics[metric] + ", ";
+                                }
+                                display_str += "</li>";
                             }
                             display_str += "<hr>";
                         }
@@ -954,6 +1060,10 @@
                             ls_load_survey($(this).attr("id"), "sv_sr_");
                         });
                         refresh_lang();
+                        for (var i = 0; i < charts.length; i++) {
+                            hackernoon_pie(charts[i]["chart_id"], charts[i]["slices"]);
+                        }
+                        $(".regen_color").on("click", function (e) { e.preventDefault(); ls_show_local_storage(); return false; });
                         ui_resize_textareas();
                     } else {
                         warn_user_alert();
