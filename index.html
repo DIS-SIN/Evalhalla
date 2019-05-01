@@ -845,6 +845,7 @@
                         if (ev_ls["saved_filled_survey_responses"] != null && ev_ls["saved_filled_survey_responses"].length > 0) {
                             display_str = display_str.replace(/\%count/g, ev_ls["saved_filled_survey_responses"].length);
                             var survey = "", answer = "", answer_text = "", keys = "", qid = "", q = "", qida = [], opt_text = "", type = "";
+                            var tabulation = {};
                             for (var l = 0; l < ev_ls["saved_filled_survey_responses"].length; l++) {
                                 answer_text = [];
                                 survey = ev_ls["saved_filled_survey_responses"][l]["survey"];
@@ -852,14 +853,18 @@
 
                                 // key = Object.keys(answer);
                                 if (typeof survey["questions"] !== "undefined") {
-                                    for (k in answer) {
-                                        // TODO fix qid oid pull
+                                    for (var k in answer) {
                                         type = (k.split("_"))[0];
                                         qida = (k.match(/\d+/g));
                                         qid = qida[0];
                                         oid = "";
 
-                                        console.log(qid, k);
+                                        //console.log(qid, k);
+
+                                        if (typeof tabulation[survey["title"]] === "undefined") {
+                                            tabulation[survey["title"]] = {};
+                                        }
+
 
                                         q = survey["questions"].find(function (element) {
                                             return element["qid"] == qid;
@@ -869,7 +874,22 @@
                                             oid = qida[1];
                                             opt_text = q["options"][oid];
                                         }
+                                        var ans_key = ("Q" + qid + " " + opt_text).trim();
                                         if (typeof q !== "undefined") {
+                                            if (typeof tabulation[survey["title"]][ans_key] === "undefined") {
+                                                tabulation[survey["title"]][ans_key] = {
+                                                    "question": (q["question"] + " " + opt_text).trim(),
+                                                    "values": []
+                                                }
+                                            }
+                                            tabulation[survey["title"]][ans_key]["values"].push(
+                                                //"(Q" + qid + ", " + type + ") " +
+                                                //q["question"] + " " + opt_text +
+                                                //" (A) " + 
+                                                answer[k]
+                                                // + "<br>"
+                                            );
+
                                             answer_text.push(
                                                 "(Q" + qid + ", " + type + ") " +
                                                 q["question"] + " " + opt_text +
@@ -898,9 +918,37 @@
                         display_str = display_str.replace(/\%count/g, "0");
                         display_str = display_str.replace(/\%tbody/g, tbody);
 
+                        display_str += get_template_snip("ls_header").replace(/\%en/g, "Tabulated Results (Basic)").replace(/\%fr/g, "Resultats Tabulé (Simple)");
+
+
+                        var metrics = {};
+                        for (var index in tabulation) {
+                            metrics = {};
+                            display_str += "" + "<div><strong>" + index + "</strong></div>";// + JSON.stringify(tabulation[index]) + "</div><hr>";
+                            for (var rindex in tabulation[index]) {
+                                metrics = {};
+                                display_str += "<li><strong>" + rindex + "</strong> <em>" +
+                                    tabulation[index][rindex]["question"] +
+                                    "</em><br>";
+                                for (var t = 0; t < tabulation[index][rindex]["values"].length; t++) {
+                                    if (typeof metrics[tabulation[index][rindex]["values"][t]] === "undefined") {
+                                        metrics[tabulation[index][rindex]["values"][t]] = 1
+                                    } else {
+                                        metrics[tabulation[index][rindex]["values"][t]] += 1
+                                    }
+                                }
+                                for (var metric in metrics) {
+                                    metrics[metric] = ((parseFloat(metrics[metric]) / parseFloat(tabulation[index][rindex]["values"].length)) * 100).toFixed(1) + "%";
+                                }
+                                display_str += JSON.stringify(metrics) +
+                                    "</li>";
+                            }
+                            display_str += "<hr>";
+                        }
+                        //display_str += "" + "<pre>" + JSON.stringify(tabulation, null, 4) + "</pre>";
+
                         g_state["el"]["c_ls"].html("" +
-                            display_str +
-                            ""
+                            display_str
                         );
                         $(".adm_load_survey").on("click", function () {
                             ls_load_survey($(this).attr("id"), "sv_sr_");
