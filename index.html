@@ -811,11 +811,23 @@
                             // if the slice is more than 50%, take the large arc (the long way around)
                             const largeArcFlag = slice.percent > .5 ? 1 : 0;
                             // create an array and join it just for code readability
+                            /*
                             const pathData = [
                                 `M ${startX} ${startY}`, // Move
                                 `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
                                 `L 0 0`, // Line
                             ].join(' ');
+                            */
+
+                            const thickness = .3;
+                            const pathData = [
+                                `M ${startX} ${startY}`,
+                                `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
+                                /** next two lines added for donut chart, as well as thickness constant*/
+                                `L ${endX * thickness} ${endY * thickness}`,
+                                `A ${thickness} ${thickness} 0 ${largeArcFlag} 0 ${startX * thickness} ${startY * thickness}`,
+                            ].join(' ');
+
                             // create a <path> and append it to the <svg> element
                             const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                             pathEl.setAttribute('d', pathData);
@@ -874,6 +886,7 @@
                     }
                 }
                 // TODO: Pull out template code into snips
+                // TODO: Optimize render, no need to show ls on every keystroke
                 var ls_show_local_storage = function () {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
