@@ -551,68 +551,7 @@
         <a class="btn-floating btn-large red" href="#editor">
             <i class="large material-icons">arrow_upward</i>
         </a>
-        <!--<ul>
-            <li><a id="hs_render_window" class="btn-floating red"><i class="material-icons">assignment</i></a></li>
-            <li><a id="hs_json_window" class="btn-floating yellow darken-1"><i class="material-icons">code</i></a></li>
-            <li><a id="hs_editor_window" class="btn-floating orange darken-1"><i class="material-icons">create</i></a>
-            </li>
-            <li><a id="hs_ls_window" class="btn-floating green"><i class="material-icons">how_to_vote</i></a></li>
-            <li><a class="btn-floating blue" href="#root"><i class="material-icons">arrow_upward</i></a></li>
-        </ul>-->
     </div>
-    <!-- Modal Structure -->
-    <!--
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4><span class="en">+ "Evalese"</span><span class="fr">+ "Evalese"</span></h4>
-            <p>
-
-                <span class="en">Use these to quickly insert commands to help you build your survey fast.</span>
-                <span class="fr">Utilisez-les pour insérer rapidement des commandes pour votre enquête.</span>
-            </p>
-            <div class="collection">
-                <a href="#!" class="ev-add-header collection-item waves-effect waves-green btn">
-                    <span class="en">Add survey header</span>
-                    <span class="fr">Ajouter un en-tête d'enquête</span>
-                </a>
-                <a href="#!" class="ev-add-instr collection-item waves-effect waves-green btn">
-                    <span class="en">Add Instruction</span>
-                    <span class="fr">Ajouter une instruction</span>
-                </a>
-                <a href="#!" class="ev-add-qfree collection-item waves-effect waves-green btn">
-
-                    <span class="en">Add Question (Free Text)</span>
-                    <span class="fr">Ajouter une question (texte libre)</span>
-                </a>
-                <a href="#!" class="ev-add-qone collection-item waves-effect waves-green btn">
-                    <span class="en">Add Question (Pick One)</span>
-                    <span class="fr">Ajouter une question (Choisissez-en une)</span>
-                </a>
-                <a href="#!" class="ev-add-qany collection-item waves-effect waves-green btn">
-                    <span class="en">Add Question (Pick Any)</span>
-                    <span class="fr">Ajouter une question (choisir)</span>
-                </a>
-                <a href="#!" class="ev-add-qscale collection-item waves-effect waves-green btn">
-                    <span class="en">Add Question (Scale 1-10)</span>
-                    <span class="fr">Ajouter une question (échelle 1-10)</span>
-                </a>
-                <a href="#!" class="ev-add-qrank collection-item waves-effect waves-green btn">
-                    <span class="en">Add Question (Rank/Rate)</span>
-                    <span class="fr">Ajouter une question (classement / taux)</span>
-                </a>
-            </div>
-            <hr>
-            <a href="#!" class="ev-add-erase waves-effect waves-red btn red darken-2">
-                <span class="en">Clear</span>
-                <span class="fr">Effacer</span>
-            </a>
-            <a href="#!" class="modal-close waves-effect waves-green btn">
-                <span class="en">Close Editor</span>
-                <span class="fr">Fermer Editeur</span>
-            </a>
-        </div>
-    </div>
--->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
@@ -639,6 +578,8 @@
                     "###": { "type": "intro", "html": "<intro>%v</intro>" },
                     "[QUESTION]": { "type": "question", "html": "<question>%v</question>" },
                     "Q:": { "type": "question", "html": "<question>%v</question>" },
+                    "[*QUESTION]": { "type": "req question", "html": "<question>%v</question>" },
+                    "*Q:": { "type": "req question", "html": "<question>%v</question>" },
                     "[SCALE]": { "type": "scale", "html": "<scale>%v</scale>" },
                     "/SCALE": { "type": "scale", "html": "<scale>%v</scale>" },
                     "/ÉCHELLE": { "type": "scale", "html": "<scale>%v</scale>" },
@@ -691,11 +632,11 @@
 
                 };
                 const g_intro_script = "" +
-                    "# 123\n" +
-                    "##\n/en Evalhalla Survey /;\n/fr Enquête Evalhalla /; \n" +
+                    "# 123\n\n" +
+                    "##\n/en Evalhalla Survey /;\n/fr Enquête Evalhalla /; \n\n" +
                     "###\n/en It's easy to make a survey. /;\n/fr Il est facile de faire une enquête. /; \n" +
                     "\n" +
-                    "Q:\n/en Have you clicked on 'tutorial' yet? /;\n/fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
+                    "*Q:\n/en Have you clicked on 'tutorial' yet? /;\n/fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
                     "/ONE\n" +
                     "/en Yes /; /fr Oui /; \n" +
                     "/en No /; /fr Non /; \n" +
@@ -866,7 +807,7 @@
                             '<p class="flow-text left-align light">%intro</p>' +
                             '</div>' +
                             '</div>';
-                    } else if (snip == "question") {
+                    } else if (snip == "question" || snip == "req question") {
                         if (format == "json") {
                             return '{' +
                                 '"qid": "%qid",' +
@@ -874,6 +815,7 @@
                                 '"description": "%question",' +
                                 '"language": "%lang",' + // en or fr
                                 '"questionType": "%type",' + //mcq 'text' , 'dropdown',
+                                '"required": "%req",' +
                                 '"randomOrder": "%rand_order",' +
                                 '"randomOptions": "%rand_options",' +
                                 '"options": [%options]' +
@@ -881,7 +823,7 @@
                         }
                         return '' +
                             '<div class="card-panel">' +
-                            '<blockquote><span class="badge" style="font-size:1.5em;"><strong>#%qid</strong></span> %question</blockquote>%form' +
+                            '<blockquote><span class="badge" style="font-size:1.5em;"><strong>#%qid</strong>%req</span> %question</blockquote>%form' +
                             '</div>' +
                             '';
                     } else if (snip == "scale") {
@@ -901,7 +843,7 @@
                         return '' +
                             '<div class="row">' +
                             '<div class="input-field col s12" >' +
-                            '<select id="scale_qid_%qid" name="scale_qid_%qid">' +
+                            '<select class="%reqcls" %reqattr id="scale_qid_%qid" name="scale_qid_%qid">' +
                             '<option value="" disabled selected>--</option>' +
                             '<option value="1">1 %low</option>' +
                             '<option value="2">2</option>' +
@@ -928,7 +870,7 @@
                             '<div class="row">' +
                             '<div class="input-field col s12">' +
                             '<label for="textarea_qid_%qid"><span class="en">Enter your answer</span><span class="fr">Provir votre reponse</span></label>' +
-                            '<textarea id="textarea_qid_%qid" name="textarea_qid_%qid" class="materialize-textarea"></textarea>' +
+                            '<textarea type="text" %reqattr id="textarea_qid_%qid" name="textarea_qid_%qid" class="%reqcls materialize-textarea"></textarea>' +
                             '</div>' +
                             '</div>' +
                             '</div>' +
@@ -940,7 +882,7 @@
                         return '' +
                             '<div class="row">' +
                             '<label>' +
-                            '<input class="with-gap" name="rgroup_qid_%qid" type="radio" value="%pick" />' +
+                            '<input class="with-gap %reqcls" %reqattr name="rgroup_qid_%qid" type="radio" value="%pick" />' +
                             '<span>%pick</span>' +
                             '</label>' +
                             '</div>' +
@@ -949,10 +891,10 @@
                         if (format == "json") {
                             return '"%pick"';
                         }
-                        return '' +
+                        return '' + // no validation needed, you pick any. Any includes none.
                             '<div class="row">' +
                             '<label>' +
-                            '<input name="cgroup_qid_%qid[]" type="checkbox" value="%pick" />' +
+                            '<input class="with-gap" name="cgroup_qid_%qid[]" type="checkbox" value="%pick" />' +
                             '<span>%pick</span>' +
                             '</label>' +
                             '</div>' +
@@ -965,7 +907,7 @@
                             '<div class="row">' +
                             '<div class="col s12">' +
                             '<div class="input-field s12">' +
-                            '<input id="inline_qid_%qid" name="inline_qid_%qid_oid_%oid" type="text">' +
+                            '<input class="%reqcls" %reqattr id="inline_qid_%qid" name="inline_qid_%qid_oid_%oid" type="text">' +
                             '<label for="inline_qid_%qid">%pick</label>' +
                             '</div>' +
                             '</div>' +
@@ -1021,13 +963,13 @@
                             <div class="row">
                             <div class="col s6">
                             <div class="input-field s6">
-                            <input id="inline_qid_%qid_dept_0" class="ev_inline_dept" name="inline_qid_%qid_dept_0" type="text">
+                            <input id="inline_qid_%qid_dept_0" class="ev_inline_dept %reqcls" %reqattr name="inline_qid_%qid_dept_0" type="text">
                             <label for="inline_qid_%qid_dept_0"><span class="en">Department</span><span class="fr">Department</span></label>
                             </div>
                             </div>
                             <div class="col s6">
                             <div class="input-field s6">
-                            <input id="inline_qid_%qid_role_1" class="ev_inline_role" name="inline_qid_%qid_role_1" type="text">
+                            <input id="inline_qid_%qid_role_1" class="ev_inline_role %reqcls" %reqattr  name="inline_qid_%qid_role_1" type="text">
                             <label for="inline_qid_%qid_role_1"><span class="en">Role</span><span class="fr">Role</span></label>
                             </div>
                             </div>
@@ -1035,13 +977,13 @@
                             <div class="row">
                             <div class="col s6">
                             <div class="input-field s6">
-                            <input id="inline_qid_%qid_region_2" class="ev_inline_region" name="inline_qid_%qid_region_2" type="text">
+                            <input id="inline_qid_%qid_region_2" class="ev_inline_region %reqcls" %reqattr  name="inline_qid_%qid_region_2" type="text">
                             <label for="inline_qid_%qid_region_2"><span class="en">Region</span><span class="fr">Region</span></label>
                             </div>
                             </div>
                             <div class="col s6">
                             <div class="input-field s6">
-                            <input id="inline_qid_%qid_office_3" class="ev_inline_office" name="inline_qid_%qid_office_3" type="text">
+                            <input id="inline_qid_%qid_office_3" class="ev_inline_office %reqcls" %reqattr  name="inline_qid_%qid_office_3" type="text">
                             <label for="inline_qid_%qid_office_3"><span class="en">Office</span><span class="fr">Office</span></label>
                             </div>
                             </div>
@@ -1646,7 +1588,8 @@
                         "random": {
                             "order": false,
                             "options": false
-                        }
+                        },
+                        "required": false
                     }
                 }
                 var reset_control_flags = function (hard = false) {
@@ -1657,7 +1600,8 @@
                         "random": {
                             "order": false,
                             "options": false
-                        }
+                        },
+                        "required": false
                     };
                     g_control_flags["json"] = "{}";
                     g_control_flags["pageid"] = 1;
@@ -1753,6 +1697,12 @@
                     // query string would be
                     var query_string = $("#evalhalla_form").serialize();
                     console.log(query_string);
+                    if (formElement.reportValidity() == true) {
+                        alert("Good to go!")
+                    } else {
+                        alert("Missing Data");
+                        return;
+                    }
                     // let em know
                     var json_o = get_params_as_object(query_string);
                     var json_o_string = (JSON.stringify(json_o, null, 4));
@@ -1874,12 +1824,17 @@
                 }
                 var handle_cmd_question = function (cmd, src, json = "") {
                     var snip = get_template_snip("question");
-                    if (cmd == "question") {
+                    if (cmd == "question" || cmd == "req question") {
                         // handle html
                         g_control_flags["question"]["text"] = src.replace(src.split(" ")[0], "").trim();
                         g_control_flags["question"]["qid"] = g_control_flags["question"]["qid"] + 1;
                         snip = snip.replace(/\%question/g, g_control_flags["question"]["text"]);
                         snip = snip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                        if (cmd == "req question") {
+                            snip = snip.replace(/\%req/g, '<span class="badge red white-text"><span class="en">required</span><span class="fr">requis</span></span>');
+                        } else {
+                            snip = snip.replace(/\%req/g, '');
+                        }
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         var jsonsnip = get_template_snip("question", "json");
@@ -1891,6 +1846,15 @@
                             .replace("%rand_order", g_control_flags["question"]["random"]["order"])
                             .replace("%rand_options", g_control_flags["question"]["random"]["options"])
                             ;
+                        if (cmd == "req question") {
+                            g_control_flags["question"]["required"] = true;
+                            g_control_flags["json"] = g_control_flags["json"]
+                                .replace("%req", "true");
+                        } else {
+                            g_control_flags["question"]["required"] = false;
+                            g_control_flags["json"] = g_control_flags["json"]
+                                .replace("%req", "false");
+                        }
                     } else if (cmd == "scale") {
                         // handle html
                         snip = g_control_flags["question"]["form"];
@@ -1933,11 +1897,25 @@
 
                         g_control_flags["json"] = g_control_flags["json"].replace("%options", jsonsnip);
                         snip = snip.replace(/\%form/g, scale);
+                        if (g_control_flags["question"]["required"] == true) {
+                            snip = snip.replace(/\%reqattr/g, 'required="" aria-required="true"').replace(/\%reqcls/g, "validate");
+                        } else {
+                            snip = snip.replace(/\%reqattr/g, '').replace(/\%reqcls/g, "");
+                        }
                         g_control_flags["question"]["form"] = snip;
                     } else if (cmd == "open") {
+                        //required="" aria-required="true" class="validate"
                         // handle html
                         snip = g_control_flags["question"]["form"];
-                        snip = snip.replace(/\%form/g, get_template_snip("open").replace(/\%qid/g, g_control_flags["question"]["qid"]));
+                        snip = snip.replace(/\%form/g,
+                            get_template_snip("open")
+                                .replace(/\%qid/g, g_control_flags["question"]["qid"])
+                        );
+                        if (g_control_flags["question"]["required"] == true) {
+                            snip = snip.replace(/\%reqattr/g, 'required="" aria-required="true"').replace(/\%reqcls/g, "validate");
+                        } else {
+                            snip = snip.replace(/\%reqattr/g, '').replace(/\%reqcls/g, "");
+                        }
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         g_control_flags["json"] = g_control_flags["json"].replace("%options", "").replace(/\%type/g, "text");
@@ -1945,6 +1923,11 @@
                         // handle html
                         snip = g_control_flags["question"]["form"];
                         snip = snip.replace(/\%form/g, get_template_snip("generics").replace(/\%qid/g, g_control_flags["question"]["qid"]));
+                        if (g_control_flags["question"]["required"] == true) {
+                            snip = snip.replace(/\%reqattr/g, 'required="" aria-required="true"').replace(/\%reqcls/g, "validate");
+                        } else {
+                            snip = snip.replace(/\%reqattr/g, '').replace(/\%reqcls/g, "");
+                        }
                         g_control_flags["question"]["form"] = snip;
                         // todo: handle json
                         g_control_flags["json"] = g_control_flags["json"].replace("%options", '"dept","role","region","office"').replace(/\%type/g, "text");
@@ -1981,6 +1964,11 @@
                             snip = snip.replace(/\%form/g, form);
                         }
 
+                        if (g_control_flags["question"]["required"] == true) {
+                            snip = snip.replace(/\%reqattr/g, 'required="" aria-required="true"').replace(/\%reqcls/g, "validate");
+                        } else {
+                            snip = snip.replace(/\%reqattr/g, '').replace(/\%reqcls/g, "");
+                        }
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "mcq");
@@ -2018,7 +2006,7 @@
                                 i = pkg["i"];
                                 //}
                                 evalhalla = [handle_cmd_header(cmd["type"], pack, pkg["pack_json"])];
-                            } else if (cmd["type"] == "question"
+                            } else if (cmd["type"] == "question" || cmd["type"] == "req question"
                                 || cmd["type"] == "scale"
                                 || cmd["type"] == "open"
                                 || cmd["type"] == "generics"
@@ -2208,7 +2196,27 @@
                 $("#qlib").trigger("change");
 
                 // Render Trigger
-                g_state["el"]["c_editor"].on("change keyup paste", function () {
+                // Render Timer additions. TODO: Causes flicker of submit. Adjust setting classes.
+                var render_buffering = false;
+                var render_manager = null;
+                var render_delay = 1300; // 1.3 sec delay between renders
+                var render_requested = false;
+                g_state["el"]["c_editor"].on("change keyup", function () {
+                    // render timer
+                    if (render_buffering == true) {
+                        render_requested = true;
+                        return false;
+                    } else {
+                        render_buffering = true;
+                        render_manager = setTimeout(function () {
+                            render_buffering = false;
+                            if (render_requested == true) {
+                                render_requested = false;
+                                g_state["el"]["c_editor"].trigger("keyup");
+                            }
+                        }, render_delay);
+                    }
+                    // end render timer
                     // get source
                     var src = g_state["el"]["c_editor"].val().replace(/\t/g, "");
                     // prep
@@ -2300,6 +2308,7 @@
                         M.toast({ html: 'Hint: Use single quotes, JSON ' + e.toString(), classes: 'rounded' });
                     }
                     $('select').formSelect();
+
                 });
                 // render
                 g_state["el"]["c_editor"].trigger("change");
