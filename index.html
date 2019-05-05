@@ -95,43 +95,48 @@
 </head>
 
 <body>
-    <nav class="white nav-extended" role="navigation" id="root" name="root">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right">
-                <li>
-                    <div class="switch">
-                        <label>
-                            EN
-                            <input class="lang" type="checkbox">
-                            <span class="lever"></span>
-                            FR
-                        </label>
-                    </div>
-                </li>
-            </ul>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li>
-                    <a class="waves-effect waves-light btn light-blue darken-1 modal-trigger" href="#modal1">
-                        <!--<i class="material-icons">build</i>-->
-                        <span class="en">
-                            Insert
-                        </span>
-                        <span class="fr">
-                            Adjouter
-                        </span>
-                    </a>
-                </li>
-                <li class="hide-on-small-only">
-                    <a class="dropdown-trigger" href="#!" data-target="dropdown1">
-                        Menu <i class="material-icons right">arrow_drop_down</i>
-                    </a>
-                </li>
-            </ul>
-            </ul>
-        </div>
-    </nav>
+    <div class="navbar-fixed">
+        <nav class="white nav-extended" role="navigation" id="root" name="root">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right">
+                    <li>
+                        <div class="switch">
+                            <label>
+                                EN
+                                <input class="lang" type="checkbox">
+                                <span class="lever"></span>
+                                FR
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" href="#!" data-target="dropdown3">
+                            <span class="en">
+                                Insert
+                            </span>
+                            <span class="fr">
+                                Adjouter
+                            </span> <i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" href="#!" data-target="dropdown2">
+                            View <i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" href="#!" data-target="dropdown1">
+                            Menu <i class="material-icons right">arrow_drop_down</i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <ul id="dropdown1" class="dropdown-content hide-on-small-only">
         <li>
             <a href="#" class="show_me_how">
@@ -165,6 +170,11 @@
                 <span class="en">Audit</span><span class="fr">Vérification</span>
             </a>
         </li>
+        <li><a href="#!" class="ev-add-erase">
+                <i class="material-icons">clear</i>
+                <span class="en">Clear</span>
+                <span class="fr">Effacer</span>
+            </a></li>
         <li>
             <a href="#" class="adm_clear_ls">
                 <i class="material-icons">flip_to_back</i>
@@ -172,18 +182,98 @@
             </a>
         </li>
     </ul>
-    <ul class="sidenav" id="mobile-demo">
-        <!-- Modal Trigger -->
+    <ul id="dropdown2" class="dropdown-content hide-on-small-only">
         <li>
-            <a class="waves-effect waves-light btn light-blue darken-1 modal-trigger" href="#modal1">
-                <!--<i class="material-icons">build</i>-->
+            <a class="hs_render_window">
+                <i class="material-icons">assignment</i>
                 <span class="en">
-                    Insert
+                    Survey
                 </span>
                 <span class="fr">
-                    Adjouter
+                    Enquête
                 </span>
             </a>
+        </li>
+        <li>
+            <a class="hs_json_window">
+                <i class="material-icons">code</i>
+                <span class="en">
+                    JSON
+                </span>
+                <span class="fr">
+                    JSON
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_editor_window">
+                <i class="material-icons">create</i>
+                <span class="en">
+                    Editor
+                </span>
+                <span class="fr">
+                    Editeur
+                </span>
+            </a>
+        </li>
+        <li><a class="hs_ls_window">
+                <i class="material-icons">how_to_vote</i>
+                <span class="en">Storage</span><span class="fr">Storage</span>
+            </a>
+        </li>
+        <li>
+            <a href="#!" class="hs_qlib_window">
+                <i class="material-icons">build</i>
+                <span class="en">
+                    Library
+                </span>
+                <span class="fr">
+                    Bibliothèque
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul id="dropdown3" class="dropdown-content hide-on-small-only">
+        <li><a href="#!" class="ev-add-header">
+                <i class="material-icons">title</i>
+                <span class="en">Header</span>
+                <span class="fr">En-tête</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-instr">
+                <i class="material-icons">help</i>
+                <span class="en">Instruction</span>
+                <span class="fr">Instruction</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qfree">
+                <i class="material-icons">input</i>
+                <span class="en">Open</span>
+                <span class="fr">Libre</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qone">
+                <i class="material-icons">done</i>
+                <span class="en">One</span>
+                <span class="fr">Une</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qany">
+                <i class="material-icons">done_all</i>
+                <span class="en">Any</span>
+                <span class="fr">Choisir</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qscale">
+                <i class="material-icons">call_made</i>
+                <span class="en">Scale</span>
+                <span class="fr">Echelle</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qrank">
+                <i class="material-icons">import_export</i>
+                <span class="en">Rate</span>
+                <span class="fr">Taux</span>
+            </a></li>
+    </ul>
+    <ul class="sidenav" id="mobile-demo">
+        <li>
+            <h6 class="center-align">MENU</h6>
+            <hr>
         </li>
         <li>
             <a href="#" class="show_me_how">
@@ -218,12 +308,109 @@
                 <span class="en">Audit</span><span class="fr">Vérification</span>
             </a>
         </li>
+        <li><a href="#!" class="ev-add-erase">
+                <i class="material-icons">clear</i>
+                <span class="en">Clear</span>
+                <span class="fr">Effacer</span>
+            </a></li>
         <li>
             <a href="#" class="adm_clear_ls">
                 <i class="material-icons">flip_to_back</i>
                 <span class="en">Reset</span><span class="fr">Réinitialiser</span>
             </a>
         </li>
+        <li>
+            <h6 class="center-align">VIEW</h6>
+            <hr>
+        </li>
+        <li>
+            <a class="hs_render_window">
+                <i class="material-icons">assignment</i>
+                <span class="en">
+                    Survey
+                </span>
+                <span class="fr">
+                    Enquête
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_json_window">
+                <i class="material-icons">code</i>
+                <span class="en">
+                    JSON
+                </span>
+                <span class="fr">
+                    JSON
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_editor_window">
+                <i class="material-icons">create</i>
+                <span class="en">
+                    Editor
+                </span>
+                <span class="fr">
+                    Editeur
+                </span>
+            </a>
+        </li>
+        <li><a class="hs_ls_window">
+                <i class="material-icons">how_to_vote</i>
+                <span class="en">Storage</span><span class="fr">Storage</span>
+            </a>
+        </li>
+        <li>
+            <a href="#!" class="hs_qlib_window">
+                <i class="material-icons">build</i>
+                <span class="en">
+                    Library
+                </span>
+                <span class="fr">
+                    Bibliothèque
+                </span>
+            </a>
+        </li>
+        <li>
+            <h6 class="center-align">INSERT</h6>
+            <hr>
+        </li>
+        <li><a href="#!" class="ev-add-header">
+                <i class="material-icons">title</i>
+                <span class="en">Header</span>
+                <span class="fr">En-tête</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-instr">
+                <i class="material-icons">help</i>
+                <span class="en">Instruction</span>
+                <span class="fr">Instruction</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qfree">
+                <i class="material-icons">input</i>
+                <span class="en">Open</span>
+                <span class="fr">Libre</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qone">
+                <i class="material-icons">done</i>
+                <span class="en">One</span>
+                <span class="fr">Une</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qany">
+                <i class="material-icons">done_all</i>
+                <span class="en">Any</span>
+                <span class="fr">Choisir</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qscale">
+                <i class="material-icons">call_made</i>
+                <span class="en">Scale</span>
+                <span class="fr">Echelle</span>
+            </a></li>
+        <li><a href="#!" class="ev-add-qrank">
+                <i class="material-icons">import_export</i>
+                <span class="en">Rate</span>
+                <span class="fr">Taux</span>
+            </a></li>
     </ul>
 
     <div id="editor" name="editor" class="container">
@@ -264,6 +451,10 @@
                                         Storage Locale (en browser)
                                     </span>
                                 </h5>
+
+                                <a href="#" class="update_ls btn light-blue lighten-2"><i
+                                        class="material-icons">refresh</i> Update</a>
+
                                 <div id="ls_target"></div>
                             </div>
                         </form>
@@ -286,6 +477,31 @@
                             </div>
                         </form>
                     </div>
+                </div>
+                <div id="qlib_window" name="qlib_window" class="col s12 m12">
+                    <div class="row">
+                        <nav>
+                            <div class="nav-wrapper light-blue darken-1">
+                                <div class="col s12">
+                                    <span class="en">Library</span><span class="fr">Bibliothèque</span>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="row">
+                        <table class="highlight responsive-table">
+                            <thead>
+                                <tr>
+                                    <th><span class="en">Details</span><span class="fr">Details</span></th>
+                                    <th><span class="en">Add</span><span class="fr">Adjouter</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="qlib_target">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <textarea id="qlib" class="materialize-textarea"></textarea>
                 </div>
             </div>
         </div>
@@ -333,19 +549,20 @@
         </div>
     </footer>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red">
-            <i class="large material-icons">mode_edit</i>
+        <a class="btn-floating btn-large red" href="#root">
+            <i class="large material-icons">arrow_upward</i>
         </a>
-        <ul>
+        <!--<ul>
             <li><a id="hs_render_window" class="btn-floating red"><i class="material-icons">assignment</i></a></li>
             <li><a id="hs_json_window" class="btn-floating yellow darken-1"><i class="material-icons">code</i></a></li>
             <li><a id="hs_editor_window" class="btn-floating orange darken-1"><i class="material-icons">create</i></a>
             </li>
             <li><a id="hs_ls_window" class="btn-floating green"><i class="material-icons">how_to_vote</i></a></li>
             <li><a class="btn-floating blue" href="#root"><i class="material-icons">arrow_upward</i></a></li>
-        </ul>
+        </ul>-->
     </div>
     <!-- Modal Structure -->
+    <!--
     <div id="modal1" class="modal">
         <div class="modal-content">
             <h4><span class="en">+ "Evalese"</span><span class="fr">+ "Evalese"</span></h4>
@@ -396,6 +613,7 @@
             </a>
         </div>
     </div>
+-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
@@ -413,6 +631,7 @@
                 //
 
                 const g_cmd = {
+                    // CMDS in ALLCAPS, but input is any case
                     "[SURVEY]": { "type": "survey", "html": "<survey>%v</survey>" },
                     "#": { "type": "survey", "html": "<survey>%v</survey>" },
                     "[TITLE]": { "type": "title", "html": "<title>%v</title>" },
@@ -465,33 +684,38 @@
                     "[RATE]": { "type": "rank", "html": "<rank>%v</rank>" },
                     "/RATE": { "type": "rank", "html": "<rank>%v</rank>" },
                     "[ENDRANK]": { "type": "end rank", "html": "<rank>%v</rank>" },
-                    "[ENDRATE]": { "type": "end rank", "html": "<rank>%v</rank>" }
+                    "[ENDRATE]": { "type": "end rank", "html": "<rank>%v</rank>" },
+                    "/GENERICS": { "type": "generics", "html": "<generics>%v</generics>" },
+                    "[GENERICS]": { "type": "generics", "html": "<generics>%v</generics>" }
+
                 };
                 const g_intro_script = "" +
                     "# 123\n" +
-                    "## Evalhalla Survey\n" +
-                    "### It's easy to make a survey. \n" +
+                    "##\n/en Evalhalla Survey /;\n/fr Enquête Evalhalla /; \n" +
+                    "###\n/en It's easy to make a survey. /;\n/fr Il est facile de faire une enquête. /; \n" +
                     "\n" +
-                    "Q: Have you clicked on 'tutorial' yet?\n" +
+                    "Q:\n/en Have you clicked on 'tutorial' yet? /;\n/fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
                     "/ONE\n" +
-                    "Yes\n" +
-                    "No\n" +
+                    "/en Yes /; /fr Oui /; \n" +
+                    "/en No /; /fr Non /; \n" +
                     ";\n" +
+                    "Q: Generic Info Stuff (autofilled)\n" +
+                    "/generics\n" +
                     "\n" +
-                    "// Thanks\n" +
+                    "// /en Thanks /; /fr Merci /; \n" +
                     "";
                 const g_intro_script_fr = "" +
                     "# 123\n" +
-                    "## Enquête Evalhalla \n" +
-                    "### Il est facile de faire une enquête. \n" +
+                    "## /en Evalhalla Survey /; /fr Enquête Evalhalla /; \n" +
+                    "### /en It's easy to make a survey. /; /fr Il est facile de faire une enquête. /; \n" +
                     "\n" +
-                    "Q: Avez-vous déjà cliqué sur 'tutorial'?\n" +
-                    "/UN\n" +
-                    "Oui\n" +
-                    "Non\n" +
+                    "Q: /en Have you clicked on 'tutorial' yet? /; /fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
+                    "/ONE\n" +
+                    "/en Yes/;  /fr Oui /; \n" +
+                    "/en No/;  /fr Non /; \n" +
                     ";\n" +
                     "\n" +
-                    "// Merci!\n" +
+                    "// /en Thanks /; /fr Merci /; \n" +
                     "";
                 const g_tutorial_script = "" +
                     "[SURVEY] 1234 \n" +
@@ -744,8 +968,8 @@
                                 '}';
                         }
                         return '' +
-                            '<div class="card-panel">' +
-                            '<span class="blue-text text-darken-2">%instruction</span>' +
+                            '<div class="card-panel light-blue darken-2">' +
+                            '<span class="white-text">%instruction</span>' +
                             '</div>' +
                             '';
                     } else if (snip == "ls") {
@@ -770,10 +994,88 @@
                             '<span class="en">%en</span><span class="fr">%fr</span>' +
                             '</div></div></nav>' +
                             '';
+                    } else if (snip == "generics") {
+                        // todo only one generics
+                        // TODO JSON
+                        if (format == "json") {
+                            return '"%field"';
+                        }
+                        return `
+                            <div class="row">
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_dept_0" class="ev_inline_dept" name="inline_qid_%qid_dept_0" type="text">
+                            <label for="inline_qid_%qid_dept_0"><span class="en">Department</span><span class="fr">Department</span></label>
+                            </div>
+                            </div>
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_role_1" class="ev_inline_role" name="inline_qid_%qid_role_1" type="text">
+                            <label for="inline_qid_%qid_role_1"><span class="en">Role</span><span class="fr">Role</span></label>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_region_2" class="ev_inline_region" name="inline_qid_%qid_region_2" type="text">
+                            <label for="inline_qid_%qid_region_2"><span class="en">Region</span><span class="fr">Region</span></label>
+                            </div>
+                            </div>
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_office_3" class="ev_inline_office" name="inline_qid_%qid_office_3" type="text">
+                            <label for="inline_qid_%qid_office_3"><span class="en">Office</span><span class="fr">Office</span></label>
+                            </div>
+                            </div>
+                            </div>
+                            `;
+                    } else if (snip == "qlib entry") {
+                        return `<tr>
+                                    <td>
+                                        <pre id="bqlib_%bqid">%question
+                                        </pre>
+                                    </td>
+                                    <td>%ctrl</td>
+                                </tr>`;
                     }
 
                     return "";
                 };
+
+                //
+                // Question Libary
+                //
+
+                var update_question_library = function () {
+                    var qlib = $("#qlib").val();
+                    if (qlib == "") {
+                        qlib = "Q: Example?\n/open\n///\nQ: Example 2?\n/open\n";
+                        $("#qlib").val(qlib);
+                    }
+                    qlib = qlib.split("///");
+                    var tbody = "";
+                    for (var i = 0; i < qlib.length; i++) {
+                        tbody += get_template_snip("qlib entry")
+                            .replace(/\%bqid/g, i)
+                            .replace(/\%question/g, qlib[i])
+                            .replace(/\%ctrl/g, '<a id="ql_' + i + '" class="btn-small bqlib">Add</a>')
+
+                    }
+                    $("#qlib_target").html(tbody);
+                    $(".bqlib").on("click", function () {
+                        var bqid = $(this).attr("id");
+                        bqid = bqid.replace("ql_", "");
+                        var text = $("#bqlib_" + bqid).html();
+                        g_state["el"]["c_editor"].val(
+                            g_state["el"]["c_editor"].val() +
+                            "\n" +
+                            text
+                        );
+                        g_state["el"]["c_editor"].trigger("keyup");
+                    });
+                }
+
 
                 //
                 // Basic Pre-Survista Charting
@@ -781,7 +1083,6 @@
 
                 // Random HSL Color value generation
                 const randomHsl = () => `hsla(${Math.random() * 360}, 70%, 70%, 1)`;
-
                 // svg basic pie chart
                 var hackernoon_pie = function (elid, slices) {
                     // just read this. trust me: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
@@ -800,7 +1101,6 @@
                         const y = Math.sin(2 * Math.PI * percent);
                         return [x, y];
                     }
-
                     for (var i = 0; i < svgEls.length; i++) {
                         slices.forEach(slice => {
                             // destructuring assignment sets the two variables at once
@@ -811,14 +1111,15 @@
                             // if the slice is more than 50%, take the large arc (the long way around)
                             const largeArcFlag = slice.percent > .5 ? 1 : 0;
                             // create an array and join it just for code readability
-                            /*
+                            /* 
+                            // Pie Chart Filled
                             const pathData = [
                                 `M ${startX} ${startY}`, // Move
                                 `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
                                 `L 0 0`, // Line
                             ].join(' ');
                             */
-
+                            // Donut chart
                             const thickness = .3;
                             const pathData = [
                                 `M ${startX} ${startY}`,
@@ -837,6 +1138,7 @@
                     }
                 }
                 // slug all the things
+                // read: https://medium.com/@mhagemann/the-ultimate-way-to-slugify-a-url-string-in-javascript-b8e4a0d849e1
                 function slugify(string) {
                     const a = 'àáäâãåăæçèéëêǵḧìíïîḿńǹñòóöôœṕŕßśșțùúüûǘẃẍÿź·/_,:;'
                     const b = 'aaaaaaaaceeeeghiiiimnnnoooooprssstuuuuuwxyz------'
@@ -892,6 +1194,7 @@
                         var ev_ls = ls_get_lsobject();
                         var display_str = "";
                         var tbody = "";
+
 
                         display_str += get_template_snip("ls_header").replace(/\%en/g, "Working Survey").replace(/\%fr/g, "Enquête en cours").replace(/\%count/g, "");
                         display_str += get_template_snip("ls");
@@ -1005,17 +1308,20 @@
                                     "</td><td>" +
                                     answer_text.join(" ") + //JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) +
                                     "</td><td>" +
-                                    //"<input value='" + JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) + "'/>" +
+                                    //"<pre>" + JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["response"], null, 4) + "</pre>" +
                                     "-</td><td>" +
                                     //<input value='" + JSON.stringify(ev_ls["saved_filled_survey_responses"][l]["survey"], null, 4) + "'/>" +
                                     "-</td><tr>" +
                                     "";
+
+
                             }
                         } else {
                             tbody = "<tr><td>-</td><td></td><td></td><td></td>";
                         }
                         display_str = display_str.replace(/\%count/g, "0");
                         display_str = display_str.replace(/\%tbody/g, tbody);
+
 
                         var regen_color_btn = '<a href="#" class="regen_color btn light-blue lighten-2"><i class="material-icons">refresh</i> Color</a>';
                         display_str += get_template_snip("ls_header")
@@ -1067,7 +1373,7 @@
                         //display_str += "" + "<pre>" + JSON.stringify(tabulation, null, 4) + "</pre>";
 
                         g_state["el"]["c_ls"].html("" +
-                            display_str
+                            activate_lang(display_str)
                         );
                         $(".adm_load_survey").on("click", function () {
                             ls_load_survey($(this).attr("id"), "sv_sr_");
@@ -1077,6 +1383,7 @@
                             hackernoon_pie(charts[i]["chart_id"], charts[i]["slices"]);
                         }
                         $(".regen_color").on("click", function (e) { e.preventDefault(); ls_show_local_storage(); return false; });
+
                         ui_resize_textareas();
                     } else {
                         warn_user_alert();
@@ -1134,6 +1441,32 @@
                     ev_ls = JSON.parse(ev_ls);
                     return ev_ls;
                 }
+                var ls_save_qlib = function () {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = ls_get_lsobject();
+                        //console.log(ev_ls);
+                        ev_ls["qlib"] = $("#qlib").val();
+                        localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+                        ls_show_local_storage();
+                        update_question_library();
+                        ui_resize_textareas();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                var ls_load_qlib = function () {
+                    if (ls_storageAvailable('localStorage')) {
+                        var ev_ls = ls_get_lsobject();
+                        //console.log(ev_ls);
+                        $("#qlib").val(ev_ls["qlib"]);
+                        update_question_library();
+                    } else {
+                        warn_user_alert();
+                    }
+                }
+                // load up
+                ls_load_qlib();
+
                 var ls_save_survey_signature = function (signature, src) {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1151,7 +1484,8 @@
                         var ev_ls = ls_get_lsobject();
                         ev_ls["working_survey"] = JSON.parse(signature);
                         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
-                        ls_show_local_storage();
+                        //todo: timer on refreshes
+                        //ls_show_local_storage();
                         ui_resize_textareas();
                     } else {
                         warn_user_alert();
@@ -1173,6 +1507,9 @@
                         ui_resize_textareas();
                         alert("Thank you!");
                         // clear responses
+                        // TODO: reinit tombstone generics
+                        g_state["generics"]["generic_fetched"] = false;
+                        api_get_generics();
                         g_state["el"]["c_editor"].trigger("change");
                     } else {
                         warn_user_alert();
@@ -1199,12 +1536,21 @@
                         "char_at": 0,
                         "typer": null,
                     },
+                    "qlib": [],
+                    "generics": {
+                        "generic_fetched": false,
+                        "ev_inline_dept": "",
+                        "ev_inline_role": "",
+                        "ev_inline_region": "",
+                        "ev_inline_office": ""
+                    },
                     "ui": {
                         "lang": "en",
                         "hs_editor_window": false,
                         "hs_json_window": false,
                         "hs_render_window": false,
-                        "hs_ls_window": false
+                        "hs_ls_window": false,
+                        "hs_qlib_window": false
                     },
                     "el": {
                         // lang
@@ -1215,10 +1561,11 @@
                         "btn_upload": $(".survista_send"),
                         "btn_tutorial": $(".show_me_how"),
                         "btn_tutorial_short": $(".show_me_how_short"),
-                        "btn_hs_editor": $("#hs_editor_window"),
-                        "btn_hs_json": $("#hs_json_window"),
-                        "btn_hs_render": $("#hs_render_window"),
-                        "btn_hs_ls": $("#hs_ls_window"),
+                        "btn_hs_editor": $(".hs_editor_window"),
+                        "btn_hs_json": $(".hs_json_window"),
+                        "btn_hs_render": $(".hs_render_window"),
+                        "btn_hs_ls": $(".hs_ls_window"),
+                        "btn_hs_qlib": $(".hs_qlib_window"),
                         "btn_audit": $(".audit_json_render"),
                         // admin buttons
                         "adm_clear_ls": $(".adm_clear_ls"),
@@ -1242,13 +1589,19 @@
                         "ui_editor": $("#editor_window"),
                         "ui_json": $("#json_window"),
                         "ui_render": $("#render_window"),
-                        "ui_ls": $("#ls_window")
+                        "ui_ls": $("#ls_window"),
+                        "ui_qlib": $("#qlib_window")
                     }
                 };
                 // parser state, headers, questions, json
                 var g_control_flags = {
                     "json": "{}",
                     "header": {
+                        "survey": false,
+                        "title": false,
+                        "intro": false
+                    },
+                    "header_json": {
                         "survey": false,
                         "title": false,
                         "intro": false
@@ -1283,9 +1636,26 @@
                     }
                 }
 
+
                 //
                 // Helper functions
                 //
+
+                // get from tombstone: stub
+                // TODO: Fix with correct code (right now just obj/deobj for test)
+                g_state["generics"]["generic_fetched"] = false;
+                var api_get_generics = function () {
+                    if (g_state["generics"]["generic_fetched"] == false) {
+                        M.toast({ html: "Found this gc data, prefilling...", classes: 'rounded' });
+                        g_state["generics"]["ev_inline_dept"] = "CSPS-EFPC";
+                        g_state["generics"]["ev_inline_role"] = "CS-04";
+                        g_state["generics"]["ev_inline_region"] = "NCR";
+                        g_state["generics"]["ev_inline_office"] = "Bayview";
+                        g_state["generics"]["generic_fetched"] = true;
+                    }
+                };
+                // TODO: init tombstone generics
+                //api_get_generics();
 
                 const shuffle_array = function (array) {
                     for (let i = array.length - 1; i > 0; i--) {
@@ -1359,12 +1729,26 @@
                     //alert("Check the console for details");
                 };
 
+                const activate_lang = function (pack) {
+                    pack = pack
+                        .replace(/\/en/g, "<span class='en'>")
+                        .replace(/\/fr/g, "<span class='fr'>")
+                        .replace(/\/\;/g, "</span>")
+                        .replace(/\/\;\/en/g, "</span><span class='en'>")
+                        .replace(/\/\;\/fr/g, "</span><span class='fr'>")
+                        .replace(/\;\/en/g, "</span><span class='en'>")
+                        .replace(/\;\/fr/g, "</span><span class='fr'>")
+                        ;
+                    return pack;
+                };
                 const pack_text = function (src_a, i, pack, join = " ") {
                     var nextcmd = "null";
+                    var pack_json = "";
                     while (nextcmd == "null") {
                         if (i + 1 < src_a.length) {
                             nextcmd = detect_command(src_a[i + 1]);
                             if (nextcmd == "null") {
+                                //pack += join + "[en] " + src_a[i + 1] + " [fr] " + src_a[i + 1];
                                 pack += join + src_a[i + 1];
                                 i++;
                             } else {
@@ -1374,7 +1758,16 @@
                             nextcmd = "exit";
                         }
                     }
-                    return { "pack": pack, "i": i };
+                    // Q: the test
+                    // Q: /en the test
+                    // Q: /fr le test
+                    // Q: /en the test /fr le test
+                    // TODO note: this/entails could be an issue
+                    pack_json = pack;
+
+                    pack = activate_lang(pack);
+
+                    return { "pack": pack, "pack_json": pack_json, "i": i };
                 }
 
                 var ui_resize_textareas = function () {
@@ -1397,30 +1790,33 @@
                     }
                     return "null";
                 }
-                var handle_cmd_header = function (cmd, src) {
+                var handle_cmd_header = function (cmd, src, json = "") {
+                    reset_control_flags();
+
                     g_control_flags["header"][cmd] = src.replace(src.split(" ")[0], "").trim();
+                    g_control_flags["header_json"][cmd] = json.replace(json.split(" ")[0], "").trim();
                     // handle html
                     var snip = get_template_snip("header");
                     snip = snip.replace(/\%title/g, g_control_flags["header"]["title"]);
                     snip = snip.replace(/\%survey/g, g_control_flags["header"]["survey"]);
                     snip = snip.replace(/\%intro/g, g_control_flags["header"]["intro"]);
-                    reset_control_flags();
                     // handle json
                     var jsonsnip = get_template_snip("header", "json");
-                    jsonsnip = jsonsnip.replace(/\%title/g, g_control_flags["header"]["title"]);
-                    jsonsnip = jsonsnip.replace(/\%survey/g, g_control_flags["header"]["survey"]);
-                    jsonsnip = jsonsnip.replace(/\%intro/g, g_control_flags["header"]["intro"]);
+                    jsonsnip = jsonsnip.replace(/\%title/g, g_control_flags["header_json"]["title"]);
+                    jsonsnip = jsonsnip.replace(/\%survey/g, g_control_flags["header_json"]["survey"]);
+                    jsonsnip = jsonsnip.replace(/\%intro/g, g_control_flags["header_json"]["intro"]);
                     g_control_flags["json"] = jsonsnip;
+
 
                     return snip;
                 }
-                var handle_cmd_instruction = function (cmd, src) {
+                var handle_cmd_instruction = function (cmd, src, json = "") {
                     // handle html
                     var snip = get_template_snip("instruction");
                     snip = snip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
                     // handle json
                     var jsonsnip = get_template_snip("instruction", "json");
-                    jsonsnip = jsonsnip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
+                    jsonsnip = jsonsnip.replace(/\%instruction/g, json.replace(json.split(" ")[0], "").trim());
                     g_control_flags["json"] = g_control_flags["json"]
                         .replace("%questions", jsonsnip + ",%questions")
                         .replace("%rand_order", g_control_flags["question"]["random"]["order"])
@@ -1429,7 +1825,7 @@
                         ;
                     return snip;
                 }
-                var handle_cmd_question = function (cmd, src) {
+                var handle_cmd_question = function (cmd, src, json = "") {
                     var snip = get_template_snip("question");
                     if (cmd == "question") {
                         // handle html
@@ -1440,6 +1836,7 @@
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         var jsonsnip = get_template_snip("question", "json");
+                        g_control_flags["question"]["text"] = json.replace(json.split(" ")[0], "").trim()
                         jsonsnip = jsonsnip.replace(/\%question/g, g_control_flags["question"]["text"]);
                         jsonsnip = jsonsnip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
                         g_control_flags["json"] = g_control_flags["json"]
@@ -1497,10 +1894,21 @@
                         g_control_flags["question"]["form"] = snip;
                         // handle json
                         g_control_flags["json"] = g_control_flags["json"].replace("%options", "").replace(/\%type/g, "text");
+                    } else if (cmd == "generics") {
+                        // handle html
+                        snip = g_control_flags["question"]["form"];
+                        snip = snip.replace(/\%form/g, get_template_snip("generics").replace(/\%qid/g, g_control_flags["question"]["qid"]));
+                        g_control_flags["question"]["form"] = snip;
+                        // todo: handle json
+                        g_control_flags["json"] = g_control_flags["json"].replace("%options", '"dept","role","region","office"').replace(/\%type/g, "text");
                     } else if (cmd == "pick one" || cmd == "pick any" || cmd == "rank") {
                         snip = g_control_flags["question"]["form"];
                         var opts = src.split("[OPT]")
                         opts.shift(); // remove first null item
+
+                        var opts_json = json.split("[OPT]")
+                        opts_json.shift(); // remove first null item
+
                         var form = "";
                         var jsonsnip = '';
                         // handle html+json same time
@@ -1516,7 +1924,7 @@
                             random_shuffle.push(temp_snip);
 
                             jsonsnip += "," + get_template_snip(cmd, "json")
-                                .replace(/\%pick/g, opts[opti].trim());
+                                .replace(/\%pick/g, opts_json[opti].trim());
                         }
                         if (g_control_flags["question"]["random"]["options"] == true) {
                             shuffle_array(random_shuffle);
@@ -1557,15 +1965,16 @@
                                 || cmd["type"] == "title"
                             ) {
                                 var pack = src_a[i];
-                                if (cmd["type"] == "intro") {
-                                    var pkg = pack_text(src_a, i, pack);
-                                    pack = pkg["pack"];
-                                    i = pkg["i"];
-                                }
-                                evalhalla = [handle_cmd_header(cmd["type"], pack)];
+                                //if (cmd["type"] == "intro") {
+                                var pkg = pack_text(src_a, i, pack);
+                                pack = pkg["pack"];
+                                i = pkg["i"];
+                                //}
+                                evalhalla = [handle_cmd_header(cmd["type"], pack, pkg["pack_json"])];
                             } else if (cmd["type"] == "question"
                                 || cmd["type"] == "scale"
                                 || cmd["type"] == "open"
+                                || cmd["type"] == "generics"
                                 || cmd["type"] == "pick one"
                                 || cmd["type"] == "pick any"
                                 || cmd["type"] == "rank"
@@ -1581,18 +1990,21 @@
 
                                 if (cmd["type"] == "scale"
                                     || cmd["type"] == "open"
+                                    || cmd["type"] == "generics"
                                     || cmd["type"] == "pick one"
                                     || cmd["type"] == "pick any"
                                     || cmd["type"] == "rank") {
                                     evalhalla.pop();
+                                    g_state["qlib"].pop();
                                 }
-                                evalhalla.push(handle_cmd_question(cmd["type"], pack));
+                                evalhalla.push(handle_cmd_question(cmd["type"], pack, pkg["pack_json"]));
+                                g_state["qlib"].push(pack);
                             } else if (cmd["type"] == "instruction") {
                                 var pack = src_a[i];
                                 var pkg = pack_text(src_a, i, pack);
                                 pack = pkg["pack"];
                                 i = pkg["i"];
-                                evalhalla.push(handle_cmd_instruction(cmd["type"], pack));
+                                evalhalla.push(handle_cmd_instruction(cmd["type"], pack, pkg["pack_json"]));
                             } else if (cmd["type"] == "random order" || cmd["type"] == "end random order") {
                                 // handle randomize order
                                 if (cmd["type"] == "random order") {
@@ -1680,6 +2092,27 @@
                 // Non-Material UI general
                 //
 
+
+                $(".update_ls").on("click", function (e) { e.preventDefault(); ls_show_local_storage(); return false; });
+
+                var refresh_generics = function () {
+                    //alert("Refreshing Generic");
+
+                    api_get_generics();
+
+                    $(".ev_inline_dept").val(g_state["generics"]["ev_inline_dept"]);
+                    $(".ev_inline_role").val(g_state["generics"]["ev_inline_role"]);
+                    $(".ev_inline_region").val(g_state["generics"]["ev_inline_region"]);
+                    $(".ev_inline_office").val(g_state["generics"]["ev_inline_office"]);
+
+                    $(".ev_inline_dept").on("change", function () { g_state["generics"]["ev_inline_dept"] = $(this).val(); });
+                    $(".ev_inline_role").on("change", function () { g_state["generics"]["ev_inline_role"] = $(this).val(); });
+                    $(".ev_inline_region").on("change", function () { g_state["generics"]["ev_inline_region"] = $(this).val(); });
+                    $(".ev_inline_office").on("change", function () { g_state["generics"]["ev_inline_office"] = $(this).val(); });
+
+                    M.updateTextFields();
+                };
+
                 // lang
                 var refresh_lang = function () {
                     if (g_state["ui"]["lang"] == "en") {
@@ -1693,27 +2126,15 @@
                 };
                 g_state["el"]["lang"].on("change", function () {
                     if (g_state["ui"]["lang"] == "en") {
-                        g_state["el"]["en"].hide();
-                        g_state["el"]["fr"].show();
                         g_state["ui"]["lang"] = "fr";
-                        g_state["el"]["c_editor"].val(
-                            g_intro_script_fr
-                        );
-                        // render
-                        g_state["el"]["c_editor"].trigger("change");
-                        // resize
+                        refresh_lang();
                         ui_resize_textareas();
+                        $(".dropdown-trigger").dropdown();
                     } else if (g_state["ui"]["lang"] == "fr") {
-                        g_state["el"]["en"].show();
-                        g_state["el"]["fr"].hide();
                         g_state["ui"]["lang"] = "en";
-                        g_state["el"]["c_editor"].val(
-                            g_intro_script
-                        );
-                        // render
-                        g_state["el"]["c_editor"].trigger("change");
-                        // resize
+                        refresh_lang();
                         ui_resize_textareas();
+                        $(".dropdown-trigger").dropdown();
                     }
                 });
                 //g_state["el"]["lang"].trigger("change");
@@ -1723,6 +2144,17 @@
                     g_intro_script
                 );
 
+                // 
+                // Question Library
+                //
+
+                $("#qlib").on("change", function () {
+                    update_question_library();
+                    ls_save_qlib();
+                });
+                $("#qlib").trigger("change");
+
+                // Render Trigger
                 g_state["el"]["c_editor"].on("change keyup paste", function () {
                     // get source
                     var src = g_state["el"]["c_editor"].val().replace(/\t/g, "");
@@ -1735,6 +2167,7 @@
                     // reinit submit, lang refresh
                     $("#evalhalla_submit").on("click", evalhalla_submit);
                     refresh_lang();
+                    refresh_generics();
                     // load json
                     try {
                         g_state["el"]["c_json"].val(JSON.stringify(JSON.parse(
@@ -1794,11 +2227,26 @@
                     g_state["el"]["ui_json"].hide();
                     // g_state["el"]["ui_ls"].addClass("m4").removeClass("m12");
                     g_state["el"]["ui_ls"].show();
+                    g_state["el"]["ui_qlib"].show();
                     g_state["ui"]["hs_render_window"] = false;
                     g_state["ui"]["hs_editor_window"] = false;
                     g_state["ui"]["hs_json_window"] = false;
                     g_state["ui"]["hs_ls_window"] = false;
+                    g_state["ui"]["hs_qlib_window"] = false;
                 };
+                g_state["el"]["btn_hs_qlib"].on("click", function () {
+                    if (g_state["ui"]["hs_qlib_window"] == true) {
+                        ui_reset_panels();
+                    } else {
+                        //g_state["el"]["ui_ls"].removeClass("m4").addClass("m12");
+                        g_state["el"]["ui_qlib"].show();
+                        g_state["el"]["ui_ls"].hide();
+                        g_state["el"]["ui_render"].hide();
+                        g_state["el"]["ui_editor"].hide();
+                        g_state["el"]["ui_json"].hide();
+                        g_state["ui"]["hs_qlib_window"] = true;
+                    }
+                });
                 g_state["el"]["btn_hs_ls"].on("click", function () {
                     if (g_state["ui"]["hs_ls_window"] == true) {
                         ui_reset_panels();
@@ -1808,6 +2256,7 @@
                         g_state["el"]["ui_render"].hide();
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_json"].hide();
+                        g_state["el"]["ui_qlib"].hide();
                         g_state["ui"]["hs_ls_window"] = true;
                     }
                 });
@@ -1820,6 +2269,7 @@
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_json"].hide();
                         g_state["el"]["ui_ls"].hide();
+                        g_state["el"]["ui_qlib"].hide();
                         g_state["ui"]["hs_render_window"] = true;
                     }
                 });
@@ -1832,6 +2282,7 @@
                         g_state["el"]["ui_json"].hide();
                         g_state["el"]["ui_render"].hide();
                         g_state["el"]["ui_ls"].hide();
+                        g_state["el"]["ui_qlib"].hide();
                         g_state["ui"]["hs_editor_window"] = true;
                     }
                 });
@@ -1848,6 +2299,7 @@
                         g_state["el"]["ui_editor"].hide();
                         g_state["el"]["ui_render"].hide();
                         g_state["el"]["ui_ls"].hide();
+                        g_state["el"]["ui_qlib"].hide();
                         g_state["ui"]["hs_json_window"] = true;
                     }
                 });
