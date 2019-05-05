@@ -96,7 +96,7 @@
 
 <body>
     <div class="navbar-fixed">
-        <nav class="white nav-extended" role="navigation" id="root" name="root">
+        <nav class="white nav-extended" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -506,7 +506,6 @@
             </div>
         </div>
     </div>
-    </div>
     <div class="parallax-container valign-wrapper">
         <div class="section no-pad-bot">
             <div class="container">
@@ -549,7 +548,7 @@
         </div>
     </footer>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" href="#root">
+        <a class="btn-floating btn-large red" href="#editor">
             <i class="large material-icons">arrow_upward</i>
         </a>
         <!--<ul>
@@ -686,7 +685,9 @@
                     "[ENDRANK]": { "type": "end rank", "html": "<rank>%v</rank>" },
                     "[ENDRATE]": { "type": "end rank", "html": "<rank>%v</rank>" },
                     "/GENERICS": { "type": "generics", "html": "<generics>%v</generics>" },
-                    "[GENERICS]": { "type": "generics", "html": "<generics>%v</generics>" }
+                    "[GENERICS]": { "type": "generics", "html": "<generics>%v</generics>" },
+                    "/PAGEBREAK": { "type": "page break", "html": "<page break>%v</page break>" },
+                    "[PAGEBREAK]": { "type": "page break", "html": "<page break>%v</page break>" }
 
                 };
                 const g_intro_script = "" +
@@ -698,7 +699,8 @@
                     "/ONE\n" +
                     "/en Yes /; /fr Oui /; \n" +
                     "/en No /; /fr Non /; \n" +
-                    ";\n" +
+                    ";\n\n" +
+                    "/pagebreak\n\n" +
                     "Q: Generic Info Stuff (autofilled)\n" +
                     "/generics\n" +
                     "\n" +
@@ -820,9 +822,24 @@
                     "";
                 // Je vous remercie!
                 var form_wrap = function (src) {
+                    var pages = "";
+                    for (var i = 1; i <= g_control_flags["pageid"]; i++) {
+                        pages += `<li class="waves-effect ev-page-sel ev-page-sel-` + i + `"><a href="#!">` + i + `</a></li>`;
+                    }
                     return '' +
+                        `<div class="progress">
+                        <div class="determinate" style="width: `+ ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + `%"></div>
+                    </div>`+
                         '<form id="evalhalla_form" action="#">' +
+                        '<div class="ev-page ev-page-1 card-panel">' +
                         src +
+                        '</div>' +
+                        ` <ul class="pagination center-align">
+                            <li class="waves-effect ev-page-sel-left"><a href="#!"><i class="material-icons">chevron_left</i></a></li>`+
+                        pages +
+                        `<li class="waves-effect ev-page-sel-right"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                        </ul>
+                        `+
                         '<div class="row">' +
                         '<div class="col s12 center">' +
                         '<a id="evalhalla_submit" class="waves-effect waves-light green lighten-1 btn-large"><i class="material-icons right">cloud</i><span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>' +
@@ -1038,6 +1055,20 @@
                                     </td>
                                     <td>%ctrl</td>
                                 </tr>`;
+                    } else if (snip == "page break") {
+                        if (format == "json") {
+                            return '{' +
+                                '"qid": "none",' +
+                                '"question": "none",' +
+                                '"description": "none",' +
+                                '"language": "none",' + // en or fr
+                                '"questionType": "page break",' + //mcq 'text' , 'dropdown',
+                                '"randomOrder": "false",' +
+                                '"randomOptions": "false",' +
+                                '"options": []' +
+                                '}';
+                        }
+                        return `</div><div class="ev-page ev-page-%pageid card-panel">`;
                     }
 
                     return "";
@@ -1050,10 +1081,10 @@
                 var update_question_library = function () {
                     var qlib = $("#qlib").val();
                     if (qlib == "") {
-                        qlib = "Q: Example?\n/open\n///\nQ: Example 2?\n/open\n";
+                        qlib = "Q: Example?\n/open\n\nQ: Example 2?\n/open\n";
                         $("#qlib").val(qlib);
                     }
-                    qlib = qlib.split("///");
+                    qlib = qlib.split("\n\n");
                     var tbody = "";
                     for (var i = 0; i < qlib.length; i++) {
                         tbody += get_template_snip("qlib entry")
@@ -1596,6 +1627,8 @@
                 // parser state, headers, questions, json
                 var g_control_flags = {
                     "json": "{}",
+                    "pageid": 1,
+                    "currpageid": 1,
                     "header": {
                         "survey": false,
                         "title": false,
@@ -1627,6 +1660,8 @@
                         }
                     };
                     g_control_flags["json"] = "{}";
+                    g_control_flags["pageid"] = 1;
+                    g_control_flags["currpageid"] = 1;
                     if (hard == true) {
                         g_control_flags["header"] = {
                             "survey": "",
@@ -1808,6 +1843,18 @@
                     g_control_flags["json"] = jsonsnip;
 
 
+                    return snip;
+                }
+                var handle_cmd_pagebreak = function (cmd, src, json = "") {
+                    // handle html
+                    var snip = get_template_snip("page break");
+                    g_control_flags["pageid"] = g_control_flags["pageid"] + 1;
+                    snip = snip.replace(/\%pageid/g, g_control_flags["pageid"]);
+                    // handle json
+                    var jsonsnip = get_template_snip("page break", "json");
+                    jsonsnip = jsonsnip.replace(/\%instruction/g, json.replace(json.split(" ")[0], "").trim());
+                    g_control_flags["json"] = g_control_flags["json"]
+                        .replace("%questions", jsonsnip + ",%questions")
                     return snip;
                 }
                 var handle_cmd_instruction = function (cmd, src, json = "") {
@@ -2005,6 +2052,12 @@
                                 pack = pkg["pack"];
                                 i = pkg["i"];
                                 evalhalla.push(handle_cmd_instruction(cmd["type"], pack, pkg["pack_json"]));
+                            } else if (cmd["type"] == "page break") {
+                                var pack = src_a[i];
+                                var pkg = pack_text(src_a, i, pack);
+                                pack = pkg["pack"];
+                                i = pkg["i"];
+                                evalhalla.push(handle_cmd_pagebreak(cmd["type"], pack, pkg["pack_json"]));
                             } else if (cmd["type"] == "random order" || cmd["type"] == "end random order") {
                                 // handle randomize order
                                 if (cmd["type"] == "random order") {
@@ -2168,6 +2221,73 @@
                     $("#evalhalla_submit").on("click", evalhalla_submit);
                     refresh_lang();
                     refresh_generics();
+                    // pagination
+                    $(".ev-page-sel").removeClass("active");
+                    $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
+
+                    $(".ev-page").hide();
+                    $(".ev-page-" + g_control_flags["currpageid"]).show();
+
+                    $("#evalhalla_submit").addClass("disabled");
+                    if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
+                        $("#evalhalla_submit").removeClass("disabled");
+                    }
+
+                    for (var i = 1; i <= g_control_flags["pageid"]; i++) {
+                        $(".ev-page-sel-" + i).on("click", { "i": i },
+                            function (e) {
+                                g_control_flags["currpageid"] = e.data.i
+                                $(".ev-page").hide();
+                                $(".ev-page-" + e.data.i).show();
+                                $(".ev-page-sel").removeClass("active");
+                                $(".ev-page-sel-" + e.data.i).addClass("active");
+                                $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+                                //alert(e.data.i);
+                                $("#evalhalla_submit").addClass("disabled");
+                                if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
+                                    $("#evalhalla_submit").removeClass("disabled");
+                                }
+                            });
+                    }
+                    $(".ev-page-sel-" + "left").on("click", { "i": "left" },
+                        function (e) {
+                            //alert(e.data.i);
+                            g_control_flags["currpageid"] = g_control_flags["currpageid"] - 1;
+                            if (g_control_flags["currpageid"] <= 0) {
+                                g_control_flags["currpageid"] = 1;
+                            }
+                            $(".ev-page").hide();
+                            $(".ev-page-" + g_control_flags["currpageid"]).show();
+                            $(".ev-page-sel").removeClass("active");
+                            $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
+                            $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+
+                            //alert(e.data.i);
+                            $("#evalhalla_submit").addClass("disabled");
+                            if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
+                                $("#evalhalla_submit").removeClass("disabled");
+                            }
+                        });
+                    $(".ev-page-sel-" + "right").on("click", { "i": "right" },
+                        function (e) {
+                            //alert(e.data.i);
+                            g_control_flags["currpageid"] = g_control_flags["currpageid"] + 1;
+                            if (g_control_flags["currpageid"] >= g_control_flags["pageid"]) {
+                                g_control_flags["currpageid"] = g_control_flags["pageid"];
+                            }
+                            $(".ev-page").hide();
+                            $(".ev-page-" + g_control_flags["currpageid"]).show();
+                            $(".ev-page-sel").removeClass("active");
+                            $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
+                            $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+
+                            //alert(e.data.i);
+                            $("#evalhalla_submit").addClass("disabled");
+                            if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
+                                $("#evalhalla_submit").removeClass("disabled");
+                            }
+                        });
+
                     // load json
                     try {
                         g_state["el"]["c_json"].val(JSON.stringify(JSON.parse(
