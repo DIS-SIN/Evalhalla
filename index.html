@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
-        rel="stylesheet" media="screen,projection">
+        rel="stylesheet" media="screen,projection" />
     <style>
         nav ul a,
         nav .brand-logo {
@@ -1055,17 +1055,60 @@
                 //
 
                 // Random HSL Color value generation
-                const randomHsl = () => `hsla(${Math.random() * 360}, 70%, 70%, 1)`;
+                /*
+                point = 0
+                if odd {
+                    point opposite (360)
+                } 
+                if even {
+                    last + curr /2
+                }
+                */
+                var randomCoord = 0;
+                var lastCoord = 0;
+                var currCoord = Math.random() * 360;
+                var slicecount = 0;
+                var color_space = [
+                    `hsla(13,85%,58%,1)`,
+                    `hsla(315,79%,64%,1)`,
+                    `hsla(103,40%,56%,1)`,
+                    `hsla(178,49%,78%,1)`,
+                    `hsla(230,31%,66%,1)`//,
+                    /*                    `hsla(6,72%,45%,1)`,
+                                        `hsla(299,71%,40%,1)`,
+                                        `hsla(117,41%,42%,1)`,
+                                        `hsla(195,55%,44%,1)`,
+                                        `hsla(233,32%,53%,1)`,
+                                        `hsla(1,79%,32%,1)`,
+                                        `hsla(280,94%,23%,1)`,
+                                        `hsla(117,59%,25%,1)`,
+                                        `hsla(154,39%,62%,1)`,
+                                        `hsla(224,33%,76%,1)`*/
+                ];
+                const randomHsl = () => {
+                    slicecount = slicecount + 1;
+                    //return color_space[(slicecount % 15)];
+                    if (slicecount % 2 == 0) {
+                        currCoord = (currCoord + 90) % 360;
+                    } else {
+                        currCoord = ((lastCoord + currCoord) / 2 + 90) % 360;
+                    }
+                    lastCoord = currCoord;
+                    currCoord = currCoord + 61; // prime between 45 and 90
+                    //return color_space[slicecount % 5];
+                    return `hsla(${currCoord}, 70%, 70%, 1)`;
+                }
                 // svg basic pie chart
                 var hackernoon_pie = function (elid, slices) {
+                    //currCoord = Math.random() * 360;
                     // just read this. trust me: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
                     var svgEls = [document.getElementById(elid)];
+                    //slices = null;
                     if (slices == null) {
-                        slices = [
-                            { percent: 0.1, color: randomHsl() },
-                            { percent: 0.65, color: randomHsl() },
-                            { percent: 0.2, color: randomHsl() },
-                        ];
+                        //slices = [];
+                        for (var i = 0; i < 100; i++) {
+                            slices.push({ percent: 0.01, color: randomHsl() })
+                        }
                     }
                     let cumulativePercent = 0;
 
@@ -1697,10 +1740,12 @@
                     // query string would be
                     var query_string = $("#evalhalla_form").serialize();
                     console.log(query_string);
-                    if (formElement.reportValidity() == true) {
+                    if (formElement.checkValidity() == true) {
                         alert("Good to go!")
                     } else {
                         alert("Missing Data");
+                        $(".ev-page").show();
+                        formElement.checkValidity()
                         return;
                     }
                     // let em know
