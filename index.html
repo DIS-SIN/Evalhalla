@@ -554,6 +554,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="example_sur.js"></script>
     <script>
         (function ($) {
             $(function () {
@@ -567,6 +568,7 @@
                 //
                 // HTML, JSON, and EVALESE snips
                 //
+
 
                 const g_cmd = {
                     // CMDS in ALLCAPS, but input is any case
@@ -631,7 +633,7 @@
                     "[PAGEBREAK]": { "type": "page break", "html": "<page break>%v</page break>" }
 
                 };
-                const g_intro_script = "" +
+                let g_intro_script = "" +
                     "# 123\n\n" +
                     "##\n/en Evalhalla Survey /;\n/fr Enquête Evalhalla /; \n\n" +
                     "###\n/en It's easy to make a survey. /;\n/fr Il est facile de faire une enquête. /; \n" +
@@ -647,7 +649,7 @@
                     "\n" +
                     "// /en Thanks /; /fr Merci /; \n" +
                     "";
-                const g_intro_script_fr = "" +
+                let g_intro_script_fr = "" +
                     "# 123\n" +
                     "## /en Evalhalla Survey /; /fr Enquête Evalhalla /; \n" +
                     "### /en It's easy to make a survey. /; /fr Il est facile de faire une enquête. /; \n" +
@@ -660,6 +662,17 @@
                     "\n" +
                     "// /en Thanks /; /fr Merci /; \n" +
                     "";
+
+                //
+                // Example Overrides
+                //
+
+                const params = new URLSearchParams(window.location.search);
+                let sur = params.get("sur");
+                let auto_display_mode = false;
+                if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
+                if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
+
                 const g_tutorial_script = "" +
                     "[SURVEY] 1234 \n" +
                     "[TITLE] This is my title \n" +
@@ -2481,6 +2494,21 @@
                     alert("Auditing Evalhalla to Survista Render. Note there may be differences until both systems are fully aligned.");
                     audit_json();
                 });
+
+                //
+                //  Auto Display Mode
+                //
+
+                if (auto_display_mode == true) {
+                    //alert("auto");
+                    g_state["el"]["ui_render"].removeClass("m6").addClass("m12");
+                    g_state["el"]["ui_render"].show();
+                    g_state["el"]["ui_editor"].hide();
+                    g_state["el"]["ui_json"].hide();
+                    g_state["el"]["ui_ls"].hide();
+                    g_state["el"]["ui_qlib"].hide();
+                    g_state["ui"]["hs_render_window"] = true;
+                }
 
                 //
                 // Editor buttons
