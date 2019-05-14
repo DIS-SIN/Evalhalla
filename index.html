@@ -106,7 +106,8 @@
         <nav class="white nav-extended" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="#" data-target="mobile-demo" class="adm-function sidenav-trigger"><i
+                        class="material-icons">menu</i></a>
                 <ul class="right">
                     <li>
                         <div class="switch">
@@ -119,7 +120,7 @@
                         </div>
                     </li>
                 </ul>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <ul id="nav-mobile" class="adm-function right hide-on-med-and-down">
                     <li class="hide-on-small-only">
                         <a class="dropdown-trigger" href="#!" data-target="dropdown3">
                             <span class="en">
@@ -144,7 +145,7 @@
             </div>
         </nav>
     </div>
-    <ul id="dropdown1" class="dropdown-content hide-on-small-only">
+    <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
         <li>
             <a href="#" class="show_me_how">
                 <i class="material-icons">help</i>
@@ -189,7 +190,7 @@
             </a>
         </li>
     </ul>
-    <ul id="dropdown2" class="dropdown-content hide-on-small-only">
+    <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
         <li>
             <a class="hs_render_window">
                 <i class="material-icons">assignment</i>
@@ -240,7 +241,7 @@
             </a>
         </li>
     </ul>
-    <ul id="dropdown3" class="dropdown-content hide-on-small-only">
+    <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
         <li><a href="#!" class="ev-add-header">
                 <i class="material-icons">title</i>
                 <span class="en">Header</span>
@@ -277,7 +278,7 @@
                 <span class="fr">Taux</span>
             </a></li>
     </ul>
-    <ul class="sidenav" id="mobile-demo">
+    <ul class="adm-function sidenav" id="mobile-demo">
         <li>
             <h6 class="center-align">MENU</h6>
             <hr>
@@ -2700,6 +2701,7 @@
                     g_state["el"]["ui_qlib"].hide();
                     $("#admin_footer").hide();
                     $("#admin_footer_end").hide();
+                    $(".adm-function").hide();
                     g_state["ui"]["hs_render_window"] = true;
                     // HACK: hidden textareas have real height for some reason.
                     // adding display none kills resize capability of textarea.
