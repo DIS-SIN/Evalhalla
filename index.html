@@ -14,7 +14,12 @@
             color: #444;
         }
 
-        .hiddendiv {display:none;} /* fix for massive white space on lang toggle */
+        /* fix for massive white space on lang toggle */
+        .hiddendiv-hack {
+            overflow: hidden;
+            height: auto;
+            max-height: 460px;
+        }
 
         p {
             line-height: 2rem;
@@ -498,9 +503,7 @@
                                     <th><span class="en">Add</span><span class="fr">Adjouter</span></th>
                                 </tr>
                             </thead>
-                            <tbody id="qlib_target">
-
-                            </tbody>
+                            <tbody id="qlib_target"> </tbody>
                         </table>
                     </div>
                     <textarea id="qlib" class="materialize-textarea"></textarea>
@@ -668,10 +671,18 @@
                 //
                 // Example Overrides
                 //
+                var auto_display_mode = false;
+                var params = null;
+                var sur = null;
+                try {
+                    params = new URLSearchParams(window.location.search);
+                    sur = params.get("sur");
+                } catch (e) {
+                    // good old Internet Explorer or Edge. Still writing "special" code for you...
+                    params = window.location.search.split("=")[1]; // yep, I actually did that.
+                    sur = params; // very cross. much browser. so wow.
+                }
 
-                const params = new URLSearchParams(window.location.search);
-                let sur = params.get("sur");
-                let auto_display_mode = false;
                 if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
                 if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
 
@@ -1007,8 +1018,8 @@
                     } else if (snip == "qlib entry") {
                         return `<tr>
                                     <td>
-                                        <pre id="bqlib_%bqid">%question
-                                        </pre>
+                                        <div id="bqlib_%bqid">%question
+                                        </div>
                                     </td>
                                     <td>%ctrl</td>
                                 </tr>`;
@@ -1415,7 +1426,7 @@
                         }
                         $(".regen_color").on("click", function (e) { e.preventDefault(); ls_show_local_storage(); return false; });
 
-                        ui_resize_textareas();
+                        //ui_resize_textareas();
                     } else {
                         warn_user_alert();
                     }
@@ -2229,12 +2240,12 @@
                     if (g_state["ui"]["lang"] == "en") {
                         g_state["ui"]["lang"] = "fr";
                         refresh_lang();
-                        ui_resize_textareas();
+                        //ui_resize_textareas();
                         $(".dropdown-trigger").dropdown();
                     } else if (g_state["ui"]["lang"] == "fr") {
                         g_state["ui"]["lang"] = "en";
                         refresh_lang();
-                        ui_resize_textareas();
+                        //ui_resize_textareas();
                         $(".dropdown-trigger").dropdown();
                     }
                 });
@@ -2498,23 +2509,6 @@
                 });
 
                 //
-                //  Auto Display Mode
-                //
-
-                if (auto_display_mode == true) {
-                    //alert("auto");
-                    g_state["el"]["ui_render"].removeClass("m6").addClass("m12");
-                    g_state["el"]["ui_render"].show();
-                    g_state["el"]["ui_editor"].hide();
-                    g_state["el"]["ui_json"].hide();
-                    g_state["el"]["ui_ls"].hide();
-                    g_state["el"]["ui_qlib"].hide();
-                    $("#admin_footer").hide();
-                    $("#admin_footer_end").hide();
-                    g_state["ui"]["hs_render_window"] = true;
-                }
-
-                //
                 // Editor buttons
                 //
                 var get_editor_tmpl = function (cmd) {
@@ -2687,6 +2681,27 @@
                     $("select").formSelect();
 
                 };
+
+                //
+                //  Auto Display Mode
+                //
+
+                if (auto_display_mode == true) {
+                    //alert("auto");
+                    g_state["el"]["ui_render"].removeClass("m6").addClass("m12");
+                    g_state["el"]["ui_render"].show();
+                    g_state["el"]["ui_editor"].hide();
+                    g_state["el"]["ui_json"].hide();
+                    g_state["el"]["ui_ls"].hide();
+                    g_state["el"]["ui_qlib"].hide();
+                    $("#admin_footer").hide();
+                    $("#admin_footer_end").hide();
+                    g_state["ui"]["hs_render_window"] = true;
+                    // HACK: hidden textareas have real height for some reason.
+                    // adding display none kills resize capability of textarea.
+                    // we're dynamically adding the maxsize when we need it in presentation mode
+                    $(".hiddendiv").addClass("hiddendiv-hack");
+                }
 
             });
         })(jQuery);
