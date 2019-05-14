@@ -15,7 +15,7 @@
         }
 
         /* fix for massive white space on lang toggle */
-        .hiddendiv-hack {
+        .hiddendiv {
             overflow: hidden;
             height: auto;
             max-height: 460px;
@@ -1694,7 +1694,8 @@
                 g_state["generics"]["generic_fetched"] = false;
                 var api_get_generics = function () {
                     if (g_state["generics"]["generic_fetched"] == false) {
-                        M.toast({ html: "Found this gc data, prefilling...", classes: 'rounded' });
+                        //M.toast({ html: "Found this gc data, prefilling...", classes: 'rounded' });
+                        console.info("Found this gc data, prefilling...")
                         g_state["generics"]["ev_inline_dept"] = "CSPS-EFPC";
                         g_state["generics"]["ev_inline_role"] = "CS-04";
                         g_state["generics"]["ev_inline_region"] = "NCR";
@@ -2703,7 +2704,7 @@
                     // HACK: hidden textareas have real height for some reason.
                     // adding display none kills resize capability of textarea.
                     // we're dynamically adding the maxsize when we need it in presentation mode
-                    $(".hiddendiv").addClass("hiddendiv-hack");
+                    //$(".hiddendiv").addClass("hiddendiv-hack");
                 }
 
             });
