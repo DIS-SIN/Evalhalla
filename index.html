@@ -15,7 +15,7 @@
         }
 
         /* fix for massive white space on lang toggle */
-        .hiddendiv {
+        .hiddendiv-maxsized {
             overflow: hidden;
             height: auto;
             max-height: 460px;
@@ -2341,11 +2341,11 @@
                             $(".ev-page-sel").removeClass("active");
                             $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
                             $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
-                            
+
 
                             //alert(e.data.i);
                             $("#evalhalla_submit").addClass("disabled");
-                            window.scrollTo(0,0);
+                            window.scrollTo(0, 0);
                             if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                                 $("#evalhalla_submit").removeClass("disabled");
                             }
@@ -2365,7 +2365,7 @@
 
                             //alert(e.data.i);
                             $("#evalhalla_submit").addClass("disabled");
-                            window.scrollTo(0,0);
+                            window.scrollTo(0, 0);
                             if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                                 $("#evalhalla_submit").removeClass("disabled");
                             }
@@ -2704,7 +2704,7 @@
                     // HACK: hidden textareas have real height for some reason.
                     // adding display none kills resize capability of textarea.
                     // we're dynamically adding the maxsize when we need it in presentation mode
-                    //$(".hiddendiv").addClass("hiddendiv-hack");
+                    $(".hiddendiv").addClass("hiddendiv-maxsized");
                 }
 
             });
