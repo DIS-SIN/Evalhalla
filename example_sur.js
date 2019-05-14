@@ -13,12 +13,12 @@ Please note that your personal informationwill remain confidential and is protec
 Privacy Act. For more
 information, refer to the School's Privacy Notice.
 
-Q: 1.Please rate your overall satisfaction or dissatisfaction with this learning
+Q: 1. Please rate your overall satisfaction or dissatisfaction with this learning
 activity, on a scale of 1 to 10
 where 1 is very dissatisfied and 10 is very satisfied.
 /SCALE Very dissatisfied, Very satisfied, Unsure
 
-Q: 2.Why did you give that score?
+Q: 2. Why did you give that score?
 /OPEN
 
 // Please rate your satisfaction or dissatisfaction with the following components of
@@ -26,19 +26,19 @@ this learning activity,
 on a scale of 1 to 10 where 1 is very dissatisfied and 10 is very satisfied.
 
 /RAND
-Q: 3.The level of detail of the content
+Q: 3. The level of detail of the content
 /SCALE Very dissatisfied, Very satisfied, Unsure
 
-Q: 4.The quality of the content
+Q: 4. The quality of the content
 /SCALE Very dissatisfied, Very satisfied, Unsure
 
-Q: 5.The language quality(English and French)of the materials
+Q: 5. The language quality (English and French) of the materials
 /SCALE Very dissatisfied, Very satisfied, Unsure
 
-Q: 6.The overall quality of the instructor/facilitator
+Q: 6. The overall quality of the instructor/facilitator
 /SCALE Very dissatisfied, Very satisfied, Unsure
 
-Q: 7.The subject matter knowledge of the instructor/facilitator
+Q: 7. The subject matter knowledge of the instructor/facilitator
 /SCALE Very dissatisfied, Very satisfied, Unsure
 ;RAND
 
@@ -56,13 +56,13 @@ Unsure...4
 where 1 is very low level
 of knowledge in the subject area and 10 is a very high level of knowledge in the subject area.
 
-Q: 9.Before this learning activity
+Q: 9. Before this learning activity
 /SCALE Low level of knowledge, High level of knowledge, Unsure
 
-Q: 10.After this learning activity
+Q: 10. After this learning activity
 /SCALE Low level of knowledge, High level of knowledge, Unsure
 
-Q: 11.Would you say that your expectations were exceeded, met or not met?
+Q: 11. Would you say that your expectations were exceeded, met or not met?
 /ONE
 Exceeded...1
 Met...2
@@ -70,7 +70,7 @@ Not met...3
 Unsure...77
 ;
 
-Q: 12.Are you likely, somewhat likely, somewhat unlikely or unlikely to recommend this
+Q: 12. Are you likely, somewhat likely, somewhat unlikely or unlikely to recommend this
 learning activity to a
 colleage?
 /ONE
@@ -81,12 +81,12 @@ Unlikely...4
 Unsure...77
 ;
 
-Q: 13.Do you have any comments you would like to share aboutthe
+Q: 13. Do you have any comments you would like to share about the
 facilitator(s)/instructor(s)? For privacy
 reasons, please do not use facilitator / instructor names in your comments.
 /OPEN
 
-Q: 14.Did you use any tools (e.g. blogs, videos, etc.) from GCcampus to complement your
+Q: 14. Did you use any tools (e.g. blogs, videos, etc.) from GCcampus to complement your
 learning?
 /ONE
 Yes...1 (CONTINUE TO Q15)
@@ -99,7 +99,7 @@ contributing to your learning?
 
 /RAND
 
-Q: 15.Videos
+Q: 15. Videos
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -109,7 +109,7 @@ Did not use tool...5
 Unsure...77
 ;
 
-Q: 16.Blogs
+Q: 16. Blogs
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -119,7 +119,7 @@ Did not use tool...5
 Unsure...77
 ;
 
-Q: 17.Forums
+Q: 17. Forums
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -129,7 +129,7 @@ Did not use tool...5
 Unsure...77
 ;
 
-Q: 18.Job aids
+Q: 18. Job aids
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -142,7 +142,7 @@ Unsure...77
 ;RAND
 
 /RANDO
-Q: 19.Please rank why you took this learning activity where 1 is the most important
+Q: 19. Please rank why you took this learning activity where 1 is the most important
 reason, 2 is the second most
 important reason and so forth?
 /RANK
@@ -165,21 +165,21 @@ any, of the learning activity.
 
 /RAND
 
-Q: 20.This learning activity as a valuableuse of my time.
+Q: 20. This learning activity as a valuableuse of my time.
 /SCALE Very negative impression, Very positive impression, Unsure
 
-Q: 21.The relevance of the learning activity to my job.
+Q: 21. The relevance of the learning activity to my job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
-Q: 22.The learning activity contributing to my performance on the job.
+Q: 22. The learning activity contributing to my performance on the job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
-Q: 23.Applying what I have learned to my job.
+Q: 23. Applying what I have learned to my job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
 ;RAND
 
-Q: 24.Are there any other comments you would like to share in order to help the CSPS
+Q: 24. Are there any other comments you would like to share in order to help the CSPS
 improve? For privacy
 reasons, please do not use instructor/facilitator names in your comments.
 /OPEN
@@ -244,13 +244,13 @@ Unsure...4
 where 1 is very low level
 of knowledge in the subject area and 10 is a very high level of knowledge in the subject area.
 
-Q: 9.Before this learning activity
+Q: 9. Before this learning activity
 /SCALE Low level of knowledge, High level of knowledge, Unsure
 
-Q: 10.After this learning activity
+Q: 10. After this learning activity
 /SCALE Low level of knowledge, High level of knowledge, Unsure
 /pagebreak
-Q: 11.Would you say that your expectations were exceeded, met or not met?
+Q: 11. Would you say that your expectations were exceeded, met or not met?
 /ONE
 Exceeded...1
 Met...2
@@ -258,7 +258,7 @@ Not met...3
 Unsure...77
 ;
 
-Q: 12.Are you likely, somewhat likely, somewhat unlikely or unlikely to recommend this
+Q: 12. Are you likely, somewhat likely, somewhat unlikely or unlikely to recommend this
 learning activity to a
 colleage?
 /ONE
@@ -269,12 +269,12 @@ Unlikely...4
 Unsure...77
 ;
 /pagebreak
-Q: 13.Do you have any comments you would like to share aboutthe
+Q: 13. Do you have any comments you would like to share about the
 facilitator(s)/instructor(s)? For privacy
 reasons, please do not use facilitator / instructor names in your comments.
 /OPEN
 /pagebreak
-Q: 14.Did you use any tools (e.g. blogs, videos, etc.) from GCcampus to complement your
+Q: 14. Did you use any tools (e.g. blogs, videos, etc.) from GCcampus to complement your
 learning?
 /ONE
 Yes...1 (CONTINUE TO Q15)
@@ -287,7 +287,7 @@ contributing to your learning?
 
 /RAND
 
-Q: 15.Videos
+Q: 15. Videos
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -297,7 +297,7 @@ Did not use tool...5
 Unsure...77
 ;
 
-Q: 16.Blogs
+Q: 16. Blogs
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -307,7 +307,7 @@ Did not use tool...5
 Unsure...77
 ;
 
-Q: 17.Forums
+Q: 17. Forums
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -317,7 +317,7 @@ Did not use tool...5
 Unsure...77
 ;
 
-Q: 18.Job aids
+Q: 18. Job aids
 /ONE
 Valuable...1
 Somewhat valuable...2
@@ -330,7 +330,7 @@ Unsure...77
 ;RAND
 /pagebreak
 /RANDO
-Q: 19.Please rank why you took this learning activity where 1 is the most important
+Q: 19. Please rank why you took this learning activity where 1 is the most important
 reason, 2 is the second most
 important reason and so forth?
 /RANK
@@ -353,21 +353,21 @@ any, of the learning activity.
 
 /RAND
 
-Q: 20.This learning activity as a valuableuse of my time.
+Q: 20. This learning activity as a valuableuse of my time.
 /SCALE Very negative impression, Very positive impression, Unsure
 
-Q: 21.The relevance of the learning activity to my job.
+Q: 21. The relevance of the learning activity to my job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
-Q: 22.The learning activity contributing to my performance on the job.
+Q: 22. The learning activity contributing to my performance on the job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
-Q: 23.Applying what I have learned to my job.
+Q: 23. Applying what I have learned to my job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
 ;RAND
 /pagebreak
-Q: 24.Are there any other comments you would like to share in order to help the CSPS
+Q: 24. Are there any other comments you would like to share in order to help the CSPS
 improve? For privacy
 reasons, please do not use instructor/facilitator names in your comments.
 /OPEN

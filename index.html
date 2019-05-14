@@ -849,7 +849,7 @@
                         }
                         return '' +
                             '<div class="card-panel">' +
-                            '<blockquote><span class="badge" style="font-size:1.5em;"><strong>#%qid</strong>%req</span> %question</blockquote>%form' +
+                            '<blockquote><span class="badge" style="font-size:1.5em;margin:0px;"><strong>#%qid</strong>%req</span> %question</blockquote>%form' +
                             '</div>' +
                             '';
                     } else if (snip == "scale") {
@@ -2323,6 +2323,7 @@
                                 $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
                                 //alert(e.data.i);
                                 $("#evalhalla_submit").addClass("disabled");
+                                window.scrollTo(0, 0);
                                 if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                                     $("#evalhalla_submit").removeClass("disabled");
                                 }
@@ -2330,7 +2331,6 @@
                     }
                     $(".ev-page-sel-" + "left").on("click", { "i": "left" },
                         function (e) {
-                            //alert(e.data.i);
                             g_control_flags["currpageid"] = g_control_flags["currpageid"] - 1;
                             if (g_control_flags["currpageid"] <= 0) {
                                 g_control_flags["currpageid"] = 1;
@@ -2340,9 +2340,11 @@
                             $(".ev-page-sel").removeClass("active");
                             $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
                             $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+                            
 
                             //alert(e.data.i);
                             $("#evalhalla_submit").addClass("disabled");
+                            window.scrollTo(0,0);
                             if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                                 $("#evalhalla_submit").removeClass("disabled");
                             }
@@ -2362,6 +2364,7 @@
 
                             //alert(e.data.i);
                             $("#evalhalla_submit").addClass("disabled");
+                            window.scrollTo(0,0);
                             if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                                 $("#evalhalla_submit").removeClass("disabled");
                             }
