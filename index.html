@@ -1315,9 +1315,13 @@
                                             return element["qid"] == qid;
                                         });
                                         opt_text = "";
-                                        if (typeof qida[1] !== "undefined") {
-                                            oid = qida[1];
-                                            opt_text = q["options"][oid];
+                                        try {
+                                            if (typeof qida[1] !== "undefined") {
+                                                oid = qida[1];
+                                                opt_text = q["options"][oid];
+                                            }
+                                        } catch(e) {
+                                            // do nothing
                                         }
                                         var ans_key = ("Q" + qid + " " + opt_text).trim();
                                         if (typeof q !== "undefined") {
