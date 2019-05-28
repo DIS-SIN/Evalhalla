@@ -103,10 +103,19 @@
         /* overrides mcss */
         html {
             font-family: 'Lato', sans-serif;
+            color: #333333;
         }
 
         blockquote {
-            border-left: 5px solid #26374B;
+            border-left: 0;
+            margin-left: 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 5px;
+            /*5px solid #26374B;*/
+            background-color: rgba(238, 239, 241, 1);
+            font-size: 1.4em;
+            font-weight: bold;
         }
 
         .blue-canada-ca {
@@ -140,6 +149,57 @@
         .btn,
         .btn-large {
             border-radius: 50px;
+        }
+
+        .purp-canada-ca-edged {
+            border-left: 5px solid #3f2a56;
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .grey-canada-ca-block-header {
+            background-color: rgba(238, 239, 241, 1);
+            font-size: 1.2em;
+        }
+
+        .padbox {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .input-wrapper+label,
+        .textarea-wrapper+label,
+        .select-wrapper+label {
+            font-size: 1.1em;
+        }
+
+        .dropdown-content li>a,
+        .dropdown-content li>span {
+            color: #333333;
+        }
+
+        textarea.materialize-textarea {
+            border-bottom: 1px solid #26374b;
+        }
+
+        textarea.materialize-textarea:focus:not([readonly]) {
+            border-bottom: 1px solid #26374b;
+            box-shadow: 0 1px 0 0 #26374b;
+        }
+
+        .select-wrapper input.select-dropdown {
+            border-bottom: 1px solid #26374b;
+        }
+
+        .select-wrapper input.select-dropdown:focus {
+            border-bottom: 1px solid #26374b;
+        }
+
+        .input-field>label,
+        label,
+        input {
+            color: #333333;
         }
     </style>
 </head>
@@ -905,10 +965,10 @@
                                 '}';
                         }
                         return '' +
-                            '<div class="card-panel">' +
+                            '<div class="card-panel purp-canada-ca-edged">' +
                             '<blockquote><span class="badge" style="font-size:1.5em;margin:0px;">' +
                             //'<strong>#%qid</strong>'+
-                            '%req</span> %question</blockquote>%form' +
+                            '%req</span> %question</blockquote><div class="padbox">%form</div>' +
                             '</div>' +
                             '';
                     } else if (snip == "scale") {
