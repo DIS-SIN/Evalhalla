@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
         rel="stylesheet" media="screen,projection" />
     <style>
@@ -97,6 +98,48 @@
         .hnpie {
             width: 20px;
             height: 20px;
+        }
+
+        /* overrides mcss */
+        html {
+            font-family: 'Lato', sans-serif;
+        }
+
+        blockquote {
+            border-left: 5px solid #26374B;
+        }
+
+        .blue-canada-ca {
+            background-color: #26374b;
+        }
+
+        .purp-canada-ca {
+            background-color: #3f2a56;
+        }
+
+        .pagination li.active {
+            background-color: #26374b;
+        }
+
+        .progress {
+            background-color: #26374b;
+            height: 18px;
+            border-radius: 50px;
+        }
+
+        .progress .determinate {
+            background-color: rgba(167, 181, 196, 1);
+            margin: 4px;
+            border-radius: 50px;
+        }
+
+        .badge {
+            border-radius: 50px;
+        }
+
+        .btn,
+        .btn-large {
+            border-radius: 50px;
         }
     </style>
 </head>
@@ -460,8 +503,8 @@
                                     </span>
                                 </h5>
 
-                                <a href="#" class="update_ls btn light-blue lighten-2"><i
-                                        class="material-icons">refresh</i> Update</a>
+                                <a href="#" class="update_ls btn blue-canada-ca"><i class="material-icons">refresh</i>
+                                    Update</a>
 
                                 <div id="ls_target"></div>
                             </div>
@@ -554,7 +597,7 @@
         </div>
     </footer>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" href="#editor">
+        <a class="btn-floating btn-large blue-canada-ca" href="#editor">
             <i class="large material-icons">arrow_upward</i>
         </a>
     </div>
@@ -795,9 +838,12 @@
                         pages += `<li class="waves-effect ev-page-sel ev-page-sel-` + i + `"><a href="#!">` + i + `</a></li>`;
                     }
                     return '' +
-                        `<div class="progress">
+                        '<div class="row">' +
+                        '<div class="col s12 center">' +
+                        `<strong class="center-align determinate-text">` + ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + `%</strong>` +
+                        `</div><div class="progress">
                         <div class="determinate" style="width: `+ ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + `%"></div>
-                    </div>`+
+                    </div></div>`+
                         '<form id="evalhalla_form" action="#">' +
                         '<div class="ev-page ev-page-1 card-panel">' +
                         src +
@@ -810,7 +856,9 @@
                         `+
                         '<div class="row">' +
                         '<div class="col s12 center">' +
-                        '<a id="evalhalla_submit" class="waves-effect waves-light green lighten-1 btn-large"><i class="material-icons right">cloud</i><span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>' +
+                        '<a id="evalhalla_submit" class="waves-effect waves-light purp-canada-ca btn-large">' +
+                        //'<i class="material-icons right">cloud</i>'+    
+                        '<span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>' +
                         '</div>' +
                         '</div>' +
                         '</form>' +
@@ -850,7 +898,9 @@
                         }
                         return '' +
                             '<div class="card-panel">' +
-                            '<blockquote><span class="badge" style="font-size:1.5em;margin:0px;"><strong>#%qid</strong>%req</span> %question</blockquote>%form' +
+                            '<blockquote><span class="badge" style="font-size:1.5em;margin:0px;">' +
+                            //'<strong>#%qid</strong>'+
+                            '%req</span> %question</blockquote>%form' +
                             '</div>' +
                             '';
                     } else if (snip == "scale") {
@@ -954,7 +1004,7 @@
                                 '}';
                         }
                         return '' +
-                            '<div class="card-panel light-blue darken-2">' +
+                            '<div class="card-panel blue-canada-ca darken-2">' +
                             '<span class="white-text">%instruction</span>' +
                             '</div>' +
                             '';
@@ -976,7 +1026,7 @@
                             '';
                     } else if (snip == "ls_header") {
                         return '' +
-                            '<nav><div class="nav-wrapper light-blue darken-1"><div class="col s12">' +
+                            '<nav><div class="nav-wrapper blue-canada-ca darken-1"><div class="col s12">' +
                             '<span class="en">%en</span><span class="fr">%fr</span>' +
                             '</div></div></nav>' +
                             '';
@@ -1320,7 +1370,7 @@
                                                 oid = qida[1];
                                                 opt_text = q["options"][oid];
                                             }
-                                        } catch(e) {
+                                        } catch (e) {
                                             // do nothing
                                         }
                                         var ans_key = ("Q" + qid + " " + opt_text).trim();
@@ -1370,7 +1420,7 @@
                         display_str = display_str.replace(/\%tbody/g, tbody);
 
 
-                        var regen_color_btn = '<a href="#" class="regen_color btn light-blue lighten-2"><i class="material-icons">refresh</i> Color</a>';
+                        var regen_color_btn = '<a href="#" class="regen_color btn blue-canada-ca lighten-2"><i class="material-icons">refresh</i> Color</a>';
                         display_str += get_template_snip("ls_header")
                             .replace(/\%en/g, "Tabulated Results (Basic)")
                             .replace(/\%fr/g, "Resultats Tabulé (Simple)");
@@ -2327,6 +2377,7 @@
                                 $(".ev-page-sel").removeClass("active");
                                 $(".ev-page-sel-" + e.data.i).addClass("active");
                                 $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+                                $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
                                 //alert(e.data.i);
                                 $("#evalhalla_submit").addClass("disabled");
                                 window.scrollTo(0, 0);
@@ -2346,6 +2397,7 @@
                             $(".ev-page-sel").removeClass("active");
                             $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
                             $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+                            $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
 
 
                             //alert(e.data.i);
@@ -2367,6 +2419,7 @@
                             $(".ev-page-sel").removeClass("active");
                             $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
                             $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+                            $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
 
                             //alert(e.data.i);
                             $("#evalhalla_submit").addClass("disabled");
