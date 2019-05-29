@@ -361,8 +361,11 @@ Q: /en Please rank why you took this learning activity where 1 is the most impor
 ;RANDO
 
 /pagebreak
-// /en Reflecting on the learning activity, please rate the following statements, where 1 is a very negative impression and 10 is a very positive impression in terms of your impression of the experience and potential impact, if any, of the learning activity.
+
+// 
+/en Reflecting on the learning activity, please rate the following statements, where 1 is a very negative impression and 10 is a very positive impression in terms of your impression of the experience and potential impact, if any, of the learning activity. /;
 /fr En réfléchissant à l'activité, veuillez évaluer les énoncés suivants sur une échelle de 1 à 10 en fonction de vos impressions sur l'expérience d'apprentissage et sur l'incidence possible de l'activité en question (1 = impression très défavorable, et 10 = impression favorable). /;
+
 /RAND
 
 Q: /en This learning activity as a valuable use of my time. /;
