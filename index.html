@@ -3323,9 +3323,20 @@
                         success: function (response) {
                             var offs = response.results ? response.results : [];
                             var offs_html = "";
+                            var suggested = "";
                             for (var i = 0; i < offs.length; i++) {
+                                if (i == 0) {
+                                    suggested = `<div style="padding: 1em;">
+                                        <span class="badge red white-text" style="float:none;">
+                                            <span class="en">Suggested</span><span class="fr">Suggéré</span>
+                                        </span></div>
+                                        `
+                                } else {
+                                    suggested = "";
+                                }
                                 offs_html += `<div class="card-panel purp-canada-ca-edged">
                                     <div class="padbox">
+                                        ${suggested}
                                         <div class="row">
                                     ${offs[i]["offering_id"]} - ${offs[i]["course_code"]}<br />
                                     <strong>${offs[i]["course_title"]}</strong><br />
@@ -3335,12 +3346,22 @@
                                     </div></div></div>`;
 
                             }
+                            g_state["tombstone"]["offerings"] = offs;
 
                             $(".offering_target").html(offs_html);
                             refresh_lang();
                             $(".select-offering").on("click", function () {
                                 //alert($(this).attr("id").split("_")[1]);
                                 g_state["tombstone"]["offering_id"] = $(this).attr("id").split("_")[1];
+                                for (var i = 0; i < g_state["tombstone"]["offerings"].length; i++) {
+                                    if (g_state["tombstone"]["offering_id"] == g_state["tombstone"]["offerings"][i]["offering_id"]) {
+                                        $("#autocomplete-input-city").val(
+                                            g_state["tombstone"]["offerings"][i]["offering_city"]
+                                        );
+                                        M.updateTextFields();
+                                    }
+                                }
+
                                 $("#step_offering").hide();
                                 $("#step_tombstone").show();
                             });
