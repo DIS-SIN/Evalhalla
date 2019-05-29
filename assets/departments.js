@@ -1,5 +1,5 @@
 ﻿
-var Departments = [
+var autoc_departments = [
     "Administrative Tribunals Support Service of Canada",
     "Advisory Council on Public Safety in the Transportation of Dangerous Goods",
     "Assisted Human Reproduction Agency of Canada",
@@ -24,7 +24,7 @@ var Departments = [
     "Canada Post Corporation",
     "Canada Public Service Agency",
     "Canada Revenue Agency",
-    "Canada School of Public Service",
+    "Canada School of Public Service (CSPS)",
     "Canada Science and Technology Museum Corporation",
     "Canadian Air Transport Security Authority",
     "Canadian Broadcasting Corporation",
@@ -181,7 +181,7 @@ var Departments = [
     "Patented Medicine Prices Review Board",
     "Polar Knowledge Canada(formerly Canadian High Arctic Research Station)",
     "Prairie Farm Rehabilitation Administration",
-    "Privy Council Office",
+    "Privy Council Office (PCO)",
     "Provincial Advisory Board",
     "Public Health Agency of Canada",
     "Public Safety Canada",
@@ -208,7 +208,7 @@ var Departments = [
     "SVC-Policy Planning And Comms",
     "Security Intelligence Review Committee",
     "Senate of Canada",
-    "Shared Services Canada",
+    "Shared Services Canada (SSC)",
     "Ship-source Oil Pollution Fund",
     "Social Sciences and Humanities Research Council",
     "Social Security Tribunal of Canada",
@@ -227,12 +227,12 @@ var Departments = [
     "Translation Bureau",
     "Transport Canada",
     "Transportation Safety Board of Canada",
-    "Treasury Board of Canada Secretariat",
+    "Treasury Board of Canada Secretariat (TBS)",
     "Treaty Relations Commission of Manitoba",
     "Veterans Affairs Canada",
     "Veterans Ombudsman",
     "Veterans Review and Appeal Board",
     "Western Economic Diversification Canada"
 
-       
+
 ]
