@@ -220,7 +220,7 @@ Q: /en The quality of the content /;
 /fr Qualité du contenu /;
 /SCALE Very dissatisfied / Très insatisfait, Very satisfied / Très satisfait, Unsure / Incertain
 
-Q: /en The language quality(English and French)of the materials /;
+Q: /en The language quality (English and French) of the materials /;
 /fr Qualité de la langue du matériel (français ou anglais) /;
 /SCALE Very dissatisfied / Très insatisfait, Very satisfied / Très satisfait, Unsure / Incertain
 
