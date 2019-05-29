@@ -140,6 +140,8 @@
             background-color: rgba(167, 181, 196, 1);
             margin: 4px;
             border-radius: 50px;
+            /* fix for the 100% case where it runs outside the prog bar
+            border-right: 10px solid #26374b; */
         }
 
         .badge {
@@ -201,6 +203,44 @@
         input {
             color: #333333;
         }
+
+        .csps-flag {
+            max-height: 80px;
+            float: right;
+            padding: 20px;
+        }
+
+        .csps-flag-center {
+            max-height: 80px;
+            padding: 20px;
+        }
+
+        .bnomargin {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .bannered {
+            background-image: url('static/images/top_banner.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right;
+            height: 250px;
+            max-height: 250px;
+            /*min-height: 100px;*/
+            width: 100%;
+        }
+
+        .bannerbgbacked {
+            background-image: url('static/images/lp_bg.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right;
+            min-height: 550px;
+            height: auto;
+            /*min-height: 100px;*/
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -210,8 +250,7 @@
             <div class="nav-wrapper container">
                 <a id="logo-container" href="#" class="brand-logo">Evalhalla</a>
                 <a href="#" data-target="mobile-demo" class="adm-function sidenav-trigger">
-                    <i class="material-icons">menu</i>
-                </a>
+                    <i class="material-icons">menu</i></a>
                 <ul class="right">
                     <li>
                         <div>
@@ -259,6 +298,17 @@
     </div>
     <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
         <li>
+            <a href="?sur=example_nanos_paged" class="demo_ev_loop">
+                <i class="material-icons">lightbulb</i>
+                <span class="en">
+                    Demo
+                </span>
+                <span class="fr">
+                    Demo
+                </span>
+            </a>
+        </li>
+        <li>
             <a href="#" class="show_me_how">
                 <i class="material-icons">help</i>
                 <span class="en">
@@ -285,19 +335,16 @@
                 <i class="material-icons">cloud_upload</i>Survista
             </a>
         </li>
-        <li>
-            <a href="#" class="audit_json_render">
+        <li><a href="#" class="audit_json_render">
                 <i class="material-icons">gavel</i>
                 <span class="en">Audit</span><span class="fr">Vérification</span>
             </a>
         </li>
-        <li>
-            <a href="#!" class="ev-add-erase">
+        <li><a href="#!" class="ev-add-erase">
                 <i class="material-icons">clear</i>
                 <span class="en">Clear</span>
                 <span class="fr">Effacer</span>
-            </a>
-        </li>
+            </a></li>
         <li>
             <a href="#" class="adm_clear_ls">
                 <i class="material-icons">flip_to_back</i>
@@ -339,8 +386,7 @@
                 </span>
             </a>
         </li>
-        <li>
-            <a class="hs_ls_window">
+        <li><a class="hs_ls_window">
                 <i class="material-icons">how_to_vote</i>
                 <span class="en">Storage</span><span class="fr">Storage</span>
             </a>
@@ -358,60 +404,57 @@
         </li>
     </ul>
     <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
-        <li>
-            <a href="#!" class="ev-add-header">
+        <li><a href="#!" class="ev-add-header">
                 <i class="material-icons">title</i>
                 <span class="en">Header</span>
                 <span class="fr">En-tête</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-instr">
+            </a></li>
+        <li><a href="#!" class="ev-add-instr">
                 <i class="material-icons">help</i>
                 <span class="en">Instruction</span>
                 <span class="fr">Instruction</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qfree">
+            </a></li>
+        <li><a href="#!" class="ev-add-qfree">
                 <i class="material-icons">input</i>
                 <span class="en">Open</span>
                 <span class="fr">Libre</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qone">
+            </a></li>
+        <li><a href="#!" class="ev-add-qone">
                 <i class="material-icons">done</i>
                 <span class="en">One</span>
                 <span class="fr">Une</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qany">
+            </a></li>
+        <li><a href="#!" class="ev-add-qany">
                 <i class="material-icons">done_all</i>
                 <span class="en">Any</span>
                 <span class="fr">Choisir</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qscale">
+            </a></li>
+        <li><a href="#!" class="ev-add-qscale">
                 <i class="material-icons">call_made</i>
                 <span class="en">Scale</span>
                 <span class="fr">Echelle</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qrank">
+            </a></li>
+        <li><a href="#!" class="ev-add-qrank">
                 <i class="material-icons">import_export</i>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
-            </a>
-        </li>
+            </a></li>
     </ul>
     <ul class="adm-function sidenav" id="mobile-demo">
         <li>
             <h6 class="center-align">MENU</h6>
             <hr>
+        </li>
+        <li>
+            <a href="?sur=example_nanos_paged" class="demo_ev_loop">
+                <i class="material-icons">lightbulb</i>
+                <span class="en">
+                    Demo
+                </span>
+                <span class="fr">
+                    Demo
+                </span>
+            </a>
         </li>
         <li>
             <a href="#" class="show_me_how">
@@ -446,13 +489,11 @@
                 <span class="en">Audit</span><span class="fr">Vérification</span>
             </a>
         </li>
-        <li>
-            <a href="#!" class="ev-add-erase">
+        <li><a href="#!" class="ev-add-erase">
                 <i class="material-icons">clear</i>
                 <span class="en">Clear</span>
                 <span class="fr">Effacer</span>
-            </a>
-        </li>
+            </a></li>
         <li>
             <a href="#" class="adm_clear_ls">
                 <i class="material-icons">flip_to_back</i>
@@ -496,8 +537,7 @@
                 </span>
             </a>
         </li>
-        <li>
-            <a class="hs_ls_window">
+        <li><a class="hs_ls_window">
                 <i class="material-icons">how_to_vote</i>
                 <span class="en">Storage</span><span class="fr">Storage</span>
             </a>
@@ -517,58 +557,190 @@
             <h6 class="center-align">INSERT</h6>
             <hr>
         </li>
-        <li>
-            <a href="#!" class="ev-add-header">
+        <li><a href="#!" class="ev-add-header">
                 <i class="material-icons">title</i>
                 <span class="en">Header</span>
                 <span class="fr">En-tête</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-instr">
+            </a></li>
+        <li><a href="#!" class="ev-add-instr">
                 <i class="material-icons">help</i>
                 <span class="en">Instruction</span>
                 <span class="fr">Instruction</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qfree">
+            </a></li>
+        <li><a href="#!" class="ev-add-qfree">
                 <i class="material-icons">input</i>
                 <span class="en">Open</span>
                 <span class="fr">Libre</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qone">
+            </a></li>
+        <li><a href="#!" class="ev-add-qone">
                 <i class="material-icons">done</i>
                 <span class="en">One</span>
                 <span class="fr">Une</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qany">
+            </a></li>
+        <li><a href="#!" class="ev-add-qany">
                 <i class="material-icons">done_all</i>
                 <span class="en">Any</span>
                 <span class="fr">Choisir</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qscale">
+            </a></li>
+        <li><a href="#!" class="ev-add-qscale">
                 <i class="material-icons">call_made</i>
                 <span class="en">Scale</span>
                 <span class="fr">Echelle</span>
-            </a>
-        </li>
-        <li>
-            <a href="#!" class="ev-add-qrank">
+            </a></li>
+        <li><a href="#!" class="ev-add-qrank">
                 <i class="material-icons">import_export</i>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
-            </a>
-        </li>
+            </a></li>
     </ul>
 
     <div id="editor" name="editor" class="container">
+        <div class="section">
+            <div id="step_lang" class="row bannerbgbacked center">
+                <div class="col hide-on-small-only m3"></div>
+                <div class="col s12 m6 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center" />
+                    </div>
+                    <div class="card-panel">
+                        <div class="row center">
+                            <h4>Satisfaction Survey</h4>
+                            <p>
+                                Language of preference - Langue de préférence
+                            </p>
+                        </div>
+
+                        <div class="row center">
+                            <div class="col s12 m6 center">
+                                <div class="row center">
+                                    <button class="lang-set-en purp-canada-ca btn-large">English</button>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 center">
+                                <div class="row center">
+                                    <button class="lang-set-fr purp-canada-ca btn-large">Français</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m3"></div>
+            </div>
+            <div id="step_offering" class="row bannerbgbacked center">
+                <div class="col hide-on-small-only m2"></div>
+                <div class="col s12 m8 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center" />
+                    </div>
+                    <div class="card-panel">
+                        <div class="row center">
+                            <h4>Satisfaction Survey</h4>
+                            <p>
+                                <span class="en">Please choose your course offering</span>
+                                <span class="fr">Veuillez choisir votre offre de cours</span>
+                            </p>
+                        </div>
+
+                        <div class="row center offering_target">
+                            OFFERINGS
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m2"></div>
+            </div>
+            <div id="step_tombstone" class="row bannerbgbacked center">
+                <div class="col hide-on-small-only m1"></div>
+                <div class="col s12 m10 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center" />
+                    </div>
+                    <div class="card-panel">
+                        <div class="row center">
+                            <h4>Satisfaction Survey</h4>
+                            <p>
+                                <span class="en">A bit about you</span>
+                                <span class="fr">Un peu de vous</span>
+                            </p>
+                        </div>
+
+                        <div class="row center tombstone_target">
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input-department"
+                                            class="autocomplete tombstone_department">
+                                        <label for="autocomplete-input-department"><span
+                                                class="en">Department</span><span class="fr">Département</span></label>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input-classification"
+                                            class="autocomplete tombstone_classification">
+                                        <label for="autocomplete-input-classification">Classification</label>
+                                    </div>
+                                </div>
+
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input-city"
+                                            class="autocomplete tombstone_city">
+                                        <label for="autocomplete-input-city"><span class="en">City</span><span
+                                                class="fr">Ville</span></label>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="row center">
+                                        <button class="tombstone-set purp-canada-ca btn-large"><span
+                                                class="en">Start</span><span class="fr">Début</span></button>
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="col s6">
+                                    <div class="input-field s6">
+                                        <input id="inline_qid_%qid_office_3" class="ev_inline_office %reqcls" %reqattr
+                                            name="inline_qid_%qid_office_3" type="text">
+                                        <label for="inline_qid_%qid_office_3"><span class="en">Office</span><span class="fr">Office</span></label>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m1"></div>
+            </div>
+            <div id="step_thank_you_cta" class="row bannerbgbacked center">
+                <div class="col hide-on-small-only m2"></div>
+                <div class="col s12 m8 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center" />
+                    </div>
+
+
+
+                    <div class="card-panel">
+                        <div class="row center">
+                            <i class="material-icons" style="color: #7cb342;font-size:5em;">check_circle</i>
+                            <h4><span class="en">You're Awesome!</span><span class="fr">Vous êtes génial!</span></h4>
+                            <p>
+                                <span class="en">Thank you for taking the time to take this survey.</span>
+                                <span class="fr">Merci d'avoir pris le temps de répondre à ce sondage</span>
+                            </p>
+
+                            <div class="row center">
+                                <button class="ev-ready-for-next purp-canada-ca btn-large"><span
+                                        class="en">Goodbye</span><span class="fr">Au revoir</span></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m2"></div>
+            </div>
+        </div>
         <div class="section">
             <div class="row">
                 <div id="editor_window" class="col s12 m6">
@@ -576,7 +748,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <textarea id="editor_target" class="materialize-textarea"
-                                          data-original-height=0></textarea>
+                                    data-original-height=0></textarea>
                                 <label for="editor_target">
                                     <span class="en">
                                         Survey Source (TYPE HERE).
@@ -622,7 +794,7 @@
                         <form class="col s12">
                             <div class="input-field col s12">
                                 <textarea id="json_target" class="materialize-textarea"
-                                          data-original-height=0></textarea>
+                                    data-original-height=0></textarea>
                                 <label for="json_target">
                                     <span class="en">
                                         Survey JSON (auto-generated).
@@ -667,8 +839,7 @@
                 <div class="row center">
                     <h5 class="header col s12 light">
                         <span class="en">Evaluate More. Build Less.</span>
-                        <span class="fr">Évaluer plus. Construire moins.</span>
-                    </h5>
+                        <span class="fr">Évaluer plus. Construire moins.</span></h5>
                     <h6 class="header col s12 light">
                         <span class="en">
                             Just type to build your survey.
@@ -689,10 +860,8 @@
                     <h5 class="white-text">Evalhalla</h5>
                     <p class="grey-text text-lighten-4">
                         <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
-                        <span class="fr">
-                            Alpha. Evalhalla est une expérience visant à faciliter la création de
-                            formulaires.
-                        </span>
+                        <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
+                            formulaires.</span>
                     </p>
                     <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
                 </div>
@@ -712,9 +881,12 @@
     </div>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- DEMO File for Survey Load -->
     <script src="example_sur.js"></script>
     <script src="assets/departments.js"></script>
     <script src="assets/classifications.js"></script>
+    <!-- DEMO API Connection -->
+    <script src="registhor_key.js"></script>
     <script>
         (function ($) {
             $(function () {
@@ -841,6 +1013,8 @@
                 if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
                 if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
 
+
+
                 const g_tutorial_script = "" +
                     "[SURVEY] 1234 \n" +
                     "[TITLE] This is my title \n" +
@@ -953,22 +1127,29 @@
                         '<div class="col s12 center">' +
                         `<strong class="center-align determinate-text">` + ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + `%</strong>` +
                         `</div><div class="progress">
-                            <div class="determinate" style="width: `+ ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + `%"></div>
+                        <div class="determinate" style="width: `+ ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + `%"></div>
                         </div></div>`+
+                        `<div class="row">
+                            <div class="col s12 center bannered">`+
+                        //<img src="static/images/top_banner.png" class="responsive-img" alt="CSPS-EFPC Branding, Humans in classroom" />
+                        `<img src="static/images/csps_flag.png" class="responsive-img csps-flag" alt="CSPS-EFPC Flag, Maple leaf in book" />
+                            </div>
+                        </div>
+                        `+
                         '<form id="evalhalla_form" action="#">' +
                         '<div class="ev-page ev-page-1 card-panel">' +
                         src +
                         '</div>' +
                         ` <ul class="pagination center-align">
-                                <li class="waves-effect ev-page-sel-left"><a href="#!"><i class="material-icons">chevron_left</i></a></li>`+
+                            <li class="waves-effect ev-page-sel-left"><a href="#!"><i class="material-icons">chevron_left</i></a></li>`+
                         pages +
                         `<li class="waves-effect ev-page-sel-right"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                            </ul>
-                            `+
+                        </ul>
+                        `+
                         '<div class="row">' +
                         '<div class="col s12 center">' +
                         '<a id="evalhalla_submit" class="waves-effect waves-light purp-canada-ca btn-large">' +
-                        //'<i class="material-icons right">cloud</i>'+
+                        //'<i class="material-icons right">cloud</i>'+    
                         '<span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>' +
                         '</div>' +
                         '</div>' +
@@ -989,7 +1170,7 @@
                             '<div class="row">' +
                             '<div class="col s12 center">' +
                             '<h3><i class="mdi-content-send brown-text"></i></h3>' +
-                            '<h4>%title (%survey)</h4>' +
+                            '<h4>%title<br/>(%survey)</h4>' +
                             '<p class="flow-text left-align light">%intro</p>' +
                             '</div>' +
                             '</div>';
@@ -1148,43 +1329,43 @@
                             return '"%field"';
                         }
                         return `
-                                <div class="row">
-                                <div class="col s6">
-                                <div class="input-field s6">
-                                <input id="inline_qid_%qid_dept_0" class="ev_inline_dept %reqcls" %reqattr name="inline_qid_%qid_dept_0" type="text">
-                                <label for="inline_qid_%qid_dept_0"><span class="en">Department</span><span class="fr">Department</span></label>
-                                </div>
-                                </div>
-                                <div class="col s6">
-                                <div class="input-field s6">
-                                <input id="inline_qid_%qid_role_1" class="ev_inline_role %reqcls" %reqattr  name="inline_qid_%qid_role_1" type="text">
-                                <label for="inline_qid_%qid_role_1"><span class="en">Role</span><span class="fr">Role</span></label>
-                                </div>
-                                </div>
-                                </div>
-                                <div class="row">
-                                <div class="col s6">
-                                <div class="input-field s6">
-                                <input id="inline_qid_%qid_region_2" class="ev_inline_region %reqcls" %reqattr  name="inline_qid_%qid_region_2" type="text">
-                                <label for="inline_qid_%qid_region_2"><span class="en">Region</span><span class="fr">Region</span></label>
-                                </div>
-                                </div>
-                                <div class="col s6">
-                                <div class="input-field s6">
-                                <input id="inline_qid_%qid_office_3" class="ev_inline_office %reqcls" %reqattr  name="inline_qid_%qid_office_3" type="text">
-                                <label for="inline_qid_%qid_office_3"><span class="en">Office</span><span class="fr">Office</span></label>
-                                </div>
-                                </div>
-                                </div>
-                                `;
+                            <div class="row">
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_dept_0" class="ev_inline_dept %reqcls" %reqattr name="inline_qid_%qid_dept_0" type="text">
+                            <label for="inline_qid_%qid_dept_0"><span class="en">Department</span><span class="fr">Department</span></label>
+                            </div>
+                            </div>
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_role_1" class="ev_inline_role %reqcls" %reqattr  name="inline_qid_%qid_role_1" type="text">
+                            <label for="inline_qid_%qid_role_1"><span class="en">Role</span><span class="fr">Role</span></label>
+                            </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_region_2" class="ev_inline_region %reqcls" %reqattr  name="inline_qid_%qid_region_2" type="text">
+                            <label for="inline_qid_%qid_region_2"><span class="en">Region</span><span class="fr">Region</span></label>
+                            </div>
+                            </div>
+                            <div class="col s6">
+                            <div class="input-field s6">
+                            <input id="inline_qid_%qid_office_3" class="ev_inline_office %reqcls" %reqattr  name="inline_qid_%qid_office_3" type="text">
+                            <label for="inline_qid_%qid_office_3"><span class="en">Office</span><span class="fr">Office</span></label>
+                            </div>
+                            </div>
+                            </div>
+                            `;
                     } else if (snip == "qlib entry") {
                         return `<tr>
-                                        <td>
-                                            <div id="bqlib_%bqid">%question
-                                            </div>
-                                        </td>
-                                        <td>%ctrl</td>
-                                    </tr>`;
+                                    <td>
+                                        <div id="bqlib_%bqid">%question
+                                        </div>
+                                    </td>
+                                    <td>%ctrl</td>
+                                </tr>`;
                     } else if (snip == "page break") {
                         if (format == "json") {
                             return '{' +
@@ -1247,7 +1428,7 @@
                 point = 0
                 if odd {
                     point opposite (360)
-                }
+                } 
                 if even {
                     last + curr /2
                 }
@@ -1315,7 +1496,7 @@
                             // if the slice is more than 50%, take the large arc (the long way around)
                             const largeArcFlag = slice.percent > .5 ? 1 : 0;
                             // create an array and join it just for code readability
-                            /*
+                            /* 
                             // Pie Chart Filled
                             const pathData = [
                                 `M ${startX} ${startY}`, // Move
@@ -1462,7 +1643,12 @@
                                     for (var k in answer) {
                                         type = (k.split("_"))[0];
                                         qida = (k.match(/\d+/g));
-                                        qid = qida[0];
+                                        qid = "";
+                                        try {
+                                            qid = qida[0];
+                                        } catch (e) {
+                                            qid = -1;
+                                        }
                                         oid = "";
 
                                         //console.log(qid, k);
@@ -1495,7 +1681,7 @@
                                             tabulation[survey["title"]][ans_key]["values"].push(
                                                 //"(Q" + qid + ", " + type + ") " +
                                                 //q["question"] + " " + opt_text +
-                                                //" (A) " +
+                                                //" (A) " + 
                                                 answer[k]
                                                 // + "<br>"
                                             );
@@ -1699,6 +1885,21 @@
                         warn_user_alert();
                     }
                 }
+
+                const api_route = api_post_surv_resp_route + api_key;
+                var api_upload_survey_result = function (data_in) {
+                    //console.log(data_in);
+                    $.ajax({
+                        url: api_route,
+                        contentType: "application/json",
+                        type: "POST",
+                        data: data_in,
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                }
+                //
                 var ls_save_survey_response = function (response) {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1713,7 +1914,13 @@
                         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
                         ls_show_local_storage();
                         ui_resize_textareas();
-                        alert("Thank you!");
+                        //alert("Thank you!");
+                        // submit to api
+
+                        // TODO: turn on
+                        // TODO: add survista api upload
+                        api_upload_survey_result(response);
+
                         // clear responses
                         // TODO: reinit tombstone generics
                         g_state["generics"]["generic_fetched"] = false;
@@ -1745,6 +1952,12 @@
                         "typer": null,
                     },
                     "qlib": [],
+                    "tombstone": {
+                        "offering_id": "",
+                        "department": "",
+                        "classification": "",
+                        "city": ""
+                    },
                     "generics": {
                         "generic_fetched": false,
                         "ev_inline_dept": "",
@@ -1763,6 +1976,8 @@
                     "el": {
                         // lang
                         "lang": $(".lang"),
+                        "lang_set_en": $(".lang-set-en"),
+                        "lang_set_fr": $(".lang-set-fr"),
                         "en": $(".en"),
                         "fr": $(".fr"),
                         // buttons
@@ -1858,6 +2073,96 @@
                 // get from tombstone: stub
                 // TODO: Fix with correct code (right now just obj/deobj for test)
                 g_state["generics"]["generic_fetched"] = false;
+
+
+                $.ajax({
+                    url: api_get_classifications_route + api_key,
+                    contentType: "application/json",
+                    type: "GET",
+                    //data: data_in,
+                    success: function (response) {
+                        g_state["generics"]["classifications"] = response.results ? response.results : [];
+                        var autoc_json = {}
+                        for (var i = 0; i < g_state["generics"]["classifications"].length; i++) {
+                            autoc_json[g_state["generics"]["classifications"][i]] = null;
+                        }
+                        g_state["generics"]["classifications"] = autoc_json;
+                        $('.tombstone_classification').autocomplete({
+                            data: g_state["generics"]["classifications"]
+                        });
+                    }
+                });
+                $.ajax({
+                    url: api_get_departments_route + api_key,
+                    contentType: "application/json",
+                    type: "GET",
+                    //data: data_in,
+                    success: function (response) {
+                        g_state["generics"]["department_en"] = response.results ? response.results : [];
+                        var autoc_json = {}
+                        for (var i = 0; i < g_state["generics"]["department_en"].length; i++) {
+                            autoc_json[g_state["generics"]["department_en"][i]] = null;
+                        }
+                        g_state["generics"]["department_en"] = autoc_json;
+                        $('.tombstone_department').autocomplete({
+                            data: g_state["generics"]["department_en"]
+                        });
+                    }
+                });
+                $.ajax({
+                    url: api_get_departments_route_fr + api_key,
+                    contentType: "application/json",
+                    type: "GET",
+                    //data: data_in,
+                    success: function (response) {
+                        g_state["generics"]["department_fr"] = response.results ? response.results : [];
+                        var autoc_json = {}
+                        for (var i = 0; i < g_state["generics"]["department_fr"].length; i++) {
+                            autoc_json[g_state["generics"]["department_fr"][i]] = null;
+                        }
+                        g_state["generics"]["department_fr"] = autoc_json;
+                        // TODO: Merge the two dept arrays
+                        $('.tombstone_department_fr').autocomplete({
+                            data: g_state["generics"]["department_fr"]
+                        });
+                    }
+                });
+                $.ajax({
+                    url: api_get_cities_route + api_key,
+                    contentType: "application/json",
+                    type: "GET",
+                    //data: data_in,
+                    success: function (response) {
+                        g_state["generics"]["cities_en"] = response.results ? response.results : [];
+                        var autoc_json = {}
+                        for (var i = 0; i < g_state["generics"]["cities_en"].length; i++) {
+                            autoc_json[g_state["generics"]["cities_en"][i]] = null;
+                        }
+                        g_state["generics"]["cities_en"] = autoc_json;
+                        $('.tombstone_city').autocomplete({
+                            data: g_state["generics"]["cities_en"]
+                        });
+                    }
+                });
+                $.ajax({
+                    url: api_get_cities_route_fr + api_key,
+                    contentType: "application/json",
+                    type: "GET",
+                    //data: data_in,
+                    success: function (response) {
+                        g_state["generics"]["cities_fr"] = response.results ? response.results : [];
+                        var autoc_json = {}
+                        for (var i = 0; i < g_state["generics"]["cities_fr"].length; i++) {
+                            autoc_json[g_state["generics"]["cities_fr"][i]] = null;
+                        }
+                        g_state["generics"]["cities_fr"] = autoc_json;
+                        $('.tombstone_city_fr').autocomplete({
+                            data: g_state["generics"]["cities_fr"]
+                        });
+                    }
+                });
+
+
                 var api_get_generics = function () {
                     if (g_state["generics"]["generic_fetched"] == false) {
                         //M.toast({ html: "Found this gc data, prefilling...", classes: 'rounded' });
@@ -1924,6 +2229,9 @@
                     return params;
                 };
 
+                const activate_restart_timer = function () {
+                    //TODO: 20 sec delay restart
+                };
                 const evalhalla_submit = function () {
                     // make some form data
                     var formElement = document.getElementById("evalhalla_form");
@@ -1934,7 +2242,7 @@
                     var query_string = $("#evalhalla_form").serialize();
                     console.log(query_string);
                     if (formElement.checkValidity() == true) {
-                        alert("Good to go!")
+                        //alert("Good to go!");
                     } else {
                         alert("Missing Data");
                         $(".ev-page").show();
@@ -1943,12 +2251,23 @@
                     }
                     // let em know
                     var json_o = get_params_as_object(query_string);
+
+                    // get tombstone details
+                    json_o["tombstone_department"] = $("#autocomplete-input-department").val();
+                    json_o["tombstone_city"] = $("#autocomplete-input-city").val();
+                    json_o["tombstone_classification"] = $("#autocomplete-input-classification").val();
+                    json_o["tombstone_offering_id"] = g_state["tombstone"]["offering_id"];
+                    json_o["tombstone_language"] = g_state["ui"]["lang"];
+
                     var json_o_string = (JSON.stringify(json_o, null, 4));
                     // save response to local storage
                     ls_save_survey_response(json_o_string);
                     // show local storage items
                     ls_view_saved_entries();
-                    //alert(json_o_string);
+                    alert(json_o_string);
+                    g_state["el"]["ui_render"].hide();
+                    $("#step_thank_you_cta").show();
+                    activate_restart_timer();
                     //alert("Check the console for details");
                 };
 
@@ -2357,7 +2676,7 @@
                         .replace(/\%questions/g, "")
                 };
 
-                //
+                // 
                 // Material UI General
                 //
 
@@ -2416,6 +2735,35 @@
                         $(".dropdown-trigger").dropdown();
                     }
                 });
+                g_state["el"]["lang_set_fr"].on("click", function () {
+                    g_state["ui"]["lang"] = "fr";
+                    refresh_lang();
+                    //ui_resize_textareas();
+                    $(".dropdown-trigger").dropdown();
+                    $("#step_lang").hide();
+                    $("#step_offering").show();
+                });
+                g_state["el"]["lang_set_en"].on("click", function () {
+                    g_state["ui"]["lang"] = "en";
+                    refresh_lang();
+                    //ui_resize_textareas();
+                    $(".dropdown-trigger").dropdown();
+                    $("#step_lang").hide();
+                    $("#step_offering").show();
+                });
+                $(".tombstone-set").on("click", function () {
+                    $("#step_tombstone").hide();
+                    g_state["el"]["ui_render"].show();
+                });
+                $(".ev-ready-for-next").on("click", function () {
+                    $("#step_thank_you_cta").hide();
+                    $("#step_lang").show();
+                    $("#autocomplete-input-department").val("");
+                    $("#autocomplete-input-city").val("");
+                    $("#autocomplete-input-classification").val("");
+                });
+
+
                 //g_state["el"]["lang"].trigger("change");
 
                 // load intro content
@@ -2423,7 +2771,7 @@
                     g_intro_script
                 );
 
-                //
+                // 
                 // Question Library
                 //
 
@@ -2769,7 +3117,7 @@
                     }
                 });
 
-                //
+                // 
                 // JSON Render
                 //
 
@@ -2826,7 +3174,7 @@
                                 //opts_snip = get_template_snip("rank"); // survista handles it?
 
                                 //console.log(qs[k]["questionType"]);
-                                // render_opts.push(opts[l]);
+                                // render_opts.push(opts[l]);                          
                                 opts_snip = opts_snip
                                     .replace(/\%qid/g, qs[k]["qid"])
                                     .replace(/\%pick/g, opts[l].trim())
@@ -2862,7 +3210,13 @@
                 if (auto_display_mode == true) {
                     //alert("auto");
                     g_state["el"]["ui_render"].removeClass("m6").addClass("m12");
-                    g_state["el"]["ui_render"].show();
+
+                    $("#step_lang").show();
+                    $("#step_offering").hide();
+                    $("#step_tombstone").hide();
+                    $("#step_thank_you_cta").hide();
+
+                    g_state["el"]["ui_render"].hide();
                     g_state["el"]["ui_editor"].hide();
                     g_state["el"]["ui_json"].hide();
                     g_state["el"]["ui_ls"].hide();
@@ -2875,7 +3229,66 @@
                     // adding display none kills resize capability of textarea.
                     // we're dynamically adding the maxsize when we need it in presentation mode
                     $(".hiddendiv").addClass("hiddendiv-maxsized");
+                } else {
+                    $("#step_lang").hide();
+                    $("#step_offering").hide();
+                    $("#step_tombstone").hide();
+                    $("#step_thank_you_cta").hide();
                 }
+
+                //
+                // MVP 0.1 Connection, Registhor
+                //
+
+                // Registhor Connection
+                /*
+                {
+                    "results": [
+                    {
+                        "offering_id": 119472,
+                        "course_code": "A313",
+                        "course_title": "Fundamentals of Writing for the Web (A313)",
+                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                        "offering_province": "NCR/RCN"
+                    },
+                */
+                var populate_offerings = function () {
+                    var date = new Date();
+                    var date_string = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+                        .toISOString()
+                        .split("T")[0];
+                    $.ajax({
+                        url: api_get_offering_route.replace("%currentdate", date_string) + api_key,
+                        contentType: "application/json",
+                        type: "GET",
+                        //data: data_in,
+                        success: function (response) {
+                            var offs = response.results ? response.results : [];
+                            var offs_html = "";
+                            for (var i = 0; i < offs.length; i++) {
+                                offs_html += `<div class="card-panel purp-canada-ca-edged">
+                                    <div class="padbox">
+                                        <div class="row">
+                                    ${offs[i]["offering_id"]} - ${offs[i]["course_code"]}<br />
+                                    <strong>${offs[i]["course_title"]}</strong><br />
+                                    ${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}
+                                    </div><div class="row">
+                                    <button id="off_${offs[i]["offering_id"]}" class="select-offering btn purp-canada-ca"><span class="en">Select</span><span class="fr">Choisir</span></button>
+                                    </div></div></div>`;
+
+                            }
+
+                            $(".offering_target").html(offs_html);
+                            $(".select-offering").on("click", function () {
+                                //alert($(this).attr("id").split("_")[1]);
+                                g_state["tombstone"]["offering_id"] = $(this).attr("id").split("_")[1];
+                                $("#step_offering").hide();
+                                $("#step_tombstone").show();
+                            });
+                        }
+                    });
+                }
+                populate_offerings();
 
             });
         })(jQuery);

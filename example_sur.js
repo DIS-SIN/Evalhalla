@@ -229,7 +229,7 @@ Q: The overall quality of the instructor/facilitator
 Q: The subject matter knowledge of the instructor/facilitator
 /SCALE Very dissatisfied, Very satisfied, Unsure
 ;RAND
-/pagebreak
+
 Q: Would you say that the instructor/facilitator spent too much, the right amount or
 not enough time covering
 the content of the learning activity.
@@ -239,7 +239,7 @@ The right amount of time...2
 Not enough time...3
 Unsure...4
 ;
-/pagebreak
+
 // Please rate your level of knowledge of the subject areaon a scalefrom 1 to 10,
 where 1 is very low level
 of knowledge in the subject area and 10 is a very high level of knowledge in the subject area.
@@ -268,19 +268,21 @@ Somewhat unlikely...3
 Unlikely...4
 Unsure...77
 ;
-/pagebreak
+
 Q: Do you have any comments you would like to share about the
 facilitator(s)/instructor(s)? For privacy
 reasons, please do not use facilitator / instructor names in your comments.
 /OPEN
+
 /pagebreak
+
 Q: Did you use any tools (e.g. blogs, videos, etc.) from GCcampus to complement your
 learning?
 /ONE
-Yes...1 (CONTINUE TO Q15)
-No...2 (SKIP TO Q19)
+Yes...1
+No...2
 ;
-/pagebreak
+
 // Were the following tools valuable, somewhat valuable, somewhat not valuable or not
 valuable in terms of
 contributing to your learning?
@@ -344,6 +346,7 @@ General interest
 Other (please specify)
 ;
 ;RANDO
+
 /pagebreak
 // Reflecting on the learning activity, please rate the following statements,where 1
 is a very negative
@@ -366,11 +369,13 @@ Q: Applying what I have learned to my job.
 /SCALE Very negative impression, Very positive impression, Unsure
 
 ;RAND
+
 /pagebreak
+
 Q: Are there any other comments you would like to share in order to help the CSPS
 improve? For privacy
 reasons, please do not use instructor/facilitator names in your comments.
 /OPEN
-/pagebreak
+
 // Thank you for sharing your views
 `;
