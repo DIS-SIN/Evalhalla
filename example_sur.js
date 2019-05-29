@@ -236,7 +236,7 @@ Q: /en The subject matter knowledge of the instructor/facilitator /;
 Q: /en Would you say that the instructor/facilitator spent too much, the right amount or not enough time covering the content of the learning activity. /;
 /fr Diriez-vous que l'instructeur / animateur a dépensé trop, assez ou pas assez de temps pour couvrir le contenu de l'activité d'apprentissage. /;
 /ONE
-/en Too much time...1 /; /fr rop de temps ... 1 /;
+/en Too much time...1 /; /fr Trop de temps ... 1 /;
 /en The right amount of time...2 /; /fr La bonne quantité de temps ... 2 /;
 /en Not enough time...3 /; /fr Pas assez de temps ... 3 /;
 /en Unsure...4 /; /fr Pas sûr ... 4 /;
