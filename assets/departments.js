@@ -1,5 +1,5 @@
 ﻿
-var Departments = [
+var autoc_departments = [
     "Administrative Tribunals Support Service of Canada",
     "Advisory Council on Public Safety in the Transportation of Dangerous Goods",
     "Assisted Human Reproduction Agency of Canada",
@@ -234,5 +234,5 @@ var Departments = [
     "Veterans Review and Appeal Board",
     "Western Economic Diversification Canada"
 
-       
+
 ]
