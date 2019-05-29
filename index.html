@@ -726,8 +726,8 @@
                             <i class="material-icons" style="color: #7cb342;font-size:5em;">check_circle</i>
                             <h4><span class="en">You're Awesome!</span><span class="fr">Vous êtes génial!</span></h4>
                             <p>
-                                <span class="en">Thank you for taking the time to take this survey.</span>
-                                <span class="fr">Merci d'avoir pris le temps de répondre à ce sondage</span>
+                                <span class="en">Thank you for taking the time</span>
+                                <span class="fr">Merci d'avoir pris le temps de répondre</span>
                             </p>
 
                             <div class="row center">
@@ -887,6 +887,7 @@
     <script src="assets/classifications.js"></script>
     <!-- DEMO API Connection -->
     <script src="registhor_key.js"></script>
+    <script src="survista_key.js"></script>
     <script>
         (function ($) {
             $(function () {
@@ -1886,11 +1887,11 @@
                     }
                 }
 
-                const api_route = api_post_surv_resp_route + api_key;
-                var api_upload_survey_result = function (data_in) {
-                    //console.log(data_in);
+                const rg_api_route = api_post_surv_resp_route + api_key;
+                const sv_api_route = sv_api_post_surv_resp_route + sv_api_key;
+                var api_post_to_route = function (route, data_in) {
                     $.ajax({
-                        url: api_route,
+                        url: route,
                         contentType: "application/json",
                         type: "POST",
                         data: data_in,
@@ -1898,6 +1899,14 @@
                             console.log(response);
                         }
                     });
+                }
+                var api_upload_survey_result = function (data_in) {
+                    //console.log(data_in);
+                    let api_route = "";
+                    api_route = sv_api_route;
+                    api_post_to_route(api_route, data_in);
+                    api_route = rg_api_route;
+                    api_post_to_route(api_route, data_in);
                 }
                 //
                 var ls_save_survey_response = function (response) {
@@ -3279,6 +3288,7 @@
                             }
 
                             $(".offering_target").html(offs_html);
+                            refresh_lang();
                             $(".select-offering").on("click", function () {
                                 //alert($(this).attr("id").split("_")[1]);
                                 g_state["tombstone"]["offering_id"] = $(this).attr("id").split("_")[1];
