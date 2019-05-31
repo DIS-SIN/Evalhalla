@@ -1256,7 +1256,7 @@
                         return '' +
                             '<div class="row">' +
                             '<label>' +
-                            '<input class="with-gap %reqcls" %reqattr name="rgroup_qid_%qid" type="radio" value="%pick" />' +
+                            '<input class="with-gap %reqcls" %reqattr name="rgroup_qid_%qid" type="radio" value="%vpick" />' +
                             '<span>%pick</span>' +
                             '</label>' +
                             '</div>' +
@@ -1268,7 +1268,7 @@
                         return '' + // no validation needed, you pick any. Any includes none.
                             '<div class="row">' +
                             '<label>' +
-                            '<input class="with-gap" name="cgroup_qid_%qid[]" type="checkbox" value="%pick" />' +
+                            '<input class="with-gap" name="cgroup_qid_%qid[]" type="checkbox" value="%vpick" />' +
                             '<span>%pick</span>' +
                             '</label>' +
                             '</div>' +
@@ -2365,7 +2365,7 @@
                     // TODO note: this/entails could be an issue
                     pack_json = pack;
 
-                    pack = activate_lang(pack);
+                    pack = activate_lang(pack); // adds in the <span> s
 
                     return { "pack": pack, "pack_json": pack_json, "i": i };
                 }
@@ -2559,11 +2559,30 @@
                         // handle html+json same time
                         var random_shuffle = [];
                         var temp_snip = "";
+                        // lang opt check for bilingual
+                        var opt_input_value = ""
                         for (var opti = 0; opti < opts.length; opti++) {
+                            //
+                            // WARN: Brittle code. Tied to HTML structure.
+                            // See pack_text, activate_lang
+                            // suggest holding off on activate_lang until form is fully built
+                            // also, address the JSON render (it will have evalese in the mix)
+                            // 
+                            opt_input_value = opts[opti].trim()
+                            var oa = [];
+                            oa = opt_input_value.split("</span>")
+                            for (var m = 0; m < oa.length; m++) {
+                                if (oa[m].indexOf("<span class='" + g_state["ui"]["lang"] + "'>") !== -1) {
+                                    opt_input_value = oa[m].replace("<span class='" + g_state["ui"]["lang"] + "'>", "");
+                                }
+                            }
+                            // end WARN
+
                             temp_snip = get_template_snip(cmd)
                                 .replace(/\%qid/g, g_control_flags["question"]["qid"])
                                 .replace(/\%pick/g, opts[opti].trim())
                                 .replace(/\%oid/g, opti)
+                                .replace(/\%vpick/g, opt_input_value.trim())
                                 ;
                             form += temp_snip;
                             random_shuffle.push(temp_snip);
