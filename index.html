@@ -354,8 +354,6 @@
         </li>
     </ul>
     <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
-
-
         <li>
             <a href="https://app.klipfolio.com/published/692bec18aa4e866b9d7fbb5b5c355de3/satisfaction-survey">
                 <i class="material-icons">cloud_upload</i>
@@ -877,6 +875,7 @@
         </a>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- DEMO Statics for Tombstone autocomplete -->
     <script src="example_sur.js"></script>
@@ -886,6 +885,7 @@
     <!-- DEMO API Connection -->
     <script src="integrations/registhor/registhor_key.js"></script>
     <script src="integrations/survista/survista_key.js"></script>
+    <script src="static/assets/evalese_md_scripts.js"></script>
     <script>
         (function ($) {
             $(function () {
@@ -900,7 +900,19 @@
                 // HTML, JSON, and EVALESE snips
                 //
 
+                const config_DOMPurify = {
+                    /*ALLOWED_TAGS: ['p', '#text']*/
+                    SAFE_FOR_JQUERY: true,
+                    KEEP_CONTENT: false
+                };
+                // Clean HTML string and write into our DIV
+                const safe = function (dirty) {
+                    return DOMPurify.sanitize(dirty, config_DOMPurify);
+                };
 
+                // These are the "EVALESE" command. This is the markdown that builds the forms.
+                // You can easily add new aliases for the core commands. Just make sure you check
+                // yourself. There's not much in the way of error catching here. It trusts you.
                 const g_cmd = {
                     // CMDS in ALLCAPS, but input is any case
                     "[SURVEY]": { "type": "survey", "html": "<survey>%v</survey>" },
@@ -964,42 +976,13 @@
                     "[PAGEBREAK]": { "type": "page break", "html": "<page break>%v</page break>" }
 
                 };
-                let g_intro_script = "" +
-                    "# 123\n\n" +
-                    "##\n/en Evalhalla Survey /;\n/fr Enquête Evalhalla /; \n\n" +
-                    "###\n/en It's easy to make a survey. /;\n/fr Il est facile de faire une enquête. /; \n" +
-                    "\n" +
-                    "*Q:\n/en Have you clicked on 'tutorial' yet? /;\n/fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
-                    "/ONE\n" +
-                    "/en Yes /; /fr Oui /; \n" +
-                    "/en No /; /fr Non /; \n" +
-                    ";\n\n" +
-                    "/pagebreak\n\n" +
-                    "Q: Generic Info Stuff (autofilled)\n" +
-                    "/generics\n" +
-                    "\n" +
-                    "// /en Thanks /; /fr Merci /; \n" +
-                    "";
-                let g_intro_script_fr = "" +
-                    "# 123\n" +
-                    "## /en Evalhalla Survey /; /fr Enquête Evalhalla /; \n" +
-                    "### /en It's easy to make a survey. /; /fr Il est facile de faire une enquête. /; \n" +
-                    "\n" +
-                    "Q: /en Have you clicked on 'tutorial' yet? /; /fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
-                    "/ONE\n" +
-                    "/en Yes/;  /fr Oui /; \n" +
-                    "/en No/;  /fr Non /; \n" +
-                    ";\n" +
-                    "\n" +
-                    "// /en Thanks /; /fr Merci /; \n" +
-                    "";
 
                 //
                 // Example Overrides
                 //
-                var auto_display_mode = false;
-                var params = null;
-                var sur = null;
+                var auto_display_mode = false; // if you pass a query param in with sur=example_nanos_paged for example, it goes right into "presentation mode"
+                var params = null; // the search params
+                var sur = null; // the survey to load
                 try {
                     params = new URLSearchParams(window.location.search);
                     sur = params.get("sur");
@@ -1008,114 +991,11 @@
                     params = window.location.search.split("=")[1]; // yep, I actually did that.
                     sur = params; // very cross. much browser. so wow.
                 }
-
+                // ok let's load it up
                 if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
                 if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
 
-
-
-                const g_tutorial_script = "" +
-                    "[SURVEY] 1234 \n" +
-                    "[TITLE] This is my title \n" +
-                    "[INTRO] This is a cool survey, you should fill it out. \n" +
-                    "\n" +
-                    "[QUESTION] How about them apples \n" +
-                    "[PICKONE] \n" +
-                    "Red \n" +
-                    "Green \n" +
-                    "Gala \n" +
-                    "[END] \n" +
-                    "\n" +
-                    "[QUESTION] How cool was that ? \n" +
-                    "[SCALE] Meh, Cool! , Unsure \n" +
-                    "\n" +
-                    "[INSTRUCTION] 3 is good 1 is bad \n" +
-                    "[QUESTION] Rate the following from 1 to 3 \n" +
-                    "[RATE] \n" +
-                    "Apples \n" +
-                    "Oranges \n" +
-                    "[END] \n" +
-                    "\n" +
-                    "[QUESTION] Ok, you in right ? \n" +
-                    "[PICKANY] \n" +
-                    "Yes \n" +
-                    "YUSSSS \n" +
-                    "OMG \n" +
-                    "[END] \n" +
-                    "\n" +
-                    "[QUESTION] Parting thoughts ? \n" +
-                    "[OPEN] \n" +
-                    "\n" +
-                    "[INSTRUCTION] Thank you!\n";
-                var g_shorthand_script = "" +
-                    "# 1234 \n" +
-                    "## This is my title \n" +
-                    "### This is a cool survey, you should fill it out. \n" +
-                    "\n" +
-                    "Q: How about them apples \n" +
-                    "/ONE \n" +
-                    "Red \n" +
-                    "Green \n" +
-                    "Gala \n" +
-                    "; \n" +
-                    "\n" +
-                    "Q: How cool was that ? \n" +
-                    "/SCALE Meh, Cool! , Unsure \n" +
-                    "\n" +
-                    "// 3 is good 1 is bad \n" +
-                    "Q: Rate the following from 1 to 3 \n" +
-                    "/RATE \n" +
-                    "Apples \n" +
-                    "Oranges \n" +
-                    "; \n" +
-                    "\n" +
-                    "Q: Ok, you in right ? \n" +
-                    "/ANY \n" +
-                    "Yes \n" +
-                    "YUSSSS \n" +
-                    "OMG \n" +
-                    "; \n" +
-                    "\n" +
-                    "Q: Parting thoughts ? \n" +
-                    "/OPEN \n" +
-                    "\n" +
-                    "// Thank you!\n" +
-                    "";
-                var g_shorthand_script_fr = "" +
-                    "# 1234\n" +
-                    "## c'est mon titre\n" +
-                    "### Ceci est une bonne enquête, vous devriez le remplir.\n" +
-                    "\n" +
-                    "Q: Et les pommes\n" +
-                    "/UN\n" +
-                    "rouge\n" +
-                    "vert\n" +
-                    "Gala\n" +
-                    "; \n" +
-                    "\n" +
-                    "Q: Comment était-ce cool?\n" +
-                    "/ÉCHELLE Meh, Cool! , Incertain\n" +
-                    "\n" +
-                    "// 3 est bon 1 est mauvais\n" +
-                    "Q: Évaluez ce qui suit de 1 à 3\n" +
-                    "/TAUX\n" +
-                    "Pommes\n" +
-                    "Des oranges\n" +
-                    "; \n" +
-                    "\n" +
-                    "Q: Ok, vous avez raison?\n" +
-                    "/TOUT\n" +
-                    "Oui\n" +
-                    "YUSSSS\n" +
-                    "OMG\n" +
-                    "; \n" +
-                    "\n" +
-                    "Q: pensées de séparation?\n" +
-                    "/OUVRIR\n" +
-                    "\n" +
-                    "// Merci!\n" +
-                    "";
-                // Je vous remercie!
+                // wraps the generated elements in a form and a paginator
                 var form_wrap = function (src) {
                     var pages = "";
                     for (var i = 1; i <= g_control_flags["pageid"]; i++) {
@@ -1155,6 +1035,11 @@
                         '</form>' +
                         '';
                 };
+                // return a json or html snip with %replaceme codons/tokens sprinkled in
+                // the general idea here is to use these like a templating lang. Just waaaay simpler
+                // For huge surveys we might get into hot water performance wise
+                // theres about 160 .replace regexes - but for our problem domain we're aiming
+                // for small short and light surveys.
                 var get_template_snip = function (snip, format = "html") {
                     if (snip == "header") {
                         if (format == "json") {
@@ -1324,6 +1209,7 @@
                     } else if (snip == "generics") {
                         // todo only one generics
                         // TODO JSON
+                        // Generics was the prototype of tombstone. Repurpose for other "generic fields"
                         if (format == "json") {
                             return '"%field"';
                         }
@@ -1387,9 +1273,11 @@
                 //
                 // Question Libary
                 //
-
+                // This is a copy/paste storage for questions you have in the editor.
+                // Once you start building surveys this makes it easier to make new ones
+                // Why have to do stuff over and over right?
                 var update_question_library = function () {
-                    var qlib = $("#qlib").val();
+                    var qlib = safe($("#qlib").val());
                     if (qlib == "") {
                         qlib = "Q: Example?\n/open\n\nQ: Example 2?\n/open\n";
                         $("#qlib").val(qlib);
@@ -1421,41 +1309,18 @@
                 //
                 // Basic Pre-Survista Charting
                 //
+                // The idea here is so that you can use localStorage to save the responses on
+                // the device you're using (lets say you wanna decide what pizza to order for a meeting)
+                // This will let you build the survey, pass the device around, and then see a chart of the 
+                // results right away.
 
                 // Random HSL Color value generation
-                /*
-                point = 0
-                if odd {
-                    point opposite (360)
-                } 
-                if even {
-                    last + curr /2
-                }
-                */
                 var randomCoord = 0;
                 var lastCoord = 0;
                 var currCoord = Math.random() * 360;
                 var slicecount = 0;
-                var color_space = [
-                    `hsla(13,85%,58%,1)`,
-                    `hsla(315,79%,64%,1)`,
-                    `hsla(103,40%,56%,1)`,
-                    `hsla(178,49%,78%,1)`,
-                    `hsla(230,31%,66%,1)`//,
-                    /*                    `hsla(6,72%,45%,1)`,
-                                        `hsla(299,71%,40%,1)`,
-                                        `hsla(117,41%,42%,1)`,
-                                        `hsla(195,55%,44%,1)`,
-                                        `hsla(233,32%,53%,1)`,
-                                        `hsla(1,79%,32%,1)`,
-                                        `hsla(280,94%,23%,1)`,
-                                        `hsla(117,59%,25%,1)`,
-                                        `hsla(154,39%,62%,1)`,
-                                        `hsla(224,33%,76%,1)`*/
-                ];
                 const randomHsl = () => {
                     slicecount = slicecount + 1;
-                    //return color_space[(slicecount % 15)];
                     if (slicecount % 2 == 0) {
                         currCoord = (currCoord + 90) % 360;
                     } else {
@@ -1463,15 +1328,14 @@
                     }
                     lastCoord = currCoord;
                     currCoord = currCoord + 61; // prime between 45 and 90
-                    //return color_space[slicecount % 5];
+
                     return `hsla(${currCoord}, 70%, 70%, 1)`;
                 }
                 // svg basic pie chart
                 var hackernoon_pie = function (elid, slices) {
-                    //currCoord = Math.random() * 360;
                     // just read this. trust me: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
                     var svgEls = [document.getElementById(elid)];
-                    //slices = null;
+
                     if (slices == null) {
                         //slices = [];
                         for (var i = 0; i < 100; i++) {
@@ -1539,6 +1403,8 @@
                 //
                 // LocalStorage for client side info store
                 //
+
+                // do we even has this?
                 var ls_storageAvailable = function (type) {
                     var storage;
                     try {
@@ -1563,7 +1429,7 @@
                     }
                 }
 
-                var warn_user_no_storage = false;
+                var warn_user_no_storage = false; // this will fire once and only once. No need to annoy.
                 var warn_user_alert = function () {
                     // Too bad, no localStorage for us
                     if (warn_user_no_storage == false) {
@@ -1571,8 +1437,10 @@
                         warn_user_no_storage = true;
                     }
                 }
+
                 // TODO: Pull out template code into snips
                 // TODO: Optimize render, no need to show ls on every keystroke
+                // display the report of the stored information. Survey, Responses, all of it.
                 var ls_show_local_storage = function () {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1782,6 +1650,8 @@
                         warn_user_alert();
                     }
                 }
+
+                // pull the survey from localstorage and render it
                 var ls_load_survey = function (id, trim) {
                     if (ls_storageAvailable('localStorage')) {
                         var ls_index = parseInt(id.replace(trim, ""), 10);
@@ -1796,6 +1666,8 @@
                         warn_user_alert();
                     }
                 }
+
+                // clear out the local storage, clean and frush.
                 var ls_clear_saved_entries = function () {
                     if (ls_storageAvailable('localStorage')) {
                         localStorage.clear();
@@ -1807,12 +1679,16 @@
                     }
                 }
                 /*
+                This is a peek at what we're saving
+                Survista has JSON format to follow, Evalhalla has evalese.
+                
                 ev_ls = {
                     "working_survey": "", // json source curr survey
                     "saved_survey_signature": [{"survista":{}, "evalhalla": ""}], // array of json src
                     "saved_filled_survey_responses": [{},{}], //array of answerjson + survey sig
                 }
                 */
+                // initialize the local store
                 var ls_init_local_storage = function () {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = {
@@ -1825,6 +1701,7 @@
                         warn_user_alert();
                     }
                 }
+                // get the string from local store and make it an object for use
                 var ls_get_lsobject = function () {
                     var ev_ls = localStorage.getItem('ev_ls');
                     if (ev_ls == null) {
@@ -1834,11 +1711,12 @@
                     ev_ls = JSON.parse(ev_ls);
                     return ev_ls;
                 }
+                // save the question library text into the library
                 var ls_save_qlib = function () {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
                         //console.log(ev_ls);
-                        ev_ls["qlib"] = $("#qlib").val();
+                        ev_ls["qlib"] = safe($("#qlib").val());
                         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
                         ls_show_local_storage();
                         update_question_library();
@@ -1847,6 +1725,7 @@
                         warn_user_alert();
                     }
                 }
+                // load the question library into the editor
                 var ls_load_qlib = function () {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1857,9 +1736,10 @@
                         warn_user_alert();
                     }
                 }
-                // load up
+                // EXEC INIT -- fire the load for the question library
                 ls_load_qlib();
 
+                // save the current survey in the editor to the ls
                 var ls_save_survey_signature = function (signature, src) {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1872,6 +1752,8 @@
                         warn_user_alert();
                     }
                 }
+                // update the local store of the current working survey
+                // this allows cross refresh content to remain
                 var ls_update_working_survey = function (signature) {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1885,8 +1767,11 @@
                     }
                 }
 
+                // registhor api integrations. Testing route
                 const rg_api_route = api_post_surv_resp_route + api_key;
+                // survista:eval api integrations
                 const sv_api_route = sv_api_post_surv_resp_route + sv_api_key;
+                // post the currently rendered survey response to the api
                 var api_post_to_route = function (route, data_in) {
                     $.ajax({
                         url: route,
@@ -1898,6 +1783,7 @@
                         }
                     });
                 }
+                // upload the survey reponse to our integrations
                 var api_upload_survey_result = function (data_in) {
                     //console.log(data_in);
                     let api_route = "";
@@ -1906,7 +1792,8 @@
                     api_route = rg_api_route;
                     api_post_to_route(api_route, data_in);
                 }
-                //
+                // save the survey response into the local store. allows for offline storage for upload later
+                // TODO: upload later function
                 var ls_save_survey_response = function (response) {
                     if (ls_storageAvailable('localStorage')) {
                         var ev_ls = ls_get_lsobject();
@@ -1921,15 +1808,13 @@
                         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
                         ls_show_local_storage();
                         ui_resize_textareas();
-                        //alert("Thank you!");
-                        // submit to api
 
-                        // TODO: turn on
-                        // TODO: add survista api upload
+                        // submit to api
+                        // TODO: turn back on
                         api_upload_survey_result(response);
 
                         // clear responses
-                        // TODO: reinit tombstone generics
+                        // TODO: reinit tombstone generics, refactor needed
                         g_state["generics"]["generic_fetched"] = false;
                         api_get_generics();
                         g_state["el"]["c_editor"].trigger("change");
@@ -1948,9 +1833,13 @@
                 //
                 // State Controls
                 //
+                // this is a the app state object. it hold a bunch of info to help optimize things
+                // the jquery selectors are stored here so we can refactor easier and hopefully 
+                // speed things up.
 
                 // app state details, ui, handle to jq elems
                 const g_state = {
+                    // tutorial script vars
                     "tut": {
                         "type_it": g_tutorial_script.split(""),
                         "type_it_short": g_shorthand_script.split(""),
@@ -1958,13 +1847,16 @@
                         "char_at": 0,
                         "typer": null,
                     },
+                    // question library
                     "qlib": [],
+                    // tombstone information
                     "tombstone": {
                         "offering_id": "",
                         "department": "",
                         "classification": "",
                         "city": ""
                     },
+                    // generics (refactor)
                     "generics": {
                         "generic_fetched": false,
                         "ev_inline_dept": "",
@@ -1972,6 +1864,7 @@
                         "ev_inline_region": "",
                         "ev_inline_office": ""
                     },
+                    // ui window state (for hide show)
                     "ui": {
                         "lang": "en",
                         "hs_editor_window": false,
@@ -1980,6 +1873,7 @@
                         "hs_ls_window": false,
                         "hs_qlib_window": false
                     },
+                    // elements, jquery selectors
                     "el": {
                         // lang
                         "lang": $(".lang"),
@@ -2009,7 +1903,6 @@
                         "edt_qone": $(".ev-add-qone"),
                         "edt_qrank": $(".ev-add-qrank"),
                         "edt_qscale": $(".ev-add-qscale"),
-
                         // content
                         "c_editor": $("#editor_target"),
                         "c_json": $("#json_target"),
@@ -2023,7 +1916,9 @@
                         "ui_qlib": $("#qlib_window")
                     }
                 };
-                // parser state, headers, questions, json
+
+                // Evalese parser state, headers, questions, json
+                // used for generation of html form
                 var g_control_flags = {
                     "json": "{}",
                     "pageid": 1,
@@ -2049,6 +1944,9 @@
                         "required": false
                     }
                 }
+                // reset the control flags after each successful chunk processing
+                // hard means a new survey. This is usually triggered when we get 
+                // a new survey header
                 var reset_control_flags = function (hard = false) {
                     g_control_flags["question"] = {
                         "text": false,
@@ -2078,9 +1976,10 @@
                 //
 
                 // get from tombstone: stub
-                // TODO: Fix with correct code (right now just obj/deobj for test)
+                // TODO: Refactor Fix with correct code (right now just obj/deobj for test)
                 g_state["generics"]["generic_fetched"] = false;
 
+                // REGISTHOR INTEGRATION autocomplete load classifications from registhor
                 var autoc_load_classifications = function (api_load = false) {
                     if (api_load == true) {
                         $.ajax({
@@ -2114,6 +2013,8 @@
                 }
                 autoc_load_classifications();
 
+                // REGISTHOR INTEGRATION autocomplete load departments from registhor
+                // local js options are the default to reduce api call load
                 var autoc_load_departments = function (api_load = false) {
                     if (api_load == true) {
                         $.ajax({
@@ -2165,6 +2066,8 @@
                 }
                 autoc_load_departments();
 
+                // REGISTHOR INTEGRATION autocomplete load cities from registhor
+                // local js options are the default to reduce api call load
                 var autoc_load_cities = function (api_load = false) {
                     if (api_load == true) {
                         $.ajax({
@@ -2215,6 +2118,8 @@
                 }
                 autoc_load_cities();
 
+                // refactor
+                // pull default values into the generics for demonstration
                 var api_get_generics = function () {
                     if (g_state["generics"]["generic_fetched"] == false) {
                         //M.toast({ html: "Found this gc data, prefilling...", classes: 'rounded' });
@@ -2229,6 +2134,7 @@
                 // TODO: init tombstone generics
                 //api_get_generics();
 
+                // shuffles an array. So you can randomize things.
                 const shuffle_array = function (array) {
                     for (let i = array.length - 1; i > 0; i--) {
                         const j = Math.floor(Math.random() * (i + 1));
@@ -2236,13 +2142,15 @@
                     }
                 };
 
+                // returns the query string as an object. 
+                // NOTE: Need to protect against injection/XSS
                 const get_params_as_object = function (query) {
                     query = query.substring(query.indexOf('?') + 1);
                     var re = /([^&=]+)=?([^&]*)/g;
                     var decodeRE = /\+/g;
 
                     var decode = function (str) {
-                        return decodeURIComponent(str.replace(decodeRE, " "));
+                        return safe(decodeURIComponent(str.replace(decodeRE, " ")));
                     };
 
                     var params = {}, e;
@@ -2281,9 +2189,13 @@
                     return params;
                 };
 
+                // auto reset the form if enough time has passed
+                // NOTE: Accessibility concerns here
                 const activate_restart_timer = function () {
                     //TODO: 20 sec delay restart
                 };
+
+                // submit the form result
                 const evalhalla_submit = function () {
                     // make some form data
                     var formElement = document.getElementById("evalhalla_form");
@@ -2305,11 +2217,12 @@
                     var json_o = get_params_as_object(query_string);
 
                     // get tombstone details
-                    json_o["tombstone_department"] = $("#autocomplete-input-department").val();
-                    json_o["tombstone_city"] = $("#autocomplete-input-city").val();
-                    json_o["tombstone_classification"] = $("#autocomplete-input-classification").val();
-                    json_o["tombstone_offering_id"] = g_state["tombstone"]["offering_id"];
-                    json_o["tombstone_language"] = g_state["ui"]["lang"];
+                    // TODO: Sanitize inputs
+                    json_o["tombstone_department"] = safe($("#autocomplete-input-department").val());
+                    json_o["tombstone_city"] = safe($("#autocomplete-input-city").val());
+                    json_o["tombstone_classification"] = safe($("#autocomplete-input-classification").val());
+                    json_o["tombstone_offering_id"] = safe(g_state["tombstone"]["offering_id"]);
+                    json_o["tombstone_language"] = safe(g_state["ui"]["lang"]);
 
                     var json_o_string = (JSON.stringify(json_o, null, 4));
                     // save response to local storage
@@ -2323,6 +2236,7 @@
                     //alert("Check the console for details");
                 };
 
+                // convert the en/fr tags into HTML
                 const activate_lang = function (pack) {
                     pack = pack
                         .replace(/\/en/g, "<span class='en'>")
@@ -2335,6 +2249,8 @@
                         ;
                     return pack;
                 };
+
+                // helper function to take the multiline input and pack it into one object
                 const pack_text = function (src_a, i, pack, join = " ") {
                     var nextcmd = "null";
                     var pack_json = "";
@@ -2364,6 +2280,8 @@
                     return { "pack": pack, "pack_json": pack_json, "i": i };
                 }
 
+                // materialize css resize the textareas so it shows content instead
+                // of remaining the previous size
                 var ui_resize_textareas = function () {
                     M.textareaAutoResize(g_state["el"]["c_editor"]);
                     M.textareaAutoResize(g_state["el"]["c_json"]);
@@ -2373,6 +2291,7 @@
                 // Command Handlers
                 //
 
+                // parser - detect if we have encountered a command
                 var detect_command = function (src) {
                     var first_word = src.split(" ")[0];
                     if (first_word == "" || typeof first_word === "undefined") {
@@ -2384,6 +2303,7 @@
                     }
                     return "null";
                 }
+                // parser - handle the header command
                 var handle_cmd_header = function (cmd, src, json = "") {
                     reset_control_flags();
 
@@ -2404,6 +2324,8 @@
 
                     return snip;
                 }
+
+                // parser - handle the pagebreak command
                 var handle_cmd_pagebreak = function (cmd, src, json = "") {
                     // handle html
                     var snip = get_template_snip("page break");
@@ -2416,6 +2338,8 @@
                         .replace("%questions", jsonsnip + ",%questions")
                     return snip;
                 }
+
+                // parser - handle the instruction command
                 var handle_cmd_instruction = function (cmd, src, json = "") {
                     // handle html
                     var snip = get_template_snip("instruction");
@@ -2431,6 +2355,8 @@
                         ;
                     return snip;
                 }
+
+                // parser - handle the question command
                 var handle_cmd_question = function (cmd, src, json = "") {
                     var snip = get_template_snip("question");
                     if (cmd == "question" || cmd == "req question") {
@@ -2613,6 +2539,7 @@
                 // Main proc loop
                 //
 
+                // start parsing the input
                 var raise_src_to_evalhalla = function (src) {
                     var src_a = src.split("\n");
                     var i = 0;
@@ -2764,6 +2691,7 @@
 
                 $(".update_ls").on("click", function (e) { e.preventDefault(); ls_show_local_storage(); return false; });
 
+                // TODO: refactor. tombstone generic info
                 var refresh_generics = function () {
                     //alert("Refreshing Generic");
 
@@ -2774,15 +2702,15 @@
                     $(".ev_inline_region").val(g_state["generics"]["ev_inline_region"]);
                     $(".ev_inline_office").val(g_state["generics"]["ev_inline_office"]);
 
-                    $(".ev_inline_dept").on("change", function () { g_state["generics"]["ev_inline_dept"] = $(this).val(); });
-                    $(".ev_inline_role").on("change", function () { g_state["generics"]["ev_inline_role"] = $(this).val(); });
-                    $(".ev_inline_region").on("change", function () { g_state["generics"]["ev_inline_region"] = $(this).val(); });
-                    $(".ev_inline_office").on("change", function () { g_state["generics"]["ev_inline_office"] = $(this).val(); });
+                    $(".ev_inline_dept").on("change", function () { g_state["generics"]["ev_inline_dept"] = safe($(this).val()); });
+                    $(".ev_inline_role").on("change", function () { g_state["generics"]["ev_inline_role"] = safe($(this).val()); });
+                    $(".ev_inline_region").on("change", function () { g_state["generics"]["ev_inline_region"] = safe($(this).val()); });
+                    $(".ev_inline_office").on("change", function () { g_state["generics"]["ev_inline_office"] = safe($(this).val()); });
 
                     M.updateTextFields();
                 };
 
-                // lang
+                // lang refresh to show the new language spans
                 var refresh_lang = function () {
                     if (g_state["ui"]["lang"] == "en") {
                         $("span.en").show();
@@ -2793,6 +2721,7 @@
                     }
                     ui_resize_textareas();
                 };
+                // language buttons
                 g_state["el"]["lang"].on("click", function () {
                     if (g_state["ui"]["lang"] == "en") {
                         g_state["ui"]["lang"] = "fr";
@@ -2822,10 +2751,12 @@
                     $("#step_lang").hide();
                     $("#step_offering").show();
                 });
+                // step advance - tomstone information set
                 $(".tombstone-set").on("click", function () {
                     $("#step_tombstone").hide();
                     g_state["el"]["ui_render"].show();
                 });
+                // step advance - ready for next partipant step
                 $(".ev-ready-for-next").on("click", function () {
                     $("#step_thank_you_cta").hide();
                     $("#step_lang").show();
@@ -2834,7 +2765,7 @@
                     $("#autocomplete-input-classification").val("");
                 });
 
-
+                // uncomment to generate on load
                 //g_state["el"]["lang"].trigger("change");
 
                 // load intro content
@@ -2875,7 +2806,7 @@
                     }
                     // end render timer
                     // get source
-                    var src = g_state["el"]["c_editor"].val().replace(/\t/g, "");
+                    var src = safe(g_state["el"]["c_editor"].val().replace(/\t/g, ""));
                     // prep
                     reset_control_flags();
                     // E V A L H A L L A
@@ -3003,7 +2934,7 @@
                     ls_save_survey_signature(g_control_flags["json"]
                         .replace(/\,\%questions/g, "")
                         .replace(/\%questions/g, "")
-                        .replace(/\%options/g, ""), g_state["el"]["c_editor"].val());
+                        .replace(/\%options/g, ""), safe(g_state["el"]["c_editor"].val()));
                 });
 
                 //
@@ -3124,7 +3055,7 @@
                 }
                 var editor_add_template = function (cmd) {
                     g_state["el"]["c_editor"].val(
-                        g_state["el"]["c_editor"].val() + get_editor_tmpl(cmd)
+                        safe(g_state["el"]["c_editor"].val()) + get_editor_tmpl(cmd)
                     );
                     g_state["el"]["c_editor"].trigger("keyup");
                 }
