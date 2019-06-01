@@ -288,6 +288,27 @@
             font-weight: 400;
             padding-left: 20px;
         }
+
+        em.material-icons {
+            display: block;
+            font-size: 24px;
+            font-feature-settings: 'liga';
+        }
+
+        .lhi-menu {
+            height: 64px;
+            line-height: 64px;
+        }
+
+        .fab-align {
+            margin-left: 0px;
+            line-height: 56px;
+            height: 56px;
+            width: inherit;
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+        }
     </style>
 </head>
 
@@ -297,7 +318,7 @@
             <div class="nav-wrapper container">
                 <a id="logo-container" class="brand-logo">Evalhalla</a>
                 <a data-target="mobile-demo" class="adm-function sidenav-trigger" aria-label="Open menu">
-                    <i class="material-icons">menu</i></a>
+                    <em class="material-icons" aria-hidden="true">menu</em></a>
                 <ul class="right">
                     <li>
                         <div>
@@ -326,18 +347,18 @@
                             </span>
                             <span class="fr">
                                 Insérer
-                            </span> <i class="material-icons right" aria-hidden="true">arrow_drop_down</i>
+                            </span> <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
                     <li class="hide-on-small-only">
                         <a class="dropdown-trigger" data-target="dropdown2">
-                            <span class="en">View</span><span class="fr">Vue</span> <i class="material-icons right"
-                                aria-hidden="true">arrow_drop_down</i>
+                            <span class="en">View</span><span class="fr">Vue</span> <em
+                                class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
                     <li class="hide-on-small-only">
                         <a class="dropdown-trigger" data-target="dropdown1">
-                            Menu <i class="material-icons right" aria-hidden="true">arrow_drop_down</i>
+                            Menu <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
                 </ul>
@@ -347,7 +368,7 @@
     <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
         <li>
             <a href="?sur=example_nanos_paged" class="demo_ev_loop" alt="reload demo survey">
-                <i class="material-icons" aria-hidden="true">lightbulb</i>
+                <em class="material-icons" aria-hidden="true">lightbulb</em>
                 <span class="en">
                     Demo
                 </span>
@@ -358,7 +379,7 @@
         </li>
         <li>
             <a class="show_me_how">
-                <i class="material-icons" aria-hidden="true">help</i>
+                <em class="material-icons" aria-hidden="true">help</em>
                 <span class="en">
                     Tutorial
                 </span>
@@ -369,7 +390,7 @@
         </li>
         <li>
             <a class="adm_save_working_survey">
-                <i class="material-icons" aria-hidden="true">save</i>
+                <em class="material-icons" aria-hidden="true">save</em>
                 <span class="en">
                     Save
                 </span>
@@ -380,22 +401,22 @@
         </li>
         <li>
             <a class="survista_send">
-                <i class="material-icons" aria-hidden="true">cloud_upload</i>Survista
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>Survista
             </a>
         </li>
         <li><a class="audit_json_render">
-                <i class="material-icons" aria-hidden="true">gavel</i>
+                <em class="material-icons" aria-hidden="true">gavel</em>
                 <span class="en">Audit</span><span class="fr">Vérification</span>
             </a>
         </li>
         <li><a class="ev-add-erase">
-                <i class="material-icons" aria-hidden="true">clear</i>
+                <em class="material-icons" aria-hidden="true">clear</em>
                 <span class="en">Clear</span>
                 <span class="fr">Effacer</span>
             </a></li>
         <li>
             <a class="adm_clear_ls">
-                <i class="material-icons" aria-hidden="true">flip_to_back</i>
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
                 <span class="en">Reset</span><span class="fr">Réinitialiser</span>
             </a>
         </li>
@@ -403,7 +424,7 @@
     <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
         <li>
             <a href="https://app.klipfolio.com/published/692bec18aa4e866b9d7fbb5b5c355de3/satisfaction-survey">
-                <i class="material-icons" aria-hidden="true">cloud_upload</i>
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>
                 <span class="en">
                     Dashboard
                 </span>
@@ -414,7 +435,7 @@
         </li>
         <li>
             <a class="hs_render_window">
-                <i class="material-icons" aria-hidden="true">assignment</i>
+                <em class="material-icons" aria-hidden="true">assignment</em>
                 <span class="en">
                     Survey
                 </span>
@@ -425,7 +446,7 @@
         </li>
         <li>
             <a class="hs_json_window">
-                <i class="material-icons" aria-hidden="true">code</i>
+                <em class="material-icons" aria-hidden="true">code</em>
                 <span class="en">
                     JSON
                 </span>
@@ -436,7 +457,7 @@
         </li>
         <li>
             <a class="hs_editor_window">
-                <i class="material-icons" aria-hidden="true">create</i>
+                <em class="material-icons" aria-hidden="true">create</em>
                 <span class="en">
                     Editor
                 </span>
@@ -446,13 +467,13 @@
             </a>
         </li>
         <li><a class="hs_ls_window">
-                <i class="material-icons" aria-hidden="true">how_to_vote</i>
+                <em class="material-icons" aria-hidden="true">how_to_vote</em>
                 <span class="en">Storage</span><span class="fr">Storage</span>
             </a>
         </li>
         <li>
             <a class="hs_qlib_window">
-                <i class="material-icons">build</i>
+                <em class="material-icons">build</em>
                 <span class="en">
                     Library
                 </span>
@@ -464,37 +485,37 @@
     </ul>
     <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
         <li><a class="ev-add-header">
-                <i class="material-icons" aria-hidden="true">title</i>
+                <em class="material-icons" aria-hidden="true">title</em>
                 <span class="en">Header</span>
                 <span class="fr">En-tête</span>
             </a></li>
         <li><a class="ev-add-instr">
-                <i class="material-icons" aria-hidden="true">help</i>
+                <em class="material-icons" aria-hidden="true">help</em>
                 <span class="en">Instruction</span>
                 <span class="fr">Instruction</span>
             </a></li>
         <li><a class="ev-add-qfree">
-                <i class="material-icons" aria-hidden="true">input</i>
+                <em class="material-icons" aria-hidden="true">input</em>
                 <span class="en">Open</span>
                 <span class="fr">Libre</span>
             </a></li>
         <li><a class="ev-add-qone">
-                <i class="material-icons" aria-hidden="true">done</i>
+                <em class="material-icons" aria-hidden="true">done</em>
                 <span class="en">One</span>
                 <span class="fr">Une</span>
             </a></li>
         <li><a class="ev-add-qany">
-                <i class="material-icons" aria-hidden="true">done_all</i>
+                <em class="material-icons" aria-hidden="true">done_all</em>
                 <span class="en">Any</span>
                 <span class="fr">Choisir</span>
             </a></li>
         <li><a class="ev-add-qscale">
-                <i class="material-icons" aria-hidden="true">call_made</i>
+                <em class="material-icons" aria-hidden="true">call_made</em>
                 <span class="en">Scale</span>
                 <span class="fr">Echelle</span>
             </a></li>
         <li><a class="ev-add-qrank">
-                <i class="material-icons" aria-hidden="true">import_export</i>
+                <em class="material-icons" aria-hidden="true">import_export</em>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
             </a></li>
@@ -506,7 +527,7 @@
         </li>
         <li>
             <a href="?sur=example_nanos_paged&m=on" class="demo_ev_loop" alt="mobile reload demo survey">
-                <i class="material-icons" aria-hidden="true">lightbulb</i>
+                <em class="material-icons" aria-hidden="true">lightbulb</em>
                 <span class="en">
                     Demo
                 </span>
@@ -517,7 +538,7 @@
         </li>
         <li>
             <a class="show_me_how">
-                <i class="material-icons" aria-hidden="true">help</i>
+                <em class="material-icons" aria-hidden="true">help</em>
                 <span class="en">
                     Tutorial
                 </span>
@@ -528,7 +549,7 @@
         </li>
         <li>
             <a class="adm_save_working_survey">
-                <i class="material-icons" aria-hidden="true">save</i>
+                <em class="material-icons" aria-hidden="true">save</em>
                 <span class="en">
                     Save
                 </span>
@@ -539,23 +560,23 @@
         </li>
         <li>
             <a class="survista_send">
-                <i class="material-icons" aria-hidden="true">cloud_upload</i> Survista
+                <em class="material-icons" aria-hidden="true">cloud_upload</em> Survista
             </a>
         </li>
         <li>
             <a class="audit_json_render">
-                <i class="material-icons" aria-hidden="true">gavel</i>
+                <em class="material-icons" aria-hidden="true">gavel</em>
                 <span class="en">Audit</span><span class="fr">Vérification</span>
             </a>
         </li>
         <li><a class="ev-add-erase">
-                <i class="material-icons" aria-hidden="true">clear</i>
+                <em class="material-icons" aria-hidden="true">clear</em>
                 <span class="en">Clear</span>
                 <span class="fr">Effacer</span>
             </a></li>
         <li>
             <a class="adm_clear_ls">
-                <i class="material-icons" aria-hidden="true">flip_to_back</i>
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
                 <span class="en">Reset</span><span class="fr">Réinitialiser</span>
             </a>
         </li>
@@ -565,7 +586,7 @@
         </li>
         <li>
             <a class="hs_render_window">
-                <i class="material-icons" aria-hidden="true">assignment</i>
+                <em class="material-icons" aria-hidden="true">assignment</em>
                 <span class="en">
                     Survey
                 </span>
@@ -576,7 +597,7 @@
         </li>
         <li>
             <a class="hs_json_window">
-                <i class="material-icons" aria-hidden="true">code</i>
+                <em class="material-icons" aria-hidden="true">code</em>
                 <span class="en">
                     JSON
                 </span>
@@ -587,7 +608,7 @@
         </li>
         <li>
             <a class="hs_editor_window">
-                <i class="material-icons" aria-hidden="true">create</i>
+                <em class="material-icons" aria-hidden="true">create</em>
                 <span class="en">
                     Editor
                 </span>
@@ -597,13 +618,13 @@
             </a>
         </li>
         <li><a class="hs_ls_window">
-                <i class="material-icons" aria-hidden="true">how_to_vote</i>
+                <em class="material-icons" aria-hidden="true">how_to_vote</em>
                 <span class="en">Storage</span><span class="fr">Storage</span>
             </a>
         </li>
         <li>
             <a class="hs_qlib_window">
-                <i class="material-icons" aria-hidden="true">build</i>
+                <em class="material-icons" aria-hidden="true">build</em>
                 <span class="en">
                     Library
                 </span>
@@ -617,37 +638,37 @@
             <hr>
         </li>
         <li><a class="ev-add-header">
-                <i class="material-icons" aria-hidden="true">title</i>
+                <em class="material-icons" aria-hidden="true">title</em>
                 <span class="en">Header</span>
                 <span class="fr">En-tête</span>
             </a></li>
         <li><a class="ev-add-instr">
-                <i class="material-icons" aria-hidden="true">help</i>
+                <em class="material-icons" aria-hidden="true">help</em>
                 <span class="en">Instruction</span>
                 <span class="fr">Instruction</span>
             </a></li>
         <li><a class="ev-add-qfree">
-                <i class="material-icons" aria-hidden="true">input</i>
+                <em class="material-icons" aria-hidden="true">input</em>
                 <span class="en">Open</span>
                 <span class="fr">Libre</span>
             </a></li>
         <li><a class="ev-add-qone">
-                <i class="material-icons" aria-hidden="true">done</i>
+                <em class="material-icons" aria-hidden="true">done</em>
                 <span class="en">One</span>
                 <span class="fr">Une</span>
             </a></li>
         <li><a class="ev-add-qany">
-                <i class="material-icons" aria-hidden="true">done_all</i>
+                <em class="material-icons" aria-hidden="true">done_all</em>
                 <span class="en">Any</span>
                 <span class="fr">Choisir</span>
             </a></li>
         <li><a class="ev-add-qscale">
-                <i class="material-icons" aria-hidden="true">call_made</i>
+                <em class="material-icons" aria-hidden="true">call_made</em>
                 <span class="en">Scale</span>
                 <span class="fr">Echelle</span>
             </a></li>
         <li><a class="ev-add-qrank">
-                <i class="material-icons" aria-hidden="true">import_export</i>
+                <em class="material-icons" aria-hidden="true">import_export</em>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
             </a></li>
@@ -789,8 +810,8 @@
 
                     <div class="card-panel">
                         <div class="row center">
-                            <i class="material-icons" aria-hidden="true"
-                                style="color: #7cb342;font-size:5em;">check_circle</i>
+                            <em class="material-icons" aria-hidden="true"
+                                style="color: #7cb342;font-size:5em;">check_circle</em>
                             <h1><span class="en">You're Awesome!</span><span class="fr">Vous êtes génial!</span></h1>
                             <p>
                                 <span class="en">Thank you for taking the time</span>
@@ -846,9 +867,8 @@
                                     </span>
                                 </h2>
 
-                                <a class="update_ls btn blue-canada-ca">
-                                    <i class="material-icons" aria-hidden="true">refresh</i>
-                                    Update
+                                <a class="update_ls btn purp-canada-ca">
+                                    <span class="en">Update</span><span class="fr">mettre à jour</span>
                                 </a>
 
                                 <div id="ls_target"></div>
@@ -927,7 +947,7 @@
     </footer>
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large blue-canada-ca" href="#editor" aria-label="Skip to top">
-            <i class="large material-icons">arrow_upward</i>
+            <em class="large material-icons fab-align">arrow_upward</em>
         </a>
     </div>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -1076,15 +1096,15 @@
                         src +
                         '</div>' +
                         ` <ul class="pagination center-align">
-                            <li class="waves-effect ev-page-sel-left"><a><i class="material-icons">chevron_left</i></a></li>`+
+                            <li class="waves-effect ev-page-sel-left"><a><em class="material-icons">chevron_left</em></a></li>`+
                         pages +
-                        `<li class="waves-effect ev-page-sel-right"><a><i class="material-icons">chevron_right</i></a></li>
+                        `<li class="waves-effect ev-page-sel-right"><a><em class="material-icons">chevron_right</em></a></li>
                         </ul>
                         `+
                         '<div class="row">' +
                         '<div class="col s12 center">' +
                         '<a id="evalhalla_submit" class="waves-effect waves-light purp-canada-ca btn-large">' +
-                        //'<i class="material-icons right">cloud</i>'+    
+                        //'<em class="material-icons right">cloud</em>'+    
                         '<span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>' +
                         '</div>' +
                         '</div>' +
@@ -1109,7 +1129,7 @@
                         return '' +
                             '<div class="row">' +
                             '<div class="col s12 center">' +
-                            //'<h3><i class="mdi-content-send brown-text"></i></h3>' +
+                            //'<h3><em class="mdi-content-send brown-text"></em></h3>' +
                             '<h1>%title<br/>(%survey)</h1>' +
                             '<p class="flow-text left-align light">%intro</p>' +
                             '</div>' +
@@ -1640,7 +1660,7 @@
                         display_str = display_str.replace(/\%tbody/g, tbody);
 
 
-                        var regen_color_btn = '<a class="regen_color btn blue-canada-ca lighten-2"><i class="material-icons">refresh</i> Color</a>';
+                        var regen_color_btn = '<a class="regen_color btn purp-canada-ca lighten-2"><span class="en">Colour</span><span class="fr">Couleur</span></a>';
                         display_str += get_template_snip("ls_header")
                             .replace(/\%en/g, "Tabulated Results (Basic)")
                             .replace(/\%fr/g, "Resultats Tabulé (Simple)");
