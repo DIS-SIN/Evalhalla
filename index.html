@@ -241,6 +241,12 @@
             /*min-height: 100px;*/
             width: 100%;
         }
+
+        fieldset {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -612,7 +618,8 @@
                 <div class="col hide-on-small-only m3"></div>
                 <div class="col s12 m6 center">
                     <div>
-                        <img src="static/images/csps_flag.webp" class="csps-flag-center" />
+                        <img src="static/images/csps_flag.webp" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
                     </div>
                     <div class="card-panel">
                         <div class="row center">
@@ -644,7 +651,8 @@
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
-                        <img src="static/images/csps_flag.webp" class="csps-flag-center" />
+                        <img src="static/images/csps_flag.webp" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
                     </div>
                     <div class="card-panel">
                         <div class="row center">
@@ -668,7 +676,8 @@
                 <div class="col hide-on-small-only m1"></div>
                 <div class="col s12 m10 center">
                     <div>
-                        <img src="static/images/csps_flag.webp" class="csps-flag-center" />
+                        <img src="static/images/csps_flag.webp" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
                     </div>
                     <div class="card-panel">
                         <div class="row center">
@@ -731,7 +740,8 @@
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
-                        <img src="static/images/csps_flag.webp" class="csps-flag-center" />
+                        <img src="static/images/csps_flag.webp" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
                     </div>
 
 
@@ -1053,7 +1063,7 @@
                         return '' +
                             '<div class="row">' +
                             '<div class="col s12 center">' +
-                            '<h3><i class="mdi-content-send brown-text"></i></h3>' +
+                            //'<h3><i class="mdi-content-send brown-text"></i></h3>' +
                             '<h4>%title<br/>(%survey)</h4>' +
                             '<p class="flow-text left-align light">%intro</p>' +
                             '</div>' +
@@ -1096,7 +1106,7 @@
                         return '' +
                             '<div class="row">' +
                             '<div class="input-field col s12" >' +
-                            '<select class="%reqcls" %reqattr id="scale_qid_%qid" name="scale_qid_%qid">' +
+                            '<select class="%reqcls" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">' +
                             '<option value="" disabled selected>--</option>' +
                             '<option value="1">1 %low</option>' +
                             '<option value="2">2</option>' +
@@ -1110,7 +1120,7 @@
                             '<option value="10">10 %high</option>' +
                             '<option value="77">%unsure</option>' +
                             '</select>' +
-                            '<label><span class="en">Choose your rating</span><span class="fr">Chosir s.v.p.</span></label>' +
+                            '<label id="lbl_scale_qid_%qid"><span class="en">Choose your rating</span><span class="fr">Chosir s.v.p.</span></label>' +
                             '</div> ' +
                             '</div> ' +
                             '';
@@ -2515,7 +2525,11 @@
                             form = random_shuffle.join(" ");
                         }
                         if (typeof snip !== "undefined" && snip != false) {
-                            snip = snip.replace(/\%form/g, form);
+                            if (cmd == "pick one" || cmd == "pick any") {
+                                snip = snip.replace(/\%form/g, `<fieldset>${form}</fieldset>`);
+                            } else {
+                                snip = snip.replace(/\%form/g, form);
+                            }
                         }
 
                         if (g_control_flags["question"]["required"] == true) {
@@ -3268,6 +3282,19 @@
                             var offs = response.results ? response.results : [];
                             var offs_html = "";
                             var suggested = "";
+                            // to enable testing when no courses load. delete this code
+                            if (offs.length == 0) {
+                                offs_html += "<h4><span class='en'>No courses today</span><span class='fr'>Aucune de cours aujourd'hui</span></h4>";
+                                offs = [
+                                    {
+                                        "offering_id": 000000,
+                                        "course_code": "X000",
+                                        "course_title": "(dev) Test Course",
+                                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                        "offering_province": "NCR/RCN"
+                                    }];
+                            }
+                            // end delete
                             for (var i = 0; i < offs.length; i++) {
                                 if (i == 0) {
                                     suggested = `<div style="padding: 1em;">
