@@ -268,7 +268,7 @@
         }
 
         em.material-icons {
-            display: block;
+            display: inline-block;
             font-size: 24px;
             font-feature-settings: 'liga';
         }
@@ -276,6 +276,11 @@
         .lhi-menu {
             height: 64px;
             line-height: 64px;
+        }
+
+        .mhi-menu {
+            line-height: 56px;
+            height: 56px;
         }
 
         .fab-align {
@@ -287,6 +292,10 @@
             text-align: center;
             color: #fff;
         }
+
+        .sidenav-trigger {
+            color: #3f2a56;
+        }
     </style>
 </head>
 
@@ -296,7 +305,7 @@
             <div class="nav-wrapper container">
                 <a id="logo-container" class="brand-logo">Evalhalla</a>
                 <a data-target="mobile-demo" class="adm-function sidenav-trigger" aria-label="Open menu">
-                    <em class="material-icons" aria-hidden="true">menu</em></a>
+                    <em class="material-icons mhi-menu" aria-hidden="true">menu</em></a>
                 <ul class="right">
                     <li>
                         <div>
