@@ -292,7 +292,7 @@ em.material-icons {
 .ulresetpadprogress {
     padding-inline-start: 0px;
 }
-.ok-check {
+em.ok-check {
     color: #006600;
     font-size:5em;
 }
