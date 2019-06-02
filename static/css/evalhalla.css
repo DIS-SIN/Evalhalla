@@ -1,0 +1,286 @@
+nav ul a,
+nav .brand-logo {
+    color: #444;
+}
+
+/* fix for massive white space on lang toggle */
+.hiddendiv-maxsized {
+    overflow: hidden;
+    height: auto;
+    max-height: 460px;
+}
+
+p {
+    line-height: 2rem;
+}
+
+.sidenav-trigger {
+    color: #26a69a;
+}
+
+@media only screen and (max-width : 600px) {
+    #index-banner .section {
+        top: 0;
+    }
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+footer.page-footer {
+    margin: 0;
+}
+
+nav ul .waves-effect i {
+    display: inline;
+}
+
+nav ul .tab i {
+    display: inline;
+}
+
+.pie-chart {
+    padding: 0 5px 0 10px;
+    width: 39px;
+}
+
+.pie-chart svg {
+    transform: rotate(-90deg);
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+}
+
+.pie-chart path,
+.pie-chart circle {
+    fill: #cccccc;
+}
+
+.hnpie {
+    width: 20px;
+    height: 20px;
+}
+
+/* overrides mcss */
+html {
+    font-family: 'Lato', sans-serif;
+    color: #333333;
+}
+
+blockquote {
+    border-left: 0;
+    margin-left: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    /*5px solid #26374B;*/
+    background-color: rgba(238, 239, 241, 1);
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.blue-canada-ca {
+    background-color: #26374b;
+}
+
+.purp-canada-ca {
+    background-color: #3f2a56;
+}
+
+.pagination li.active {
+    background-color: #26374b;
+}
+
+.progress {
+    background-color: #26374b;
+    height: 18px;
+    border-radius: 50px;
+}
+
+.progress .determinate {
+    background-color: rgba(167, 181, 196, 1);
+    margin: 4px;
+    border-radius: 50px;
+    /* fix for the 100% case where it runs outside the prog bar
+    border-right: 10px solid #26374b; */
+}
+
+.badge {
+    border-radius: 50px;
+}
+
+.btn,
+.btn-large {
+    border-radius: 50px;
+}
+
+.purp-canada-ca-edged {
+    border-left: 5px solid #3f2a56;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.grey-canada-ca-block-header {
+    background-color: rgba(238, 239, 241, 1);
+    font-size: 1.2em;
+}
+
+.padbox {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.input-wrapper+label,
+.textarea-wrapper+label,
+.select-wrapper+label {
+    font-size: 1.1em;
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: #333333;
+}
+
+textarea.materialize-textarea {
+    border-bottom: 1px solid #26374b;
+}
+
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #26374b;
+    box-shadow: 0 1px 0 0 #26374b;
+}
+
+.select-wrapper input.select-dropdown {
+    border-bottom: 1px solid #26374b;
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #26374b;
+}
+
+.input-field>label,
+label,
+input {
+    color: #333333;
+}
+
+
+
+.csps-flag {
+    max-height: 80px;
+    float: right;
+    padding: 20px;
+}
+
+.csps-flag-center {
+    max-height: 80px;
+    padding: 20px;
+}
+
+.bnomargin {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.bannered {
+    background-image: url('../images/top_banner.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    height: 250px;
+    max-height: 250px;
+    /*min-height: 100px;*/
+    width: 100%;
+}
+
+.bannerbgbacked {
+    background-image: url('../images/lp_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+    min-height: 550px;
+    height: auto;
+    /*min-height: 100px;*/
+    width: 100%;
+}
+
+fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.lg-lbl {
+    font-size: 1.1em;
+}
+
+select {
+    padding: 3px;
+    border-color: #333333;
+}
+
+select:focus {
+    border: 2px solid #3f2a56;
+    /*outline: none;*/
+}
+
+legend {
+    display: none;
+}
+
+h1,
+h2 {
+    font-size: 2.28rem;
+    line-height: 110%;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1.15rem;
+    line-height: 110%;
+}
+
+.mob-span {
+    font-size: 1.15rem;
+    line-height: 110%;
+    font-weight: 400;
+    padding-left: 20px;
+}
+
+em.material-icons {
+    display: inline-block;
+    font-size: 24px;
+    font-feature-settings: 'liga';
+}
+
+.lhi-menu {
+    height: 64px;
+    line-height: 64px;
+}
+
+.mhi-menu {
+    line-height: 56px;
+    height: 56px;
+}
+
+.fab-align {
+    margin-left: 0px;
+    line-height: 56px;
+    height: 56px;
+    width: inherit;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+}
+
+.sidenav-trigger {
+    color: #3f2a56;
+}
