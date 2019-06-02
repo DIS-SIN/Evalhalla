@@ -284,3 +284,7 @@ em.material-icons {
 .sidenav-trigger {
     color: #3f2a56;
 }
+
+.ulresetpadprogress {
+    padding-inline-start: 0px;
+}
