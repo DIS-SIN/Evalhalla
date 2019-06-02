@@ -21,7 +21,7 @@ const evh_templates = {
                 <div class="row">
                  <div class="col s12 center">
                     <a class="btn btn-large purp-canada-ca ev-page-sel-left left"><em class="material-icons fab-align">chevron_left</em></a>
-                    <a id="evalhalla_submit" class="waves-effect waves-light purp-canada-ca btn-large ">
+                    <a id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large ">
                         <span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>
                     <a class="btn btn-large purp-canada-ca ev-page-sel-right right"><em class="material-icons fab-align">chevron_right</em></a>
                  </div>

@@ -92,6 +92,10 @@ blockquote {
     background-color: #3f2a56;
 }
 
+.green-canada-ca {
+    background-color: #006600;
+}
+
 .pagination li.active {
     background-color: #26374b;
 }
@@ -287,4 +291,8 @@ em.material-icons {
 
 .ulresetpadprogress {
     padding-inline-start: 0px;
+}
+.ok-check {
+    color: #006600;
+    font-size:5em;
 }
