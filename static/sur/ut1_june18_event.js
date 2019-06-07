@@ -7,13 +7,13 @@ var ut1_june18_event = `# UT-1-JN-18
 Q: The way people interact with the world is constantly changing with the development of new technologies. We communicate with each other on new digital platforms, consume media in different ways, and have new digital tools for our work. In order to meet the needs of this changing world, there is increasingly more collaboration between different disciplines and new ways of working. How do you think your job will, or can, change to meet these demands?
 /open
 
-Q2: What new skills and tools do you think are needed for these new ways of working?
+Q: What new skills and tools do you think are needed for these new ways of working?
 /open
 
-Q3: Are there barriers that stand in the way of you working in these ways and trying new things? What are they? How can they be removed?
+Q: Are there barriers that stand in the way of you working in these ways and trying new things? What are they? How can they be removed?
 /open
 
-Q4: What do you, or your team, need to learn in order to be able to work in these ways? (ex skills, mindsets, behaviours etc) How do you imagine would be the best way to learn these skills?
+Q: What do you, or your team, need to learn in order to be able to work in these ways? (ex skills, mindsets, behaviours etc) How do you imagine would be the best way to learn these skills?
 /open
 
 Q: Have you seen the Digital Standards that have been published by the Government of Canada?
