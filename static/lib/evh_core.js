@@ -819,6 +819,8 @@
                 jsonsnip = jsonsnip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
                 g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "dropdown");
 
+                // NOTE: You cant stuff a span inside an <option>, it's bad form.
+                // Gotta find another way to biling the option values
                 for (var opti = 0; opti < opts.length; opti++) {
                     if (opti == 0) {
                         scale = scale.replace(/\%low/g, opts[opti]);

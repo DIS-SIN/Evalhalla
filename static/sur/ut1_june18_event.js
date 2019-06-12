@@ -1,56 +1,101 @@
-var ut1_june18_event = `# UT-1-JN-18
-## Group Interviews
-### This is intended for a group of three participants in open ended group interview. Moderator – “Please tell me your department and function.”
+var ut1_june18_event = `# /en Sub Header /; /fr (fr)Sub Header /;
 
-/pagebreak
 
-Q: The way people interact with the world is constantly changing with the development of new technologies. We communicate with each other on new digital platforms, consume media in different ways, and have new digital tools for our work. In order to meet the needs of this changing world, there is increasingly more collaboration between different disciplines and new ways of working. How do you think your job will, or can, change to meet these demands?
-/open
+##
+/en Events Evaluation /;
+/fr (fr)Events Evaluation /; 
 
-Q: What new skills and tools do you think are needed for these new ways of working?
-/open
 
-Q: Are there barriers that stand in the way of you working in these ways and trying new things? What are they? How can they be removed?
-/open
+###
+/en Description /;
+/fr (fr)Description /; 
 
-Q: What do you, or your team, need to learn in order to be able to work in these ways? (ex skills, mindsets, behaviours etc) How do you imagine would be the best way to learn these skills?
-/open
 
-Q: Have you seen the Digital Standards that have been published by the Government of Canada?
-/one
-Yes
-No
+*Q:
+/en How did you participate in the event? /;
+/fr (fr)How did you participate in the event? /; 
+/ONE
+/en In person /; /fr (fr)In person /; 
+/en Via webcast /; /fr (fr)Via webcast /; 
 ;
 
-Q: Do you feel that you would be able to change the way you work in a way that is aligned to the Digital Standards?
-/one
-Yes
-No
+
+*Q: 
+/en Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied? /;
+/fr (fr)Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied? /;
+/scale Very Unsatisfied, Very Satisfied, Unsure
+
+
+*Q: 
+/en Did this event meet your expectations as it was outlined in the advertisement? /;
+/fr (fr)Did this event meet your expectations as it was outlined in the advertisement? /;
+/ONE
+/en Yes /; /fr (fr)Yes /; 
+/en No /; /fr (fr)No /; 
 ;
 
-Q: Do you collaborate with people outside of your group in your job?
-/one
-Yes
-No
+
+Q: 
+/en If no, why not? /;
+/fr (fr)If no, why not? /;
+/open
+
+
+*Q:
+/en How satisfied were you with the speaker(s) for this event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
+/fr (fr)How satisfied were you with the speaker(s) for this event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
+
+/scale Very Unsatisfied, Very Satisfied, Unsure
+
+
+Q: 
+/en Why did you give the score that you did? /;
+/fr (fr)Why did you give the score that you did? /;
+/open
+
+
+*Q: /en Did you learn something new from this event? /;
+/fr (fr)Did you learn something new from this event? /;
+/ONE
+/en Yes, I learned a lot of new things /; /fr (fr)Yes, I learned a lot of new things /; 
+/en Yes, I learned something new /; /fr (fr)Yes, I learned something new /; 
+/en No, I did not learn anything new /; /fr (fr)No, I did not learn anything new /; 
 ;
 
-Q: List the organizations/groups you collaborate with.
-/open
 
-Q: What technologies do you think you need to learn, or learn to be better at, in your job?
-/open
-
-Q: What skills do you think you need to learn, or learn to be better at, in your job?
-/open
-
-Q: Check any, or all, barriers that you think will stand in the way of you implementing new ways of working
-/any
-Barrier 1
-Barrier 2
-Barrier 3
+*Q: 
+/en Is there something you can take away from this event that will help you in your job? /;
+/fr (fr)Is there something you can take away from this event that will help you in your job? /;
+/ONE
+/en Yes /; /fr (fr)Yes /; 
+/en No /; /fr (fr)No /; 
 ;
 
-Q: What would you need the most to help you implement new ways of working that will improve your job?
+
+Q: 
+/en If yes, what? /;
+/fr (fr)If yes, what? /;
+/open
+
+
+*Q: 
+/en Would you recommend this event to others? /;
+/fr (fr)Would you recommend this event to others? /;
+/ONE
+/en Yes /; /fr (fr)Yes /; 
+/en No /; /fr (fr)No /; 
+;
+
+
+Q: 
+/en Why or why not? /;
+/fr (fr)Why or why not? /;
+/open
+
+
+Q: 
+/en Please provide any other comments you may have /;
+/fr (fr)Please provide any other comments you may have /;
 /open
 
 `;
