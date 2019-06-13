@@ -23,9 +23,11 @@
             sur = params; // very cross. much browser. so wow.
         }
         // ok let's load it up
+        // TODO: Remove hardcode demos and replace with API
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
         if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
         if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
+        if (sur == "ut0_da_interest") { g_intro_script = ut0_da_interest; auto_display_mode = true; }
 
         // wraps the generated elements in a form and a paginator
         var form_wrap = function (src) {
