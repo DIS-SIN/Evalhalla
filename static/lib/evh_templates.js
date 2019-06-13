@@ -81,6 +81,22 @@ const evh_templates = {
                 </div>
             </div> 
         `,
+        "scale1-5": `
+            <div class="row">
+                <div class="col s12" >
+                    <label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Choose your rating</span><span class="fr">Chosir s.v.p.</span></label>
+                    <select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">
+                    <option value="" disabled selected></option>
+                    <option value="1">1 %low</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 %high</option>
+                    <option value="77">%unsure</option>
+                    </select>
+                </div>
+            </div> 
+        `,
         "open": `
             <div class="row">
                 <div class="row">
@@ -216,6 +232,14 @@ const evh_templates = {
             "8",
             "9",
             "10 %high",
+            "%unsure"
+        `,
+        "scale1-5": `
+            "1 %low",
+            "2",
+            "3",
+            "4",
+            "5 %high",
             "%unsure"
         `,
         "open": ``,

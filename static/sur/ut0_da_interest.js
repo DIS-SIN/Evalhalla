@@ -5,49 +5,19 @@ var ut0_da_interest = `# UT0-DA
 // On a scale from 1-5 where 1 is Not Relevant and 5 is Very Relevant
 
 *Q: Cloud (AWS, Azure) 
-/one
-1
-2
-3
-4
-5
-;
+/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain
 
 Q: Python
-/one
-1
-2
-3
-4
-5
-;
+/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain
 
 Q: Continuous Integration / Continuous Delivery
-/one
-1
-2
-3
-4
-5
-;
+/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain
 
 Q: Open Source
-/one
-1
-2
-3
-4
-5
-;
+/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain
 
 *Q: Cloud Native Development
-/one
-1
-2
-3
-4
-5
-;
+/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain
 
 /pagebreak
 

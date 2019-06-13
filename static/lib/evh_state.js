@@ -16,6 +16,7 @@ const g_cmd = {
     "*Q:": { "type": "req question", "html": "<question>%v</question>" },
     "[SCALE]": { "type": "scale", "html": "<scale>%v</scale>" },
     "/SCALE": { "type": "scale", "html": "<scale>%v</scale>" },
+    "/SCALE1-5": { "type": "scale1-5", "html": "<scale>%v</scale>" },
     "/ÉCHELLE": { "type": "scale", "html": "<scale>%v</scale>" },
     "|": { "type": "scale", "html": "<scale>%v</scale>" },
     "[OPEN]": { "type": "open", "html": "<open>%v</open>" },

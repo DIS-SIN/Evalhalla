@@ -19,13 +19,7 @@ var ut1_june18_event = `# /en UT1-J18 /; /fr UT1-J18 /;
 *Q: 
 /en 2. Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
 /fr 2. (fr)Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
-/ONE
-1 
-2
-3
-4
-5
-;
+/scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 *Q: 
 /en 3a. Did this event meet your expectations as it was outlined in the advertisement? /;
@@ -45,13 +39,7 @@ Q:
 *Q:
 /en 4a. How satisfied were you with the speaker(s) for this event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
 /fr 4a. (fr)How satisfied were you with the speaker(s) for this event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
-/ONE
-1 
-2
-3
-4
-5
-;
+/scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 Q: 
 /en 4b. Why did you give the score that you did? /;

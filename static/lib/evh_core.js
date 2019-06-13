@@ -65,6 +65,11 @@
                     return evh_templates["json"]["scale"];
                 }
                 return evh_templates["html"]["scale"];
+            } else if (snip == "scale1-5") {
+                if (format == "json") {
+                    return evh_templates["json"]["scale1-5"];
+                }
+                return evh_templates["html"]["scale1-5"];
             } else if (snip == "open") {
                 if (format == "json") {
                     return evh_templates["json"]["open"];
@@ -804,20 +809,32 @@
                     g_control_flags["json"] = g_control_flags["json"]
                         .replace("%req", "false");
                 }
-            } else if (cmd == "scale") {
+            } else if (cmd == "scale" || cmd == "scale1-5") {
                 // handle html
                 snip = g_control_flags["question"]["form"];
-                var scale = get_template_snip("scale").replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                var scale = "";
+                if (cmd == "scale") {
+                    scale = get_template_snip("scale").replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                } else if (cmd == "scale1-5") {
+                    scale = get_template_snip("scale1-5").replace(/\%qid/g, g_control_flags["question"]["qid"]);
+                }
+
                 var opts = src.split(",")
                 // clean opts
                 opts[0] = opts[0]
                     .replace("[SCALE]", "")
+                    .replace(/(\/SCALE1\-5|\/scale1\-5)/g, "") // 1-5 scale
                     .replace(/(\/SCALE|\/scale)/g, "")
                     .replace(/(\/ÉCHELLE|\/échelle)/g, "")
                     .replace("|", "")
                     .trim();
                 // handle json
-                var jsonsnip = get_template_snip("scale", "json");
+                var jsonsnip = "";
+                if (cmd == "scale") {
+                    jsonsnip = get_template_snip("scale", "json");
+                } else if (cmd == "scale1-5") {
+                    jsonsnip = get_template_snip("scale1-5", "json");
+                }
                 jsonsnip = jsonsnip.replace(/\%qid/g, g_control_flags["question"]["qid"]);
                 g_control_flags["json"] = g_control_flags["json"].replace(/\%type/g, "dropdown");
 
@@ -983,6 +1000,7 @@
                         evalhalla = [handle_cmd_header(cmd["type"], pack, pkg["pack_json"])];
                     } else if (cmd["type"] == "question" || cmd["type"] == "req question"
                         || cmd["type"] == "scale"
+                        || cmd["type"] == "scale1-5"
                         || cmd["type"] == "open"
                         || cmd["type"] == "generics"
                         || cmd["type"] == "pick one"
@@ -999,6 +1017,7 @@
                         i = pkg["i"];
 
                         if (cmd["type"] == "scale"
+                            || cmd["type"] == "scale1-5"
                             || cmd["type"] == "open"
                             || cmd["type"] == "generics"
                             || cmd["type"] == "pick one"
