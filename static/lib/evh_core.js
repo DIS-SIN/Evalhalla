@@ -1811,15 +1811,20 @@
                             suggested = "";
                         }
                         offs_html += `<div class="card-panel purp-canada-ca-edged">
-                                    <div class="padbox badgelarge">
-                                        ${suggested}
-                                        <div class="row">
-                                    ${offs[i]["offering_id"]} - ${offs[i]["course_code"]}<br />
-                                    <strong>${offs[i]["course_title"]}</strong><br />
-                                    ${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}
-                                    </div><div class="row">
-                                    <button id="off_${offs[i]["offering_id"]}" class="select-offering btn btn-large purp-canada-ca"><span class="en">Select</span><span class="fr">Choisir</span></button>
-                                    </div></div></div>`;
+                                        <div class="padbox badgelarge">
+                                            ${suggested}
+                                            <div class="row">
+                                                ${offs[i]["offering_id"]} - ${offs[i]["course_code"]}<br />
+                                                <strong>${offs[i]["course_title"]}</strong><br />
+                                                ${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}
+                                            </div>
+                                            <div class="row">
+                                                <a href="#editor" id="off_${offs[i]["offering_id"]}" class="select-offering btn btn-large purp-canada-ca">
+                                                    <span class="en">Select</span><span class="fr">Choisir</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>`;
 
                     }
                     g_state["tombstone"]["offerings"] = offs;
