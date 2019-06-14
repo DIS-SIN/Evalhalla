@@ -14,14 +14,19 @@
         var auto_display_mode = false; // if you pass a query param in with sur=example_nanos_paged for example, it goes right into "presentation mode"
         var params = null; // the search params
         var sur = null; // the survey to load
+        var entry = "direct";
         try {
             params = new URLSearchParams(window.location.search);
-            sur = params.get("sur");
+            sur = safe(params.get("sur"));
+            entry = safe(params.get("entry"));
         } catch (e) {
-            // good old Internet Explorer or Edge. Still writing "special" code for you...
-            params = window.location.search.split("=")[1]; // yep, I actually did that.
-            sur = params; // very cross. much browser. so wow.
+            // good old Internet Explorer. Still writing "special" code for you...
+            params = window.location.search.split("?")[1]; // yep, I actually did that.
+            sur = safe(params.split("sur=")[1].split("&entry=")[0]); // very cross. much browser. so wow.
+            entry = safe(params.split("entry=")[1].split("&sur=")[0]); // very cross. much browser. so wow.
+            alert(sur + " " + entry);
         }
+
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
@@ -621,11 +626,11 @@
             // make some form data
             var formElement = document.getElementById("evalhalla_form");
             var formData = new FormData(formElement);
-            console.log(formData);
+            //console.log(formData);
             // can use that to post
             // query string would be
             var query_string = $("#evalhalla_form").serialize();
-            console.log(query_string);
+            //console.log(query_string);
             if (formElement.checkValidity() == true) {
                 //alert("Good to go!");
             } else {
@@ -648,12 +653,20 @@
             json_o["tombstone_offering_id"] = safe(g_state["tombstone"]["offering_id"]);
             json_o["tombstone_language"] = safe(g_state["ui"]["lang"]);
 
+            // user-agent information
+            json_o["meta_useragent"] = safe(window.navigator.userAgent);
+            json_o["meta_entry_method"] = safe(entry); // "email", "QR", "web", "altered"
+            json_o["meta_evalhalla_sur"] = safe(sur);
+
             var json_o_string = (JSON.stringify(json_o, null, 4));
+            console.log(json_o_string);
             // save response to local storage
             ls_save_survey_response(json_o_string);
             // save response to survista
+
             // TODO: turn back on
             //api_upload_survey_result(response);
+
             // show local storage items
             ls_view_saved_entries();
             //alert(json_o_string);
