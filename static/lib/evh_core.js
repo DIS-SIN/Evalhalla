@@ -36,7 +36,12 @@
                 pages += `<li class="waves-effect ev-page-sel ev-page-sel-` + i + `"><a>` + i + `</a></li>`;
             }
             var fwtmpl = evh_templates["html"]["form wrap"];
-            var currpct = ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0)
+            var currpct = 0;
+            try {
+                currpct = ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0)
+            } catch (e) {
+                currpct = 0;
+            }
             fwtmpl = fwtmpl
                 .replace(/\%pctdisplay/g, currpct)
                 .replace(/\%pct/g, currpct)
@@ -624,8 +629,11 @@
             if (formElement.checkValidity() == true) {
                 //alert("Good to go!");
             } else {
-                alert("Missing Data");
+                alert("Missing data / Données manquantes");
                 $(".ev-page").show();
+                $(".ev-page-lang").hide();
+                $(".ev-page-offering").hide();
+                $(".ev-page-tombstone").hide();
                 formElement.checkValidity()
                 return;
             }
@@ -1178,21 +1186,31 @@
             refresh_lang();
             //ui_resize_textareas();
             $(".dropdown-trigger").dropdown();
-            $("#step_lang").hide();
-            $("#step_offering").show();
+            //$("#step_lang").hide();
+            //$("#step_offering").show();
+            g_control_flags["currpageid"] = "offering"; // advance page
+            //console.log(g_control_flags["currpageid"]);
+            hs_page_intro_step();
         });
         g_state["el"]["lang_set_en"].on("click", function () {
             g_state["ui"]["lang"] = "en";
             refresh_lang();
             //ui_resize_textareas();
             $(".dropdown-trigger").dropdown();
-            $("#step_lang").hide();
-            $("#step_offering").show();
+            //$("#step_lang").hide();
+            //$("#step_offering").show();
+            g_control_flags["currpageid"] = "offering"; // advance page
+            //console.log(g_control_flags["currpageid"]);
+            hs_page_intro_step();
         });
         // step advance - tomstone information set
         $(".tombstone-set").on("click", function () {
-            $("#step_tombstone").hide();
-            g_state["el"]["ui_render"].show();
+            //$("#step_tombstone").hide();
+            //$(".surveybody").show();
+            //g_state["el"]["ui_render"].show();
+            g_control_flags["currpageid"] = 1; // advance page, note we're switching types here
+            //console.log(g_control_flags["currpageid"]);
+            hs_page_step();
         });
         // step advance - ready for next partipant step
         $(".ev-ready-for-next").on("click", function () {
@@ -1220,6 +1238,95 @@
             ls_save_qlib();
         });
         $("#qlib").trigger("change");
+
+
+        // pagination
+        var hs_page_step = function () {
+            if (g_control_flags["currpageid"] <= 0) {
+                //g_control_flags["currpageid"] = 1;
+                g_control_flags["currpageid"] = "tombstone";
+                hs_page_intro_step();
+                return;
+            }
+            var pct = 0;
+            try {
+                pct = ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0);
+            } catch (e) {
+                pct = 0;
+            }
+            $(".surveybody").show();
+            g_state["el"]["ui_render"].show();
+            $(".ev-page").hide();
+            $(".ev-page-" + g_control_flags["currpageid"]).show();
+            $(".ev-page-sel").removeClass("active");
+            $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
+
+            $(".determinate").css({ "width": pct + "%" });
+            $(".determinate-text").text(pct + "%");
+        };
+        var hs_page_intro_step = function () {
+
+            /*if (g_control_flags["currpageid"] == "lang") {
+                g_control_flags["currpageid"] = "offering";
+            } else if (g_control_flags["currpageid"] == "offering") {
+                g_control_flags["currpageid"] = "tombstone";
+            } else if (g_control_flags["currpageid"] == "tombstone") {
+                g_control_flags["currpageid"] = "1";
+                $(".surveybody").show();
+                hs_page_step();
+                return;
+            }*/
+            $(".surveybody").hide();
+            $(".ev-page").hide();
+            $(".ev-page-" + g_control_flags["currpageid"]).show();
+        };
+        var ui_activate_intropagedirection_buttons = function () {
+            $(".ev-page-sel-" + "offering").on("click", function () {
+                g_control_flags["currpageid"] = "offering";
+                hs_page_intro_step();
+            });
+        };
+        var ui_activate_pagedirection_buttons = function () {
+            $(".ev-page-sel-" + "left").on("click", { "i": "left" },
+                function (e) {
+                    if (isNaN(g_control_flags["currpageid"]) == false) {
+                        g_control_flags["currpageid"] = g_control_flags["currpageid"] - 1;
+                        hs_page_step();
+                    } else {
+                        hs_page_intro_step();
+                    }
+
+
+                    //alert(e.data.i);
+                    $("#evalhalla_submit").addClass("disabled");
+                    window.scrollTo(0, 0);
+                    if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
+                        $("#evalhalla_submit").removeClass("disabled");
+                    }
+                });
+            $(".ev-page-sel-" + "right").on("click", { "i": "right" },
+                function (e) {
+                    //alert(e.data.i);
+                    g_control_flags["currpageid"] = g_control_flags["currpageid"] + 1;
+                    if (g_control_flags["currpageid"] >= g_control_flags["pageid"]) {
+                        g_control_flags["currpageid"] = g_control_flags["pageid"];
+                    }
+                    $(".ev-page").hide();
+                    $(".ev-page-" + g_control_flags["currpageid"]).show();
+                    $(".ev-page-sel").removeClass("active");
+                    $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
+                    $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
+                    $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
+
+                    //alert(e.data.i);
+                    $("#evalhalla_submit").addClass("disabled");
+                    window.scrollTo(0, 0);
+                    if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
+                        $("#evalhalla_submit").removeClass("disabled");
+                    }
+                });
+        }
+        ui_activate_intropagedirection_buttons(); // enable buttons for intro steps
 
         // Render Trigger
         // Render Timer additions. TODO: Causes flicker of submit. Adjust setting classes.
@@ -1285,48 +1392,8 @@
                         }
                     });
             }
-            $(".ev-page-sel-" + "left").on("click", { "i": "left" },
-                function (e) {
-                    g_control_flags["currpageid"] = g_control_flags["currpageid"] - 1;
-                    if (g_control_flags["currpageid"] <= 0) {
-                        g_control_flags["currpageid"] = 1;
-                    }
-                    $(".ev-page").hide();
-                    $(".ev-page-" + g_control_flags["currpageid"]).show();
-                    $(".ev-page-sel").removeClass("active");
-                    $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
-                    $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
-                    $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
 
-
-                    //alert(e.data.i);
-                    $("#evalhalla_submit").addClass("disabled");
-                    window.scrollTo(0, 0);
-                    if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
-                        $("#evalhalla_submit").removeClass("disabled");
-                    }
-                });
-            $(".ev-page-sel-" + "right").on("click", { "i": "right" },
-                function (e) {
-                    //alert(e.data.i);
-                    g_control_flags["currpageid"] = g_control_flags["currpageid"] + 1;
-                    if (g_control_flags["currpageid"] >= g_control_flags["pageid"]) {
-                        g_control_flags["currpageid"] = g_control_flags["pageid"];
-                    }
-                    $(".ev-page").hide();
-                    $(".ev-page-" + g_control_flags["currpageid"]).show();
-                    $(".ev-page-sel").removeClass("active");
-                    $(".ev-page-sel-" + g_control_flags["currpageid"]).addClass("active");
-                    $(".determinate").css({ "width": ((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%" });
-                    $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
-
-                    //alert(e.data.i);
-                    $("#evalhalla_submit").addClass("disabled");
-                    window.scrollTo(0, 0);
-                    if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
-                        $("#evalhalla_submit").removeClass("disabled");
-                    }
-                });
+            ui_activate_pagedirection_buttons();
 
             // load json
             try {
@@ -1723,7 +1790,7 @@
                     for (var i = 0; i < offs.length; i++) {
                         if (i == 0) {
                             suggested = `<div style="padding: 1em;">
-                                        <span class="badge red white-text" style="float:none;">
+                                        <span class="badge red white-text" style="float:none;padding:0.3em;font-size:1.1em;">
                                             <span class="en">Suggested</span><span class="fr">Suggéré</span>
                                         </span></div>
                                         `
@@ -1731,14 +1798,14 @@
                             suggested = "";
                         }
                         offs_html += `<div class="card-panel purp-canada-ca-edged">
-                                    <div class="padbox">
+                                    <div class="padbox badgelarge">
                                         ${suggested}
                                         <div class="row">
                                     ${offs[i]["offering_id"]} - ${offs[i]["course_code"]}<br />
                                     <strong>${offs[i]["course_title"]}</strong><br />
                                     ${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}
                                     </div><div class="row">
-                                    <button id="off_${offs[i]["offering_id"]}" class="select-offering btn purp-canada-ca"><span class="en">Select</span><span class="fr">Choisir</span></button>
+                                    <button id="off_${offs[i]["offering_id"]}" class="select-offering btn btn-large purp-canada-ca"><span class="en">Select</span><span class="fr">Choisir</span></button>
                                     </div></div></div>`;
 
                     }
@@ -1758,8 +1825,11 @@
                             }
                         }
 
-                        $("#step_offering").hide();
-                        $("#step_tombstone").show();
+                        g_control_flags["currpageid"] = "tombstone";
+                        //console.log(g_control_flags["currpageid"]);
+                        hs_page_intro_step();
+                        //$("#step_offering").hide();
+                        //$("#step_tombstone").show();
                     });
                 }
             });

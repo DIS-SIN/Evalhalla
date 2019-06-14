@@ -31,7 +31,7 @@
                 <ul class="right">
                     <li>
                         <div>
-                            <a class="lang">
+                            <a class="lang" href="#editor">
                                 <span class="en">Français</span>
                                 <span class="fr">English</span>
                             </a>
@@ -396,7 +396,7 @@
 
     <div id="editor" class="container">
         <div class="section">
-            <div id="step_lang" class="row bannerbgbacked center">
+            <div id="step_lang" class="row bannerbgbacked center ev-page ev-page-lang">
                 <div class="col hide-on-small-only m3"></div>
                 <div class="col s12 m6 center">
                     <div>
@@ -431,7 +431,7 @@
                 </div>
                 <div class="col hide-on-small-only m3"></div>
             </div>
-            <div id="step_offering" class="row bannerbgbacked center">
+            <div id="step_offering" class="row bannerbgbacked center ev-page ev-page-offering">
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
@@ -458,7 +458,7 @@
                 </div>
                 <div class="col hide-on-small-only m2"></div>
             </div>
-            <div id="step_tombstone" class="row bannerbgbacked center">
+            <div id="step_tombstone" class="row bannerbgbacked center ev-page ev-page-tombstone">
                 <div class="col hide-on-small-only m1"></div>
                 <div class="col s12 m10 center">
                     <div>
@@ -486,7 +486,7 @@
                                             class="autocomplete tombstone_department">
                                         <label for="autocomplete-input-department">
                                             <span class="en">Department</span>
-                                            <span class="fr">Département</span>
+                                            <span class="fr">Division</span>
                                         </label>
                                     </div>
                                 </div>
@@ -494,7 +494,10 @@
                                     <div class="input-field col s12">
                                         <input type="text" id="autocomplete-input-classification"
                                             class="autocomplete tombstone_classification">
-                                        <label for="autocomplete-input-classification">Classification</label>
+                                        <label for="autocomplete-input-classification">
+                                            <span class="en">Classification</span>
+                                            <span class="fr">Niveau du poste</span>
+                                        </label>
                                     </div>
                                 </div>
 
@@ -510,7 +513,11 @@
                                 </div>
                                 <div class="col s12">
                                     <div class="row center">
-                                        <button class="tombstone-set purp-canada-ca btn-large">
+                                        <a href="#editor"
+                                            class="btn btn-large purp-canada-ca ev-page-sel-offering left padleft">
+                                            <em class="material-icons fab-align">chevron_left</em>
+                                        </a>
+                                        <button class="tombstone-set purp-canada-ca btn-large right padright">
                                             <span class="en">Start</span>
                                             <span class="fr">Début</span>
                                         </button>

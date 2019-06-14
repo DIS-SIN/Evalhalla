@@ -212,6 +212,7 @@ input {
     height: auto;
     /*min-height: 100px;*/
     width: 100%;
+    padding-bottom:80px;
 }
 
 fieldset {
@@ -285,6 +286,15 @@ em.material-icons {
     color: #fff;
 }
 
+.padleft {
+    margin-left: 20px;
+}
+.padright {
+    margin-right: 20px;
+}
+.badgelarge {
+    font-size: 1.5em;
+}
 .sidenav-trigger {
     color: #3f2a56;
 }

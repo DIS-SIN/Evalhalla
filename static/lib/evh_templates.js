@@ -1,40 +1,41 @@
 const evh_templates = {
     "html": {
         "form wrap": `
-            <div class="row">
-                <div class="col s12 center">
-                    <strong class="center-align determinate-text">%pctdisplay%</strong>
-                </div>
-                <div class="progress">
-                    <div class="determinate" style="width: %pct%"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 center bannered">
-                    <img src="static/images/csps_flag.png" class="responsive-img csps-flag" alt="CSPS-EFPC Flag, Maple leaf in book" />
-                </div>
-            </div>
-            <form id="evalhalla_form" action="#">
-                <div class="ev-page ev-page-1 card-panel">
-                    %src
+            <div class="surveybody">
+                <div class="row">
+                    <div class="col s12 center">
+                        <strong class="center-align determinate-text">%pctdisplay%</strong>
+                    </div>
+                    <div class="progress">
+                        <div class="determinate" style="width: %pct%"></div>
+                    </div>
                 </div>
                 <div class="row">
-                 <div class="col s12 center">
-                    <a class="btn btn-large purp-canada-ca ev-page-sel-left left"><em class="material-icons fab-align">chevron_left</em></a>
-                    <a id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large ">
-                        <span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>
-                    <a class="btn btn-large purp-canada-ca ev-page-sel-right right"><em class="material-icons fab-align">chevron_right</em></a>
-                 </div>
+                    <div class="col s12 center bannered">
+                        <img src="static/images/csps_flag.png" class="responsive-img csps-flag" alt="CSPS-EFPC Flag, Maple leaf in book" />
+                    </div>
                 </div>
-                <div class="row">
-                    <ul class="pagination center-align" style="marigin:0;">
-                        
-                        %pages
-                        
-                    </ul>
-                </div>
-                
-            </form>       
+                <form id="evalhalla_form" action="#">
+                    <div class="ev-page ev-page-1 card-panel">
+                        %src
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center">
+                            <a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-left left"><em class="material-icons fab-align">chevron_left</em></a>
+                            <a href="#editor" id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large ">
+                                <span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>
+                            <a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-right right"><em class="material-icons fab-align">chevron_right</em></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <ul class="pagination center-align" style="marigin:0;">
+                            
+                            %pages
+                            
+                        </ul>
+                    </div>
+                </form>  
+            </div>     
         `,
         /**
          * <li class="waves-effect ev-page-sel-left"><a><em class="material-icons">chevron_left</em></a></li>
