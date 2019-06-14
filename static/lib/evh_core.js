@@ -665,7 +665,7 @@
             // save response to survista
 
             // TODO: turn back on
-            api_upload_survey_result(response);
+            api_upload_survey_result(json_o_string);
 
             // show local storage items
             ls_view_saved_entries();
