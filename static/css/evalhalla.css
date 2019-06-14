@@ -228,6 +228,7 @@ fieldset {
 select {
     padding: 3px;
     border-color: #333333;
+    font-size: 16px;
 }
 
 select:focus {
