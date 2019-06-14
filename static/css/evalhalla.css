@@ -70,6 +70,7 @@ nav ul .tab i {
 html {
     font-family: 'Lato', sans-serif;
     color: #333333;
+    font-size:16px;
 }
 
 blockquote {
@@ -228,7 +229,6 @@ fieldset {
 select {
     padding: 3px;
     border-color: #333333;
-    font-size: 16px;
 }
 
 select:focus {
@@ -306,4 +306,10 @@ em.material-icons {
 em.ok-check {
     color: #006600;
     font-size:5em;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+select:focus, textarea:focus, input:focus {
+        font-size: 16px;
+    }
 }
