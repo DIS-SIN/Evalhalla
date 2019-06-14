@@ -646,7 +646,7 @@
             var json_o = get_params_as_object(query_string);
 
             // get tombstone details
-            // TODO: Sanitize inputs
+            // TODO: Sanitize inputs, done?
             json_o["tombstone_department"] = safe($("#autocomplete-input-department").val());
             json_o["tombstone_city"] = safe($("#autocomplete-input-city").val());
             json_o["tombstone_classification"] = safe($("#autocomplete-input-classification").val());
@@ -665,7 +665,7 @@
             // save response to survista
 
             // TODO: turn back on
-            //api_upload_survey_result(response);
+            api_upload_survey_result(response);
 
             // show local storage items
             ls_view_saved_entries();
