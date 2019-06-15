@@ -1787,28 +1787,43 @@
                     var offs = response.results ? response.results : [];
                     var offs_html = "";
                     var suggested = "";
-                    var demo_offering = [
-                        {
-                            "offering_id": 000001,
-                            "course_code": "EVH-UT1",
-                            "course_title": "June 18 Event",
-                            "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                            "offering_province": "NCR/RCN"
-                        },
-                        {
-                            "offering_id": 000000,
-                            "course_code": "EVH-UT0",
-                            "course_title": "Stratosphere Event",
-                            "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                            "offering_province": "NCR/RCN"
-                        },
-                        {
-                            "offering_id": 000002,
-                            "course_code": "EVH-NN1-P",
-                            "course_title": "General Satisfaction Survey",
-                            "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                            "offering_province": "NCR/RCN"
-                        }];
+                    var demo_offering = [{
+                        "offering_id": 000000,
+                        "course_code": "DEV-TS1",
+                        "course_title": "Development Test Event",
+                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                        "offering_province": "NCR/RCN"
+                    }];
+                    if (sur == "ut1_june18_event") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000001,
+                                "course_code": "EVH-UT1",
+                                "course_title": "June 18 Event",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
+                    if (sur == "ut0_da_interest") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000000,
+                                "course_code": "EVH-UT0",
+                                "course_title": "Stratosphere Event",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
+                    if (sur == "example_nanos" || sur == "example_nanos_paged") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000002,
+                                "course_code": "EVH-NN1-P",
+                                "course_title": "General Satisfaction Survey",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
                     // to enable testing when no courses load. delete this code
                     offs = demo_offering.concat(offs);
                     if (offs.length == 0) {
