@@ -286,7 +286,10 @@ em.material-icons {
     text-align: center;
     color: #fff;
 }
-
+.offeringtitle {
+    font-weight: bold;
+    font-size: 1.2em;
+}
 .padleft {
     margin-left: 20px;
 }

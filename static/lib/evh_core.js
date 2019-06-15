@@ -1787,17 +1787,35 @@
                     var offs = response.results ? response.results : [];
                     var offs_html = "";
                     var suggested = "";
+                    var demo_offering = [
+                        {
+                            "offering_id": 000001,
+                            "course_code": "EVH-UT1",
+                            "course_title": "June 18 Event",
+                            "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                            "offering_province": "NCR/RCN"
+                        },
+                        {
+                            "offering_id": 000000,
+                            "course_code": "EVH-UT0",
+                            "course_title": "Stratosphere Event",
+                            "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                            "offering_province": "NCR/RCN"
+                        },
+                        {
+                            "offering_id": 000002,
+                            "course_code": "EVH-NN1-P",
+                            "course_title": "General Satisfaction Survey",
+                            "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                            "offering_province": "NCR/RCN"
+                        }];
                     // to enable testing when no courses load. delete this code
+                    offs = demo_offering.concat(offs);
                     if (offs.length == 0) {
                         offs_html += "<h2><span class='en'>No courses today</span><span class='fr'>Aucune de cours aujourd'hui</span></h2>";
-                        offs = [
-                            {
-                                "offering_id": 000000,
-                                "course_code": "X000",
-                                "course_title": "(dev) Test Course",
-                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                                "offering_province": "NCR/RCN"
-                            }];
+                        offs = demo_offering;
+                    } else {
+                        // offs = demo_offering.concat(offs);
                     }
                     // end delete
                     for (var i = 0; i < offs.length; i++) {
@@ -1814,9 +1832,11 @@
                                         <div class="padbox badgelarge">
                                             ${suggested}
                                             <div class="row">
-                                                ${offs[i]["offering_id"]} - ${offs[i]["course_code"]}<br />
-                                                <strong>${offs[i]["course_title"]}</strong><br />
-                                                ${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}
+                                                <p>
+                                                <span class="offeringtitle">${offs[i]["course_title"]}</span><br />
+                                                <em>${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}</em><br />
+                                                <sub>${offs[i]["offering_id"]} - ${offs[i]["course_code"]}</sub>
+                                                </p>
                                             </div>
                                             <div class="row">
                                                 <a href="#editor" id="off_${offs[i]["offering_id"]}" class="select-offering btn btn-large purp-canada-ca">
@@ -1837,7 +1857,8 @@
                         for (var i = 0; i < g_state["tombstone"]["offerings"].length; i++) {
                             if (g_state["tombstone"]["offering_id"] == g_state["tombstone"]["offerings"][i]["offering_id"]) {
                                 $("#autocomplete-input-city").val(
-                                    g_state["tombstone"]["offerings"][i]["offering_city"]
+                                    g_state["tombstone"]["offerings"][i]["offering_city"] + ", " +
+                                    g_state["tombstone"]["offerings"][i]["offering_province"]
                                 );
                                 M.updateTextFields();
                             }
