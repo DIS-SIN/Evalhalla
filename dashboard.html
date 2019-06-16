@@ -207,7 +207,7 @@
         var build_scale = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col  s12 m4"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div>`);
+            $("#render_target").append(`<div class="col s12 m4  m4"><div class="card-panel"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
             //console.log(d_labels);
             //console.log(d_data);
 
@@ -268,7 +268,7 @@
             chartd.d_data.sort();
             chartd.d_labels.sort();
 
-            $("#render_target").append(`<div class="col s12 m4"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div>`);
+            $("#render_target").append(`<div class="col s12 m4  m4"><div class="card-panel"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
             var ctx = document.getElementById(`chart_rgroup_${chartd.target_qid}`).getContext('2d');
 
             //console.log(chartd.d_data);
@@ -316,7 +316,7 @@
         var build_textarea = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col s12 m4"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div>`);
+            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div></div>`);
             var ctx = $(`#chart_textarea_${chartd.target_qid}`);
 
             //console.log(chartd.d_data);

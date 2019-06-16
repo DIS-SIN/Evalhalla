@@ -131,6 +131,14 @@ blockquote {
     padding-right: 0;
 }
 
+.purp-canada-ca-edged-buffered {
+    border-left: 5px solid #3f2a56;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top:25px;
+}
+
 .grey-canada-ca-block-header {
     background-color: rgba(238, 239, 241, 1);
     font-size: 1.2em;
