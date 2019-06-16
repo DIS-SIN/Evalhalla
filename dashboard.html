@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
+        rel="stylesheet" media="screen" />
+    <link href="static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen" />
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="static/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="white nav-extended">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">Evalhalla</a>
+                <a data-target="mobile-demo" href="#logo-container" class="adm-function sidenav-trigger"
+                    aria-label="Open menu">
+                    <em class="material-icons mhi-menu" aria-hidden="true">menu</em>
+                </a>
+                <ul class="right">
+                    <li>
+                        <div>
+                            <a class="lang" href="#editor">
+                                <!--<span class="en">Français</span>
+                                <span class="fr">English</span>-->
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+
+    <div id="editor" class="container">
+
+        <div class="section">
+            <div class="row">
+
+                <div id="render_window" class="col s12">
+
+                    <div id="render_target" class="row">
+
+                        <!-- <canvas id="myChart" width="300" height="300"></canvas> -->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer id="admin_footer_end" class="page-footer purp-canada-ca">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h3 class="white-text">Evalhalla</h3>
+                    <p class="grey-text text-lighten-4">
+                        <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
+                        <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
+                            formulaires.</span>
+                    </p>
+                    <a class="brown-text text-lighten-3" href="https://github.com/DIS-SIN/">DIS-SIN Github</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <span class="en">Forms that function.</span>
+                <span class="fr">Des formes qui fonctionnent.</span>
+            </div>
+        </div>
+    </footer>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue-canada-ca" href="#editor" aria-label="Skip to top">
+            <em class="large material-icons fab-align">arrow_upward</em>
+        </a>
+    </div>
+    <!-- Dependencies -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <!-- Default Survey -->
+    <script src="static/sur/example_sur.js"></script>
+    <script src="static/sur/ut1_june18_event.js"></script>
+    <script src="static/sur/ut0_da_interest.js"></script>
+    <script>
+        var g_chart_data = [];
+        // Clean HTML string and write into our DIV
+
+        // string sanitizer 
+        const config_DOMPurify = {
+            /*ALLOWED_TAGS: ['p', '#text']*/
+            SAFE_FOR_JQUERY: true,
+            KEEP_CONTENT: false
+        };
+        const safe = function (dirty) {
+            return DOMPurify.sanitize(dirty, config_DOMPurify);
+        };
+
+        var qindex = {} // derefrence question text here
+        var parse_question_text = function (sur_text) {
+            var sa = sur_text.replace(/\n/g, "").split("Q:");
+            for (let i = 1; i < sa.length; i++) {
+                let evh_sai = sa[i];
+                evh_sai = evh_sai.split("/open")[0].split("/OPEN")[0]
+                    .split("/any")[0].split("/ANY")[0]
+                    .split("/scale")[0].split("/SCALE")[0]
+                    .split("/scale1-5")[0].split("/SCALE1-5")[0];
+                evh_sai = evh_sai;
+
+                // split by lang (en for now)
+                evh_sai = evh_sai.split("/;")[0];
+                evh_sai = evh_sai.replace("/en", "");
+                qindex["" + i] = evh_sai;
+            }
+        }
+
+
+        var params = null; // the search params
+        var sur = "ut1_june18_event"; // the survey to load
+        var entry = "direct";
+        try {
+            params = new URLSearchParams(window.location.search);
+            sur = safe(params.get("sur"));
+            entry = safe(params.get("entry"));
+        } catch (e) {
+            // good old Internet Explorer. Still writing "special" code for you...
+            params = window.location.search.split("?")[1]; // yep, I actually did that.
+            if (typeof params !== "undefined") {
+                sur = safe(params.split("sur=")[1].split("&entry=")[0]); // very cross. much browser. so wow.
+                entry = safe(params.split("entry=")[1].split("&sur=")[0]); // very cross. much browser. so wow.
+                //alert(sur + " " + entry);
+            }
+        }
+        if (sur == "" || typeof sur === "undefined") {
+            sur = "ut1_june18_event"; // the survey to load
+        }
+        var sur_evh = "";
+        if (sur == "ut1_june18_event") {
+            sur_evh = ut1_june18_event;
+        } else if (sur == "ut0_da_interest") {
+            sur_evh = ut0_da_interest;
+        } else if (sur == "example_nanos_paged") {
+            sur_evh = example_nanos_paged;
+        }
+        parse_question_text(sur_evh);
+
+        //alert(sur);
+        $("#render_target").append(`<div class="col s12"><h3>Instant Dashboard: ${sur}</h3></div>`);
+        // REGISTHOR INTEGRATION autocomplete load classifications from registhor
+        var survista_get_survey = function (survey) {
+            if (survey == "" || typeof survey === "undefined") {
+                survey = "ut1_june18_event";
+            }
+            $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
+                g_chart_data = (typeof response !== "undefined") ? response : [];
+
+                let questions_to_chart = [];
+                for (let i = 0; i < g_chart_data.length; i++) {
+                    let data_point = g_chart_data[i];
+                    for (const key in data_point) {
+                        let value = data_point[key];
+                        if (data_point.hasOwnProperty(key)) {
+                            let key_tokens = key.split("_");
+                            let data_type = key_tokens[0];
+                            if (data_type == "meta" || data_type == "tombstone") {
+                                continue;
+                            } else {
+                                let data_qid = key_tokens[2];
+                                if (questions_to_chart.includes(data_qid)) {
+                                    continue;
+                                }
+                                questions_to_chart.push(data_qid);
+                            }
+                        }
+                    }
+                }
+                //console.log(questions_to_chart);
+                questions_to_chart.sort(function (a, b) { return a - b; });
+                for (let i = 0; i < questions_to_chart.length; i++) {
+
+                    build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
+                }
+
+            });
+
+        }
+        survista_get_survey(sur);
+        var handle_meta = function () {
+            // TODO: Metadata and Tombstone
+        }
+
+        var build_scale = function (chartd) {
+            chartd.d_data.sort();
+            chartd.d_labels.sort();
+            $("#render_target").append(`<div class="col  s12 m4"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div>`);
+            //console.log(d_labels);
+            //console.log(d_data);
+
+            //scrub data
+            var d_data_new = [];
+            for (var i = 0; i < chartd.d_labels.length; i++) {
+                //alert(chartd.d_data[i]);
+                if (77 == chartd.d_labels[i] || "77" == chartd.d_labels[i]) {
+                    d_data_new.push("Unsure");
+                } else {
+                    d_data_new.push(chartd.d_labels[i])
+                }
+            }
+            chartd.d_labels = d_data_new;
+            // console.log(chartd.d_labels);
+
+            var ctx = document.getElementById(`chart_scale_${chartd.target_qid}`).getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartd.d_labels,//['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                        label: 'Responses',
+                        data: chartd.d_data//[12, 19, 3, 5, 2, 3]
+                        , backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ]
+                        , borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                suggestedMin: 10,
+                                max: 10
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+        var build_rgroup = function (chartd) {
+            chartd.d_data.sort();
+            chartd.d_labels.sort();
+
+            $("#render_target").append(`<div class="col s12 m4"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div>`);
+            var ctx = document.getElementById(`chart_rgroup_${chartd.target_qid}`).getContext('2d');
+
+            //console.log(chartd.d_data);
+            // scrub data to match form
+
+            var num_repl = -1;
+            var cur_labl = "";
+            var d_data_new = [];
+            for (var i = 0; i < chartd.d_data.length; i++) {
+                //alert(chartd.d_data[i]);
+                if (cur_labl == chartd.d_data[i]) {
+                    d_data_new[num_repl] = d_data_new[num_repl] + 1;
+                } else {
+                    cur_labl = chartd.d_data[i];
+                    num_repl += 1;
+                    d_data_new[num_repl] = 1;
+                }
+            }
+            chartd.d_data = d_data_new;
+            //console.log(chartd.d_data);
+
+            // And for a doughnut chart
+            var myDoughnutChart = new Chart(ctx, {
+                "type": "doughnut",
+                "data": {
+                    "labels": chartd.d_labels,//["Red", "Blue", "Yellow"], 
+                    "datasets": [
+                        {
+                            "label": '% Responses',
+                            "data": chartd.d_data
+                            , "backgroundColor": [
+                                "rgb(255, 99, 132)",
+                                "rgb(54, 162, 235)",
+                                "#ffcc00"
+                            ]
+                        }
+                    ]
+                }
+            });
+        }
+        var build_cgroup = function (chartd) {
+            build_rgroup(chartd);
+        }
+
+        var build_textarea = function (chartd) {
+            chartd.d_data.sort();
+            chartd.d_labels.sort();
+            $("#render_target").append(`<div class="col s12 m4"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div>`);
+            var ctx = $(`#chart_textarea_${chartd.target_qid}`);
+
+            //console.log(chartd.d_data);
+
+            var acc = 0.0;
+            for (let i = 0; i < chartd.d_data.length; i++) {
+                acc += parseFloat(chartd.d_data[i]);
+            }
+            var avg_senitment = (acc / parseFloat(chartd.d_data.length)).toFixed(2);
+            let clr = "";
+            if (avg_senitment == 0) {
+                clr = "#ffcc00";
+            } else if (avg_senitment > 0) {
+                clr = "rgb(54, 162, 235)";
+            } else if (avg_senitment < 0) {
+                clr = "rgb(255, 99, 132)";
+            }
+            ctx.append(`<p><strong>Avg. Sentiment</strong><br/><span style="color:${clr};font-size:2.3em;">${avg_senitment}</span></p>`);
+        }
+
+        var build_charts = function (chartd) {
+
+            //console.log(g_chart_data);
+            for (var i = 0; i < g_chart_data.length; i++) {
+                let data_point = g_chart_data[i];
+                for (const key in data_point) {
+                    let value = data_point[key];
+                    if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
+                        let key_tokens = key.split("_");
+                        //console.log(key_tokens);
+                        let data_type = key_tokens[0];
+                        if (data_type == "meta" || data_type == "tombstone") {
+                            handle_meta();
+                        } else {
+                            let data_qid = key_tokens[2];
+                            if (data_qid != chartd.target_qid) { continue; }
+                            chartd.chart_type = data_type;
+                            let data_detail = (typeof (key_tokens[3]) === "undefined") ? "data" : key_tokens[3];
+                            //console.log(data_qid + " " + data_detail);
+                            if (data_detail == "data" || data_detail == "sentimentScore") {
+                                if (data_type == "cgroup") {
+                                    //console.log("adding rgroup data: " + value);
+                                    for (let k = 0; k < value.length; k++) {
+                                        if (!chartd.d_labels.includes(value[k])) {
+                                            //console.log("adding label: " + value);
+                                            chartd.d_labels.push(value[k]);
+                                        }
+                                        chartd.d_data.push(value[k]);
+                                    }
+                                } else {
+                                    if (!chartd.d_labels.includes(value)) {
+                                        //console.log("adding label: " + value);
+                                        chartd.d_labels.push(value);
+                                    }
+                                }
+
+                                if (data_type == "scale") {
+                                    //console.log("adding scale data: " + value);
+                                    chartd.d_data.push(parseInt(value, 10));
+                                } else if (data_type == "rgroup") {
+                                    //console.log("adding rgroup data: " + value);
+                                    chartd.d_data.push(value);
+                                } else if (data_type == "textarea" && data_detail == "sentimentScore") {
+                                    //console.log("adding textarea sentiment: " + value);
+                                    chartd.d_data.push(value);
+                                }
+                            }
+                        }
+                    } else {  //property from protytpe chain
+                    }
+                }
+            }
+            //console.log(chartd.d_data);
+            if (chartd.chart_type == "scale") {
+                build_scale(chartd);
+            } else if (chartd.chart_type == "rgroup") {
+                build_rgroup(chartd);
+            } else if (chartd.chart_type == "cgroup") {
+                build_cgroup(chartd);
+            } else if (chartd.chart_type == "textarea") {
+                build_textarea(chartd);
+            }
+
+
+        };
+    </script>
+
+</body>
+
+</html>
