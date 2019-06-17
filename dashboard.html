@@ -46,21 +46,17 @@
 
     <div id="editor" class="container">
 
-        <div class="section">
-            <div class="row">
 
-                <div id="render_window" class="col s12">
+        <div id="render_window" class="col s12">
 
-                    <div id="render_target" class="row">
+            <div id="render_target" class="row">
 
-                        <!-- <canvas id="myChart" width="300" height="300"></canvas> -->
-
-                    </div>
-
-                </div>
+                <!-- <canvas id="myChart" width="300" height="300"></canvas> -->
 
             </div>
+
         </div>
+
     </div>
     <footer id="admin_footer_end" class="page-footer purp-canada-ca">
         <div class="container">
@@ -190,11 +186,14 @@
                     }
                 }
                 //console.log(questions_to_chart);
-                questions_to_chart.sort(function (a, b) { return a - b; });
-                for (let i = 0; i < questions_to_chart.length; i++) {
 
+                questions_to_chart.sort(function (a, b) { return a - b; });
+                //$("#render_target").append(`<div class="col s12"><h4>Question Answers</h4></div>`);
+                for (let i = 0; i < questions_to_chart.length; i++) {
                     build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
                 }
+                $("#render_target").append(`<div class="col s12"><h4>General Information</h4></div>`);
+                build_meta_charts();
 
             });
 
@@ -207,7 +206,7 @@
         var build_scale = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col s12 m4  m4"><div class="card-panel"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
+            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
             //console.log(d_labels);
             //console.log(d_data);
 
@@ -257,18 +256,24 @@
                             ticks: {
                                 beginAtZero: true,
                                 suggestedMin: 10,
-                                max: 10
+                                max: 10,
+                                minHeight: 10
                             }
                         }]
+                    },
+                    legend: {
+                        display: false,
+                        position: 'right'
                     }
                 }
+
             });
         }
         var build_rgroup = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
 
-            $("#render_target").append(`<div class="col s12 m4  m4"><div class="card-panel"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
+            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid] ? qindex[chartd.target_qid] : ""}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
             var ctx = document.getElementById(`chart_rgroup_${chartd.target_qid}`).getContext('2d');
 
             //console.log(chartd.d_data);
@@ -300,12 +305,28 @@
                             "label": '% Responses',
                             "data": chartd.d_data
                             , "backgroundColor": [
-                                "rgb(255, 99, 132)",
-                                "rgb(54, 162, 235)",
-                                "#ffcc00"
+
+
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                '#fdd835',
+                                '#fbc02d',
+                                '#a8f925',
+                                '#f5177f',
+                                '#ff7c4d'
                             ]
                         }
                     ]
+                },
+                options: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
                 }
             });
         }
@@ -316,7 +337,7 @@
         var build_textarea = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">QID${chartd.target_qid}</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div></div>`);
+            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div></div>`);
             var ctx = $(`#chart_textarea_${chartd.target_qid}`);
 
             //console.log(chartd.d_data);
@@ -337,6 +358,145 @@
             ctx.append(`<p><strong>Avg. Sentiment</strong><br/><span style="color:${clr};font-size:2.3em;">${avg_senitment}</span></p>`);
         }
 
+        var meta_data = {
+            entry: {
+                target_qid: "Entry",
+                chart_type: "rgroup",
+                d_data: [],
+                d_labels: []
+            },
+            evalhalla: {
+                target_qid: "Sur",
+                chart_type: "none",
+                d_data: [],
+                d_labels: []
+            },
+            useragent: {
+                target_qid: "Method",
+                chart_type: "rgroup",
+                d_data: [],
+                d_labels: []
+            },
+            language: {
+                target_qid: "Lang",
+                chart_type: "rgroup",
+                d_data: [],
+                d_labels: []
+            },
+            department: {
+                target_qid: "Department",
+                chart_type: "rgroup",
+                d_data: [],
+                d_labels: []
+            },
+            offering: {
+                target_qid: "Offering",
+                chart_type: "none",
+                d_data: [],
+                d_labels: []
+            },
+            classification: {
+                target_qid: "Classification",
+                chart_type: "rgroup",
+                d_data: [],
+                d_labels: []
+            },
+            city: {
+                target_qid: "City",
+                chart_type: "rgroup",
+                d_data: [],
+                d_labels: []
+            }
+        };
+
+        var build_meta_charts = function () {
+            let chartd = { "d_data": [], "d_labels": [] };
+            for (var i = 0; i < g_chart_data.length; i++) {
+                let data_point = g_chart_data[i];
+                for (const key in data_point) {
+                    let value = data_point[key];
+                    if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
+                        let key_tokens = key.split("_");
+                        //console.log(key_tokens);
+                        let data_type = key_tokens[0];
+                        if (data_type == "meta" || data_type == "tombstone") {
+                            let chartd = {};
+                            if (value == "") {
+                                value = "Blank";
+                            }
+                            if (data_type == "meta" && key_tokens[1] == "entry") {
+                                if (!meta_data.entry.d_labels.includes(value)) {
+                                    meta_data.entry.d_labels.push(value);
+                                }
+                                meta_data.entry.d_data.push(value);
+                            } else if (data_type == "meta" && key_tokens[1] == "evalhalla") {
+                                if (!meta_data.evalhalla.d_labels.includes(value)) {
+                                    meta_data.evalhalla.d_labels.push(value);
+                                }
+                                meta_data.evalhalla.d_data.push(value);
+                            } else if (data_type == "meta" && key_tokens[1] == "useragent") {
+                                if (!meta_data.useragent.d_labels.includes(value.split(" ")[0].split("/")[0])) {
+                                    meta_data.useragent.d_labels.push(value.split(" ")[0].split("/")[0]);
+                                }
+                                meta_data.useragent.d_data.push(value.split(" ")[0].split("/")[0]);
+                            } else if (data_type == "tombstone" && key_tokens[1] == "language") {
+                                if (!meta_data.language.d_labels.includes(value)) {
+                                    meta_data.language.d_labels.push(value);
+                                }
+                                meta_data.language.d_data.push(value);
+                            } else if (data_type == "tombstone" && key_tokens[1] == "department") {
+                                if (!meta_data.department.d_labels.includes(value)) {
+                                    meta_data.department.d_labels.push(value);
+                                }
+                                meta_data.department.d_data.push(value);
+                            } else if (data_type == "tombstone" && key_tokens[1] == "offering") {
+                                if (!meta_data.offering.d_labels.includes(value)) {
+                                    meta_data.offering.d_labels.push(value);
+                                }
+                                meta_data.offering.d_data.push(value);
+                            } else if (data_type == "tombstone" && key_tokens[1] == "classification") {
+                                if (!meta_data.classification.d_labels.includes(value)) {
+                                    meta_data.classification.d_labels.push(value);
+                                }
+                                meta_data.classification.d_data.push(value);
+                            } else if (data_type == "tombstone" && key_tokens[1] == "city") {
+                                if (!meta_data.city.d_labels.includes(value)) {
+                                    meta_data.city.d_labels.push(value);
+                                }
+                                meta_data.city.d_data.push(value);
+                            }
+                            /*
+                                "meta_entry_method": "",
+                                "meta_evalhalla_sur": "ut0_da_interest",
+                                "meta_useragent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1",
+                                
+                                "tombstone_language": "en",
+                                "tombstone_department": "Parcs Canada",
+                                "tombstone_offering_id": "119639",
+                                "tombstone_classification": "CS-05",
+                                "tombstone_city": "NATIONAL CAPITAL REGION (NCR), NCR/RCN", 
+                                
+                            */
+                        }
+                    }
+                }
+            }
+            //$("#render_target").append(`<div class="card-panel">${JSON.stringify(chartd.d_data)}</div>`);
+            for (const key in meta_data) {
+                let value = meta_data[key];
+                if (meta_data.hasOwnProperty(key)) {
+                    //qindex[key] = key;
+                    if (value.chart_type == "scale") {
+                        build_scale(value);
+                    } else if (value.chart_type == "rgroup") {
+                        build_rgroup(value);
+                    } else if (value.chart_type == "none") {
+                        //build_rgroup(value);
+                    }
+                }
+            }
+
+        }
         var build_charts = function (chartd) {
 
             //console.log(g_chart_data);
@@ -349,7 +509,7 @@
                         //console.log(key_tokens);
                         let data_type = key_tokens[0];
                         if (data_type == "meta" || data_type == "tombstone") {
-                            handle_meta();
+                            continue;
                         } else {
                             let data_qid = key_tokens[2];
                             if (data_qid != chartd.target_qid) { continue; }
