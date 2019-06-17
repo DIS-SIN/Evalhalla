@@ -102,7 +102,7 @@ const evh_templates = {
             <div class="row">
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="textarea_qid_%qid"><span class="en">Enter your answer</span><span class="fr">Soumettre votre reponse</span></label>
+                        <label for="textarea_qid_%qid"><span class="en">Enter your answer</span><span class="fr">Inscrivez votre réponse</span></label>
                         <textarea type="text" %reqattr id="textarea_qid_%qid" name="textarea_qid_%qid" class="%reqcls materialize-textarea"></textarea>
                     </div>
                 </div>
@@ -168,7 +168,7 @@ const evh_templates = {
             <div class="col s6">
             <div class="input-field s6">
             <input id="inline_qid_%qid_dept_0" class="ev_inline_dept %reqcls" %reqattr name="inline_qid_%qid_dept_0" type="text">
-            <label for="inline_qid_%qid_dept_0"><span class="en">Department</span><span class="fr">Department</span></label>
+            <label for="inline_qid_%qid_dept_0"><span class="en">Department</span><span class="fr">Ministère</span></label>
             </div>
             </div>
             <div class="col s6">

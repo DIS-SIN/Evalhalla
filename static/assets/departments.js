@@ -215,7 +215,7 @@ var autoc_departments = [
     "Développement économique Canada pour les régions du Québec",
     "Direction générale de la propriété intellectuelle",
     "Diversification de l'économie de l'Ouest Canada",
-    "École de la fonction publique du Canada",
+    "École de la fonction publique du Canada (EFPC)",
     "Education Statistics National Advisory Committee",
     "Emploi et Développement social Canada",
     "Employment and Social Development Canada",
@@ -465,5 +465,7 @@ var autoc_departments = [
     "Veterans Affairs Canada",
     "Veterans Ombudsman",
     "Veterans Review and Appeal Board",
-    "Western Economic Diversification Canada"
+    "Western Economic Diversification Canada",
+    "Women and Gender Equality Canada",
+    "Condition féminine Canada",
 ];

@@ -6,11 +6,11 @@ var ut1_june18_event = `# /en UT1-J18 /; /fr UT1-J18 /;
 
 ###
 /en Please let us know about your experience at this event /;
-/fr S'il vous plaît laissez-nous savoir sur votre expérience lors de cet événement /; 
+/fr Veuillez nous faire part de votre expérience lors de cet événement /; 
 
 *Q:
 /en 1. How did you participate in the event? /;
-/fr 1. Par quel moyen avez-vous participé à l’activité? /; 
+/fr 1. De quelle façon avez-vous participé à l’activité? /; 
 /ONE
 /en In person /; /fr En personne /; 
 /en Via webcast /; /fr Par webdiffusion /; 
@@ -18,12 +18,12 @@ var ut1_june18_event = `# /en UT1-J18 /; /fr UT1-J18 /;
 
 *Q: 
 /en 2. Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
-/fr 2. Globalement, à quel point êtes-vous satisfait de cette activité d’apprentissage? Cotez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
+/fr 2. Dans l’ensemble, à quel point êtes-vous satisfait(e) de cette activité d’apprentissage? Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
 /scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 *Q: 
 /en 3a. Did this event meet your expectations as it was outlined in the advertisement? /;
-/fr 3a. Cette activité a t elle répondu à vos attentes, d’après la description de l’annonce? /;
+/fr 3a. D’après la description de l’annonce, est-ce que cetteactivité a répondu à vos attentes? /;
 /ONE
 /en Yes /; /fr Oui /; 
 /en No /; /fr Non /; 
@@ -37,13 +37,13 @@ Q:
 /pagebreak
 
 *Q:
-/en 4a. How satisfied were you with the speaker(s) for this event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
-/fr 4a. À quel point êtes-vous satisfait du ou des intervenants ayant participé à cette activité? Cotez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
+/en 4a. How satisfied were you with the speaker(s) for this event on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
+/fr 4a. À quel point êtes-vous satisfait(e) du ou des conférenciers ayant participé à cette activité? Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait » /;
 /scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 Q: 
 /en 4b. Why did you give the score that you did? /;
-/fr 4b. Veuillez justifier votre cote. /;
+/fr 4b. Veuillez justifier votre évaluation. /;
 /open
 
 *Q: 
@@ -51,13 +51,13 @@ Q:
 /fr 5a. Avez-vous appris quelque chose de nouveau durant cette activité? /;
 /ONE
 /en I did not learn anything new /; /fr Je n’ai rien appris de nouveau. /;
-/en I learnt something new. /; /fr J’ai appris quelque chose de nouveau. /;
+/en I learned something new. /; /fr J’ai appris quelque chose de nouveau. /;
 /en I learned a lot of new things. /; /fr J’ai appris beaucoup de choses.  /;
 ;
 
 Q: 
-/en 5b. If you learned something during the event, please describe what you have learned. /;
-/fr 5b. Si vous avez appris quelque chose durant l’activité, veuillez décrire la nature de vos apprentissages. /;
+/en 5b. Please describe what you learned from this event /;
+/fr 5b. Veuillez décrire la nature de vos apprentissages durant l’activité. /;
 /open
 
 *Q: 

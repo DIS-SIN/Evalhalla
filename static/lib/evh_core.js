@@ -812,7 +812,7 @@
                 if (cmd == "req question") {
                     snip = snip.replace(/\%req/g, '<span class="badge red white-text"><span class="en">required</span><span class="fr">requis</span></span>');
                 } else {
-                    snip = snip.replace(/\%req/g, '');
+                    snip = snip.replace(/\%req/g, '<span class="badge grey white-text"><span class="en">optional</span><span class="fr">optionnel</span></span>');
                 }
                 g_control_flags["question"]["form"] = snip;
                 // handle json
