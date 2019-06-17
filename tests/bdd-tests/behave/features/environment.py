@@ -66,13 +66,13 @@ def before_all(context):
 
     if webdriver_wrapper == WebdriverWrapperType.RAW:
         context.driver = webdriver.Chrome(
-          executable_path="C:\\Users\\rukau\\Desktop\\Github\\xmlMapper\\Tests\\chromedriver.exe",
+          #executable_path=CHROME_EXE_PATH,
           chrome_options=chrome_options
         )
     elif webdriver_wrapper == WebdriverWrapperType.ELEMENTIUM:
         context.driver = SeElements(
             webdriver.Chrome(
-                executable_path="C:\\Users\\rukau\\Desktop\\Github\\xmlMapper\\Tests\\chromedriver.exe",
+                #executable_path=CHROME_EXE_PATH,
                 chrome_options=chrome_options
             )
         )
@@ -106,7 +106,7 @@ def init_selenium_chrome_driver(app):
     global chrome_options
     return Driver(
       app, browser="chrome",
-      executable_path="C:\\Users\\rukau\\Desktop\\Github\\xmlMapper\\Tests\\chromedriver.exe",
+      #executable_path=CHROME_EXE_PATH,
       chrome_options=chrome_options
     )
 
