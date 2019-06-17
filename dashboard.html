@@ -188,7 +188,9 @@
                 //console.log(questions_to_chart);
 
                 questions_to_chart.sort(function (a, b) { return a - b; });
-                //$("#render_target").append(`<div class="col s12"><h4>Question Answers</h4></div>`);
+                $("#render_target").append(`<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">
+                    <p><strong>Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">${g_chart_data.length}</span></p>
+                    </div></div></div>`);
                 for (let i = 0; i < questions_to_chart.length; i++) {
                     build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
                 }
