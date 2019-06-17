@@ -38,25 +38,14 @@
                         </div>
                     </li>
                 </ul>
-
             </div>
         </nav>
     </div>
-
-
     <div id="editor" class="container">
-
-
         <div id="render_window" class="col s12">
-
             <div id="render_target" class="row">
-
-                <!-- <canvas id="myChart" width="300" height="300"></canvas> -->
-
             </div>
-
         </div>
-
     </div>
     <footer id="admin_footer_end" class="page-footer purp-canada-ca">
         <div class="container">
@@ -125,7 +114,6 @@
             }
         }
 
-
         var params = null; // the search params
         var sur = "ut1_june18_event"; // the survey to load
         var entry = "direct";
@@ -155,9 +143,8 @@
         }
         parse_question_text(sur_evh);
 
-        //alert(sur);
         $("#render_target").append(`<div class="col s12"><h3>Instant Dashboard: ${sur}</h3></div>`);
-        // REGISTHOR INTEGRATION autocomplete load classifications from registhor
+        // SURVUSTA INTEGRATION - data pull
         var survista_get_survey = function (survey) {
             if (survey == "" || typeof survey === "undefined") {
                 survey = "ut1_june18_event";
@@ -185,7 +172,6 @@
                         }
                     }
                 }
-                //console.log(questions_to_chart);
 
                 questions_to_chart.sort(function (a, b) { return a - b; });
                 $("#render_target").append(`<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">
@@ -201,16 +187,11 @@
 
         }
         survista_get_survey(sur);
-        var handle_meta = function () {
-            // TODO: Metadata and Tombstone
-        }
 
         var build_scale = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
             $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
-            //console.log(d_labels);
-            //console.log(d_data);
 
             //scrub data
             var d_data_new = [];
@@ -234,20 +215,12 @@
                         label: 'Responses',
                         data: chartd.d_data//[12, 19, 3, 5, 2, 3]
                         , backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+                            'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'
                         ]
                         , borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
+                            'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'
                         ],
                         borderWidth: 1
                     }]
@@ -278,9 +251,7 @@
             $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid] ? qindex[chartd.target_qid] : ""}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
             var ctx = document.getElementById(`chart_rgroup_${chartd.target_qid}`).getContext('2d');
 
-            //console.log(chartd.d_data);
             // scrub data to match form
-
             var num_repl = -1;
             var cur_labl = "";
             var d_data_new = [];
@@ -295,7 +266,6 @@
                 }
             }
             chartd.d_data = d_data_new;
-            //console.log(chartd.d_data);
 
             // And for a doughnut chart
             var myDoughnutChart = new Chart(ctx, {
@@ -307,19 +277,9 @@
                             "label": '% Responses',
                             "data": chartd.d_data
                             , "backgroundColor": [
-
-
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                '#fdd835',
-                                '#fbc02d',
-                                '#a8f925',
-                                '#f5177f',
-                                '#ff7c4d'
+                                'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)',
+                                '#fdd835', '#fbc02d', '#a8f925', '#f5177f', '#ff7c4d'
                             ]
                         }
                     ]
@@ -342,8 +302,6 @@
             $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div></div>`);
             var ctx = $(`#chart_textarea_${chartd.target_qid}`);
 
-            //console.log(chartd.d_data);
-
             var acc = 0.0;
             for (let i = 0; i < chartd.d_data.length; i++) {
                 acc += parseFloat(chartd.d_data[i]);
@@ -361,54 +319,14 @@
         }
 
         var meta_data = {
-            entry: {
-                target_qid: "Entry",
-                chart_type: "rgroup",
-                d_data: [],
-                d_labels: []
-            },
-            evalhalla: {
-                target_qid: "Sur",
-                chart_type: "none",
-                d_data: [],
-                d_labels: []
-            },
-            useragent: {
-                target_qid: "Method",
-                chart_type: "rgroup",
-                d_data: [],
-                d_labels: []
-            },
-            language: {
-                target_qid: "Lang",
-                chart_type: "rgroup",
-                d_data: [],
-                d_labels: []
-            },
-            department: {
-                target_qid: "Department",
-                chart_type: "rgroup",
-                d_data: [],
-                d_labels: []
-            },
-            offering: {
-                target_qid: "Offering",
-                chart_type: "none",
-                d_data: [],
-                d_labels: []
-            },
-            classification: {
-                target_qid: "Classification",
-                chart_type: "rgroup",
-                d_data: [],
-                d_labels: []
-            },
-            city: {
-                target_qid: "City",
-                chart_type: "rgroup",
-                d_data: [],
-                d_labels: []
-            }
+            entry: { target_qid: "Entry", chart_type: "rgroup", d_data: [], d_labels: [] },
+            evalhalla: { target_qid: "Sur", chart_type: "none", d_data: [], d_labels: [] },
+            useragent: { target_qid: "Method", chart_type: "rgroup", d_data: [], d_labels: [] },
+            language: { target_qid: "Lang", chart_type: "rgroup", d_data: [], d_labels: [] },
+            department: { target_qid: "Department", chart_type: "rgroup", d_data: [], d_labels: [] },
+            offering: { target_qid: "Offering", chart_type: "none", d_data: [], d_labels: [] },
+            classification: { target_qid: "Classification", chart_type: "rgroup", d_data: [], d_labels: [] },
+            city: { target_qid: "City", chart_type: "rgroup", d_data: [], d_labels: [] }
         };
 
         var build_meta_charts = function () {
@@ -419,7 +337,18 @@
                     let value = data_point[key];
                     if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
                         let key_tokens = key.split("_");
-                        //console.log(key_tokens);
+                        /*
+                                "meta_entry_method": "",
+                                "meta_evalhalla_sur": "ut0_da_interest",
+                                "meta_useragent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1",
+                                
+                                "tombstone_language": "en",
+                                "tombstone_department": "Parcs Canada",
+                                "tombstone_offering_id": "119639",
+                                "tombstone_classification": "CS-05",
+                                "tombstone_city": "NATIONAL CAPITAL REGION (NCR), NCR/RCN", 
+                                
+                        */
                         let data_type = key_tokens[0];
                         if (data_type == "meta" || data_type == "tombstone") {
                             let chartd = {};
@@ -467,18 +396,6 @@
                                 }
                                 meta_data.city.d_data.push(value);
                             }
-                            /*
-                                "meta_entry_method": "",
-                                "meta_evalhalla_sur": "ut0_da_interest",
-                                "meta_useragent": "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1",
-                                
-                                "tombstone_language": "en",
-                                "tombstone_department": "Parcs Canada",
-                                "tombstone_offering_id": "119639",
-                                "tombstone_classification": "CS-05",
-                                "tombstone_city": "NATIONAL CAPITAL REGION (NCR), NCR/RCN", 
-                                
-                            */
                         }
                     }
                 }
@@ -508,7 +425,6 @@
                     let value = data_point[key];
                     if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
                         let key_tokens = key.split("_");
-                        //console.log(key_tokens);
                         let data_type = key_tokens[0];
                         if (data_type == "meta" || data_type == "tombstone") {
                             continue;
@@ -517,32 +433,26 @@
                             if (data_qid != chartd.target_qid) { continue; }
                             chartd.chart_type = data_type;
                             let data_detail = (typeof (key_tokens[3]) === "undefined") ? "data" : key_tokens[3];
-                            //console.log(data_qid + " " + data_detail);
+
                             if (data_detail == "data" || data_detail == "sentimentScore") {
                                 if (data_type == "cgroup") {
-                                    //console.log("adding rgroup data: " + value);
                                     for (let k = 0; k < value.length; k++) {
                                         if (!chartd.d_labels.includes(value[k])) {
-                                            //console.log("adding label: " + value);
                                             chartd.d_labels.push(value[k]);
                                         }
                                         chartd.d_data.push(value[k]);
                                     }
                                 } else {
                                     if (!chartd.d_labels.includes(value)) {
-                                        //console.log("adding label: " + value);
                                         chartd.d_labels.push(value);
                                     }
                                 }
 
                                 if (data_type == "scale") {
-                                    //console.log("adding scale data: " + value);
                                     chartd.d_data.push(parseInt(value, 10));
                                 } else if (data_type == "rgroup") {
-                                    //console.log("adding rgroup data: " + value);
                                     chartd.d_data.push(value);
                                 } else if (data_type == "textarea" && data_detail == "sentimentScore") {
-                                    //console.log("adding textarea sentiment: " + value);
                                     chartd.d_data.push(value);
                                 }
                             }
@@ -551,7 +461,7 @@
                     }
                 }
             }
-            //console.log(chartd.d_data);
+
             if (chartd.chart_type == "scale") {
                 build_scale(chartd);
             } else if (chartd.chart_type == "rgroup") {
@@ -561,8 +471,6 @@
             } else if (chartd.chart_type == "textarea") {
                 build_textarea(chartd);
             }
-
-
         };
     </script>
 
