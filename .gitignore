@@ -35,3 +35,4 @@ neuron.json
 /private
 *.sur
 tests/env
+tests/bdd-tests/behave/logs

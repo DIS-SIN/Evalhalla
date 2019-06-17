@@ -3,8 +3,16 @@ language: python
 python:
   - "3.6"
 
+addons:
+  chrome: stable
+
 install:
   - pip install -r tests/bdd-tests/behave/requirements.txt
+
+before_script:
+  - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
+  - export CHROME_EXE_PATH=chromium-browser
 
 script:
   - cd tests/bdd-tests/behave

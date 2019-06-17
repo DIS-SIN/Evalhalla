@@ -106,7 +106,7 @@ def init_selenium_chrome_driver(app):
     global chrome_options
     return Driver(
       app, browser="chrome",
-      executable_path=CHROME_EXE_PATH,
+      executable_path="../../../../chromedriver.exe",
       chrome_options=chrome_options
     )
 
