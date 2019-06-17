@@ -7,10 +7,9 @@ services:
   - docker
 
 before_install:
-- docker build -t dis-sin/bdd-test-runner
-- docker run -d -p 127.0.0.1:80:4567 dis-sin/bdd-test-runner /bin/sh -c "cd /root/bdd-test-runner; bundle exec foreman start;"
-- docker ps -a
-- docker run dis-sin/bdd-test-runner /bin/sh -c "cd /root/bdd-test-runner; bundle exec rake test"
+- git clone https://github.com/DIS-SIN/bdd-test-runner
+- cd bdd-test-runner
+- docker-compose up
 
 script:
   - cd tests/behave
