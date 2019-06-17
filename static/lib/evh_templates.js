@@ -23,7 +23,7 @@ const evh_templates = {
                         <div class="col s12 center">
                             <a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-left left"><em class="material-icons fab-align">chevron_left</em></a>
                             <a href="#editor" id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large ">
-                                <span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>
+                                <span class="en">SUBMIT</span><span class="fr">SOUMETTRE</span></a>
                             <a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-right right"><em class="material-icons fab-align">chevron_right</em></a>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ const evh_templates = {
                         <div class="row">
                     <div class="col s12 center">
                         <a id="evalhalla_submit" class="waves-effect waves-light purp-canada-ca btn-large">
-                        <span class="en">SUBMIT</span><span class="fr">PROVIR</span></a>
+                        <span class="en">SUBMIT</span><span class="fr">SOUMETTRE</span></a>
                     </div>
                 </div> */
         "header": `
@@ -64,7 +64,7 @@ const evh_templates = {
         "scale": `
             <div class="row">
                 <div class="col s12" >
-                    <label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Choose your rating</span><span class="fr">Chosir s.v.p.</span></label>
+                    <label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Choose your rating</span><span class="fr">Veuillez choisir</span></label>
                     <select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">
                     <option value="" disabled selected></option>
                     <option value="1">1 %low</option>
@@ -85,7 +85,7 @@ const evh_templates = {
         "scale1-5": `
             <div class="row">
                 <div class="col s12" >
-                    <label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Choose your rating</span><span class="fr">Chosir s.v.p.</span></label>
+                    <label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Choose your rating</span><span class="fr">Veuillez choisir</span></label>
                     <select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">
                     <option value="" disabled selected></option>
                     <option value="1">1 %low</option>
@@ -102,7 +102,7 @@ const evh_templates = {
             <div class="row">
                 <div class="row">
                     <div class="input-field col s12">
-                        <label for="textarea_qid_%qid"><span class="en">Enter your answer</span><span class="fr">Provir votre reponse</span></label>
+                        <label for="textarea_qid_%qid"><span class="en">Enter your answer</span><span class="fr">Soumettre votre reponse</span></label>
                         <textarea type="text" %reqattr id="textarea_qid_%qid" name="textarea_qid_%qid" class="%reqcls materialize-textarea"></textarea>
                     </div>
                 </div>

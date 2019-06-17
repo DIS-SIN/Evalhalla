@@ -93,6 +93,6 @@ Q:
 /fr 8. Autres commentaires /;
 /open
 
-// /en Thank you for your time! /; /fr Merci pour votre réponses! /;
+// /en Thank you for your time! /; /fr Merci pour vos réponses! /;
 
 `;
