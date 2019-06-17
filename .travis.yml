@@ -3,14 +3,9 @@ language: python
 python:
   - "3.6"
 
-services:
-  - docker
-
-before_install:
-- git clone https://github.com/DIS-SIN/bdd-test-runner
-- cd bdd-test-runner
-- docker-compose up
+install:
+  - pip install -r tests/bdd-tests/behave/requirements.txt
 
 script:
-  - cd tests/behave
+  - cd tests/bdd-tests/behave
   - behave
