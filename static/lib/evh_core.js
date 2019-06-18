@@ -12,13 +12,17 @@
         // Autodisplay Overrides
         //
         var auto_display_mode = false; // if you pass a query param in with sur=example_nanos_paged for example, it goes right into "presentation mode"
+        var load = "ig";
         var params = null; // the search params
         var sur = null; // the survey to load
-        var entry = "direct";
+        var resp = "hty";
+        var entry = "direct"; // the entry method to the survey
+        var weasel = "weasel"; // the weasel
         try {
             params = new URLSearchParams(window.location.search);
             sur = safe(params.get("sur"));
             entry = safe(params.get("entry"));
+            weasel = safe(params.get("weasel"));
         } catch (e) {
             // good old Internet Explorer. Still writing "special" code for you...
             try {
@@ -39,8 +43,10 @@
             } catch (er) { }
         }
 
+
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
+        if (weasel != "m" + load + resp) { sur = "ut1_june18_event"; }
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
         if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
         if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
@@ -50,7 +56,7 @@
         var form_wrap = function (src) {
             var pages = "";
             for (var i = 1; i <= g_control_flags["pageid"]; i++) {
-                pages += `<li class="waves-effect ev-page-sel ev-page-sel-` + i + `"><a>` + i + `</a></li>`;
+                pages += '<li class="waves-effect ev-page-sel ev-page-sel-' + i + '"><a>' + i + '</a></li>';
             }
             var fwtmpl = evh_templates["html"]["form wrap"];
             var currpct = 0;
@@ -982,7 +988,7 @@
                 }
                 if (typeof snip !== "undefined" && snip != false) {
                     if (cmd == "pick one" || cmd == "pick any") {
-                        snip = snip.replace(/\%form/g, `<fieldset><legend><span class="en">Pick</span><span class="fr">Choisir</span></legend>${form}</fieldset>`);
+                        snip = snip.replace(/\%form/g, '<fieldset><legend><span class="en">Pick</span><span class="fr">Choisir</span></legend>' + form + '</fieldset>');
                     } else {
                         snip = snip.replace(/\%form/g, form);
                     }
@@ -1847,31 +1853,31 @@
                     // end delete
                     for (var i = 0; i < offs.length; i++) {
                         if (i == 0) {
-                            suggested = `<div style="padding: 1em;">
-                                        <span class="badge red white-text" style="float:none;padding:0.3em;font-size:1.1em;">
-                                            <span class="en">Suggested</span><span class="fr">Suggéré</span>
-                                        </span></div>
-                                        `
+                            suggested = '<div style="padding: 1em;">' +
+                                '<span class="badge red white-text" style="float:none;padding:0.3em;font-size:1.1em;">' +
+                                '<span class="en">Suggested</span><span class="fr">Suggéré</span>' +
+                                '</span></div>' +
+                                '';
                         } else {
                             suggested = "";
                         }
-                        offs_html += `<div class="card-panel purp-canada-ca-edged">
-                                        <div class="padbox badgelarge">
-                                            ${suggested}
-                                            <div class="row">
-                                                <p>
-                                                <span class="offeringtitle">${offs[i]["course_title"]}</span><br />
-                                                <em>${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}</em><br />
-                                                <sub>${offs[i]["offering_id"]} - ${offs[i]["course_code"]}</sub>
-                                                </p>
-                                            </div>
-                                            <div class="row">
-                                                <a href="#editor" id="off_${offs[i]["offering_id"]}" class="select-offering btn btn-large purp-canada-ca">
-                                                    <span class="en">Select</span><span class="fr">Choisir</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>`;
+                        offs_html += '<div class="card-panel purp-canada-ca-edged">' +
+                            '<div class="padbox badgelarge">' +
+                            suggested +
+                            '<div class="row">' +
+                            '<p>' +
+                            '<span class="offeringtitle">' + offs[i]["course_title"] + '</span><br />' +
+                            '<em>' + offs[i]["offering_city"] + ', ' + offs[i]["offering_province"] + '</em><br />' +
+                            '<sub>' + offs[i]["offering_id"] + ' - ' + offs[i]["course_code"] + '</sub>' +
+                            '</p>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<a href="#editor" id="off_' + offs[i]["offering_id"] + '" class="select-offering btn btn-large purp-canada-ca">' +
+                            '<span class="en">Select</span><span class="fr">Choisir</span>' +
+                            '</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
                     }
                     g_state["tombstone"]["offerings"] = offs;

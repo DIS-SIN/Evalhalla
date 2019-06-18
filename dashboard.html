@@ -153,7 +153,7 @@
         }
         parse_question_text(sur_evh);
 
-        $("#render_target").append(`<div class="col s12"><h3>Instant Dashboard: ${sur}</h3></div>`);
+        $("#render_target").append('<div class="col s12"><h3>Instant Dashboard: ' + sur + '</h3></div>');
         // SURVUSTA INTEGRATION - data pull
         var g_response = [];
         var survista_get_survey = function (survey) {
@@ -191,16 +191,16 @@
                 }
 
                 questions_to_chart.sort(function (a, b) { return a - b; });
-                $("#render_target").append(`<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">
-                    <div class="row">
-                    <div class="col s12 m4 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">${g_chart_data.length}</span></p></div>
-                    <div class="col s12 m4 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>
-                    <div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>
-                    </div></div></div></div>`);
+                $("#render_target").append('<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">' +
+                    '<div class="row">' +
+                    '<div class="col s12 m4 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">' + g_chart_data.length + '</span></p></div>' +
+                    '<div class="col s12 m4 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>' +
+                    '<div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>' +
+                    '</div></div></div></div>');
                 for (let i = 0; i < questions_to_chart.length; i++) {
                     build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
                 }
-                $("#render_target").append(`<div class="col s12"><h4>General Information</h4></div>`);
+                $("#render_target").append('<div class="col s12"><h4>General Information</h4></div>');
                 build_meta_charts();
 
             });
@@ -222,7 +222,7 @@
         var build_scale = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid] ? qindex[chartd.target_qid] : ""}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
+            $("#render_target").append('<div class="col s12 m4"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub>' + (qindex[chartd.target_qid] ? qindex[chartd.target_qid] : "") + '</sub><canvas id="chart_scale_' + chartd.target_qid + '" width="300" height="300"></canvas></div></div>');
 
             //scrub data
             var d_data_new = [];
@@ -253,7 +253,7 @@
             //console.log(chartd.d_labels);
             //console.log(chartd.d_data);
 
-            var ctx = document.getElementById(`chart_scale_${chartd.target_qid}`).getContext('2d');
+            var ctx = document.getElementById('chart_scale_' + chartd.target_qid + '').getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -295,8 +295,8 @@
             chartd.d_data.sort();
             chartd.d_labels.sort();
 
-            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid] ? qindex[chartd.target_qid] : ""}</sub><canvas id="chart_rgroup_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
-            var ctx = document.getElementById(`chart_rgroup_${chartd.target_qid}`).getContext('2d');
+            $("#render_target").append('<div class="col s12 m4"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub>' + (qindex[chartd.target_qid] ? qindex[chartd.target_qid] : "") + '</sub><canvas id="chart_rgroup_' + chartd.target_qid + '" width="300" height="300"></canvas></div></div>');
+            var ctx = document.getElementById('chart_rgroup_' + chartd.target_qid + '').getContext('2d');
 
             // scrub data to match form
             var num_repl = -1;
@@ -346,8 +346,8 @@
         var build_textarea = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid]}</sub><div id="chart_textarea_${chartd.target_qid}" width="300" height="300"></div></div></div>`);
-            var ctx = $(`#chart_textarea_${chartd.target_qid}`);
+            $("#render_target").append('<div class="col s12 m4"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub>' + qindex[chartd.target_qid] + '</sub><div id="chart_textarea_' + chartd.target_qid + '" width="300" height="300"></div></div></div>');
+            var ctx = $('#chart_textarea_' + chartd.target_qid + '');
 
             var acc = 0.0;
             for (let i = 0; i < chartd.d_data.length; i++) {
@@ -362,7 +362,7 @@
             } else if (avg_senitment < 0) {
                 clr = "rgb(255, 99, 132)";
             }
-            ctx.append(`<p><strong>Avg. Sentiment</strong><br/><span style="color:${clr};font-size:2.3em;">${avg_senitment}</span></p>`);
+            ctx.append('<p><strong>Avg. Sentiment</strong><br/><span style="color:' + clr + ';font-size:2.3em;">' + avg_senitment + '</span></p>');
         }
 
         var meta_data = {};
@@ -456,7 +456,7 @@
             $(".cht_roles").html([...new Set(meta_data.classification.d_data)].length);
             $(".cht_depts").html([...new Set(meta_data.department.d_data)].length);
             meta_data.department.d_labels.length
-            //$("#render_target").append(`<div class="card-panel">${JSON.stringify(chartd.d_data)}</div>`);
+
             for (const key in meta_data) {
                 let value = meta_data[key];
                 if (meta_data.hasOwnProperty(key)) {
