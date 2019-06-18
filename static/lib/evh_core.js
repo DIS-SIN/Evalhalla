@@ -710,7 +710,8 @@
         };
 
         // helper function to take the multiline input and pack it into one object
-        const pack_text = function (src_a, i, pack, join = " ") {
+        const pack_text = function (src_a, i, pack, join) {
+            join = join || " ";
             var nextcmd = "null";
             var pack_json = "";
             while (nextcmd == "null") {

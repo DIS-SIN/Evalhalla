@@ -88,7 +88,8 @@ var autoc_load_departments = function (api_load) {
 
 // REGISTHOR INTEGRATION autocomplete load cities from registhor
 // local js options are the default to reduce api call load
-var autoc_load_cities = function (api_load = false) {
+var autoc_load_cities = function (api_load) {
+    api_load = api_load || false;
     if (api_load == true) {
         $.ajax({
             url: api_get_cities_route + api_key,
