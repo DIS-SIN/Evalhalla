@@ -172,7 +172,7 @@
                 let questions_to_chart = [];
                 for (let i = 0; i < g_chart_data.length; i++) {
                     let data_point = g_chart_data[i];
-                    for (const key in data_point) {
+                    for (let key in data_point) {
                         let value = data_point[key];
                         if (data_point.hasOwnProperty(key)) {
                             let key_tokens = key.split("_");
