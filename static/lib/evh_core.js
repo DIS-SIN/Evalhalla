@@ -23,10 +23,18 @@
             // good old Internet Explorer. Still writing "special" code for you...
             try {
                 params = window.location.search.split("?")[1]; // yep, I actually did that.
-                if (typeof params !== "undefined") {
-                    sur = safe(params.split("sur=")[1].split("&entry=")[0]); // very cross. much browser. so wow.
-                    entry = safe(params.split("entry=")[1].split("&sur=")[0]); // very cross. much browser. so wow.
-                    alert(sur + " " + entry);
+                if (typeof params !== "undefined" && params != null && params != "") {
+                    try {
+                        sur = safe(params.split("sur=")[1].split("&entry=")[0]); // very cross. much browser. so wow.
+                    } catch (e1) {
+                        sur = null;
+                    }
+                    try {
+                        entry = safe(params.split("entry=")[1].split("&sur=")[0]); // very cross. much browser. so wow.
+                    } catch (e2) {
+                        entry = "direct";
+                    }
+                    //alert(sur + " " + entry);
                 }
             } catch (er) { }
         }
