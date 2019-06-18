@@ -209,7 +209,7 @@
         var build_scale = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid]}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
+            $("#render_target").append(`<div class="col s12 m4"><div class="card-panel"><span class="badge">(${chartd.target_qid})</span><sub>${qindex[chartd.target_qid] ? qindex[chartd.target_qid] : ""}</sub><canvas id="chart_scale_${chartd.target_qid}" width="300" height="300"></canvas></div></div>`);
 
             //scrub data
             var d_data_new = [];
@@ -222,7 +222,23 @@
                 }
             }
             chartd.d_labels = d_data_new;
-            // console.log(chartd.d_labels);
+            // scrub data to match form
+            var num_repl = -1;
+            var cur_labl = "";
+            var d_data_new = [];
+            for (var i = 0; i < chartd.d_data.length; i++) {
+                //alert(chartd.d_data[i]);
+                if (cur_labl == chartd.d_data[i]) {
+                    d_data_new[num_repl] = d_data_new[num_repl] + 1;
+                } else {
+                    cur_labl = chartd.d_data[i];
+                    num_repl += 1;
+                    d_data_new[num_repl] = 1;
+                }
+            }
+            chartd.d_data = d_data_new;
+            console.log(chartd.d_labels);
+            console.log(chartd.d_data);
 
             var ctx = document.getElementById(`chart_scale_${chartd.target_qid}`).getContext('2d');
             var myChart = new Chart(ctx, {
@@ -249,7 +265,7 @@
                             ticks: {
                                 beginAtZero: true,
                                 suggestedMin: 10,
-                                max: 10,
+                                suggestedMax: 10,
                                 minHeight: 10
                             }
                         }]
@@ -341,10 +357,10 @@
             evalhalla: { target_qid: "Sur", chart_type: "none", d_data: [], d_labels: [] },
             useragent: { target_qid: "Method", chart_type: "rgroup", d_data: [], d_labels: [] },
             language: { target_qid: "Lang", chart_type: "rgroup", d_data: [], d_labels: [] },
-            department: { target_qid: "Department", chart_type: "rgroup", d_data: [], d_labels: [] },
+            department: { target_qid: "Department", chart_type: "scale", d_data: [], d_labels: [] },
             offering: { target_qid: "Offering", chart_type: "none", d_data: [], d_labels: [] },
-            classification: { target_qid: "Classification", chart_type: "rgroup", d_data: [], d_labels: [] },
-            city: { target_qid: "City", chart_type: "rgroup", d_data: [], d_labels: [] }
+            classification: { target_qid: "Classification", chart_type: "scale", d_data: [], d_labels: [] },
+            city: { target_qid: "City", chart_type: "scale", d_data: [], d_labels: [] }
         };
 
         var build_meta_charts = function () {
@@ -481,7 +497,7 @@
             }
 
             if (chartd.chart_type == "scale") {
-                build_rgroup(chartd);
+                build_scale(chartd);
             } else if (chartd.chart_type == "rgroup") {
                 build_rgroup(chartd);
             } else if (chartd.chart_type == "cgroup") {
