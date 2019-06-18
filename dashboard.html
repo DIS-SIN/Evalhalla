@@ -386,7 +386,7 @@
             let chartd = { "d_data": [], "d_labels": [] };
             for (var i = 0; i < g_chart_data.length; i++) {
                 let data_point = g_chart_data[i];
-                for (const key in data_point) {
+                for (let key in data_point) {
                     let value = data_point[key];
                     if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
                         let key_tokens = key.split("_");
@@ -458,7 +458,7 @@
             $(".cht_depts").html([...new Set(meta_data.department.d_data)].length);
             meta_data.department.d_labels.length
 
-            for (const key in meta_data) {
+            for (let key in meta_data) {
                 let value = meta_data[key];
                 if (meta_data.hasOwnProperty(key)) {
                     //qindex[key] = key;
@@ -478,7 +478,7 @@
             //console.log(g_chart_data);
             for (var i = 0; i < g_chart_data.length; i++) {
                 let data_point = g_chart_data[i];
-                for (const key in data_point) {
+                for (let key in data_point) {
                     let value = data_point[key];
                     if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
                         let key_tokens = key.split("_");
