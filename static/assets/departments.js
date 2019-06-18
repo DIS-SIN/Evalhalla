@@ -220,7 +220,6 @@ var autoc_departments = [
     "Emploi et Développement social Canada",
     "Employment and Social Development Canada",
     "Énergie atomique du Canada Limitée",
-    "Enterprise Cape Breton Corporation",
     "Environment and Climate Change Canada",
     "Environnement et Changement climatique Canada",
     "Export Development Canada",

@@ -23,7 +23,7 @@ var ut1_june18_event = `# /en UT1-J18 /; /fr UT1-J18 /;
 
 *Q: 
 /en 3a. Did this event meet your expectations as it was outlined in the advertisement? /;
-/fr 3a. D’après la description de l’annonce, est-ce que cetteactivité a répondu à vos attentes? /;
+/fr 3a. D’après la description de l’annonce, est-ce que cette activité a répondu à vos attentes? /;
 /ONE
 /en Yes /; /fr Oui /; 
 /en No /; /fr Non /; 
@@ -57,7 +57,7 @@ Q:
 
 Q: 
 /en 5b. Please describe what you learned from this event /;
-/fr 5b. Veuillez décrire la nature de vos apprentissages durant l’activité. /;
+/fr 5b. Veuillez décrire ce que vous avez appris de cet événement? /;
 /open
 
 *Q: 

@@ -146,6 +146,7 @@
         $("#render_target").append(`<div class="col s12"><h3>Instant Dashboard: ${sur}</h3></div>`);
         // SURVUSTA INTEGRATION - data pull
         var survista_get_survey = function (survey) {
+            $("#render_target").html("");
             if (survey == "" || typeof survey === "undefined") {
                 survey = "ut1_june18_event";
             }
