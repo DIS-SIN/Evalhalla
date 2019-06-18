@@ -355,18 +355,23 @@
             ctx.append(`<p><strong>Avg. Sentiment</strong><br/><span style="color:${clr};font-size:2.3em;">${avg_senitment}</span></p>`);
         }
 
-        var meta_data = {
-            entry: { target_qid: "Entry", chart_type: "rgroup", d_data: [], d_labels: [] },
-            evalhalla: { target_qid: "Sur", chart_type: "none", d_data: [], d_labels: [] },
-            useragent: { target_qid: "Method", chart_type: "rgroup", d_data: [], d_labels: [] },
-            language: { target_qid: "Lang", chart_type: "rgroup", d_data: [], d_labels: [] },
-            department: { target_qid: "Department", chart_type: "scale", d_data: [], d_labels: [] },
-            offering: { target_qid: "Offering", chart_type: "none", d_data: [], d_labels: [] },
-            classification: { target_qid: "Classification", chart_type: "scale", d_data: [], d_labels: [] },
-            city: { target_qid: "City", chart_type: "scale", d_data: [], d_labels: [] }
-        };
+        var meta_data = {};
+        var reinit_meta = function () {
+            meta_data = {
+                entry: { target_qid: "Entry", chart_type: "rgroup", d_data: [], d_labels: [] },
+                evalhalla: { target_qid: "Sur", chart_type: "none", d_data: [], d_labels: [] },
+                useragent: { target_qid: "Method", chart_type: "rgroup", d_data: [], d_labels: [] },
+                language: { target_qid: "Lang", chart_type: "rgroup", d_data: [], d_labels: [] },
+                department: { target_qid: "Department", chart_type: "scale", d_data: [], d_labels: [] },
+                offering: { target_qid: "Offering", chart_type: "none", d_data: [], d_labels: [] },
+                classification: { target_qid: "Classification", chart_type: "scale", d_data: [], d_labels: [] },
+                city: { target_qid: "City", chart_type: "scale", d_data: [], d_labels: [] }
+            };
+        }
+        reinit_meta();
 
         var build_meta_charts = function () {
+            reinit_meta();
             let chartd = { "d_data": [], "d_labels": [] };
             for (var i = 0; i < g_chart_data.length; i++) {
                 let data_point = g_chart_data[i];
