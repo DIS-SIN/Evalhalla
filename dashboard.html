@@ -454,9 +454,22 @@
                 }
             }
             // basic metrics
-            $(".cht_roles").html([...new Set(meta_data.classification.d_data)].length);
-            $(".cht_depts").html([...new Set(meta_data.department.d_data)].length);
-            meta_data.department.d_labels.length
+            var uclass = [];
+            var udepts = [];
+            for (let q = 0; q < meta_data.classification.d_data.length; q++) {
+                if (uclass.includes(meta_data.classification.d_data[q])) { continue; }
+                uclass.push(meta_data.classification.d_data[q]);
+            }
+            for (let q = 0; q < meta_data.department.d_data.length; q++) {
+                if (udepts.includes(meta_data.department.d_data[q])) { continue; }
+                udepts.push(meta_data.department.d_data[q]);
+            }
+            //$(".cht_roles").html([...new Set(meta_data.classification.d_data)].length);
+            //$(".cht_depts").html([...new Set(meta_data.department.d_data)].length);
+            $(".cht_roles").html(uclass.length);
+            $(".cht_depts").html(udepts.length);
+
+            //meta_data.department.d_labels.length
 
             for (let key in meta_data) {
                 let value = meta_data[key];
