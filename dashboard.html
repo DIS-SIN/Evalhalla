@@ -182,8 +182,11 @@
 
                 questions_to_chart.sort(function (a, b) { return a - b; });
                 $("#render_target").append(`<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">
-                    <p><strong>Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">${g_chart_data.length}</span></p>
-                    </div></div></div>`);
+                    <div class="row">
+                    <div class="col s12 m4 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">${g_chart_data.length}</span></p></div>
+                    <div class="col s12 m4 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>
+                    <div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>
+                    </div></div></div></div>`);
                 for (let i = 0; i < questions_to_chart.length; i++) {
                     build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
                 }
@@ -237,8 +240,8 @@
                 }
             }
             chartd.d_data = d_data_new;
-            console.log(chartd.d_labels);
-            console.log(chartd.d_data);
+            //console.log(chartd.d_labels);
+            //console.log(chartd.d_data);
 
             var ctx = document.getElementById(`chart_scale_${chartd.target_qid}`).getContext('2d');
             var myChart = new Chart(ctx, {
@@ -434,6 +437,10 @@
                     }
                 }
             }
+            // basic metrics
+            $(".cht_roles").html([...new Set(meta_data.classification.d_data)].length);
+            $(".cht_depts").html([...new Set(meta_data.department.d_data)].length);
+            meta_data.department.d_labels.length
             //$("#render_target").append(`<div class="card-panel">${JSON.stringify(chartd.d_data)}</div>`);
             for (const key in meta_data) {
                 let value = meta_data[key];
