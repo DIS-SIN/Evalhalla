@@ -764,7 +764,8 @@
             return "null";
         }
         // parser - handle the header command
-        var handle_cmd_header = function (cmd, src, json = "") {
+        var handle_cmd_header = function (cmd, src, json) {
+            json = json || "";
             reset_control_flags();
 
             g_control_flags["header"][cmd] = src.replace(src.split(" ")[0], "").trim();
@@ -786,7 +787,8 @@
         }
 
         // parser - handle the pagebreak command
-        var handle_cmd_pagebreak = function (cmd, src, json = "") {
+        var handle_cmd_pagebreak = function (cmd, src, json) {
+            json = json || "";
             // handle html
             var snip = get_template_snip("page break");
             g_control_flags["pageid"] = g_control_flags["pageid"] + 1;
@@ -800,7 +802,8 @@
         }
 
         // parser - handle the instruction command
-        var handle_cmd_instruction = function (cmd, src, json = "") {
+        var handle_cmd_instruction = function (cmd, src, json) {
+            json = json || "";
             // handle html
             var snip = get_template_snip("instruction");
             snip = snip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
@@ -817,7 +820,8 @@
         }
 
         // parser - handle the question command
-        var handle_cmd_question = function (cmd, src, json = "") {
+        var handle_cmd_question = function (cmd, src, json) {
+            json = json || "";
             var snip = get_template_snip("question");
             if (cmd == "question" || cmd == "req question") {
                 // handle html
@@ -1623,7 +1627,9 @@
         // Tutorial runner setup
         //
 
-        var run_type_it = function (type_this = "type_it_short") {
+        var run_type_it = function (type_this) {
+            type_this = type_this || "type_it_short";
+
             g_state["tut"]["char_at"] = 0;
             g_state["el"]["c_editor"].val("");
             reset_control_flags(true);
