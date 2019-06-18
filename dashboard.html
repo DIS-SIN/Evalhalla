@@ -196,6 +196,7 @@
 
         var tmr = null;
         var start_auto_refresh = function () {
+            survista_get_survey(sur);
             clearInterval(tmr);
             tmr = null;
             tmr = setInterval(function () {
