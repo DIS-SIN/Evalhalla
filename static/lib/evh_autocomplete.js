@@ -1,6 +1,7 @@
 
 // REGISTHOR INTEGRATION autocomplete load classifications from registhor
-var autoc_load_classifications = function (api_load = false) {
+var autoc_load_classifications = function (api_load) {
+    api_load = api_load || false;
     if (api_load == true) {
         $.ajax({
             url: api_get_classifications_route + api_key,
@@ -34,7 +35,8 @@ var autoc_load_classifications = function (api_load = false) {
 
 // REGISTHOR INTEGRATION autocomplete load departments from registhor
 // local js options are the default to reduce api call load
-var autoc_load_departments = function (api_load = false) {
+var autoc_load_departments = function (api_load) {
+    api_load = api_load || false;
     if (api_load == true) {
         $.ajax({
             url: api_get_departments_route + api_key,

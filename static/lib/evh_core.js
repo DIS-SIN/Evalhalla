@@ -77,7 +77,8 @@
         // For huge surveys we might get into hot water performance wise
         // theres about 160 .replace regexes - but for our problem domain we're aiming
         // for small short and light surveys.
-        var get_template_snip = function (snip, format = "html") {
+        var get_template_snip = function (snip, format) {
+            format = format || 'html';
             if (snip == "header") {
                 if (format == "json") {
                     return evh_templates["json"]["header"];

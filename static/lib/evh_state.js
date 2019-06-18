@@ -186,7 +186,8 @@ var g_control_flags = {
 // reset the control flags after each successful chunk processing
 // hard means a new survey. This is usually triggered when we get 
 // a new survey header
-var reset_control_flags = function (hard = false) {
+var reset_control_flags = function (hard) {
+    hard = hard || false;
     g_control_flags["question"] = {
         "text": false,
         "qid": 0,
