@@ -145,14 +145,20 @@
 
         $("#render_target").append(`<div class="col s12"><h3>Instant Dashboard: ${sur}</h3></div>`);
         // SURVUSTA INTEGRATION - data pull
+        var g_response = [];
         var survista_get_survey = function (survey) {
-            $("#render_target").html("");
             if (survey == "" || typeof survey === "undefined") {
                 survey = "ut1_june18_event";
             }
             $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
                 g_chart_data = (typeof response !== "undefined") ? response : [];
-
+                // dont refresh if we have no new data
+                if (g_response.length == g_chart_data.length) {
+                    return;
+                }
+                // clear the render: barbaric refresh
+                $("#render_target").html("");
+                g_response = g_chart_data;
                 let questions_to_chart = [];
                 for (let i = 0; i < g_chart_data.length; i++) {
                     let data_point = g_chart_data[i];
@@ -187,7 +193,17 @@
             });
 
         }
-        survista_get_survey(sur);
+
+        var tmr = null;
+        var start_auto_refresh = function () {
+            clearInterval(tmr);
+            tmr = null;
+            tmr = setInterval(function () {
+                survista_get_survey(sur);
+            }, 3000);
+        }
+        start_auto_refresh();
+        //survista_get_survey(sur);
 
         var build_scale = function (chartd) {
             chartd.d_data.sort();

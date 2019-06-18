@@ -466,5 +466,5 @@ var autoc_departments = [
     "Veterans Review and Appeal Board",
     "Western Economic Diversification Canada",
     "Women and Gender Equality Canada",
-    "Condition féminine Canada",
+    "Condition féminine Canada"
 ];
