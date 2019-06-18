@@ -93,5 +93,28 @@ var ut1_june18_event = "# /en UT1-J18 /; /fr UT1-J18 /;\n" +
     "/fr 8. Autres commentaires /;\n" +
     "/open\n" +
     "\n" +
+    // Last minute form changes
+    "*Q:\n" +
+    "/en 9a. Please rate your level of knowledge if the subject area. Before this learning activity: /;\n" +
+    "/fr 9a. Veuillez évaluer votre niveau de connaissances dans le domaine en question. Avant l’activité d’apprentissage: /;\n" +
+    "/ONE\n" +
+    "/en High /; /fr Élevé /; \n" +
+    "/en Good /; /fr Bon /; \n" +
+    "/en Average /; /fr Moyen /; \n" +
+    "/en A Little /; /fr Faible /;\n" +
+    "/en None /; /fr Nul /; \n" +
+    ";\n" +
+    "\n" +
+    "Q: \n" +
+    "/en 9b. Please rate your level of knowledge if the subject area. After this learning activity:  /;\n" +
+    "/fr 9b. Veuillez évaluer votre niveau de connaissances dans le domaine en question. Après l’activité d’apprentissage: /;\n" +
+    "/ONE\n" +
+    "/en High /; /fr Élevé /; \n" +
+    "/en Good /; /fr Bon /; \n" +
+    "/en Average /; /fr Moyen /; \n" +
+    "/en A Little /; /fr Faible /;\n" +
+    "/en None /; /fr Nul /; \n" +
+    ";\n" +
+    "\n" +
     "// /en Thank you for your time! /; /fr Merci pour vos réponses! /;\n" +
     "";
