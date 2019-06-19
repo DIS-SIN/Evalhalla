@@ -168,9 +168,8 @@ Node
 *Q: Are there any other devops tools and tech that you are competent at using? Includes tools an tech you are comfortable using at levels 3-5 (competent, proficient or an expert level)
 /open
 
-*Q: How did you acquire most of your existing programming skills?
+*Q: How did you acquire most of your existing programming skills? Select all options that apply
 /any
-Select all options that apply
 On my own initiative
 On the job
 Through formal education
