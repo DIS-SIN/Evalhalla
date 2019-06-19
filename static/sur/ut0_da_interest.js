@@ -1,210 +1,257 @@
 var ut0_da_interest = `# UT0-DA
-## DevOps Skills and Learning
-### This 5-10 min assessment will help us design and deliver supports for the GoC DevOps community.\n\nWe may use the results of this assessment in aggregate(without individual attribution) to help the Digital Academy and other learning partners plan and develop learning products.
-*Q: Are you a regional employee?
+
+## 
+/en DevOps Skills and Learning /; 
+/fr DevOps Skills and Learning /;
+
+### 
+/en This 5-10 min assessment will help us design and deliver supports for the GoC DevOps community.\n\nWe may use the results of this assessment in aggregate(without individual attribution) to help the Digital Academy and other learning partners plan and develop learning products. /; 
+/fr This 5-10 min assessment will help us design and deliver supports for the GoC DevOps community.\n\nWe may use the results of this assessment in aggregate(without individual attribution) to help the Digital Academy and other learning partners plan and develop learning products. /;
+
+*Q: 
+/en Are you a regional employee? /; 
+/fr Are you a regional employee? /;
 /one
-Yes
-No
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
 ;
 
-// Please rank your knowledge of the following 10 devops competencies on a scale of 0-5 
+// /en Please rank your knowledge of the following 10 devops competencies on a scale of 0-5 /; /fr Please rank your knowledge of the following 10 devops competencies on a scale of 0-5 /; 
 <ul>
-<li>0 - I don’t understand or do not yet possess this competence</li>
-<li>1 - Novice: I have a basic understanding of this competence</li>
-<li>2 - Advanced beginner: I can demonstrate this competence under supervision</li>
-<li>3 - Competent: I can demonstrate this competence independently</li>
-<li>4 - Proficient: I can mentor other people in this competence</li>
-<li>5 - Expert: I develop new ways of applying this competence</li>
+<li>/en 0 - I don’t understand or do not yet possess this competence /; /fr  0 - I don’t understand or do not yet possess this competence /; </li>
+<li>/en 1 - Novice: I have a basic understanding of this competence /; /fr 1 - Novice: I have a basic understanding of this competenc /; </li>
+<li>/en 2 - Advanced beginner: I can demonstrate this competence under supervision /; /fr 2 - Advanced beginner: I can demonstrate this competence under supervision  /; </li>
+<li>/en 3 - Competent: I can demonstrate this competence independently /; /fr 3 - Competent: I can demonstrate this competence independently /; </li>
+<li>/en 4 - Proficient: I can mentor other people in this competence /; /fr 4 - Proficient: I can mentor other people in this competence /; </li>
+<li>/en 5 - Expert: I develop new ways of applying this competence /; /fr 5 - Expert: I develop new ways of applying this competence /; </li>
 </ul>
 
-*Q: Agile software development process
+*Q: 
+/en Agile software development process /; 
+/fr Agile software development process /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Web accessibility (a11Y) testing
+*Q: 
+/en Web accessibility (a11Y) testing /; 
+/fr Web accessibility (a11Y) testing /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Contributing to open source projects
+*Q: 
+/en Contributing to open source projects /; 
+/fr Contributing to open source projects /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Publishing open source software
+*Q: 
+/en Publishing open source software /; 
+/fr Publishing open source software /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Open source software legal compliance
+*Q: 
+/en Open source software legal compliance /; 
+/fr Open source software legal compliance /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Python coding
+*Q: 
+/en Python coding /; 
+/fr Python coding /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Cloud computing
+*Q: 
+/en Cloud computing /; 
+/fr Cloud computing /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Continuous integration and continuous delivery
+*Q: 
+/en Continuous integration and continuous delivery /; 
+/fr Continuous integration and continuous delivery /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Docker (Containerization)
+*Q: 
+/en Docker (Containerization) /; 
+/fr Docker (Containerization) /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Security automation
+*Q: 
+/en Security automation /; 
+/fr Security automation /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Test automation
+*Q: 
+/en Test automation /; 
+/fr Test automation /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Linux command Line
+*Q: 
+/en Linux command Line /; 
+/fr Linux command Line /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
 /pagebreak
 
-// Provide additional context for your skills
+// /en Provide additional context for your skills /; /fr Provide additional context for your skills /;
 
-*Q: Applying DevOps in the government context 
+*Q: 
+/en Applying DevOps in the government context /; 
+/fr Applying DevOps in the government context /;
 /one
-0 - No Competency
-1 - Novice
-2 - Advanced Beginner
-3 - Competent
-4 - Proficient
-5 - Expert
+/en 0 - No Competency /; /fr  0 - No Competency /;
+/en 1 - Novice /; /fr 1 - Novice /;
+/en 2 - Advanced Beginner /; /fr 2 - Advanced Beginner /;
+/en 3 - Competent /; /fr 3 - Competent /;
+/en 4 - Proficient /; /fr 4 - Proficient /;
+/en 5 - Expert /; /fr 5 - Expert /;
 ;
 
-*Q: Which of these tools are you competent at using?
+*Q: 
+/en Which of these tools are you competent at using? /; 
+/fr Which of these tools are you competent at using? /;
 /any
-Git Command Line Interface
-GitHub
-GitLab
-Bitbucket
-Visual Studio Code
-Anaconda
-Jenkins
-AWS cloud
-Azure cloud
-Node
+/en Git Command Line Interface /; /fr Git Command Line Interface /;
+/en GitHub /; /fr GitHub /;
+/en GitLab /; /fr GitLab /;
+/en Bitbucket /; /fr Bitbucket /;
+/en Visual Studio Code /; /fr Visual Studio Code /;
+/en Anaconda /; /fr Anaconda /;
+/en Jenkins /; /fr Jenkins /;
+/en AWS cloud /; /fr AWS cloud /;
+/en Azure cloud /; /fr Azure cloud /;
+/en Node /; /fr Node /;
 ;
 
-*Q: Are there any other devops tools and tech that you are competent at using? Includes tools an tech you are comfortable using at levels 3-5 (competent, proficient or an expert level)
+*Q: 
+/en Are there any other devops tools and tech that you are competent at using? Includes tools an tech you are comfortable using at levels 3-5 (competent, proficient or an expert level) /; 
+/fr Are there any other devops tools and tech that you are competent at using? Includes tools an tech you are comfortable using at levels 3-5 (competent, proficient or an expert level) /;
 /open
 
-*Q: How did you acquire most of your existing programming skills? Select all options that apply
+*Q: 
+/en How did you acquire most of your existing programming skills? Select all options that apply /; 
+/fr How did you acquire most of your existing programming skills? Select all options that apply /;
 /any
-On my own initiative
-On the job
-Through formal education
+/en On my own initiative /; /fr On my own initiative /;
+/en On the job /; /fr On the job /;
+/en Through formal education /; /fr Through formal education /;
 ;
 
 /pagebreak
 
-// Tell us about how you learn
+// /en Tell us about how you learn /; /fr Tell us about how you learn /;
 
-*Q: What resources do you use today to learn new about DevOps?
+*Q: 
+/en What resources do you use today to learn new about DevOps? /; 
+/fr What resources do you use today to learn new about DevOps? /;
 /any
-Podcasts
-Videos
-Classroom
-Online courses
-Peers
-Workshops and conferences
+/en Podcasts /; /fr Podcasts /;
+/en Videos /; /fr Videos /;
+/en Classroom /; /fr Classroom /;
+/en Online courses /; /fr Online courses /;
+/en Peers /; /fr Peers /;
+/en Workshops and conferences /; /fr Workshops and conferences /;
 ;
 
-*Q: How do you prefer to learn?
+*Q: /en How do you prefer to learn? /; /fr How do you prefer to learn? /;
 /open
 
 /pagebreak
 
-// Would you like to connect with the Digital Academy?
+// /en Would you like to connect with the Digital Academy? /; /fr Would you like to connect with the Digital Academy? /;
 
-Q: Would you like to contribute to the Digital Academy?
+Q: 
+/en Would you like to contribute to the Digital Academy? /; 
+/fr Would you like to contribute to the Digital Academy? /;
 /any
-Participate in future learning opportunities
-Help us design content and delivery training
-Provide us advice on leading DevOps practices
-Be a digital coach for others on their DevOps journey
+/en Participate in future learning opportunities /; /fr Participate in future learning opportunities /;
+/en Help us design content and delivery training /; /fr Help us design content and delivery training /;
+/en Provide us advice on leading DevOps practices /; /fr Provide us advice on leading DevOps practices /;
+/en Be a digital coach for others on their DevOps journey /; /fr Be a digital coach for others on their DevOps journey /;
 ;
 
-Q: Please provide any other comments 
+Q: 
+/en Please provide any other comments  /; 
+/fr Please provide any other comments /;
 /open
 `;
 
