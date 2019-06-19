@@ -31,9 +31,15 @@
                 <ul class="right">
                     <li>
                         <div>
-                            <a class="lang" href="#editor">
-                                <!--<span class="en">Français</span>
-                                <span class="fr">English</span>-->
+                            <a class="go-live" href="#editor">
+                                Live
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a class="go-silent" href="#editor">
+                                Silent
                             </a>
                         </div>
                     </li>
@@ -210,6 +216,16 @@
         }
 
         var tmr = null;
+        $(".go-live").on("click", function () {
+            start_auto_refresh();
+        });
+        $(".go-silent").on("click", function () {
+            stop_auto_refresh();
+        });
+        var stop_auto_refresh = function () {
+            clearInterval(tmr);
+            tmr = null;
+        }
         var start_auto_refresh = function () {
             survista_get_survey(sur);
             clearInterval(tmr);
@@ -224,8 +240,23 @@
         var build_scale = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append('<div class="col s12 m4"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub>' + (qindex[chartd.target_qid] ? qindex[chartd.target_qid] : "") + '</sub><canvas id="chart_scale_' + chartd.target_qid + '" width="300" height="300"></canvas></div></div>');
+            let layout = chartd.layout ? chartd.layout : "s12 m4";
+            $("#render_target").append('<div class="col ' + layout + '" style="float:top;"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">' + (qindex[chartd.target_qid] ? qindex[chartd.target_qid] : "") + '</p><canvas id="chart_scale_' + chartd.target_qid + '" width="300" height="300"></canvas><p id="chart_avg_' + chartd.target_qid + '"></p></div></div>');
 
+            var sum = 0;
+            for (var i = 0; i < chartd.d_data.length; i++) {
+                let pint = parseInt(chartd.d_data[i], 10);
+                if (pint != 77) {
+                    sum += parseInt(chartd.d_data[i], 10);
+                }
+            }
+            // give those were unsure a score of 0, because thats probably better than 77
+            var avg = sum / chartd.d_data.length;
+            avg = avg.toFixed(2);
+            if (isNaN(avg)) {
+                avg = "";
+                $('#chart_avg_' + chartd.target_qid + '').remove();
+            }
             //scrub data
             var d_data_new = [];
             for (var i = 0; i < chartd.d_labels.length; i++) {
@@ -254,6 +285,8 @@
             chartd.d_data = d_data_new;
             //console.log(chartd.d_labels);
             //console.log(chartd.d_data);
+
+
 
             var ctx = document.getElementById('chart_scale_' + chartd.target_qid + '').getContext('2d');
             var myChart = new Chart(ctx, {
@@ -292,12 +325,13 @@
                 }
 
             });
+            $('#chart_avg_' + chartd.target_qid + '').html('<p><strong>Avg. </strong><br/><span style="color:#666666;font-size:2.3em;">' + avg + '</span></p>');
         }
         var build_rgroup = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-
-            $("#render_target").append('<div class="col s12 m4"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub>' + (qindex[chartd.target_qid] ? qindex[chartd.target_qid] : "") + '</sub><canvas id="chart_rgroup_' + chartd.target_qid + '" width="300" height="300"></canvas></div></div>');
+            let layout = chartd.layout ? chartd.layout : "s12 m4";
+            $("#render_target").append('<div class="col ' + layout + '" style="float:top;"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><p style="font-weight:bold;font-size:0.8em;bottom:0.25rem;line-height:1.2em;">' + (qindex[chartd.target_qid] ? qindex[chartd.target_qid] : "") + '</p><canvas id="chart_rgroup_' + chartd.target_qid + '" width="300" height="300"></canvas></div></div>');
             var ctx = document.getElementById('chart_rgroup_' + chartd.target_qid + '').getContext('2d');
 
             // scrub data to match form
@@ -315,6 +349,16 @@
                 }
             }
             chartd.d_data = d_data_new;
+
+            // sum data
+            let sum = 0;
+            for (let q = 0; q < chartd.d_data.length; q++) {
+                sum += parseInt(chartd.d_data[q], 10);
+            }
+
+            for (let q = 0; q < chartd.d_labels.length; q++) {
+                chartd.d_labels[q] = ((parseInt(chartd.d_data[q], 10) / sum) * 100).toFixed(0) + "% " + chartd.d_labels[q];
+            }
 
             // And for a doughnut chart
             var myDoughnutChart = new Chart(ctx, {
@@ -348,7 +392,8 @@
         var build_textarea = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
-            $("#render_target").append('<div class="col s12 m4"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub>' + qindex[chartd.target_qid] + '</sub><div id="chart_textarea_' + chartd.target_qid + '" width="300" height="300"></div></div></div>');
+            let layout = chartd.layout ? chartd.layout : "s12 m4";
+            $("#render_target").append('<div class="col ' + layout + '" style="float:top;"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><sub style="font-weight:normal;font-size:1.3em;bottom:0.25rem;line-height:1.2em;">' + qindex[chartd.target_qid] + '</sub><div id="chart_textarea_' + chartd.target_qid + '" width="300" height="300"></div></div></div>');
             var ctx = $('#chart_textarea_' + chartd.target_qid + '');
 
             var acc = 0.0;
@@ -364,7 +409,7 @@
             } else if (avg_senitment < 0) {
                 clr = "rgb(255, 99, 132)";
             }
-            ctx.append('<p><strong>Avg. Sentiment</strong><br/><span style="color:' + clr + ';font-size:2.3em;">' + avg_senitment + '</span></p>');
+            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';font-size:2.3em;">' + avg_senitment + '</span></p>');
         }
 
         var meta_data = {};
@@ -420,10 +465,10 @@
                                 }
                                 meta_data.evalhalla.d_data.push(value);
                             } else if (data_type == "meta" && key_tokens[1] == "useragent") {
-                                if (!meta_data.useragent.d_labels.includes(value.split(" ")[0].split("/")[0])) {
-                                    meta_data.useragent.d_labels.push(value.split(" ")[0].split("/")[0]);
+                                if (!meta_data.useragent.d_labels.includes(value.split(";")[0]/*.split("/")[0]*/)) {
+                                    meta_data.useragent.d_labels.push(value.split(";")[0]/*.split("/")[0]*/);
                                 }
-                                meta_data.useragent.d_data.push(value.split(" ")[0].split("/")[0]);
+                                meta_data.useragent.d_data.push(value.split(";")[0]/*.split("/")[0]*/);
                             } else if (data_type == "tombstone" && key_tokens[1] == "language") {
                                 if (!meta_data.language.d_labels.includes(value)) {
                                     meta_data.language.d_labels.push(value);
@@ -477,6 +522,7 @@
                 if (meta_data.hasOwnProperty(key)) {
                     //qindex[key] = key;
                     if (value.chart_type == "scale") {
+                        value.layout = "s12 m12";
                         build_scale(value);
                     } else if (value.chart_type == "rgroup") {
                         build_rgroup(value);
