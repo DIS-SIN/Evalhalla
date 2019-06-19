@@ -216,7 +216,12 @@
                 '<div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>' +
                 '</div></div></div></div>');
             for (let i = 0; i < questions_to_chart.length; i++) {
-                build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
+                build_charts({
+                    "target_qid": questions_to_chart[i],
+                    "d_labels": [],
+                    "d_data": [],
+                    "d_data_sentences": []
+                });
             }
             $("#render_target").append('<div class="col s12"><h4>General Information</h4></div>');
             build_meta_charts();
@@ -473,8 +478,12 @@
             var avg_senitment = (acc / parseFloat(chartd.d_data.length)).toFixed(2);
             let clr = convert_to_color_rating(avg_senitment);
             let avg_senitment_stars = convert_to_star_rating(avg_senitment);
+            let sentences_table = '<tr><td>' + chartd.d_data_sentences.join("</td><td>") + '</td></tr>';
 
-            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';">' + avg_senitment_stars + '</span><span style="color:' + clr + ';font-size:1.8em;">' + avg_senitment + '</span></p>');
+
+            //console.log(sentences_table);
+
+            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';">' + avg_senitment_stars + '</span><span style="color:' + clr + ';font-size:1.8em;">' + avg_senitment + '</span></p><table style="font-weight:normal;font-size:0.8em;bottom:0.25rem;line-height:1.2em;"><thead><th>Responses</th></thead><tbody>' + sentences_table + '</tbody></table>');
         }
 
         var meta_data = {};
@@ -616,7 +625,10 @@
                             chartd.chart_type = data_type;
                             let data_detail = (typeof (key_tokens[3]) === "undefined") ? "data" : key_tokens[3];
 
-                            if (data_detail == "data" || data_detail == "sentimentScore") {
+                            if (data_detail == "data"
+                                || data_detail == "sentimentScore"
+                                || data_detail == "sentences"
+                            ) {
                                 if (data_type == "cgroup") {
                                     for (let k = 0; k < value.length; k++) {
                                         if (!chartd.d_labels.includes(value[k])) {
@@ -636,6 +648,13 @@
                                     chartd.d_data.push(value);
                                 } else if (data_type == "textarea" && data_detail == "sentimentScore") {
                                     chartd.d_data.push(value);
+                                } else if (data_type == "textarea" && data_detail == "sentences") {
+                                    //console.log(chartd.d_data_sentences);
+                                    for (let q = 0; q < value.length; q++) {
+                                        chartd.d_data_sentences.push(value[q].text);
+                                    }
+                                    // take only 5: TODO check most postive and most negative
+                                    chartd.d_data_sentences = chartd.d_data_sentences.slice(0, 5);
                                 }
                             }
                         }
