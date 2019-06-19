@@ -11,7 +11,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Are you a regional employee? /; 
 /fr Travaillezvous en région ? /;
-/one
+/ONE
 /en Yes /; /fr Oui /;
 /en No /; /fr Non /;
 ;
@@ -29,7 +29,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Agile software development process /; 
 /fr Processus de développement agile de logiciels /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -41,7 +41,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Web accessibility (a11Y) testing /; 
 /fr Mise à l’essai de l’accessibilité du Web(projet A11Y)  /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -53,7 +53,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Contributing to open source projects /; 
 /fr Contribution à des projets de logiciels libres /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -65,7 +65,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Publishing open source software /; 
 /fr Édition de logiciels libres /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -77,7 +77,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Open source software legal compliance /; 
 /fr Conformité des logiciels libres sur le plan législatif /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -89,7 +89,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Python coding /; 
 /fr Programmation en langage Python /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -101,7 +101,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Cloud computing /; 
 /fr Informatique en nuage /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -113,7 +113,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Continuous integration and continuous delivery /; 
 /fr Intégration continue et déploiement continu /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -125,7 +125,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Docker (Containerization) /; 
 /fr Docker(conteneurisation) /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -137,7 +137,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Security automation /; 
 /fr Automatisation de la sécurité /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -149,7 +149,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Test automation /; 
 /fr Automatisation des essais /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -161,7 +161,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Linux command Line /; 
 /fr Ligne de commande Linux /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -177,7 +177,7 @@ var ut0_da_interest = `# UT0-DA
 *Q: 
 /en Applying DevOps in the government context /; 
 /fr Utilisation des compétences liées à la méthode DevOps dans le contexte du gouvernement du Canada /;
-/one
+/ONE
 /en 0 - No Competency /; /fr  0 - Aucune /;
 /en 1 - Novice /; /fr 1 - Novice /;
 /en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
@@ -342,14 +342,14 @@ Q:
     "/open\n" +
     "\n" +
     "Q: Are you interested in training with the Digital Academy?\n" +
-    "/one\n" +
+    "/ONE\n" +
     "Yes\n" +
     "No\n" +
     "Maybe\n" +
     ";\n" +
     "\n" +
     "*Q: Are you a regional employee?\n" +
-    "/one\n" +
+    "/ONE\n" +
     "Yes\n" +
     "No\n" +
     ";\n" +
