@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
-        rel="stylesheet" media="screen" />
-    <link href="static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen" />
+        rel="stylesheet" media="screen,print" />
+    <link href="static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen,print" />
     <link rel="apple-touch-icon" sizes="180x180" href="static/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="static/images/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="static/images/icons/favicon-16x16.png">
@@ -17,10 +17,17 @@
     <link rel="mask-icon" href="static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="navbar-fixed">
+    <div class="navbar-fixed no-print">
         <nav class="white nav-extended">
             <div class="nav-wrapper container">
                 <a id="logo-container" class="brand-logo">Evalhalla</a>
@@ -73,6 +80,12 @@
                 <span class="fr">Des formes qui fonctionnent.</span>
             </div>
         </div>
+        <div class="row">
+            <div class="col s12">
+                <textarea id="render_override" style="background-color: white;color:black;"></textarea>
+                <a id="render_override_btn" class="btn btn-large purp-canada-ca" href="#editor">Use this data</a>
+            </div>
+        </div>
     </footer>
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large blue-canada-ca" href="#editor" aria-label="Skip to top">
@@ -80,8 +93,8 @@
         </a>
     </div>
     <!-- Dependencies -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes" async
-        defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
+        async defer></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -164,52 +177,56 @@
         $("#render_target").append('<div class="col s12"><h3>Instant Dashboard: ' + sur + '</h3></div>');
         // SURVUSTA INTEGRATION - data pull
         var g_response = [];
+        var render_data = function (response) {
+            g_chart_data = (typeof response !== "undefined") ? response : [];
+            // dont refresh if we have no new data
+            if (g_response.length == g_chart_data.length) {
+                return;
+            }
+            // clear the render: barbaric refresh
+            $("#render_target").html("");
+            g_response = g_chart_data;
+            let questions_to_chart = [];
+            for (let i = 0; i < g_chart_data.length; i++) {
+                let data_point = g_chart_data[i];
+                for (let key in data_point) {
+                    let value = data_point[key];
+                    if (data_point.hasOwnProperty(key)) {
+                        let key_tokens = key.split("_");
+                        let data_type = key_tokens[0];
+                        if (data_type == "meta" || data_type == "tombstone") {
+                            continue;
+                        } else {
+                            let data_qid = key_tokens[2];
+                            if (questions_to_chart.includes(data_qid)) {
+                                continue;
+                            }
+                            questions_to_chart.push(data_qid);
+                        }
+                    }
+                }
+            }
+
+            questions_to_chart.sort(function (a, b) { return a - b; });
+            $("#render_target").append('<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">' +
+                '<div class="row">' +
+                '<div class="col s12 m4 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">' + g_chart_data.length + '</span></p></div>' +
+                '<div class="col s12 m4 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>' +
+                '<div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>' +
+                '</div></div></div></div>');
+            for (let i = 0; i < questions_to_chart.length; i++) {
+                build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
+            }
+            $("#render_target").append('<div class="col s12"><h4>General Information</h4></div>');
+            build_meta_charts();
+        }
         var survista_get_survey = function (survey) {
             if (survey == "" || typeof survey === "undefined") {
                 survey = "ut1_june18_event";
             }
             $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
-                g_chart_data = (typeof response !== "undefined") ? response : [];
-                // dont refresh if we have no new data
-                if (g_response.length == g_chart_data.length) {
-                    return;
-                }
-                // clear the render: barbaric refresh
-                $("#render_target").html("");
-                g_response = g_chart_data;
-                let questions_to_chart = [];
-                for (let i = 0; i < g_chart_data.length; i++) {
-                    let data_point = g_chart_data[i];
-                    for (let key in data_point) {
-                        let value = data_point[key];
-                        if (data_point.hasOwnProperty(key)) {
-                            let key_tokens = key.split("_");
-                            let data_type = key_tokens[0];
-                            if (data_type == "meta" || data_type == "tombstone") {
-                                continue;
-                            } else {
-                                let data_qid = key_tokens[2];
-                                if (questions_to_chart.includes(data_qid)) {
-                                    continue;
-                                }
-                                questions_to_chart.push(data_qid);
-                            }
-                        }
-                    }
-                }
 
-                questions_to_chart.sort(function (a, b) { return a - b; });
-                $("#render_target").append('<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">' +
-                    '<div class="row">' +
-                    '<div class="col s12 m4 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">' + g_chart_data.length + '</span></p></div>' +
-                    '<div class="col s12 m4 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>' +
-                    '<div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>' +
-                    '</div></div></div></div>');
-                for (let i = 0; i < questions_to_chart.length; i++) {
-                    build_charts({ "target_qid": questions_to_chart[i], "d_labels": [], "d_data": [] });
-                }
-                $("#render_target").append('<div class="col s12"><h4>General Information</h4></div>');
-                build_meta_charts();
+                render_data(response);
 
             });
 
@@ -235,6 +252,12 @@
             }, 3000);
         }
         start_auto_refresh();
+
+        $("#render_override_btn").on("click", function () {
+            stop_auto_refresh();
+            render_data([]);
+            render_data(JSON.parse($("#render_override").val()));
+        });
         //survista_get_survey(sur);
 
         var build_scale = function (chartd) {
@@ -388,7 +411,53 @@
         var build_cgroup = function (chartd) {
             build_rgroup(chartd);
         }
+        var convert_to_star_rating = function (a) {
+            /* STAR RATING FOR SENTIMENT
+                 +1 = 5*
+                0.4 = 4*
+                0.0 = 3*
+               -0.4 = 2*
+               -1.0 = 1*
+            */
+            let s = 3;
+            if (a == 1.0) {
+                s = 5;
+            } else if (a < 1.0 && a >= 0.4) {
+                s = 4;
+            } else if (a < 0.4 && a >= 0.0) {
+                s = 3;
+            } else if (a < 0.0 && a > -0.4) {
+                s = 2;
+            } else if (a <= 0.4) {
+                s = 1;
+            }
+            let h = '<span style="font-size:2.3em;">🟊' + s + '</span><br />';
 
+            return h;
+        }
+        var convert_to_color_rating = function (a) {
+            /* STAR RATING FOR SENTIMENT
+                 +1 = 5*
+                0.4 = 4*
+                0.0 = 3*
+               -0.4 = 2*
+               -1.0 = 1*
+            */
+            let s = "#666666;";
+            if (a == 1.0) {
+                s = "#aaffaa;";
+            } else if (a < 1.0 && a >= 0.4) {
+                s = "rgb(54, 255, 162)";
+            } else if (a < 0.4 && a >= 0.0) {
+                s = "rgb(54, 162, 235)";
+            } else if (a < 0.0 && a > -0.4) {
+                s = "#ffcc00";
+            } else if (a <= 0.4) {
+                s = "rgb(255, 99, 132)";
+            }
+
+            return s;
+        }
         var build_textarea = function (chartd) {
             chartd.d_data.sort();
             chartd.d_labels.sort();
@@ -401,15 +470,10 @@
                 acc += parseFloat(chartd.d_data[i]);
             }
             var avg_senitment = (acc / parseFloat(chartd.d_data.length)).toFixed(2);
-            let clr = "";
-            if (avg_senitment == 0) {
-                clr = "#ffcc00";
-            } else if (avg_senitment > 0) {
-                clr = "rgb(54, 162, 235)";
-            } else if (avg_senitment < 0) {
-                clr = "rgb(255, 99, 132)";
-            }
-            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';font-size:2.3em;">' + avg_senitment + '</span></p>');
+            let clr = convert_to_color_rating(avg_senitment);
+            let avg_senitment_stars = convert_to_star_rating(avg_senitment);
+
+            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';">' + avg_senitment_stars + '</span><span style="color:' + clr + ';font-size:1.8em;">' + avg_senitment + '</span></p>');
         }
 
         var meta_data = {};
