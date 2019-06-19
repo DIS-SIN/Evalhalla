@@ -247,6 +247,28 @@ Q:
 /en Be a digital coach for others on their DevOps journey /; /fr Soyez un coach numérique pour les autres sur leur parcours DevOps /;
 ;
 
+Q:
+/en Which cloud is your department using Today? /;
+/fr Quel Cloud votre ministère utilise-t-il aujourd'hui? /;
+/any
+/en AWS /; /fr AWS /;
+/en Azure /; /fr Azure /;
+/en Google /; /fr Google /;
+/en Other /; /fr Autres /;
+/en None /; /fr Aucune /;
+;
+
+Q:
+/en Does your department have any plans to use a Cloud in the next 6-12 months? /;
+/fr Votre ministère envisage-t-il d'utiliser Cloud dans les 6 à 12 prochains mois? /;
+/any
+/en AWS /; /fr AWS /;
+/en Azure /; /fr Azure /;
+/en Google /; /fr Google /;
+/en Other /; /fr Autres /;
+/en None /; /fr Aucune /;
+;
+
 Q: 
 /en Please provide any other comments  /; 
 /fr Autres commentaires  /;
