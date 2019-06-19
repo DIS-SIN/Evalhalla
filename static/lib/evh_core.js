@@ -46,7 +46,7 @@
 
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
-        if (weasel != "m" + load + resp) { sur = "ut1_june18_event"; }
+        if (weasel != "m" + load + resp) { sur = sur ? sur : "ut1_june18_event"; }
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
         if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
         if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
