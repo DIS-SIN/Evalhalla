@@ -47,11 +47,13 @@
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
         if (weasel != "m" + load + resp) { sur = sur ? sur : "ut1_june18_event"; }
+        // override it
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
-        if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
-        if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
-        if (sur == "ut0_da_interest") { g_intro_script = ut0_da_interest; auto_display_mode = true; }
-
+        else if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
+        else if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
+        else if (sur == "ut0_da_interest") { g_intro_script = ut0_da_interest; auto_display_mode = true; }
+        else if (sur == "engage") { g_intro_script = engage; auto_display_mode = true; }
+        else { g_intro_script = engage; auto_display_mode = true; }
         // wraps the generated elements in a form and a paginator
         var form_wrap = function (src) {
             var pages = "";
@@ -1820,6 +1822,16 @@
                         "offering_city": "NATIONAL CAPITAL REGION (NCR)",
                         "offering_province": "NCR/RCN"
                     }];
+                    if (sur == "engage") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000003,
+                                "course_code": "Engage",
+                                "course_title": "Learning Together for Better Public Engagement",
+                                "offering_city": "ONLINE",
+                                "offering_province": "WEB"
+                            }];
+                    }
                     if (sur == "ut1_june18_event") {
                         demo_offering = [
                             {
@@ -1851,7 +1863,8 @@
                             }];
                     }
                     // to enable testing when no courses load. delete this code
-                    offs = demo_offering.concat(offs);
+                    //TODO: renable course selection
+                    offs = demo_offering; //demo_offering.concat(offs);
                     if (offs.length == 0) {
                         offs_html += "<h2><span class='en'>No courses today</span><span class='fr'>Aucune de cours aujourd'hui</span></h2>";
                         offs = demo_offering;

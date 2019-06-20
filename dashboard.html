@@ -103,6 +103,7 @@
     <script src="static/sur/example_sur.js"></script>
     <script src="static/sur/ut1_june18_event.js"></script>
     <script src="static/sur/ut0_da_interest.js"></script>
+    <script src="static/sur/engage.js"></script>
     <script>
         var g_chart_data = [];
         // Clean HTML string and write into our DIV
@@ -172,6 +173,9 @@
             sur_evh = ut0_da_interest;
         } else if (sur == "example_nanos_paged") {
             sur_evh = example_nanos_paged;
+        }
+        else if (sur == "engage") {
+            sur_evh = engage;
         }
         parse_question_text(sur_evh);
 
