@@ -437,7 +437,7 @@
             } else if (a <= 0.4) {
                 s = 1;
             }
-            let h = '<span style="font-size:2.3em;">🟊' + s + '</span><br />';
+            let h = '<span style="font-size:2.3em;">&#9733;' + s + '</span><br />';
 
             return h;
         }
@@ -478,12 +478,12 @@
             var avg_senitment = (acc / parseFloat(chartd.d_data.length)).toFixed(2);
             let clr = convert_to_color_rating(avg_senitment);
             let avg_senitment_stars = convert_to_star_rating(avg_senitment);
-            let sentences_table = '<tr><td>' + chartd.d_data_sentences.join("</td><td>") + '</td></tr>';
+            let sentences_table = '<tr><td>' + chartd.d_data_sentences.join("</td></tr><tr><td>") + '</td></tr>';
 
 
             //console.log(sentences_table);
 
-            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';">' + avg_senitment_stars + '</span><span style="color:' + clr + ';font-size:1.8em;">' + avg_senitment + '</span></p><table style="font-weight:normal;font-size:0.8em;bottom:0.25rem;line-height:1.2em;"><thead><th>Responses</th></thead><tbody>' + sentences_table + '</tbody></table>');
+            ctx.append('<p><strong>Avg. Sentiment <sup> (-1 to +1)</sup></em></strong><br/><span style="color:' + clr + ';">' + avg_senitment_stars + '</span><span style="color:' + clr + ';font-size:1.8em;">' + avg_senitment + '</span></p><table style="font-weight:normal;font-size:0.8em;"><thead><th>Responses</th></thead><tbody>' + sentences_table + '</tbody></table>');
         }
 
         var meta_data = {};
@@ -650,7 +650,7 @@
                                     chartd.d_data.push(value);
                                 } else if (data_type == "textarea" && data_detail == "sentences") {
                                     //console.log(chartd.d_data_sentences);
-                                    for (let q = 0; q < value.length; q++) {
+                                    for (let q = value.length - 1; q >= 0; q--) {
                                         chartd.d_data_sentences.push(value[q].text);
                                     }
                                     // take only 5: TODO check most postive and most negative
