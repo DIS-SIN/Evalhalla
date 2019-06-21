@@ -1,92 +1,91 @@
 var engage = `# Engage
 
-## 
-/en Learning Together for Better Public Engagement /; 
-/fr Apprendre Ensemble pour un Meilleur Engagement du Public /;
+##
+/en Learning Together for Better Public Engagement /;
+/fr Apprendre Ensemble en Participation du Public /;
 
 ### 
-/en This 5-10 min assessment will help us design and deliver supports for the GoC community.\n\nWe may use the results of this assessment in aggregate (without individual attribution) to help the Digital Academy and other learning partners plan and develop learning products. /; 
-/fr Cette évaluation, qui vous prendra de 5 à 10 minutes, nous aidera dans notre processus de conception et nous permettra d’offrir du soutien à la communauté des spécialistes du gouvernement du Canada. Il est possible que nous utilisions les résultats de l’évaluation dans leur ensemble (c’estàdire sans associer les réponses à quiconque) pour aider l’Académie du numérique et les autres partenaires d’apprentissage à planifier et à élaborer des produits d’apprentissage. /;
+/en User Experience check-in.<br /><br />This 5-10 min assessment will help us design and deliver supports for the GoC community.\n\nWe may use the results of this assessment in aggregate (without individual attribution) to help the Digital Academy and other learning partners plan and develop learning products. /; 
+/fr Enregistrement de l'expérience utilisateur.<br /><br />Cette évaluation, qui vous prendra de 5 à 10 minutes, nous aidera dans notre processus de conception et nous permettra d’offrir du soutien à la communauté des spécialistes du gouvernement du Canada. Il est possible que nous utilisions les résultats de l’évaluation dans leur ensemble (c’estàdire sans associer les réponses à quiconque) pour aider l’Académie du numérique et les autres partenaires d’apprentissage à planifier et à élaborer des produits d’apprentissage. /;
 
-*Q: 
-/en Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
-/fr Dans l’ensemble, à quel point êtes-vous satisfait(e) de cette activité d’apprentissage? Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
+//
+/en Please let us know about your experience so far /; 
+/fr Veuillez nous faire part de votre expérience  jusqu'à présent /; 
+
+Q:
+/en What were your objectives in joining us? Choose all that apply. /;
+/fr Quels étaient vos objectifs en vous joignant à nous ? Cochez tout ce qui s'applique. /;
+/any
+/en Build, or contribute to, a shared learning experience relating to public engagement /; /fr Construire ou contribuer à une expérience d'apprentissage partagée en matière d'engagement du public. /;
+/en Undertake principled engagement, e.g., based on the Government of Canada's Public Engagement Principles  /; /fr Entreprendre un engagement fondé sur des principes, p. ex., sur les Principes et lignes directrices du gouvernement du Canada.  /;
+/en Obtain new Government of Canada public engagement resources and tools /; /fr Obtenir de nouvelles ressources et de nouveaux outils d'engagement du public du gouvernement du Canada /;
+/en Share public engagement resources and tools /; /fr Partager les ressources et les outils d'engagement du public /;
+;
+
+Q:
+/en Want to tell us more about your response? /;
+/fr Vous souhaitez nous en dire plus sur votre réponse ? /;
+/open
+
+Q: 
+/en How have you participated to-date? /;
+/fr De quelle façon avez-vous participé? /;
+/one
+/en Online via Moodle /; /fr En ligne via Moodle /;
+/en WebEx /; /fr WebEx /;
+/en Both /; /fr Les deux /;
+/en Neither /; /fr Ni l'un ni l'autre /;
+;
+
+Q:
+/en Overall, how useful have you found the online (Moodle) experience so far? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
+/fr Dans l'ensemble, dans quelle mesure l'expérience en ligne (Moodle) vous a-t-elle été utile jusqu'à présent?  Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
 /scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 Q:
-/en Why did you give that score? /;
-/fr Veuillez nous dire les raisons pour lesquelles vous avez attribué cette note à l'activité d'apprentissage. /;
-/OPEN
-
-*Q: 
-/en Did this event meet your expectations as it was outlined in the advertisement? /;
-/fr D’après la description de l’annonce, est-ce que cette activité a répondu à vos attentes? /;
-/ONE
-/en Yes /; /fr Oui /; 
-/en No /; /fr Non /; 
-;
-
-*Q:
-/en Please rate your level of knowledge if the subject area. Before this learning activity: /;
-/fr Veuillez évaluer votre niveau de connaissances dans le domaine en question. Avant l’activité d’apprentissage: /;
-/ONE
-/en High /; /fr Élevé /; 
-/en Good /; /fr Bon /; 
-/en Average /; /fr Moyen /; 
-/en A Little /; /fr Faible /;
-/en None /; /fr Nul /; 
-;
-
-*Q: 
-/en Please rate your level of knowledge if the subject area. After this learning activity:  /;
-/fr Veuillez évaluer votre niveau de connaissances dans le domaine en question. Après l’activité d’apprentissage: /;
-/ONE
-/en High /; /fr Élevé /; 
-/en Good /; /fr Bon /; 
-/en Average /; /fr Moyen /; 
-/en A Little /; /fr Faible /;
-/en None /; /fr Nul /; 
-;
-
-*Q: 
-/en What resources do you use today to learn new things? /; 
-/fr Quelles ressources utilisezvous, actuellement, pour en apprendre? /;
-/any
-/en Podcasts /; /fr Balados /;
-/en Videos /; /fr Vidéos /;
-/en Classroom /; /fr Cours en salle de classe /;
-/en Online courses /; /fr Cours en ligne /;
-/en Peers /; /fr Apprentissage par les pairs /;
-/en Workshops and conferences /; /fr Ateliers et conférencess /;
-;
-
-*Q: 
-/en Would you recommend this event to others? /;
-/fr Recommanderiez-vous cette activité à d’autres personnes? /;
-/ONE
-/en Yes /; /fr Oui /; 
-/en No /; /fr Non /; 
-;
-
-Q: 
-/en Why or why not? /;
-/fr Pourquoi? /;
+/en Want to tell us why you gave the score that you did? /;
+/fr Voulez-vous nous dire pourquoi vous avez donné la note que vous avez choisie ? /;
 /open
 
-*Q: 
-/en Are you a regional employee? /; 
-/fr Travaillezvous en région ? /;
+Q:
+/en Overall, how useful did you find the live session platform (WebEx) so far? Rate your experience on a scale of 1 to 5, with 1 being not useful and 5 being very useful. /;
+/fr Dans l'ensemble,  dans quelle mesure la plate-forme de session en direct (WebEx) vous a-t-elle été utile jusqu'à présent ? Évaluez votre experience sur une échelle de 1 à 5, où 1 correspond à « inutile » et 5 correspond à « très utile ». /;
+/scale1-5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
+
+Q:
+/en Want to tell us why you gave the score that you did? /;
+/fr Voulez-vous nous dire pourquoi vous avez donné la note que vous avez choisie ? /;
+/open
+
+Q: 
+/en How useful did you find the live session speakers on a scale of 1 to 5, with 1 being not useful and 5 being very useful. /;
+/fr Dans quelle mesure les conférenciers de la séance en direct vous ont-ils été utiles sur une échelle de 1 à 5, 1 étant inutile et 5 étant très utile. /;
+/scale1-5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
+
+Q:
+/en Want to tell us why you gave the score that you did? /;
+/fr Voulez-vous nous dire pourquoi vous avez donné la note que vous avez choisie ? /;
+/open
+
+Q:
+/en Is there something you can take away from your experience so far that will help you in your work? /;
+/fr Y a-t-il quelque chose que vous pouvez retirer de votre expérience jusqu'à présent et qui vous aidera dans votre travail? /;
 /ONE
-/en Yes /; /fr Oui /;
-/en No /; /fr Non /;
+/en Yes /; /fr Oui /; 
+/en No /; /fr Non /; 
 ;
 
 Q: 
+/en If yes, what? /;
+/fr Dans l'affirmative, qu'est-ce que c'est? /;
+/open
+
+Q:
 /en Other comments /;
 /fr Autres commentaires /;
 /open
 
-// /en Thank you for your time! /; /fr Merci pour vos réponses! /;
+/en Thank you for your time! /; /fr Merci pour vos réponses! /;
 
 ;
 `;
