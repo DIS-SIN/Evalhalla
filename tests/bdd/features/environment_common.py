@@ -43,7 +43,7 @@ chrome_options.add_argument('headless')
 chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('disable-setuid-sandbox')
 chrome_options.add_argument('window-size=1920,1080')
-
+CHROME_EXE_PATH='/usr/local/bin/chromedriver'
 
 def before_all(context):
     print("> Starting the browser")
@@ -52,9 +52,9 @@ def before_all(context):
 
     if webdriver_wrapper == WebdriverWrapperType.CAPYBARA:
         if webdriver_headless_mode:
-            capybara.current_driver = "selenium_chrome"         # headless
+            capybara.current_driver = "selenium_chrome"        
         else:
-            capybara.current_driver = "selenium_remote_chrome"  # gui
+            capybara.current_driver = "selenium_remote_chrome"
         capybara.default_max_wait_time = 10
         capybara.current_session().current_window.resize_to(1920, 1080)
 
@@ -82,5 +82,5 @@ def init_selenium_chrome_driver(app):
 def init_selenium_chrome_driver(app):
     from capybara.selenium.driver import Driver
     return Driver(app, browser="remote",
-                  command_executor=remote_chrome_addr,
+                  #command_executor=remote_chrome_addr,
                   desired_capabilities=DesiredCapabilities.CHROME)
