@@ -1,0 +1,11 @@
+requests
+unittest-xml-reporting
+nose
+mockito
+pyshould
+behave
+selenium==2.48.0
+elementium
+capybara-py
+xvfbwrapper
+six==1.11.0
