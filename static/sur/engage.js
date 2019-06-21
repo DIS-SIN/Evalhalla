@@ -13,8 +13,8 @@ var engage = `# Engage
 /fr Veuillez nous faire part de votre expérience  jusqu'à présent /; 
 
 Q:
-/en What were your objectives in joining us? Choose all that apply. /;
-/fr Quels étaient vos objectifs en vous joignant à nous ? Cochez tout ce qui s'applique. /;
+/en Which of the following program objectives aligned with your own? Choose all that apply. /;
+/fr Lesquel des objectifs de programme suivants sont aligneés avec les vôtre ? Cochez tous ceux qui s’appliquent. /;
 /any
 /en Build, or contribute to, a shared learning experience relating to public engagement /; /fr Construire ou contribuer à une expérience d'apprentissage partagée en matière d'engagement du public. /;
 /en Undertake principled engagement, e.g., based on the Government of Canada's Public Engagement Principles  /; /fr Entreprendre un engagement fondé sur des principes, p. ex., sur les Principes et lignes directrices du gouvernement du Canada.  /;
