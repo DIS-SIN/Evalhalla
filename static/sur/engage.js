@@ -75,9 +75,9 @@ Q:
 /en No /; /fr Non /; 
 ;
 
-Q: 
-/en If yes, what? /;
-/fr Dans l'affirmative, qu'est-ce que c'est? /;
+Q:
+/en Want to tell us why? /;
+/fr Voulez-vous nous dire pourquoi? /;
 /open
 
 Q:
