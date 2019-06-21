@@ -20,7 +20,13 @@ Q:
 /en Undertake principled engagement, e.g., based on the Government of Canada's Public Engagement Principles  /; /fr Entreprendre un engagement fondé sur des principes, p. ex., sur les Principes et lignes directrices du gouvernement du Canada.  /;
 /en Obtain new Government of Canada public engagement resources and tools /; /fr Obtenir de nouvelles ressources et de nouveaux outils d'engagement du public du gouvernement du Canada /;
 /en Share public engagement resources and tools /; /fr Partager les ressources et les outils d'engagement du public /;
+/en Other /; /fr Autres /;
 ;
+
+Q:
+/en Other objectives /;
+/fr Autres objectifs /;
+/open
 
 Q:
 /en Want to tell us more about your response? /;
@@ -38,8 +44,8 @@ Q:
 ;
 
 Q:
-/en Overall, how useful have you found the online (Moodle) experience so far? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
-/fr Dans l'ensemble, dans quelle mesure l'expérience en ligne (Moodle) vous a-t-elle été utile jusqu'à présent?  Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
+/en Overall, how useful have you found the online learning experience so far? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
+/fr Dans l'ensemble, dans quelle mesure l'expérience d'apprentissage en ligne vous a-t-elle été utile jusqu'à présent?  Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
 /scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 Q:
@@ -48,8 +54,8 @@ Q:
 /open
 
 Q:
-/en Overall, how useful did you find the live session platform (WebEx) so far? Rate your experience on a scale of 1 to 5, with 1 being not useful and 5 being very useful. /;
-/fr Dans l'ensemble,  dans quelle mesure la plate-forme de session en direct (WebEx) vous a-t-elle été utile jusqu'à présent ? Évaluez votre experience sur une échelle de 1 à 5, où 1 correspond à « inutile » et 5 correspond à « très utile ». /;
+/en Overall, how useful did you find the learning materials and resources so far? Rate your experience on a scale of 1 to 5, with 1 being not useful and 5 being very useful. /;
+/fr Dans l'ensemble, dans quelle mesure le matériel et les ressources d'apprentissage vous a-t-elle été utile jusqu'à présent? Évaluez votre experience sur une échelle de 1 à 5, où 1 correspond à « inutile » et 5 correspond à « très utile ». /;
 /scale1-5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
 
 Q:
