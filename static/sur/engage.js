@@ -14,7 +14,7 @@ var engage = `# Engage
 
 Q:
 /en Which of the following program objectives aligned with your own? Choose all that apply. /;
-/fr Lesquel des objectifs de programme suivants sont aligneés avec les vôtre ? Cochez tous ceux qui s’appliquent. /;
+/fr Lesquels des objectifs de programme suivants sont aligneés avec les vôtres ? Cochez tout ce qui s'applique. /;
 /any
 /en Build, or contribute to, a shared learning experience relating to public engagement /; /fr Construire ou contribuer à une expérience d'apprentissage partagée en matière d'engagement du public. /;
 /en Undertake principled engagement, e.g., based on the Government of Canada's Public Engagement Principles  /; /fr Entreprendre un engagement fondé sur des principes, p. ex., sur les Principes et lignes directrices du gouvernement du Canada.  /;
