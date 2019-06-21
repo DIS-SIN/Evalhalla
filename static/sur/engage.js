@@ -11,14 +11,7 @@ var engage = `# Engage
 *Q: 
 /en Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
 /fr Dans l’ensemble, à quel point êtes-vous satisfait(e) de cette activité d’apprentissage? Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
-/ONE
-/en 0 - Unsure /; /fr 0 - Incertain /;
-/en 1 - Very Unsatisfied /; /fr  1 - Très insatisfait /;
-/en 2 - Advanced Beginner /; /fr 2 - Débutant avancé /;
-/en 3 - Competent /; /fr 3 - Compétent /;
-/en 4 - Proficient /; /fr 4 - Très compétent /;
-/en 5 - Very Satisfied /; /fr 5 - Très satisfait /;
-;
+/scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 Q:
 /en Why did you give that score? /;
