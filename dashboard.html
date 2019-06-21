@@ -390,7 +390,7 @@
             }
 
             for (let q = 0; q < chartd.d_labels.length; q++) {
-                chartd.d_labels[q] = ((parseInt(chartd.d_data[q], 10) / sum) * 100).toFixed(0) + "% " + chartd.d_labels[q];
+                chartd.d_labels[q] = ((parseInt(chartd.d_data[q], 10) / sum) * 100).toFixed(0) + "% " + chartd.d_labels[q].substring(0, 20);
             }
 
             // And for a doughnut chart
