@@ -42,7 +42,7 @@ chrome_options = Options()
 chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('disable-setuid-sandbox')
 chrome_options.add_argument('window-size=1920,1080')
-
+CHROME_EXE_PATH='/usr/local/bin/chromedriver'
 
 #---
 # common hooks
@@ -59,10 +59,11 @@ def before_all(context):
     if web_browser == WebBrowserType.CHROME:
         if webdriver_headless_mode:
             chrome_options.add_argument('headless')
-            context.driver = webdriver.Chrome(chrome_options=chrome_options)
-
+            context.driver = webdriver.Chrome(executable_path=CHROME_EXE_PATH, 
+                chrome_options=chrome_options)
         else:
-            context.driver = webdriver.Chrome(chrome_options=chrome_options)
+            context.driver = webdriver.Chrome(executable_path=CHROME_EXE_PATH, 
+                chrome_options=chrome_options)
         
 
 
