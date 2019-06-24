@@ -2,20 +2,73 @@
 # The environment.py module may define code to run
 # before and after certain events during your testing.
 #
+import os
+from enum import Enum
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+#---
+# Chrome: headless (default) or gui mode?
 #
-# @see https://behave.readthedocs.io/en/latest/api.html?highlight=environment#environment-file-functions
-# @see https://elliterate.github.io/capybara.py/
+webdriver_headless_mode = True
+
+def use_headless_mode(on_or_off: bool):
+    global webdriver_headless_mode
+    webdriver_headless_mode = on_or_off
+
+
+#---
+# default high-level query engine for Chrome
 #
 
-from environment_common import before_all
-from environment_common import after_all
-from environment_common import init_selenium_chrome_driver
-from environment_common import behave_use_capybara
-from environment_common import use_headless_mode
+class WebBrowserType(Enum):
+    CHROME = 1
+    FIREFOX = 2  
+    IE = 3    
+
+web_browser = WebBrowserType.CHROME
+
+def behave_use_chrome():
+    global web_browser
+    web_browser = WebBrowserType.CHROME
+
+
+#---
+# setting for chrome webdriver
+#
+
+chrome_options = Options()
+chrome_options.add_argument('no-sandbox')
+chrome_options.add_argument('disable-setuid-sandbox')
+chrome_options.add_argument('window-size=1920,1080')
+
+
+#---
+# common hooks
+#
+
+def before_all(context):
+    print("> Starting the browser")
+
+    global chrome_options
+    global web_browser
+
+    context.SURVEY_URL = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')) + "\index.html?sur="
+
+    if web_browser == WebBrowserType.CHROME:
+        if webdriver_headless_mode:
+            chrome_options.add_argument('headless')
+            context.driver = webdriver.Chrome(chrome_options=chrome_options)
+
+        else:
+            context.driver = webdriver.Chrome(chrome_options=chrome_options)
+        
+
+
+def after_all(context):
+    print("< Closing the browser")
+    if web_browser == WebBrowserType.CHROME:
+        context.driver.close()
 
 print('------------------')
-#use_headless_mode(False)
-#behave_use_capybara()
-#set_remote_chrome_addr('http://127.0.0.1:9515/wd/hub')                 # from host to the same host
-#set_remote_chrome_addr('http://docker.for.mac.localhost:9515/wd/hub')  # from Docker container to Mac host
-#set_remote_chrome_addr('http://docker.for.win.localhost:9515/wd/hub')  # from Docker container to Windows host
