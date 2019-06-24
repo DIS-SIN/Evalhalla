@@ -53,7 +53,8 @@
         else if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
         else if (sur == "ut0_da_interest") { g_intro_script = ut0_da_interest; auto_display_mode = true; }
         else if (sur == "engage") { g_intro_script = engage; auto_display_mode = true; }
-        else { g_intro_script = engage; auto_display_mode = true; }
+        else if (sur == "inclusive") { g_intro_script = inclusive; auto_display_mode = true; }
+        else { g_intro_script = engage; auto_display_mode = true; } // current hot default
         // wraps the generated elements in a form and a paginator
         var form_wrap = function (src) {
             var pages = "";
@@ -1830,6 +1831,16 @@
                                 "course_title": "Learning Together for Better Public Engagement",
                                 "offering_city": "ONLINE",
                                 "offering_province": "WEB"
+                            }];
+                    }
+                    if (sur == "inclusive") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000004,
+                                "course_code": "IPS-004",
+                                "course_title": "Digital Accessibility Matters: Creating a More Inclusive Public Service",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
                             }];
                     }
                     if (sur == "ut1_june18_event") {
