@@ -54,7 +54,7 @@ def before_all(context):
     global chrome_options
     global web_browser
 
-    context.SURVEY_URL = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')) + "\index.html?sur="
+    context.SURVEY_URL = 'file:///' + os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')) + "\index.html?sur="
 
     if web_browser == WebBrowserType.CHROME:
         if webdriver_headless_mode:
