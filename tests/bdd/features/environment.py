@@ -6,7 +6,6 @@ import os
 from enum import Enum
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 #---
 # Chrome: headless (default) or gui mode?
@@ -42,6 +41,7 @@ chrome_options = Options()
 chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('disable-setuid-sandbox')
 chrome_options.add_argument('window-size=1920,1080')
+chrome_options.add_argument("--enable-javascript")
 CHROME_EXE_PATH='/usr/local/bin/chromedriver'
 
 #---
@@ -65,8 +65,6 @@ def before_all(context):
             context.driver = webdriver.Chrome(executable_path=CHROME_EXE_PATH, 
                 chrome_options=chrome_options)
         
-
-
 def after_all(context):
     print("< Closing the browser")
     if web_browser == WebBrowserType.CHROME:
