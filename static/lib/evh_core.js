@@ -12,13 +12,17 @@
         // Autodisplay Overrides
         //
         var auto_display_mode = false; // if you pass a query param in with sur=example_nanos_paged for example, it goes right into "presentation mode"
+        var load = "ig";
         var params = null; // the search params
         var sur = null; // the survey to load
-        var entry = "direct";
+        var resp = "hty";
+        var entry = "direct"; // the entry method to the survey
+        var weasel = "weasel"; // the weasel
         try {
             params = new URLSearchParams(window.location.search);
             sur = safe(params.get("sur"));
             entry = safe(params.get("entry"));
+            weasel = safe(params.get("weasel"));
         } catch (e) {
             // good old Internet Explorer. Still writing "special" code for you...
             try {
@@ -39,18 +43,25 @@
             } catch (er) { }
         }
 
+
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
+        if (weasel != "m" + load + resp) { sur = sur ? sur : "ut1_june18_event"; }
+        // override it
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
-        if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
-        if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
-        if (sur == "ut0_da_interest") { g_intro_script = ut0_da_interest; auto_display_mode = true; }
-
+        else if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
+        else if (sur == "ut1_june18_event") { g_intro_script = ut1_june18_event; auto_display_mode = true; }
+        else if (sur == "ut0_da_interest") { g_intro_script = ut0_da_interest; auto_display_mode = true; }
+        else if (sur == "engage") { g_intro_script = engage; auto_display_mode = true; }
+        else if (sur == "inclusive") { g_intro_script = inclusive; auto_display_mode = true; }
+        else if (sur == "busrides") { g_intro_script = busrides; auto_display_mode = true; }
+        else if (sur == "test_sur") { g_intro_script = test_sur; auto_display_mode = true; }
+        else { g_intro_script = engage; auto_display_mode = true; } // current hot default
         // wraps the generated elements in a form and a paginator
         var form_wrap = function (src) {
             var pages = "";
             for (var i = 1; i <= g_control_flags["pageid"]; i++) {
-                pages += `<li class="waves-effect ev-page-sel ev-page-sel-` + i + `"><a>` + i + `</a></li>`;
+                pages += '<li class="waves-effect ev-page-sel ev-page-sel-' + i + '"><a>' + i + '</a></li>';
             }
             var fwtmpl = evh_templates["html"]["form wrap"];
             var currpct = 0;
@@ -71,7 +82,8 @@
         // For huge surveys we might get into hot water performance wise
         // theres about 160 .replace regexes - but for our problem domain we're aiming
         // for small short and light surveys.
-        var get_template_snip = function (snip, format = "html") {
+        var get_template_snip = function (snip, format) {
+            format = format || 'html';
             if (snip == "header") {
                 if (format == "json") {
                     return evh_templates["json"]["header"];
@@ -703,7 +715,8 @@
         };
 
         // helper function to take the multiline input and pack it into one object
-        const pack_text = function (src_a, i, pack, join = " ") {
+        const pack_text = function (src_a, i, pack, join) {
+            join = join || " ";
             var nextcmd = "null";
             var pack_json = "";
             while (nextcmd == "null") {
@@ -756,7 +769,8 @@
             return "null";
         }
         // parser - handle the header command
-        var handle_cmd_header = function (cmd, src, json = "") {
+        var handle_cmd_header = function (cmd, src, json) {
+            json = json || "";
             reset_control_flags();
 
             g_control_flags["header"][cmd] = src.replace(src.split(" ")[0], "").trim();
@@ -778,7 +792,8 @@
         }
 
         // parser - handle the pagebreak command
-        var handle_cmd_pagebreak = function (cmd, src, json = "") {
+        var handle_cmd_pagebreak = function (cmd, src, json) {
+            json = json || "";
             // handle html
             var snip = get_template_snip("page break");
             g_control_flags["pageid"] = g_control_flags["pageid"] + 1;
@@ -792,7 +807,8 @@
         }
 
         // parser - handle the instruction command
-        var handle_cmd_instruction = function (cmd, src, json = "") {
+        var handle_cmd_instruction = function (cmd, src, json) {
+            json = json || "";
             // handle html
             var snip = get_template_snip("instruction");
             snip = snip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
@@ -809,7 +825,8 @@
         }
 
         // parser - handle the question command
-        var handle_cmd_question = function (cmd, src, json = "") {
+        var handle_cmd_question = function (cmd, src, json) {
+            json = json || "";
             var snip = get_template_snip("question");
             if (cmd == "question" || cmd == "req question") {
                 // handle html
@@ -982,7 +999,7 @@
                 }
                 if (typeof snip !== "undefined" && snip != false) {
                     if (cmd == "pick one" || cmd == "pick any") {
-                        snip = snip.replace(/\%form/g, `<fieldset><legend><span class="en">Pick</span><span class="fr">Choisir</span></legend>${form}</fieldset>`);
+                        snip = snip.replace(/\%form/g, '<fieldset><legend><span class="en">Pick</span><span class="fr">Choisir</span></legend>' + form + '</fieldset>');
                     } else {
                         snip = snip.replace(/\%form/g, form);
                     }
@@ -1615,7 +1632,9 @@
         // Tutorial runner setup
         //
 
-        var run_type_it = function (type_this = "type_it_short") {
+        var run_type_it = function (type_this) {
+            type_this = type_this || "type_it_short";
+
             g_state["tut"]["char_at"] = 0;
             g_state["el"]["c_editor"].val("");
             reset_control_flags(true);
@@ -1806,22 +1825,22 @@
                         "offering_city": "NATIONAL CAPITAL REGION (NCR)",
                         "offering_province": "NCR/RCN"
                     }];
-                    if (sur == "ut1_june18_event") {
-                        demo_offering = [
-                            {
-                                "offering_id": 000001,
-                                "course_code": "EVH-UT1",
-                                "course_title": "June 18 Event",
-                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                                "offering_province": "NCR/RCN"
-                            }];
-                    }
                     if (sur == "ut0_da_interest") {
                         demo_offering = [
                             {
                                 "offering_id": 000000,
                                 "course_code": "EVH-UT0",
                                 "course_title": "Stratosphere Event",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
+                    if (sur == "ut1_june18_event") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000001,
+                                "course_code": "EVH-UT1",
+                                "course_title": "June 18 Event",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
                                 "offering_province": "NCR/RCN"
                             }];
@@ -1836,8 +1855,50 @@
                                 "offering_province": "NCR/RCN"
                             }];
                     }
+                    if (sur == "engage") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000003,
+                                "course_code": "Engage",
+                                "course_title": "Learning Together for Better Public Engagement",
+                                "offering_city": "ONLINE",
+                                "offering_province": "WEB"
+                            }];
+                    }
+                    if (sur == "inclusive") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000004,
+                                "course_code": "IPS-004",
+                                "course_title": "Digital Accessibility Matters: Creating a More Inclusive Public Service",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
+                    if (sur == "busrides") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000005,
+                                "course_code": "SUR-BR1",
+                                "course_title": "Episode review / Revue d'épisode",
+                                "offering_city": "ONLINE",
+                                "offering_province": "WEB"
+                            }];
+                    }
+                    if (sur == "test_sur") {
+                        demo_offering = [
+                            {
+                                "offering_id": 000006,
+                                "course_code": "TST-006",
+                                "course_title": "Test Survey",
+                                "offering_city": "ONLINE",
+                                "offering_province": "WEB"
+                            }];
+                    }
+
                     // to enable testing when no courses load. delete this code
-                    offs = demo_offering.concat(offs);
+                    //TODO: renable course selection
+                    offs = demo_offering; //demo_offering.concat(offs);
                     if (offs.length == 0) {
                         offs_html += "<h2><span class='en'>No courses today</span><span class='fr'>Aucune de cours aujourd'hui</span></h2>";
                         offs = demo_offering;
@@ -1847,31 +1908,31 @@
                     // end delete
                     for (var i = 0; i < offs.length; i++) {
                         if (i == 0) {
-                            suggested = `<div style="padding: 1em;">
-                                        <span class="badge red white-text" style="float:none;padding:0.3em;font-size:1.1em;">
-                                            <span class="en">Suggested</span><span class="fr">Suggéré</span>
-                                        </span></div>
-                                        `
+                            suggested = '<div style="padding: 1em;">' +
+                                '<span class="badge red white-text" style="float:none;padding:0.3em;font-size:1.1em;">' +
+                                '<span class="en">Suggested</span><span class="fr">Suggéré</span>' +
+                                '</span></div>' +
+                                '';
                         } else {
                             suggested = "";
                         }
-                        offs_html += `<div class="card-panel purp-canada-ca-edged">
-                                        <div class="padbox badgelarge">
-                                            ${suggested}
-                                            <div class="row">
-                                                <p>
-                                                <span class="offeringtitle">${offs[i]["course_title"]}</span><br />
-                                                <em>${offs[i]["offering_city"]}, ${offs[i]["offering_province"]}</em><br />
-                                                <sub>${offs[i]["offering_id"]} - ${offs[i]["course_code"]}</sub>
-                                                </p>
-                                            </div>
-                                            <div class="row">
-                                                <a href="#editor" id="off_${offs[i]["offering_id"]}" class="select-offering btn btn-large purp-canada-ca">
-                                                    <span class="en">Select</span><span class="fr">Choisir</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>`;
+                        offs_html += '<div class="card-panel purp-canada-ca-edged">' +
+                            '<div class="padbox badgelarge">' +
+                            suggested +
+                            '<div class="row">' +
+                            '<p>' +
+                            '<span class="offeringtitle">' + offs[i]["course_title"] + '</span><br />' +
+                            '<em>' + offs[i]["offering_city"] + ', ' + offs[i]["offering_province"] + '</em><br />' +
+                            '<sub>' + offs[i]["offering_id"] + ' - ' + offs[i]["course_code"] + '</sub>' +
+                            '</p>' +
+                            '</div>' +
+                            '<div class="row">' +
+                            '<a href="#editor" id="off_' + offs[i]["offering_id"] + '" class="select-offering btn btn-large purp-canada-ca">' +
+                            '<span class="en">Select</span><span class="fr">Choisir</span>' +
+                            '</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
 
                     }
                     g_state["tombstone"]["offerings"] = offs;

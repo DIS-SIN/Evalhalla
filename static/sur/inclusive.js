@@ -1,4 +1,4 @@
-var ut1_june18_event = "# /en UT1-J18 /; /fr UT1-J18 /;\n" +
+var inclusive = "# /en IPS-004 /; /fr IPS-004 /;\n" +
     "\n" +
     "##\n" +
     "/en Events Evaluation /;\n" +
@@ -93,7 +93,6 @@ var ut1_june18_event = "# /en UT1-J18 /; /fr UT1-J18 /;\n" +
     "/fr 8. Autres commentaires /;\n" +
     "/open\n" +
     "\n" +
-    // Last minute form changes
     "*Q:\n" +
     "/en 9a. Please rate your level of knowledge if the subject area. Before this learning activity: /;\n" +
     "/fr 9a. Veuillez évaluer votre niveau de connaissances dans le domaine en question. Avant l’activité d’apprentissage: /;\n" +

@@ -6,7 +6,7 @@ function slugify(string) {
     const p = new RegExp(a.split('').join('|'), 'g')
     return string.toString().toLowerCase()
         .replace(/\s+/g, '-') // Replace spaces with -
-        .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
+        //.replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
         .replace(/&/g, '-and-') // Replace & with ‘and’
         .replace(/[^\w\-]+/g, '') // Remove all non-word characters
         .replace(/\-\-+/g, '-') // Replace multiple - with single -
@@ -19,7 +19,7 @@ var randomCoord = 0;
 var lastCoord = 0;
 var currCoord = Math.random() * 360;
 var slicecount = 0;
-const randomHsl = () => {
+var randomHsl = function () {
     slicecount = slicecount + 1;
     if (slicecount % 2 == 0) {
         currCoord = (currCoord + 90) % 360;
@@ -29,12 +29,16 @@ const randomHsl = () => {
     lastCoord = currCoord;
     currCoord = currCoord + 61; // prime between 45 and 90
 
-    return `hsla(${currCoord}, 70%, 70%, 1)`;
+    return 'hsla(' + currCoord + ', 70%, 70%, 1)';
 }
 
 // svg basic pie chart
 var hackernoon_pie = function (elid, slices) {
     // just read this. trust me: https://hackernoon.com/a-simple-pie-chart-in-svg-dbdd653b6936
+
+    // Note: Attempting IE11 Backwards compatiblity. Hope is this works.
+
+    /* 
     var svgEls = [document.getElementById(elid)];
 
     if (slices == null) {
@@ -60,22 +64,16 @@ var hackernoon_pie = function (elid, slices) {
             // if the slice is more than 50%, take the large arc (the long way around)
             const largeArcFlag = slice.percent > .5 ? 1 : 0;
             // create an array and join it just for code readability
-            /* 
-            // Pie Chart Filled
-            const pathData = [
-                `M ${startX} ${startY}`, // Move
-                `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`, // Arc
-                `L 0 0`, // Line
-            ].join(' ');
-            */
+
             // Donut chart
             const thickness = .3;
             const pathData = [
-                `M ${startX} ${startY}`,
-                `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
-                /** next two lines added for donut chart, as well as thickness constant*/
-                `L ${endX * thickness} ${endY * thickness}`,
-                `A ${thickness} ${thickness} 0 ${largeArcFlag} 0 ${startX * thickness} ${startY * thickness}`,
+                // WARNING: The space here matter. A lot
+                'M ' + startX + ' ' + startY + '',
+                'A 1 1 0 ' + largeArcFlag + ' 1 ' + endX + ' ' + endY + '',
+                // next two lines added for donut chart, as well as thickness constant
+                'L ' + (endX * thickness) + ' ' + (endY * thickness) + '',
+                'A ' + thickness + ' ' + thickness + ' 0 ' + largeArcFlag + ' 0 ' + (startX * thickness) + ' ' + (startY * thickness) + '',
             ].join(' ');
 
             // create a <path> and append it to the <svg> element
@@ -85,6 +83,7 @@ var hackernoon_pie = function (elid, slices) {
             svgEls[i].appendChild(pathEl);
         })
     }
+    */
 }
 
 // string sanitizer  // <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
