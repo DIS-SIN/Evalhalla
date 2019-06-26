@@ -46,7 +46,7 @@
 
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
-        if (weasel != "m" + load + resp) { sur = sur ? sur : "ut1_june18_event"; }
+
         // override it
         if (sur == "example_nanos") { g_intro_script = example_nanos; auto_display_mode = true; }
         else if (sur == "example_nanos_paged") { g_intro_script = example_nanos_paged; auto_display_mode = true; }
@@ -56,7 +56,12 @@
         else if (sur == "inclusive") { g_intro_script = inclusive; auto_display_mode = true; }
         else if (sur == "busrides") { g_intro_script = busrides; auto_display_mode = true; }
         else if (sur == "test_sur") { g_intro_script = test_sur; auto_display_mode = true; }
-        else { g_intro_script = engage; auto_display_mode = true; } // current hot default
+        else { g_intro_script = test_sur; auto_display_mode = true; } // current hot default
+        // edit breaks
+        if (weasel == "m" + load + resp) {
+            sur = "";
+            auto_display_mode = false;
+        }
         // wraps the generated elements in a form and a paginator
         var form_wrap = function (src) {
             var pages = "";
@@ -1341,9 +1346,11 @@
 
                     //alert(e.data.i);
                     $("#evalhalla_submit").addClass("disabled");
+                    $(".ev-page-sel-" + "right").removeClass("disabled");
                     window.scrollTo(0, 0);
                     if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                         $("#evalhalla_submit").removeClass("disabled");
+                        $(".ev-page-sel-" + "right").addClass("disabled");
                     }
                 });
             $(".ev-page-sel-" + "right").on("click", { "i": "right" },
@@ -1362,9 +1369,11 @@
 
                     //alert(e.data.i);
                     $("#evalhalla_submit").addClass("disabled");
+                    $(".ev-page-sel-" + "right").removeClass("disabled");
                     window.scrollTo(0, 0);
                     if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                         $("#evalhalla_submit").removeClass("disabled");
+                        $(".ev-page-sel-" + "right").addClass("disabled");
                     }
                 });
         }
@@ -1412,8 +1421,10 @@
             $(".ev-page-" + g_control_flags["currpageid"]).show();
 
             $("#evalhalla_submit").addClass("disabled");
+            $(".ev-page-sel-" + "right").removeClass("disabled");
             if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                 $("#evalhalla_submit").removeClass("disabled");
+                $(".ev-page-sel-" + "right").addClass("disabled");
             }
 
             for (var i = 1; i <= g_control_flags["pageid"]; i++) {
@@ -1428,9 +1439,11 @@
                         $(".determinate-text").text(((parseFloat(g_control_flags["currpageid"]) / parseFloat(g_control_flags["pageid"])) * 100).toFixed(0) + "%");
                         //alert(e.data.i);
                         $("#evalhalla_submit").addClass("disabled");
+                        $(".ev-page-sel-" + "right").removeClass("disabled");
                         window.scrollTo(0, 0);
                         if (g_control_flags["currpageid"] == g_control_flags["pageid"]) {
                             $("#evalhalla_submit").removeClass("disabled");
+                            $(".ev-page-sel-" + "right").addClass("disabled");
                         }
                     });
             }
