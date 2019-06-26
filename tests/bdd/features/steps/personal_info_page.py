@@ -9,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 @given('I have selected a course offering')
 def step_impl(context):
     wait = WebDriverWait(context.driver, 5)
-    elem = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@id='off_1']//span[text()='Select']")))
+    elem = wait.until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Select']")))
     elem.click()
 
 @then('I should see a "{button_text}" button')
