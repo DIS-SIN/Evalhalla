@@ -1,0 +1,31 @@
+language: python
+
+python:
+  - "3.6"
+
+sudo: true
+
+addons: # get google-chrome-stable
+  chrome: stable
+
+install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
+  - wget -N http://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip -P ~/
+  - unzip ~/chromedriver_linux64.zip -d ~/
+  - rm ~/chromedriver_linux64.zip
+  - sudo mv -f ~/chromedriver /usr/local/share/
+  - sudo chmod +x /usr/local/share/chromedriver
+  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
+  - pip install -r tests/bdd/requirements.txt
+
+before_script:
+  - cd tests/bdd
+
+script:
+  - behave
+
+notifications:
+  slack: 
+    rooms: 
+      - digitalnumerique:jOpRwb5KkhTlG0Qnr0ByZWuS
+    on_success: never 
+    on_failure: always 

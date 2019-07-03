@@ -34,3 +34,5 @@ neuron_this.html
 neuron.json
 /private
 *.sur
+tests/bdd/venv
+*.exe

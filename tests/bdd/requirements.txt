@@ -1,0 +1,8 @@
+requests
+unittest-xml-reporting
+nose
+mockito
+pyshould
+behave
+selenium==2.48.0
+six==1.11.0
