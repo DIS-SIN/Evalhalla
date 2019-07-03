@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
+        rel="stylesheet" media="screen" />
+    <link href="static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen" />
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="static/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="white nav-extended">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">Evalhalla</a>
+                <a data-target="mobile-demo" href="#logo-container" class="adm-function sidenav-trigger"
+                    aria-label="Open menu">
+                    <em class="material-icons mhi-menu" aria-hidden="true">menu</em>
+                </a>
+                <ul class="right">
+                    <li>
+                        <div>
+                            <a class="lang" href="#editor">
+                                <span class="en">Français</span>
+                                <span class="fr">English</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <ul id="nav-mobile" class="adm-function right hide-on-med-and-down">
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" data-target="dropdown3">
+                            <span class="en">
+                                Insert
+                            </span>
+                            <span class="fr">
+                                Insérer
+                            </span> <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
+                        </a>
+                    </li>
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" data-target="dropdown2">
+                            <span class="en">View</span><span class="fr">Vue</span> <em
+                                class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
+                        </a>
+                    </li>
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" data-target="dropdown1">
+                            Menu <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
+        <li>
+            <a href="?sur=example_nanos_paged" class="demo_ev_loop" title="reload demo survey">
+                <em class="material-icons" aria-hidden="true">lightbulb</em>
+                <span class="en">
+                    Demo
+                </span>
+                <span class="fr">
+                    Demo
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="show_me_how">
+                <em class="material-icons" aria-hidden="true">help</em>
+                <span class="en">
+                    Tutorial
+                </span>
+                <span class="fr">
+                    Explication
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="adm_save_working_survey">
+                <em class="material-icons" aria-hidden="true">save</em>
+                <span class="en">
+                    Save
+                </span>
+                <span class="fr">
+                    Enregistrer
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="survista_send">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>Survista
+            </a>
+        </li>
+        <li><a class="audit_json_render">
+                <em class="material-icons" aria-hidden="true">gavel</em>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
+        </li>
+        <li><a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear</span>
+                <span class="fr">Effacer</span>
+            </a></li>
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
+            </a>
+        </li>
+    </ul>
+    <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
+        <li>
+            <a href="https://app.klipfolio.com/published/692bec18aa4e866b9d7fbb5b5c355de3/satisfaction-survey">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>
+                <span class="en">
+                    Dashboard
+                </span>
+                <span class="fr">
+                    Tableau de bord
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_render_window">
+                <em class="material-icons" aria-hidden="true">assignment</em>
+                <span class="en">
+                    Survey
+                </span>
+                <span class="fr">
+                    Enquête
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_json_window">
+                <em class="material-icons" aria-hidden="true">code</em>
+                <span class="en">
+                    JSON
+                </span>
+                <span class="fr">
+                    JSON
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_editor_window">
+                <em class="material-icons" aria-hidden="true">create</em>
+                <span class="en">
+                    Editor
+                </span>
+                <span class="fr">
+                    Editeur
+                </span>
+            </a>
+        </li>
+        <li><a class="hs_ls_window">
+                <em class="material-icons" aria-hidden="true">how_to_vote</em>
+                <span class="en">Storage</span><span class="fr">Storage</span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_qlib_window">
+                <em class="material-icons">build</em>
+                <span class="en">
+                    Library
+                </span>
+                <span class="fr">
+                    Bibliothèque
+                </span>
+            </a>
+        </li>
+    </ul>
+    <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
+        <li><a class="ev-add-header">
+                <em class="material-icons" aria-hidden="true">title</em>
+                <span class="en">Header</span>
+                <span class="fr">En-tête</span>
+            </a></li>
+        <li><a class="ev-add-instr">
+                <em class="material-icons" aria-hidden="true">help</em>
+                <span class="en">Instruction</span>
+                <span class="fr">Instruction</span>
+            </a></li>
+        <li><a class="ev-add-qfree">
+                <em class="material-icons" aria-hidden="true">input</em>
+                <span class="en">Open</span>
+                <span class="fr">Libre</span>
+            </a></li>
+        <li><a class="ev-add-qone">
+                <em class="material-icons" aria-hidden="true">done</em>
+                <span class="en">One</span>
+                <span class="fr">Une</span>
+            </a></li>
+        <li><a class="ev-add-qany">
+                <em class="material-icons" aria-hidden="true">done_all</em>
+                <span class="en">Any</span>
+                <span class="fr">Choisir</span>
+            </a></li>
+        <li><a class="ev-add-qscale">
+                <em class="material-icons" aria-hidden="true">call_made</em>
+                <span class="en">Scale</span>
+                <span class="fr">Echelle</span>
+            </a></li>
+        <li><a class="ev-add-qrank">
+                <em class="material-icons" aria-hidden="true">import_export</em>
+                <span class="en">Rate</span>
+                <span class="fr">Taux</span>
+            </a></li>
+    </ul>
+    <ul class="adm-function sidenav" id="mobile-demo">
+        <li>
+            <span class="mob-span center-align">MENU</span>
+            <hr>
+        </li>
+        <li>
+            <a href="?sur=example_nanos_paged&m=on" class="demo_ev_loop" title="mobile reload demo survey">
+                <em class="material-icons" aria-hidden="true">lightbulb</em>
+                <span class="en">
+                    Demo
+                </span>
+                <span class="fr">
+                    Demo
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="show_me_how">
+                <em class="material-icons" aria-hidden="true">help</em>
+                <span class="en">
+                    Tutorial
+                </span>
+                <span class="fr">
+                    Explication
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="adm_save_working_survey">
+                <em class="material-icons" aria-hidden="true">save</em>
+                <span class="en">
+                    Save
+                </span>
+                <span class="fr">
+                    Enregistrer
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="survista_send">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em> Survista
+            </a>
+        </li>
+        <li>
+            <a class="audit_json_render">
+                <em class="material-icons" aria-hidden="true">gavel</em>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
+        </li>
+        <li><a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear</span>
+                <span class="fr">Effacer</span>
+            </a></li>
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
+            </a>
+        </li>
+        <li>
+            <span class="mob-span center-align">
+                <span class="en">VIEW</span><span class="fr">VUE</span>
+            </span>
+            <hr>
+        </li>
+        <li>
+            <a class="hs_render_window">
+                <em class="material-icons" aria-hidden="true">assignment</em>
+                <span class="en">
+                    Survey
+                </span>
+                <span class="fr">
+                    Enquête
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_json_window">
+                <em class="material-icons" aria-hidden="true">code</em>
+                <span class="en">
+                    JSON
+                </span>
+                <span class="fr">
+                    JSON
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_editor_window">
+                <em class="material-icons" aria-hidden="true">create</em>
+                <span class="en">
+                    Editor
+                </span>
+                <span class="fr">
+                    Editeur
+                </span>
+            </a>
+        </li>
+        <li><a class="hs_ls_window">
+                <em class="material-icons" aria-hidden="true">how_to_vote</em>
+                <span class="en">
+                    Storage
+                </span>
+                <span class="fr">
+                    Storage
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="hs_qlib_window">
+                <em class="material-icons" aria-hidden="true">build</em>
+                <span class="en">
+                    Library
+                </span>
+                <span class="fr">
+                    Bibliothèque
+                </span>
+            </a>
+        </li>
+        <li>
+            <span class="mob-span center-align"><span class="en">INSERT</span><span class="fr">INSÉRER</span></span>
+            <hr>
+        </li>
+        <li>
+            <a class="ev-add-header">
+                <em class="material-icons" aria-hidden="true">title</em>
+                <span class="en">Header</span>
+                <span class="fr">En-tête</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-instr">
+                <em class="material-icons" aria-hidden="true">help</em>
+                <span class="en">Instruction</span>
+                <span class="fr">Instruction</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qfree">
+                <em class="material-icons" aria-hidden="true">input</em>
+                <span class="en">Open</span>
+                <span class="fr">Libre</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qone">
+                <em class="material-icons" aria-hidden="true">done</em>
+                <span class="en">One</span>
+                <span class="fr">Une</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qany">
+                <em class="material-icons" aria-hidden="true">done_all</em>
+                <span class="en">Any</span>
+                <span class="fr">Choisir</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qscale">
+                <em class="material-icons" aria-hidden="true">call_made</em>
+                <span class="en">Scale</span>
+                <span class="fr">Echelle</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qrank">
+                <em class="material-icons" aria-hidden="true">import_export</em>
+                <span class="en">Rate</span>
+                <span class="fr">Taux</span>
+            </a>
+        </li>
+    </ul>
+
+    <div id="editor" class="container">
+        <div class="section">
+            <div id="step_lang" class="row bannerbgbacked center ev-page ev-page-lang">
+                <div class="col hide-on-small-only m3"></div>
+                <div class="col s12 m6 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
+                    </div>
+                    <div class="card-panel">
+                        <div class="row center">
+                            <h1>
+                                <span class="en">Satisfaction Survey</span>
+                                <span class="fr">Enquête de satisfaction</span>
+                            </h1>
+                            <p>
+                                Language of preference - Langue de préférence
+                            </p>
+                        </div>
+
+                        <div class="row center">
+                            <div class="col s12 m6 center">
+                                <div class="row center">
+                                    <button class="lang-set-en purp-canada-ca btn-large">English</button>
+                                </div>
+                            </div>
+                            <div class="col s12 m6 center">
+                                <div class="row center">
+                                    <button class="lang-set-fr purp-canada-ca btn-large">Français</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m3"></div>
+            </div>
+            <div id="step_offering" class="row bannerbgbacked center ev-page ev-page-offering">
+                <div class="col hide-on-small-only m2"></div>
+                <div class="col s12 m8 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
+                    </div>
+                    <div class="card-panel">
+                        <div class="row center">
+                            <h2>
+                                <span class="en">Satisfaction Survey</span>
+                                <span class="fr">Enquête de satisfaction</span>
+                            </h2>
+                            <p>
+                                <span class="en">Please choose your event/course</span>
+                                <span class="fr">Veuillez choisir votre événement/cours</span>
+                            </p>
+                        </div>
+
+                        <div class="row center offering_target">
+                            OFFERINGS
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m2"></div>
+            </div>
+            <div id="step_tombstone" class="row bannerbgbacked center ev-page ev-page-tombstone">
+                <div class="col hide-on-small-only m1"></div>
+                <div class="col s12 m10 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
+                    </div>
+                    <div class="card-panel">
+                        <div class="row center">
+                            <h2>
+                                <span class="en">Satisfaction Survey</span>
+                                <span class="fr">Enquête de satisfaction</span>
+                            </h2>
+                            <p>
+                                <span class="en">A bit about you</span>
+                                <span class="fr">Un peu de vous</span>
+                                <span class="badge grey white-text"><span class="en">optional</span><span
+                                        class="fr">optionnel</span></span>
+                            </p>
+                        </div>
+
+                        <div class="row center tombstone_target">
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input-department"
+                                            class="autocomplete tombstone_department">
+                                        <label for="autocomplete-input-department">
+                                            <span class="en">Department</span>
+                                            <span class="fr">Ministère</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input-classification"
+                                            class="autocomplete tombstone_classification">
+                                        <label for="autocomplete-input-classification">
+                                            <span class="en">Classification</span>
+                                            <span class="fr">Niveau du poste</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col s12">
+                                    <div class="input-field col s12">
+                                        <input type="text" id="autocomplete-input-city"
+                                            class="autocomplete tombstone_city">
+                                        <label for="autocomplete-input-city">
+                                            <span class="en">City</span>
+                                            <span class="fr">Ville</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="row center">
+                                        <a href="#editor"
+                                            class="btn btn-large purp-canada-ca ev-page-sel-offering left padleft">
+                                            <em class="material-icons fab-align">chevron_left</em>
+                                        </a>
+                                        <button class="tombstone-set purp-canada-ca btn-large right padright">
+                                            <span class="en">Start</span>
+                                            <span class="fr">Début</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m1"></div>
+            </div>
+            <div id="step_thank_you_cta" class="row bannerbgbacked center">
+                <div class="col hide-on-small-only m2"></div>
+                <div class="col s12 m8 center">
+                    <div>
+                        <img src="static/images/csps_flag.png" class="csps-flag-center"
+                            alt="CSPS-EFPC Flag, Maple leaf in book" />
+                    </div>
+
+                    <div class="card-panel">
+                        <div class="row center">
+                            <em class="material-icons ok-check" style="font-size:5em;"
+                                aria-hidden="true">check_circle</em>
+                            <h2>
+                                <span class="en">You're Awesome!</span>
+                                <span class="fr">Vous êtes génial!</span>
+                            </h2>
+                            <p>
+                                <span class="en">Thank you for taking the time</span>
+                                <span class="fr">Merci d'avoir pris le temps de répondre</span>
+                            </p>
+
+                            <div class="row center">
+                                <button class="ev-ready-for-next purp-canada-ca btn-large"><span
+                                        class="en">Goodbye</span>
+                                    <span class="fr">Au revoir</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col hide-on-small-only m2"></div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="row">
+                <div id="editor_window" class="col s12 m6">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="editor_target" class="materialize-textarea"
+                                    data-original-height=0></textarea>
+                                <label for="editor_target">
+                                    <span class="en">
+                                        Survey Source (TYPE HERE).
+                                    </span>
+                                    <span class="fr">
+                                        Source d'enquête (TYPE ICI).
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="render_window" class="col s12 m6">
+                    <div class="row">
+                        <div id="render_target"></div>
+                    </div>
+                </div>
+                <div id="ls_window" class="col s12 m12">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col s12">
+                                <h2>
+                                    <span class="en">
+                                        Local Storage (in browser)
+                                    </span>
+                                    <span class="fr">
+                                        Storage Locale (en browser)
+                                    </span>
+                                </h2>
+
+                                <a class="update_ls btn purp-canada-ca">
+                                    <span class="en">Update</span>
+                                    <span class="fr">mettre à jour</span>
+                                </a>
+
+                                <div id="ls_target"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="json_window" class="col s12 m12">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="input-field col s12">
+                                <textarea id="json_target" class="materialize-textarea"
+                                    data-original-height=0></textarea>
+                                <label for="json_target">
+                                    <span class="en">
+                                        Survey JSON (auto-generated).
+                                    </span>
+                                    <span class="fr">
+                                        Survey JSON (généré automatiquement).
+                                    </span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="qlib_window" class="col s12 m12">
+                    <div class="row">
+                        <nav>
+                            <div class="nav-wrapper blue-canada-ca darken-1">
+                                <div class="col s12">
+                                    <span class="en">Library</span>
+                                    <span class="fr">Bibliothèque</span>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="row">
+                        <table class="highlight responsive-table">
+                            <thead>
+                                <tr>
+                                    <th><span class="en">Details</span><span class="fr">Details</span></th>
+                                    <th><span class="en">Add</span><span class="fr">Adjouter</span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="qlib_target"> </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <label for="qlib">
+                            <span class="en">Question Library</span>
+                            <span class="fr">Bibliothèque de Questions</span>
+                        </label>
+                        <textarea id="qlib" class="materialize-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="admin_footer_end" class="page-footer purp-canada-ca">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h3 class="white-text">Evalhalla</h3>
+                    <p class="grey-text text-lighten-4">
+                        <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
+                        <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
+                            formulaires.</span>
+                    </p>
+                    <a class="brown-text text-lighten-3" href="https://github.com/DIS-SIN/">DIS-SIN Github</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <span class="en">Forms that function.</span>
+                <span class="fr">Des formes qui fonctionnent.</span>
+            </div>
+        </div>
+    </footer>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue-canada-ca" href="#editor" aria-label="Skip to top">
+            <em class="large material-icons fab-align">arrow_upward</em>
+        </a>
+    </div>
+    <!-- Dependencies -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
+        async defer></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Default Survey -->
+    <script src="static/sur/example_sur.js"></script>
+    <script src="static/sur/ut1_june18_event.js"></script>
+    <script src="static/sur/ut0_da_interest.js"></script>
+    <script src="static/sur/engage.js"></script>
+    <script src="static/sur/inclusive.js"></script>
+    <script src="static/sur/busrides.js"></script>
+    <script src="static/sur/test_sur.js"></script>
+    <!-- Autocomplete values local -->
+    <script src="static/assets/departments.js"></script>
+    <script src="static/assets/classifications.js"></script>
+    <script src="static/assets/cities.js"></script>
+    <script src="static/assets/evalese_md_scripts.js"></script>
+    <!-- get Evalhalla lib files -->
+    <script src="static/lib/evh_state.js"></script>
+    <script src="static/lib/evh_common.js"></script>
+    <script src="static/lib/evh_templates.js"></script>
+    <script src="static/lib/evh_autocomplete.js"></script>
+    <!-- API Connection Integrations  -->
+    <script src="integrations/registhor/registhor_key.js"></script>
+    <script src="integrations/survista/survista_key.js"></script>
+    <!-- Evalhalla Core -->
+    <script src="static/lib/evh_unloadconfirmation.js"></script>
+    <script src="static/lib/evh_core.js"></script>
+</body>
+
+</html>

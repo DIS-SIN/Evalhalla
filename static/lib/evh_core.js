@@ -8,6 +8,7 @@
         //
 
 
+        // REFACTOR_PREP: player, param extraction (likely lib function) 
         //
         // Autodisplay Overrides
         //
@@ -43,6 +44,7 @@
             } catch (er) { }
         }
 
+        // REFACTOR_PREP: player, survey selection (editor function + api for player)
 
         // ok let's load it up
         // TODO: Remove hardcode demos and replace with API
@@ -62,6 +64,8 @@
             sur = "";
             auto_display_mode = false;
         }
+
+        // REFACTOR_PREP: parser
         // wraps the generated elements in a form and a paginator
         var form_wrap = function (src) {
             var pages = "";
@@ -82,6 +86,8 @@
                 .replace(/\%pages/g, pages)
             return fwtmpl;
         };
+
+        // REFACTOR_PREP: parser
         // return a json or html snip with %replaceme codons/tokens sprinkled in
         // the general idea here is to use these like a templating lang. Just waaaay simpler
         // For huge surveys we might get into hot water performance wise
@@ -158,6 +164,7 @@
             return "";
         };
 
+        // REFACTOR_PREP: question library
         //
         // Question Libary
         //
@@ -193,6 +200,7 @@
             });
         }
 
+        // REFACTOR_PREP: local storage, bunch of detangle and refactor
         //
         // LocalStorage for client side info store
         //
@@ -231,6 +239,7 @@
             }
         }
 
+        // REFACTOR_PREP: might be able to jettison in favor of dashboard
         //
         // Basic Pre-Survista Charting
         //
@@ -452,6 +461,7 @@
             }
         }
 
+        // REFACTOR_PREP: local storage, detangle the render
         // pull the survey from localstorage and render it
         var ls_load_survey = function (id, trim) {
             if (ls_storageAvailable('localStorage')) {
@@ -468,6 +478,7 @@
             }
         }
 
+        // REFACTOR_PREP: local storage, detangle the render
         // clear out the local storage, clean and frush.
         var ls_clear_saved_entries = function () {
             if (ls_storageAvailable('localStorage')) {
@@ -479,6 +490,8 @@
                 warn_user_alert();
             }
         }
+
+        // REFACTOR_PREP: local storage, detangle the render
         /*
         This is a peek at what we're saving
         Survista has JSON format to follow, Evalhalla has evalese.
@@ -611,6 +624,7 @@
         // Helper functions
         //
 
+        // REFACTOR_PREP: autocompletes, remove the generics demo code
         // get from tombstone: stub
         // TODO: Refactor Fix with correct code (right now just obj/deobj for test)
         g_state["generics"]["generic_fetched"] = false;
@@ -619,12 +633,14 @@
         autoc_load_cities();
         //api_get_generics();
 
+        // REFACTOR_PREP: dead code? remove
         // auto reset the form if enough time has passed
         // NOTE: Accessibility concerns here
         const activate_restart_timer = function () {
             //TODO: 20 sec delay restart
         };
 
+        // REFACTOR_PREP: api functions, pull into lib
         // registhor api integrations. Testing route
         const rg_api_route = api_post_surv_resp_route + api_key;
         // survista:eval api integrations
@@ -650,6 +666,7 @@
             api_route = rg_api_route;
             api_post_to_route(api_route, data_in);
         }
+        // REFACTOR_PREP: api, detangle the render and local storage
         // submit the form result
         const evalhalla_submit = function () {
             // make some form data
@@ -705,6 +722,7 @@
             //alert("Check the console for details");
         };
 
+        // REFACTOR_PREP: pull all lang refresh out into lib function, detangle
         // convert the en/fr tags into HTML
         const activate_lang = function (pack) {
             pack = pack
@@ -719,6 +737,7 @@
             return pack;
         };
 
+        // REFACTOR_PREP: parser - consider refactor
         // helper function to take the multiline input and pack it into one object
         const pack_text = function (src_a, i, pack, join) {
             join = join || " ";
@@ -750,6 +769,7 @@
             return { "pack": pack, "pack_json": pack_json, "i": i };
         }
 
+        // REFACTOR_PREP: UI
         // materialize css resize the textareas so it shows content instead
         // of remaining the previous size
         var ui_resize_textareas = function () {
@@ -761,6 +781,7 @@
         // Command Handlers
         //
 
+        // REFACTOR_PREP: parser
         // parser - detect if we have encountered a command
         var detect_command = function (src) {
             var first_word = src.split(" ")[0];
@@ -1031,6 +1052,7 @@
         // Main proc loop
         //
 
+        // REFACTOR_PREP: parser
         // start parsing the input
         var raise_src_to_evalhalla = function (src) {
             var src_a = src.split("\n");
@@ -1172,6 +1194,7 @@
         // Material UI General
         //
 
+        // REFACTOR_PREP: UI
         $(".sidenav").sidenav();
         $(".parallax").parallax();
         $('.fixed-action-btn').floatingActionButton();
@@ -1184,6 +1207,7 @@
 
         $(".update_ls").on("click", function (e) { e.preventDefault(); ls_show_local_storage(); return false; });
 
+        // REFACTOR_PREP: dead code? pull out old demo generics
         // TODO: refactor. tombstone generic info
         var refresh_generics = function () {
             //alert("Refreshing Generic");
@@ -1203,6 +1227,7 @@
             M.updateTextFields();
         };
 
+        // REFACTOR_PREP: pull all lang refresh out into lib function, detangle
         // lang refresh to show the new language spans
         var refresh_lang = function () {
             if (g_state["ui"]["lang"] == "en") {
@@ -1250,6 +1275,8 @@
             //console.log(g_control_flags["currpageid"]);
             hs_page_intro_step();
         });
+
+        // REFACTOR_PREP: paginator
         // step advance - tomstone information set
         $(".tombstone-set").on("click", function () {
             //$("#step_tombstone").hide();
@@ -1271,6 +1298,7 @@
         // uncomment to generate on load
         //g_state["el"]["lang"].trigger("change");
 
+        // REFACTOR_PREP: player, parser, detangle the render
         // load intro content
         g_state["el"]["c_editor"].val(
             g_intro_script
@@ -1280,6 +1308,7 @@
         // Question Library
         //
 
+        // REFACTOR_PREP: UI, qlib
         $("#qlib").on("change", function () {
             update_question_library();
             ls_save_qlib();
@@ -1287,6 +1316,7 @@
         $("#qlib").trigger("change");
 
 
+        // REFACTOR_PREP: paginator
         // pagination
         var hs_page_step = function () {
             if (g_control_flags["currpageid"] <= 0) {
@@ -1379,6 +1409,7 @@
         }
         ui_activate_intropagedirection_buttons(); // enable buttons for intro steps
 
+        // REFACTOR_PREP: editor, parser, player - detangle
         // Render Trigger
         // Render Timer additions. TODO: Causes flicker of submit. Adjust setting classes.
         var render_buffering = false;
@@ -1465,11 +1496,14 @@
             //$('select').formSelect();
 
         });
+
+        // REFACTOR_PREP: detangle render
         // render
         g_state["el"]["c_editor"].trigger("change");
         // resize
         ui_resize_textareas();
 
+        // REFACTOR_PREP: UI buttons
         // upload to survista: stub
         // TODO: Fix with correct code (right now just obj/deobj for test)
         g_state["el"]["btn_upload"].on("click", function () {
@@ -1592,6 +1626,7 @@
             audit_json();
         });
 
+        // REFACTOR_PREP: editor, UI
         //
         // Editor buttons
         //
@@ -1641,6 +1676,7 @@
         };
         enable_editor_buttons();
 
+        // REFACTOR_PREP: editor, tutorial
         //
         // Tutorial runner setup
         //
@@ -1686,6 +1722,7 @@
         // JSON Render
         //
 
+        // REFACTOR_PREP: survista integration, creation of json
         var audit_json = function () {
             var src = JSON.parse(
                 g_control_flags["json"]
@@ -1768,6 +1805,7 @@
 
         };
 
+        // REFACTOR_PREP: player, renderer
         //
         //  Auto Display Mode
         //
@@ -1801,6 +1839,7 @@
             $("#step_thank_you_cta").hide();
         }
 
+        // REFACTOR_PREP: api, populate offerings
         //
         // MVP 0.1 Connection, Registhor
         //
