@@ -1,3 +1,4 @@
+// Learn4PE Survey 
 /**
  * <br /><br />Cette évaluation, qui vous prendra de 5 à 10 minutes, nous aidera dans notre processus de conception et nous permettra d’offrir du soutien à la communauté des spécialistes du gouvernement du Canada. Il est possible que nous utilisions les résultats de l’évaluation dans leur ensemble (c’estàdire sans associer les réponses à quiconque) pour aider l’Académie du numérique et les autres partenaires d’apprentissage à planifier et à élaborer des produits d’apprentissage. /;
    <br /><br />This 5-10 min assessment will help us design and deliver supports for the GoC community.\n\nWe may use the results of this assessment in aggregate (without individual attribution) to help the Digital Academy and other learning partners plan and develop learning products. /;

@@ -1,3 +1,4 @@
+// Open Government Event Survey
 var ut1_june18_event = "# /en UT1-J18 /; /fr UT1-J18 /;\n" +
     "\n" +
     "##\n" +

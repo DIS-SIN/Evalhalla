@@ -60,6 +60,7 @@
         else if (sur == "test_sur") { g_intro_script = test_sur; auto_display_mode = true; }
         else if (sur == "ypn") { g_intro_script = ypn; auto_display_mode = true; }
         else if (sur == "dmb") { g_intro_script = dmb; auto_display_mode = true; }
+        else if (sur == "openhouse") { g_intro_script = openhouse; auto_display_mode = true; }
         else { g_intro_script = test_sur; auto_display_mode = true; } // current hot default
         // edit breaks
         if (weasel == "m" + load + resp) {
@@ -1885,6 +1886,16 @@
                                 "offering_id": "000008",
                                 "course_code": "DMB",
                                 "course_title": "DM Breakfast / Petit déjeuner DM",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
+                    if (sur == "openhouse") {
+                        demo_offering = [
+                            {
+                                "offering_id": "000009",
+                                "course_code": "OPENHOUSE",
+                                "course_title": "Digital Academy Open House",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
                                 "offering_province": "NCR/RCN"
                             }];
