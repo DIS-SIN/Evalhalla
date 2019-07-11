@@ -45,8 +45,8 @@ chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('disable-setuid-sandbox')
 chrome_options.add_argument('window-size=1920,1080')
 chrome_options.add_argument("--enable-javascript")
-# CHROME_EXE_PATH='/usr/local/bin/chromedriver'
-CHROME_EXE_PATH = 'C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe'
+CHROME_EXE_PATH = '/usr/local/bin/chromedriver'  # LINUX
+# CHROME_EXE_PATH = 'C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe' # WINDOWS, note, need to install chromedriver
 
 # ---
 # common hooks
