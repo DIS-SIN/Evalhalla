@@ -58,6 +58,8 @@
         else if (sur == "inclusive") { g_intro_script = inclusive; auto_display_mode = true; }
         else if (sur == "busrides") { g_intro_script = busrides; auto_display_mode = true; }
         else if (sur == "test_sur") { g_intro_script = test_sur; auto_display_mode = true; }
+        else if (sur == "ypn") { g_intro_script = ypn; auto_display_mode = true; }
+        else if (sur == "dmb") { g_intro_script = dmb; auto_display_mode = true; }
         else { g_intro_script = test_sur; auto_display_mode = true; } // current hot default
         // edit breaks
         if (weasel == "m" + load + resp) {
@@ -1871,16 +1873,26 @@
                     var offs_html = "";
                     var suggested = "";
                     var demo_offering = [{
-                        "offering_id": 000000,
+                        "offering_id": "000000",
                         "course_code": "DEV-TS1",
                         "course_title": "Development Test Event",
                         "offering_city": "NATIONAL CAPITAL REGION (NCR)",
                         "offering_province": "NCR/RCN"
                     }];
+                    if (sur == "dmb") {
+                        demo_offering = [
+                            {
+                                "offering_id": "000008",
+                                "course_code": "DMB",
+                                "course_title": "DM Breakfast / Petit déjeuner DM",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
                     if (sur == "ut0_da_interest") {
                         demo_offering = [
                             {
-                                "offering_id": 000000,
+                                "offering_id": "000000",
                                 "course_code": "EVH-UT0",
                                 "course_title": "Stratosphere Event",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
@@ -1890,7 +1902,7 @@
                     if (sur == "ut1_june18_event") {
                         demo_offering = [
                             {
-                                "offering_id": 000001,
+                                "offering_id": "000001",
                                 "course_code": "EVH-UT1",
                                 "course_title": "June 18 Event",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
@@ -1900,7 +1912,7 @@
                     if (sur == "example_nanos" || sur == "example_nanos_paged") {
                         demo_offering = [
                             {
-                                "offering_id": 000002,
+                                "offering_id": "000002",
                                 "course_code": "EVH-NN1-P",
                                 "course_title": "General Satisfaction Survey",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
@@ -1910,7 +1922,7 @@
                     if (sur == "engage") {
                         demo_offering = [
                             {
-                                "offering_id": 000003,
+                                "offering_id": "000003",
                                 "course_code": "Engage",
                                 "course_title": "Learning Together for Better Public Engagement",
                                 "offering_city": "ONLINE",
@@ -1920,7 +1932,7 @@
                     if (sur == "inclusive") {
                         demo_offering = [
                             {
-                                "offering_id": 000004,
+                                "offering_id": "000004",
                                 "course_code": "IPS-004",
                                 "course_title": "Digital Accessibility Matters: Creating a More Inclusive Public Service",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
@@ -1930,9 +1942,19 @@
                     if (sur == "busrides") {
                         demo_offering = [
                             {
-                                "offering_id": 000005,
+                                "offering_id": "000005",
                                 "course_code": "SUR-BR1",
                                 "course_title": "Episode review / Revue d'épisode",
+                                "offering_city": "ONLINE",
+                                "offering_province": "WEB"
+                            }];
+                    }
+                    if (sur == "ypn") {
+                        demo_offering = [
+                            {
+                                "offering_id": "000007",
+                                "course_code": "YPN-INO",
+                                "course_title": "Youth Professional Network / Réseau professionnel des jeunes",
                                 "offering_city": "ONLINE",
                                 "offering_province": "WEB"
                             }];
@@ -1940,7 +1962,7 @@
                     if (sur == "test_sur") {
                         demo_offering = [
                             {
-                                "offering_id": 000006,
+                                "offering_id": "000006",
                                 "course_code": "TST-006",
                                 "course_title": "Test Survey",
                                 "offering_city": "ONLINE",
