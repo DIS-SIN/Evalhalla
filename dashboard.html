@@ -171,7 +171,7 @@
             } catch (er) { }
         }
         if (sur == "" || typeof sur === "undefined") {
-            sur = "ut1_june18_event"; // the survey to load
+            sur = "test_sur"; // the survey to load
         }
         var sur_evh = "";
         if (sur == "ut1_june18_event") {
@@ -186,9 +186,12 @@
             sur_evh = test_sur;
         } else if (sur == "busrides") {
             sur_evh = busrides;
-        }
-        else if (sur == "engage") {
+        } else if (sur == "engage") {
             sur_evh = engage;
+        } else if (sur == "dmb") {
+            sur_evh = dmb;
+        } else if (sur == "ypn") {
+            sur_evh = ypn;
         }
         parse_question_text(sur_evh);
 
