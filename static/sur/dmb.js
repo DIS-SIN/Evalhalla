@@ -1,46 +1,55 @@
 // DM Breakfast Survey
-var dmb = `# YPN-INO
+var dmb = `# DM-B
 
 ## 
-/en Future of the Youth Professional Network /;
-/fr L'avenir du réseau de jeunes professionnels/;
+/en DM Breakfast /;
+/fr Petit Dejeuner DM /;
 
 ### 
-/en A chance for the community to let us know their thoughts /;
-/fr Une occasion pour la communauté de nous faire part de ses pensées /;
+/en Integrative. Instant. Insight. /;
+/fr Intégrative. Instant. Perspicacité. /;
 
 //
-/en Please let us know about your experience so far /; 
+/en Information becomes available in an instant. /; 
 /fr Veuillez nous faire part de votre expérience jusqu'à présent /; 
 
 Q: 
-/en Question 1 /;
-/fr Question 1 /;
+/en Do you have a 'big picture' of the data at your department /;
+/fr Avez-vous une 'grande image' des données dans votre département? /;
+/one
+/en Yes /; /fr Oui /;
+/en A bit /; /fr Un peu /;
+/en No /; /fr Non /;
+;
+
+Q: 
+/en Open access to modern tools is essential to transforming how public servants work and serve Canadians. How do you help facilitate this change? /;
+/fr Le libre accès aux outils modernes est essentiel pour transformer le mode de fonctionnement et de service des fonctionnaires. Comment aidez-vous à faciliter ce changement? /;
 /open
 
 Q: 
-/en Question 2 /;
-/fr Question 2 /;
+/en Do you see benefit in actively seeking out and experimenting with new transformative technologies? /;
+/fr Voyez-vous un avantage à rechercher activement et à expérimenter de nouvelles technologies de transformation? /;
+/one
+/en Yes /; /fr Oui /;
+/en A bit /; /fr Un peu /;
+/en No /; /fr Non /;
+;
+
+/pagebreak
+
+//
+/en This survey app and dashboard built itself. CSPS DIS developers automated the entire process, now the hard part is what questions to ask in the first place. /; 
+/fr Cette application et ce tableau de bord ont été conçus de manière autonome. Les développeurs de EFPC SIN ont automatisé l’ensemble du processus. Désormais, le plus difficile est de savoir quelles questions poser en premier. /; 
+
+Q: 
+/en On a scale from 1-5 how ready is your department for disruptive change? /;
+/fr Sur une échelle de 1 à 5, dans quelle mesure votre département est-il prêt pour un changement perturbateur? /;
 /open
 
 Q: 
-/en Question 3 /;
-/fr Question 3 /;
-/open
-
-Q: 
-/en Question 4 /;
-/fr Question 4 /;
-/open
-
-Q: 
-/en Question 5 /;
-/fr Question 5 /;
-/open
-
-Q: 
-/en Question 6 /;
-/fr Question 6 /;
+/en What concrete things do we need to be ready? /;
+/fr De quelles choses concrètes avons-nous besoin pour être prêts?5 /;
 /open
 
 Q:

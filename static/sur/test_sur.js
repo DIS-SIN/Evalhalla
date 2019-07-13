@@ -34,6 +34,15 @@ Q:
 /en Unsure /; /fr Incertain /;
 ;
 
+Q: 
+/en Would you come back for the next episode? /;
+/fr Reviendriez-vous pour le prochain épisode /;
+/any
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
+/en Unsure /; /fr Incertain /;
+;
+
 Q:
 /en Want to tell us why? /;
 /fr Voulez-vous nous dire pourquoi /;
