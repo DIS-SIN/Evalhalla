@@ -70,6 +70,22 @@
                         <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
                             formulaires.</span>
                     </p>
+                    <h4>Other Dashboards</h4>
+                    <p>
+                        <ul>
+                            <li><a href="dashboard.html?sur=test_sur">test_sur</a></li>
+                            <li><a href="dashboard.html?sur=engage">engage</a></li>
+                            <li><a href="dashboard.html?sur=busirdes">busrides</a></li>
+                            <li><a href="dashboard.html?sur=ut0_da_interest">ut0_da_interest</a></li>
+                            <li><a href="dashboard.html?sur=ut1_june18_event">ut1_june18_event</a></li>
+                            <li><a href="dashboard.html?sur=example_nanos_paged">example_nanos_paged</a></li>
+                            <li><a href="dashboard.html?sur=inclusive">inclusive</a></li>
+                            <li><a href="dashboard.html?sur=openhouse">openhouse</a></li>
+                            <li><a href="dashboard.html?sur=ypn">ypn</a></li>
+                            <li><a href="dashboard.html?sur=dmb">dmb</a></li>
+                        </ul>
+                    </p>
+
                     <a class="brown-text text-lighten-3" href="https://github.com/DIS-SIN/">DIS-SIN Github</a>
                 </div>
             </div>
@@ -145,7 +161,7 @@
         }
 
         var params = null; // the search params
-        var sur = "ut1_june18_event"; // the survey to load
+        var sur = ""; // the survey to load
         var entry = "direct";
         try {
             params = new URLSearchParams(window.location.search);
@@ -192,6 +208,8 @@
             sur_evh = dmb;
         } else if (sur == "ypn") {
             sur_evh = ypn;
+        } else if (sur == "openhouse") {
+            sur_evh = openhouse;
         }
         parse_question_text(sur_evh);
 
