@@ -45,8 +45,6 @@ chrome_options.add_argument('no-sandbox')
 chrome_options.add_argument('disable-setuid-sandbox')
 chrome_options.add_argument('window-size=1920,1080')
 chrome_options.add_argument("--enable-javascript")
-CHROME_EXE_PATH = '/usr/local/bin/chromedriver'  # LINUX
-# CHROME_EXE_PATH = 'C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe' # WINDOWS, note, need to install chromedriver
 
 # ---
 # common hooks
@@ -66,11 +64,9 @@ def before_all(context):
     if web_browser == WebBrowserType.CHROME:
         if webdriver_headless_mode:
             chrome_options.add_argument('headless')
-            context.driver = webdriver.Chrome(executable_path=CHROME_EXE_PATH,
-                                              chrome_options=chrome_options)
+            context.driver = webdriver.Chrome(chrome_options=chrome_options)
         else:
-            context.driver = webdriver.Chrome(executable_path=CHROME_EXE_PATH,
-                                              chrome_options=chrome_options)
+            context.driver = webdriver.Chrome(chrome_options=chrome_options)
 
 
 def after_all(context):
