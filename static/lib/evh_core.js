@@ -666,8 +666,10 @@
             let api_route = "";
             api_route = sv_api_route;
             api_post_to_route(api_route, data_in);
-            api_route = rg_api_route;
-            api_post_to_route(api_route, data_in);
+
+            // deprecated: Registhor storage temporary routes
+            // api_route = rg_api_route;
+            // api_post_to_route(api_route, data_in);
         }
         // REFACTOR_PREP: api, detangle the render and local storage
         // submit the form result
