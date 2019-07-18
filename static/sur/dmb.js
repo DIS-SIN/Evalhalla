@@ -13,16 +13,30 @@ var dmb = `# DM-B
 /en Information becomes available in an instant. /; 
 /fr Veuillez nous faire part de votre expérience jusqu'à présent /; 
 
-Q: What is your first official language?
+Q: 
+/en What is your first official language? /;
+/fr Quelle est votre première langue officielle? /;
 /one
-English
-French
+/en English /; /fr Anglais /;
+/en French /; /fr Français /;
 ;
 
-Q: What job category did you grow up in before you became an EX?
+Q: 
+/en Are you fluent in any non-official languages? /;
+/fr Parlez-vous couramment une langue non officielle? /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+Q: 
+/en What job category did you grow up in before you became an EX? /;
+/fr Dans quelle catégorie d'emploi avez-vous grandi avant de devenir un EX? /;
 /open
 
-Q: How many years were you an executive before you became a DM?
+Q: 
+/en How many years were you an executive before you became a DM? /;
+/fr Combien d'années avez-vous été cadre avant de devenir DM? /;
 /one
 1-5
 5-10
@@ -30,52 +44,34 @@ Q: How many years were you an executive before you became a DM?
 15+
 ;
 
-Q: How many ministers have you had since you have been a DM?
-/scale1-5 , , More than 5
+Q: 
+/en How many ministers have you had since you have been a DM? /;
+/fr Combien de ministres avez-vous eu depuis que vous êtes DM? /;
+/scale1-5 , , 5+
 
-Q: How many clerks have you worked for since you became a DM?
-/scale1-5 , , More than 5
+Q: 
+/en How many clerks have you worked for since you became a DM? /;
+/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu DM? /;
+/scale1-5 , , 5+
 
-Q: What’s your highest level of education?
+Q: 
+/en What’s your highest level of education? /;
+/fr Quel est votre plus haut niveau d’éducation? /;
 /one
-Secondary
-Bachelors
-Masters
-Doctorate
+/en Secondary /; /fr Secondaire /;
+/en Bachelors /; /fr Les bacheliers /;
+/en Masters /; /fr Maîtrise /;
+/en Doctorate /; /fr Doctorat /;
 ;
 
-Q: What do you like for fun?
+Q: 
+/en If you could be DM of any department, what department would it be? /;
+/fr Si vous pouviez être sous-ministre d'un ministère, de quel ministère s'agirait-il? /;
 /open
 
-Q: Are you a vegetarian?
-/one
-Yes
-No
-I reduce what I can
-;
-
-Q: Do you have any allergies?
-/one
-Yes
-No
-;
-
-Q: Are you fluent in any non-official languages?
-/one
-Yes
-No
-;
-
-Q: Do you have children?
-/one
-Yes
-No
-;
-
-Q: How many?
-/scale1-5 , , More than 5
-
-Q: Estimate how many hours a day you work?
+Q: 
+/en Estimate how many hours a day you work? /;
+/fr Estimez combien d'heures par jour vous travaillez? /;
 /one
 7.5
 8-10
@@ -83,28 +79,70 @@ Q: Estimate how many hours a day you work?
 14+
 ;
 
-Q: What’s your favorite genre of music?
+/pagebreak
+
+Q: 
+/en What do you like to do for fun? /;
+/fr Qu'aimez-vous pour vous amuser? /;
 /open
 
-Q: If you could be DM of any department, what department would it be?
-/open
-
-Q: When do you plan to retire ? 
+Q: 
+/en Are you a vegetarian? /;
+/fr Êtes-vous végétarien? /;
 /one
-2 years
-3-5 years
-10+ years
-Not sure
-Not intending on retiring. Ever.
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+/en I reduce what I can /; /fr Je réduis ce que je peux /;
 ;
 
-Q: How many books did you read last year?
-/scale , , More than 10
-
-Q: Do you own a cottage?
+Q: 
+/en Do you have any allergies? /;
+/fr As tu des allergies? /;
 /one
-Yes
-No
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+Q: 
+/en Do you have children? /;
+/fr Avez-vous des enfants? /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+Q: 
+/en How many? /;
+/fr Combien? /;
+/scale1-5 , , 5+
+
+Q: 
+/en What’s your favorite genre of music? /;
+/fr Quel est votre genre de musique préféré? /;
+/open
+
+Q: 
+/en When do you plan to retire (years until)? /;
+/fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;
+/one
+2
+3-5
+10+
+/en Not sure /; /fr Pas certain /;
+/en Not intending on retiring. Ever. /; /fr Pas l'intention de prendre sa retraite. Déjà. /;
+;
+
+Q: 
+/en How many books did you read last year? /;
+/fr Combien de livres avez-vous lu l'année dernière? /;
+/scale , , 10+
+
+Q: 
+/en Do you own a cottage? /;
+/fr Possédez-vous un chalet? /;
+/one
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
 ;
 
 /en Thank you for your time! /; /fr Merci pour vos réponses! /;
