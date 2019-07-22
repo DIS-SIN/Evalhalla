@@ -61,6 +61,7 @@
         else if (sur == "ypn") { g_intro_script = ypn; auto_display_mode = true; }
         else if (sur == "dmb") { g_intro_script = dmb; auto_display_mode = true; }
         else if (sur == "openhouse") { g_intro_script = openhouse; auto_display_mode = true; }
+        else if (sur == "tsq") { g_intro_script = tsq; auto_display_mode = true; }
         else { g_intro_script = test_sur; auto_display_mode = true; } // current hot default
         // edit breaks
         if (weasel == "m" + load + resp) {
@@ -1978,6 +1979,16 @@
                                 "offering_id": "000006",
                                 "course_code": "TST-006",
                                 "course_title": "Test Survey",
+                                "offering_city": "ONLINE",
+                                "offering_province": "WEB"
+                            }];
+                    }
+                    if (sur == "tsq") {
+                        demo_offering = [
+                            {
+                                "offering_id": "0000010",
+                                "course_code": "TSQ-010",
+                                "course_title": "Transferable Skills",
                                 "offering_city": "ONLINE",
                                 "offering_province": "WEB"
                             }];

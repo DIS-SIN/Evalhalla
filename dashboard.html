@@ -126,6 +126,8 @@
     <script src="static/sur/ypn.js"></script>
     <script src="static/sur/dmb.js"></script>
     <script src="static/sur/openhouse.js"></script>
+    <script src="static/sur/tsq.js"></script>
+
 
     <script>
         var g_chart_data = [];
@@ -210,6 +212,8 @@
             sur_evh = ypn;
         } else if (sur == "openhouse") {
             sur_evh = openhouse;
+        } else if (sur == "tsq") {
+            sur_evh = tsq;
         }
         parse_question_text(sur_evh);
 
