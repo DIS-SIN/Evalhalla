@@ -60,6 +60,7 @@
         else if (sur == "test_sur") { g_intro_script = test_sur; auto_display_mode = true; }
         else if (sur == "ypn") { g_intro_script = ypn; auto_display_mode = true; }
         else if (sur == "dmb") { g_intro_script = dmb; auto_display_mode = true; }
+        else if (sur == "dmb2") { g_intro_script = dmb2; auto_display_mode = true; }
         else if (sur == "openhouse") { g_intro_script = openhouse; auto_display_mode = true; }
         else if (sur == "tsq") { g_intro_script = tsq; auto_display_mode = true; }
         else { g_intro_script = test_sur; auto_display_mode = true; } // current hot default
@@ -1887,6 +1888,16 @@
                         demo_offering = [
                             {
                                 "offering_id": "000008",
+                                "course_code": "DMB",
+                                "course_title": "DM Breakfast / Petit déjeuner DM",
+                                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+                                "offering_province": "NCR/RCN"
+                            }];
+                    }
+                    if (sur == "dmb2") {
+                        demo_offering = [
+                            {
+                                "offering_id": "000011",
                                 "course_code": "DMB",
                                 "course_title": "DM Breakfast / Petit déjeuner DM",
                                 "offering_city": "NATIONAL CAPITAL REGION (NCR)",
