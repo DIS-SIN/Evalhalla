@@ -139,6 +139,32 @@ blockquote {
     margin-top:25px;
 }
 
+.accessiblegrey {
+    background-color: #565656; /* works with white text wcag aaa */
+}
+.accessiblered {
+    background-color: #DB0F2A;  /* works with white text wcag aaa */
+}
+
+
+
+.disabled.btn-large {
+    background-color: #ffffff !important;  /* works with white text wcag aaa */
+    color: #595959 !important;
+    border: 2px #595959 solid !important;
+}
+.btn-large.disabled {
+    background-color: #ffffff !important;  /* works with white text wcag aaa */
+    color: #595959 !important;
+    border: 2px #595959 solid !important;
+}
+
+.btn.accessibledisabled {
+    background-color: #ffffff !important;  /* works with white text wcag aaa */
+    color: #595959 !important;
+    border: 2px #595959 solid !important;
+}
+
 .grey-canada-ca-block-header {
     background-color: rgba(238, 239, 241, 1);
     font-size: 1.2em;
@@ -292,7 +318,7 @@ em.material-icons {
     width: inherit;
     display: inline-block;
     text-align: center;
-    color: #fff;
+    /*color: #fff;*/
 }
 .offeringtitle {
     font-weight: bold;

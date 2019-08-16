@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evalhalla Player: Dashboard</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
+        rel="stylesheet" media="screen,print" />
+    <link href="../../../static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen,print" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../static/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="../../../static/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="../../../static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar-fixed no-print">
+        <nav class="white nav-extended">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">Evalhalla</a>
+                <a data-target="mobile-demo" href="#logo-container" class="adm-function sidenav-trigger"
+                    aria-label="Open menu">
+                    <em class="material-icons mhi-menu" aria-hidden="true">menu</em>
+                </a>
+                <ul class="right">
+                    <li>
+                        <div>
+                            <a class="go-live" href="#editor">
+                                Live
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a class="go-silent" href="#editor">
+                                Silent
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="editor" class="container">
+        <div id="render_window" class="col s12">
+            <div id="render_target" class="row">
+            </div>
+        </div>
+    </div>
+    <footer id="admin_footer_end" class="page-footer purp-canada-ca">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h3 class="white-text">Evalhalla</h3>
+                    <p class="grey-text text-lighten-4">
+                        <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
+                        <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
+                            formulaires.</span>
+                    </p>
+                    <h4>Other Dashboards</h4>
+                    <p>
+                        <ul>
+                            <li><a href="dashboard.html?sur=test_sur">test_sur</a></li>
+                            <li><a href="dashboard.html?sur=engage">engage</a></li>
+                            <li><a href="dashboard.html?sur=busirdes">busrides</a></li>
+                            <li><a href="dashboard.html?sur=ut0_da_interest">ut0_da_interest</a></li>
+                            <li><a href="dashboard.html?sur=ut1_june18_event">ut1_june18_event</a></li>
+                            <li><a href="dashboard.html?sur=example_nanos_paged">example_nanos_paged</a></li>
+                            <li><a href="dashboard.html?sur=inclusive">inclusive</a></li>
+                            <li><a href="dashboard.html?sur=openhouse">openhouse</a></li>
+                            <li><a href="dashboard.html?sur=ypn">ypn</a></li>
+                            <li><a href="dashboard.html?sur=dmb">dmb</a></li>
+                        </ul>
+                    </p>
+
+                    <a class="brown-text text-lighten-3" href="https://github.com/DIS-SIN/">DIS-SIN Github</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <span class="en">Forms that function.</span>
+                <span class="fr">Des formes qui fonctionnent.</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <textarea id="render_override" style="background-color: white;color:black;"></textarea>
+                <a id="render_override_btn" class="btn btn-large purp-canada-ca" href="#editor">Use this data</a>
+            </div>
+        </div>
+    </footer>
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large blue-canada-ca" href="#editor" aria-label="Skip to top">
+            <em class="large material-icons fab-align">arrow_upward</em>
+        </a>
+    </div>
+    <!-- Dependencies -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
+        async defer></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <!-- get Evalhalla init -->
+    <script src="../../../static/lib/v2/evh_g_init.js"></script>
+
+    <!-- Default Survey -->
+    <script src="../../../static/sur/example_sur.js"></script>
+    <script src="../../../static/sur/ut1_june18_event.js"></script>
+    <script src="../../../static/sur/ut0_da_interest.js"></script>
+    <script src="../../../static/sur/engage.js"></script>
+    <script src="../../../static/sur/inclusive.js"></script>
+    <script src="../../../static/sur/busrides.js"></script>
+    <script src="../../../static/sur/test_sur.js"></script>
+    <script src="../../../static/sur/ypn.js"></script>
+    <script src="../../../static/sur/dmb.js"></script>
+    <script src="../../../static/sur/dmb2.js"></script>
+    <script src="../../../static/sur/openhouse.js"></script>
+    <script src="../../../static/sur/tsq.js"></script>
+    <script src="../../../static/sur/discover.js"></script>
+
+    <!-- get Evalhalla lib files -->
+    <script src="../../../static/lib/v2/evh_g_state.js"></script>
+    <script src="../../../static/lib/v2/evh_g_common.js"></script>
+    <!-- get Evalhalla features -->
+    <script src="../../../static/lib/v2/evh_feature_language.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_query_param_load.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_instant_dashboard.js"></script>
+
+    <!-- Evalhalla Core, start it up -->
+    <script src="../../../static/lib/v2/evh_player_core_dashboard.js"></script>
+
+</body>
+
+</html>
