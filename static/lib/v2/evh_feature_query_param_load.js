@@ -12,6 +12,23 @@ _E.feature.qparam.settings = {
     "sur_evh": ""
 };
 
+_E.feature.qparam.startup_builtinsurveys = {
+    "test_sur": test_sur,
+    "example_nanos": example_nanos,
+    "example_nanos_paged": example_nanos_paged,
+    "ut1_june18_event": ut1_june18_event,
+    "ut0_da_interest": ut0_da_interest,
+    "engage": engage,
+    "inclusive": inclusive,
+    "busrides": busrides,
+    "ypn": ypn,
+    "eldp": eldp,
+    "dmb": dmb,
+    "dmb2": dmb2,
+    "openhouse": openhouse,
+    "tsq": tsq,
+    "discover": discover
+};
 _E.feature.qparam.startup = function () {
     // REFACTOR_PREP: player, param extraction (likely lib function) 
     try {
@@ -33,69 +50,11 @@ _E.feature.qparam.startup = function () {
         _E.feature.qparam.settings.sur = "test_sur"; // the survey to load
     }
 
-
-    // override it
-    if (_E.feature.qparam.settings.sur == "example_nanos") {
-        _E.feature.qparam.settings.sur_evh = example_nanos;
+    // pull in the evalese
+    if (typeof _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur] !== "undefined") {
+        _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur];
         _E.feature.qparam.settings.auto_display_mode = true;
     }
-    else if (_E.feature.qparam.settings.sur == "example_nanos_paged") {
-        _E.feature.qparam.settings.sur_evh = example_nanos_paged;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "ut1_june18_event") {
-        _E.feature.qparam.settings.sur_evh = ut1_june18_event;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "ut0_da_interest") {
-        _E.feature.qparam.settings.sur_evh = ut0_da_interest;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "engage") {
-        _E.feature.qparam.settings.sur_evh = engage;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "inclusive") {
-        _E.feature.qparam.settings.sur_evh = inclusive;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "busrides") {
-        _E.feature.qparam.settings.sur_evh = busrides;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "test_sur") {
-        _E.feature.qparam.settings.sur_evh = test_sur;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "ypn") {
-        _E.feature.qparam.settings.sur_evh = ypn;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "dmb") {
-        _E.feature.qparam.settings.sur_evh = dmb;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "dmb2") {
-        _E.feature.qparam.settings.sur_evh = dmb2;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "openhouse") {
-        _E.feature.qparam.settings.sur_evh = openhouse;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "tsq") {
-        _E.feature.qparam.settings.sur_evh = tsq;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else if (_E.feature.qparam.settings.sur == "discover") {
-        _E.feature.qparam.settings.sur_evh = discover;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    }
-    else {
-        _E.feature.qparam.settings.sur_evh = test_sur;
-        _E.feature.qparam.settings.auto_display_mode = true;
-    } // current hot default
-    // edit breaks
 
     // REFACTOR: detangly player/designer/dash
     g_intro_script = _E.feature.qparam.settings.sur_evh;

@@ -223,6 +223,13 @@ _E.feature.autocomplete.refresh_generics = function () {
     },
 */
 _E.feature.autocomplete.populate_offerings_demodata = {
+    "eldp": {
+        "offering_id": "000008",
+        "course_code": "ELDP",
+        "course_title": "Executive Leadership Development Program / Programme de développement en leadership pour les cadres supérieurs",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
     "dmb": {
         "offering_id": "000008",
         "course_code": "DMB",

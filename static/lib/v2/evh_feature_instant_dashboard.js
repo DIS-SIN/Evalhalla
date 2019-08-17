@@ -37,6 +37,12 @@ _E.feature.instadash.parse_question_text = function (sur_text) {
         evh_sai = evh_sai.split("/open")[0].split("/OPEN")[0]
             .split("/any")[0].split("/ANY")[0]
             .split("/one")[0].split("/ONE")[0]
+            .split("/department")[0].split("/DEPARTMENT")[0]
+            .split("/location")[0].split("/LOCATION")[0]
+            .split("/offering")[0].split("/OFFERING")[0]
+            .split("/classification")[0].split("/CLASSIFICATION")[0]
+            .split("/dropdown")[0].split("/DROPDOWN")[0]
+            .split("/language")[0].split("/LANGUAGE")[0]
             .split("/scale")[0].split("/SCALE")[0]
             .split("/scale1-5")[0].split("/SCALE1-5")[0];
         evh_sai = evh_sai;
