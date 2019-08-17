@@ -89,6 +89,13 @@ _E.core.state.store = {
         "ui_ls": $("#ls_window"),
         "ui_qlib": $("#qlib_window")
     },
+    "localmem": {
+        //used for drop down rgroup_qid_1 etc
+        // buffers en and fr text so when languages change on fly
+        // we can inject the right options
+        // this is due to <select> and <option> not allowing HTML
+        // in the <option>. 
+    },
     "render": {
         "json": "{}",
         "pageid": 1,

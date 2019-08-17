@@ -13,10 +13,25 @@ var test_sur = `# TEST-007
 /en Please let us know about your experience so far /; 
 /fr Veuillez nous faire part de votre expérience  jusqu'à présent /; 
 
+
+Q:
+/en Drop this? /;
+/fr Voulez-vous nous dire pourquoi /;
+/dropdown
+/en This /; /fr Un chose /;
+/en This /; /fr Un chose /;
+/en This /; /fr Un chose /;
+;
+
 Q:
 /en If you had to rate this episode from 1 (Bad) to 5 (Awesome) what would you give it? /;
 /fr Si vous deviez évaluer cet épisode de 1 (mauvais) à 5 (génial), que lui donneriez-vous? /;
-/scale1-5 Bad / Mauvais, Awesome / Génial, Unsure / Incertain
+/scale1-5 /en Bad /; /fr Mauvais /; , /en Awesome /; /fr Génial /; , /en Unsure /; /fr Incertain /;
+
+Q:
+/en If you had to rate this episode from 1 (Bad) to 10 (Awesome) what would you give it? /;
+/fr Si vous deviez évaluer cet épisode de 1 (mauvais) à 10 (génial), que lui donneriez-vous? /;
+/scale /en Bad /; /fr Mauvais /; , /en Awesome /; /fr Génial /; , /en Unsure /; /fr Incertain /;
 
 Q:
 /en Want to tell us why? /;
@@ -43,10 +58,6 @@ Q:
 /en Unsure /; /fr Incertain /;
 ;
 
-Q:
-/en Want to tell us why? /;
-/fr Voulez-vous nous dire pourquoi /;
-/open
 
 // /en Thank you /; /fr Merci! /;
 

@@ -24,6 +24,14 @@ _E.feature.lang.refresh_lang = function () {
         $("span.en").hide();
         $("span.fr").show();
     }
+
+    for (let key in _E.core.state.store["localmem"]) {
+        //let value = _E.core.state.store["localmem"][key];
+        if (_E.core.state.store["localmem"].hasOwnProperty(key)) { //not a property from prototype chain  
+            $("#" + key).html(_E.core.state.store["localmem"][key][_E.core.state.store["ui"]["lang"]]);
+            //console.log(key);
+        }
+    }
     // REFACTOR CHECK: Turning this off as it's designer only
     //ui_resize_textareas();
 };

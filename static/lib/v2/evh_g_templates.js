@@ -245,8 +245,9 @@ _E.core.templates.library = {
         "scale": '' +
             '<div class="row">' +
             '<div class="col s12" >' +
-            '<label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Select one</span><span class="fr">Veuillez choisir</span></label>' +
+            '<label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en evh-parser-ignore">Select one</span><span class="fr evh-parser-ignore">Veuillez choisir</span></label>' +
             '<select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">' +
+            '%scale_multilang_split' +
             '<option value="" disabled selected></option>' +
             '<option value="1">1 %low</option>' +
             '<option value="2">2</option>' +
@@ -259,6 +260,7 @@ _E.core.templates.library = {
             '<option value="9">9</option>' +
             '<option value="10">10 %high</option>' +
             '<option value="77">%unsure</option>' +
+            '%scale_multilang_split' +
             '</select>' +
             '</div>' +
             '</div>' +
@@ -268,6 +270,7 @@ _E.core.templates.library = {
             '<div class="col s12" >' +
             '<label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Select one</span><span class="fr">Veuillez choisir</span></label>' +
             '<select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">' +
+            '%scale_multilang_split' +
             '<option value="" disabled selected></option>' +
             '<option value="1">1 %low</option>' +
             '<option value="2">2</option>' +
@@ -275,6 +278,7 @@ _E.core.templates.library = {
             '<option value="4">4</option>' +
             '<option value="5">5 %high</option>' +
             '<option value="77">%unsure</option>' +
+            '%scale_multilang_split' +
             '</select>' +
             '</div>' +
             '</div>' +

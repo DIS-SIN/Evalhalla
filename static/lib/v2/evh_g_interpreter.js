@@ -291,6 +291,11 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         jsonsnip = jsonsnip.replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%type/g, "dropdown");
 
+
+        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]] = {};
+        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] = '';
+        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] = '';
+
         // NOTE: You cant stuff a span inside an <option>, it's bad form.
         // Gotta find another way to biling the option values
         for (var opti = 0; opti < opts.length; opti++) {
@@ -316,8 +321,30 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             .replace(/\%high/g, "")
             .replace(/\%unsure/g, "");
 
+        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] += '<option value="" disabled selected></option>' +
+            scale.split('<option value="" disabled selected></option>')[1]
+                .replace(/<\/?span class='fr'.[^>]*>/g, '')
+                .replace(/\<span class='en'\>/g, '')
+                .replace(/\<\/span\>/g, '')
+                .split('</select>')[0]
+                .trim();
+        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] += '<option value="" disabled selected></option>' +
+            scale.split('<option value="" disabled selected></option>')[1]
+                .replace(/<\/?span class='en'.[^>]*>/g, '')
+                .replace(/\<span class='fr'\>/g, '')
+                .replace(/\<\/span\>/g, '')
+                .split('</select>')[0]
+                .trim();
+
+        let scale_parts = scale.split('%scale_multilang_split');
+
+        scale = scale_parts[0] +
+            _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]][_E.core.state.store["ui"]["lang"]] +
+            scale_parts[2];
+        //console.log(_E.core.state.store["localmem"]);
+
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace("%options", jsonsnip);
-        snip = snip.replace(/\%form/g, scale);
+        snip = snip.replace(/\%form/g, scale).replace(/\%scale_multilang_split/g, '');
         if (_E.core.state.store["render"]["question"]["required"] == true) {
             snip = snip.replace(/\%reqattr/g, 'required="" aria-required="true"').replace(/\%reqcls/g, "validate");
         } else {
@@ -373,22 +400,32 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         var random_shuffle = [];
         var temp_snip = "";
         // lang opt check for bilingual
-        var opt_input_value = ""
+        var opt_input_value = "";
+
+        if (cmd == "pick one dropdown") {
+            _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]] = {};
+            _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] = '<option value="" disabled selected></option>';
+            _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] = '<option value="" disabled selected></option>';
+        }
         for (var opti = 0; opti < opts.length; opti++) {
+
+            opt_input_value = opts[opti].trim()
+
             //
             // WARN: Brittle code. Tied to HTML structure.
             // See pack_text, activate_lang
             // suggest holding off on activate_lang until form is fully built
             // also, address the JSON render (it will have evalese in the mix)
             // 
-            opt_input_value = opts[opti].trim()
+
             var oa = [];
-            oa = opt_input_value.split("</span>")
+            oa = opt_input_value.split("</span>");
             for (var m = 0; m < oa.length; m++) {
                 if (oa[m].indexOf("<span class='" + _E.core.state.store["ui"]["lang"] + "'>") !== -1) {
                     opt_input_value = oa[m].replace("<span class='" + _E.core.state.store["ui"]["lang"] + "'>", "");
                 }
             }
+
             // end WARN
 
             temp_snip = _E.core.templates.get(cmd)
@@ -398,11 +435,21 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
                 .replace(/\%vpick/g, opt_input_value.trim())
                 ;
             form += temp_snip;
+
             random_shuffle.push(temp_snip);
 
             jsonsnip += "," + _E.core.templates.get(cmd, "json")
                 .replace(/\%pick/g, opts_json[opti].trim());
         }
+
+        if (cmd == "pick one dropdown") {
+            _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] += form.replace(/<\/?span class='fr'.[^>]*>/g, '').replace(/\<span class='en'\>/g, '').replace(/\<\/span\>/g, '').trim();
+            _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] += form.replace(/<\/?span class='en'.[^>]*>/g, '').replace(/\<span class='fr'\>/g, '').replace(/\<\/span\>/g, '').trim();
+
+            form = _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]][_E.core.state.store["ui"]["lang"]];
+            //console.log(_E.core.state.store["localmem"]);
+        }
+
         if (_E.core.state.store["render"]["question"]["random"]["options"] == true) {
             _E.fxn.common.shuffle_array(random_shuffle);
             form = random_shuffle.join(" ");
@@ -411,12 +458,17 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             if (cmd == "pick one" || cmd == "pick any") {
                 snip = snip.replace(/\%form/g, '<fieldset><legend><span class="en">Pick</span><span class="fr">Choisir</span></legend>' + form + '</fieldset>');
             } else if (cmd == "pick one dropdown") {
+
+                // store the en and fr options
+                // <option value=""><span class="en">rrr</span><span class="fr">ddd</span></option>
+
                 snip = snip.replace(/\%form/g,
                     '<div class="row">' +
                     '<div class="col s12" >' +
                     '<label class="lg-lbl" for="rgroup_qid_%qid" id="lbl_rgroup_qid_%qid"><span class="en">Select one</span><span class="fr">Veuillez choisir</span></label>' +
                     '<select class="%reqcls browser-default" %reqattr id="rgroup_qid_%qid" name="rgroup_qid_%qid" aria-labelledby="lbl_rgroup_qid_%qid">' +
-                    '<option value="" disabled selected></option>' + form + '</select></div></div>');
+                    '<option value="" disabled selected></option>' + form +
+                    '</select></div></div>');
                 snip = snip.replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
             } else {
                 snip = snip.replace(/\%form/g, form);
