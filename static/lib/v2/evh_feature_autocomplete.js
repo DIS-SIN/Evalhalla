@@ -222,6 +222,173 @@ _E.feature.autocomplete.refresh_generics = function () {
         "offering_province": "NCR/RCN"
     },
 */
+_E.feature.autocomplete.populate_offerings_demodata = {
+    "dmb": {
+        "offering_id": "000008",
+        "course_code": "DMB",
+        "course_title": "DM Breakfast / Petit déjeuner DM",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "dmb2":
+    {
+        "offering_id": "000011",
+        "course_code": "DMB",
+        "course_title": "DM Breakfast / Petit déjeuner DM",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "openhouse":
+    {
+        "offering_id": "000009",
+        "course_code": "OPENHOUSE",
+        "course_title": "Digital Academy Open House",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "ut0_da_interest":
+    {
+        "offering_id": "000000",
+        "course_code": "EVH-UT0",
+        "course_title": "Stratosphere Event",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "ut1_june18_event":
+    {
+        "offering_id": "000001",
+        "course_code": "EVH-UT1",
+        "course_title": "June 18 Event",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "example_nanos": {
+        "offering_id": "000002",
+        "course_code": "EVH-NN1-P",
+        "course_title": "General Satisfaction Survey",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "example_nanos_paged":
+    {
+        "offering_id": "000002",
+        "course_code": "EVH-NN1-P",
+        "course_title": "General Satisfaction Survey",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "engage":
+    {
+        "offering_id": "000003",
+        "course_code": "Engage",
+        "course_title": "Learning Together for Better Public Engagement",
+        "offering_city": "ONLINE",
+        "offering_province": "WEB"
+    },
+    "inclusive":
+    {
+        "offering_id": "000004",
+        "course_code": "IPS-004",
+        "course_title": "Digital Accessibility Matters: Creating a More Inclusive Public Service",
+        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
+        "offering_province": "NCR/RCN"
+    },
+    "busrides":
+    {
+        "offering_id": "000005",
+        "course_code": "SUR-BR1",
+        "course_title": "Episode review / Revue d'épisode",
+        "offering_city": "ONLINE",
+        "offering_province": "WEB"
+    },
+    "ypn":
+    {
+        "offering_id": "000007",
+        "course_code": "YPN-INO",
+        "course_title": "Youth Professional Network / Réseau professionnel des jeunes",
+        "offering_city": "ONLINE",
+        "offering_province": "WEB"
+    },
+    "test_sur":
+    {
+        "offering_id": "000006",
+        "course_code": "TST-006",
+        "course_title": "Test Survey",
+        "offering_city": "ONLINE",
+        "offering_province": "WEB"
+    },
+    "tsq":
+    {
+        "offering_id": "0000010",
+        "course_code": "TSQ-010",
+        "course_title": "Transferable Skills",
+        "offering_city": "ONLINE",
+        "offering_province": "WEB"
+    },
+    "discover":
+    {
+        "offering_id": "0000010",
+        "course_code": "DSC-011",
+        "course_title": "Registration: Discover Digital CSPS Pilot / Inscription: Pilote EFPC Découvrez le numérique",
+        "offering_city": "ONLINE",
+        "offering_province": "WEB"
+    }
+};
+_E.feature.autocomplete.autoc_offering_string = function (pod) {
+    return "" +
+        pod.course_code + ', ' +
+        pod.offering_id + ', ' +
+        pod.course_title + ', ' +
+        pod.offering_city + ', ' +
+        pod.offering_province;
+};
+_E.feature.autocomplete.autoc_load_offerings = function () {
+    _E.core.state.store["generics"]["offerings"] = typeof autoc_offerings !== "undefined" ? autoc_offerings : [];
+
+    var date = new Date();
+    // for testing on the weekend when no offerings will show
+    //date.setTime(date.getTime() + 3 * 86400000)
+    var date_string = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+        .toISOString()
+        .split("T")[0];
+    $.ajax({
+        url: api_get_offering_route.replace("%currentdate", date_string) + api_key,
+        contentType: "application/json",
+        type: "GET",
+        //data: data_in,
+        success: function (response) {
+            var offs = response.results ? response.results : [];
+            var offs_html = "";
+            var suggested = "";
+            var demo_offering = [
+                _E.feature.autocomplete.autoc_offering_string(_E.feature.autocomplete.populate_offerings_demodata["test_sur"])
+            ];
+
+            if (typeof _E.feature.autocomplete.populate_offerings_demodata[_E.feature.qparam.settings.sur] !== "undefined") {
+                demo_offering = [
+                    _E.feature.autocomplete.autoc_offering_string(_E.feature.autocomplete.populate_offerings_demodata[_E.feature.qparam.settings.sur])
+                ];
+            }
+
+            // end delete
+            for (var i = 0; i < offs.length; i++) {
+                demo_offering.push(
+                    _E.feature.autocomplete.autoc_offering_string(offs[i])
+                );
+            }
+
+            var autoc_json = {}
+            for (var i = 0; i < demo_offering.length; i++) {
+                autoc_json[demo_offering[i]] = null;
+            }
+            _E.core.state.store["generics"]["offerings"] = autoc_json;
+
+            $('.autoc_offering').autocomplete({
+                data: _E.core.state.store["generics"]["offerings"]
+            });
+        }
+    });
+}
 _E.feature.autocomplete.populate_offerings = function () {
     var date = new Date();
     var date_string = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
@@ -236,145 +403,14 @@ _E.feature.autocomplete.populate_offerings = function () {
             var offs = response.results ? response.results : [];
             var offs_html = "";
             var suggested = "";
-            var demo_offering = [{
-                "offering_id": "000000",
-                "course_code": "DEV-TS1",
-                "course_title": "Development Test Event",
-                "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                "offering_province": "NCR/RCN"
-            }];
-            // TODO: Refactor this into something less like
-            // you wrote it in between meetings and out of
-            // urgent need rather than careful planning.
-            if (_E.feature.qparam.settings.sur == "dmb") {
+            var demo_offering = [
+                _E.feature.autocomplete.populate_offerings_demodata["test_sur"]
+            ];
+
+            if (typeof _E.feature.autocomplete.populate_offerings_demodata[_E.feature.qparam.settings.sur] !== "undefined") {
                 demo_offering = [
-                    {
-                        "offering_id": "000008",
-                        "course_code": "DMB",
-                        "course_title": "DM Breakfast / Petit déjeuner DM",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "dmb2") {
-                demo_offering = [
-                    {
-                        "offering_id": "000011",
-                        "course_code": "DMB",
-                        "course_title": "DM Breakfast / Petit déjeuner DM",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "openhouse") {
-                demo_offering = [
-                    {
-                        "offering_id": "000009",
-                        "course_code": "OPENHOUSE",
-                        "course_title": "Digital Academy Open House",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "ut0_da_interest") {
-                demo_offering = [
-                    {
-                        "offering_id": "000000",
-                        "course_code": "EVH-UT0",
-                        "course_title": "Stratosphere Event",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "ut1_june18_event") {
-                demo_offering = [
-                    {
-                        "offering_id": "000001",
-                        "course_code": "EVH-UT1",
-                        "course_title": "June 18 Event",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "example_nanos" || _E.feature.qparam.settings.sur == "example_nanos_paged") {
-                demo_offering = [
-                    {
-                        "offering_id": "000002",
-                        "course_code": "EVH-NN1-P",
-                        "course_title": "General Satisfaction Survey",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "engage") {
-                demo_offering = [
-                    {
-                        "offering_id": "000003",
-                        "course_code": "Engage",
-                        "course_title": "Learning Together for Better Public Engagement",
-                        "offering_city": "ONLINE",
-                        "offering_province": "WEB"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "inclusive") {
-                demo_offering = [
-                    {
-                        "offering_id": "000004",
-                        "course_code": "IPS-004",
-                        "course_title": "Digital Accessibility Matters: Creating a More Inclusive Public Service",
-                        "offering_city": "NATIONAL CAPITAL REGION (NCR)",
-                        "offering_province": "NCR/RCN"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "busrides") {
-                demo_offering = [
-                    {
-                        "offering_id": "000005",
-                        "course_code": "SUR-BR1",
-                        "course_title": "Episode review / Revue d'épisode",
-                        "offering_city": "ONLINE",
-                        "offering_province": "WEB"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "ypn") {
-                demo_offering = [
-                    {
-                        "offering_id": "000007",
-                        "course_code": "YPN-INO",
-                        "course_title": "Youth Professional Network / Réseau professionnel des jeunes",
-                        "offering_city": "ONLINE",
-                        "offering_province": "WEB"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "test_sur") {
-                demo_offering = [
-                    {
-                        "offering_id": "000006",
-                        "course_code": "TST-006",
-                        "course_title": "Test Survey",
-                        "offering_city": "ONLINE",
-                        "offering_province": "WEB"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "tsq") {
-                demo_offering = [
-                    {
-                        "offering_id": "0000010",
-                        "course_code": "TSQ-010",
-                        "course_title": "Transferable Skills",
-                        "offering_city": "ONLINE",
-                        "offering_province": "WEB"
-                    }];
-            }
-            if (_E.feature.qparam.settings.sur == "discover") {
-                demo_offering = [
-                    {
-                        "offering_id": "0000010",
-                        "course_code": "DSC-011",
-                        "course_title": "Registration: Discover Digital CSPS Pilot / Inscription: Pilote EFPC Découvrez le numérique",
-                        "offering_city": "ONLINE",
-                        "offering_province": "WEB"
-                    }];
+                    _E.feature.autocomplete.populate_offerings_demodata[_E.feature.qparam.settings.sur]
+                ];
             }
 
             // to enable testing when no courses load. delete this code
@@ -450,8 +486,10 @@ _E.feature.autocomplete.enable_feature = function () {
     _E.core.state.store["generics"]["generic_fetched"] = false;
     _E.feature.autocomplete.autoc_load_classifications();
     _E.feature.autocomplete.autoc_load_departments();
+    _E.feature.autocomplete.autoc_load_offerings();
     _E.feature.autocomplete.autoc_load_cities();
     _E.feature.autocomplete.autoc_load_languages();
     //_E.feature.autocomplete.api_get_generics();
+    // for pre-survey pages
     _E.feature.autocomplete.populate_offerings();
 };

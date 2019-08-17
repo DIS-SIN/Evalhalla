@@ -338,6 +338,17 @@ _E.core.templates.library = {
             '</div>' +
             '</div>' +
             '',
+        "pick one offering": '' +
+            '<div class="row">' + // id="autocomplete-input-department" // REFACTOR: add new subtype (note the rgroup)
+            '<div class="col s12 input-field">' +
+            '<input type="text" id="rgroup_qid_%qid" class="autocomplete autoc_offering %reqcls" %reqattr >' +
+            '<label for="rgroup_qid_%qid">' +
+            '<span class="en">Offering</span>' +
+            '<span class="fr">Offre</span>' +
+            '</label>' +
+            '</div>' +
+            '</div>' +
+            '',
         "pick one dropdown": '' +
             '<option value="%vpick">%pick</option>' +
             '',
@@ -483,6 +494,7 @@ _E.core.templates.library = {
         "pick one department": '"%pick"',
         "pick one classification": '"%pick"',
         "pick one location": '"%pick"',
+        "pick one offering": '"%pick"',
         "pick one pop language": '"%pick"',
         "pick one dropdown": '"%pick"',
         // end interpreter v0.2 updates
@@ -552,6 +564,7 @@ _E.core.templates.get = function (snip, format) {
     } else if (snip == "pick one department"
         || snip == "pick one classification"
         || snip == "pick one language"
+        || snip == "pick one offering"
         || snip == "pick one location") {
         if (format == "json") {
             return _E.core.templates.library["json"][snip];//'"%pick"';

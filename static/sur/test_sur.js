@@ -13,6 +13,22 @@ var test_sur = `# TEST-007
 /en Please let us know about your experience so far /; 
 /fr Veuillez nous faire part de votre expérience  jusqu'à présent /; 
 
+Q: Offering
+/offering
+
+Q: Department
+/department
+
+Q: Lang
+/language
+
+Q: class
+/classification
+
+Q: loc
+/location
+
+/pagebreak 
 
 Q:
 /en Drop this? /;

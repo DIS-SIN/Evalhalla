@@ -97,6 +97,7 @@ _E.core.interpreter.evalese = {
     // interpreter v0.2
     "/DEPARTMENT": { "type": "pick one department", "html": "<pick>%v</pick>" },
     "/CLASSIFICATION": { "type": "pick one classification", "html": "<pick>%v</pick>" },
+    "/OFFERING": { "type": "pick one offering", "html": "<pick>%v</pick>" },
     "/LOCATION": { "type": "pick one location", "html": "<pick>%v</pick>" },
     "/DROPDOWN": { "type": "pick one dropdown", "html": "<pick>%v</pick>" },
     "/LANGUAGE": { "type": "pick one language", "html": "<pick>%v</pick>" }
@@ -355,6 +356,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         || cmd == "pick one department"
         || cmd == "pick one classification"
         || cmd == "pick one location"
+        || cmd == "pick one offering"
         || cmd == "pick one language") { // REFACTOR: added pick one dept
         //required="" aria-required="true" class="validate"
         // handle html
@@ -528,6 +530,7 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
                 || cmd["type"] == "pick one dropdown"
                 || cmd["type"] == "pick one department"
                 || cmd["type"] == "pick one classification"
+                || cmd["type"] == "pick one offering"
                 || cmd["type"] == "pick one location"
                 || cmd["type"] == "pick one language"
                 || cmd["type"] == "pick any"
@@ -551,6 +554,7 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
                     || cmd["type"] == "pick one dropdown"
                     || cmd["type"] == "pick one department"
                     || cmd["type"] == "pick one classification"
+                    || cmd["type"] == "pick one offering"
                     || cmd["type"] == "pick one location"
                     || cmd["type"] == "pick one language"
                     || cmd["type"] == "pick any"
