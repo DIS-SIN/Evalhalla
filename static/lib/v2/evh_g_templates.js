@@ -297,7 +297,7 @@ _E.core.templates.library = {
         "pick one classification": '' +
             '<div class="row">' + // id="autocomplete-input-department" // REFACTOR: add new subtype (note the rgroup)
             '<div class="col s12 input-field">' +
-            '<input type="text" id="rgroup_qid_%qid" class="autocomplete tombstone_classification %reqcls" %reqattr >' +
+            '<input type="text" id="rgroup_qid_%qid" name="rgroup_qid_%qid" class="autocomplete tombstone_classification %reqcls" %reqattr >' +
             '<label for="rgroup_qid_%qid">' +
             '<span class="en">Classification</span>' +
             '<span class="fr">Niveau du poste</span>' +
@@ -308,7 +308,7 @@ _E.core.templates.library = {
         "pick one location": '' +
             '<div class="row">' + // id="autocomplete-input-department" // REFACTOR: add new subtype (note the rgroup)
             '<div class="col s12 input-field">' +
-            '<input type="text" id="rgroup_qid_%qid" class="autocomplete tombstone_city %reqcls" %reqattr >' +
+            '<input type="text" id="rgroup_qid_%qid" name="rgroup_qid_%qid" class="autocomplete tombstone_city %reqcls" %reqattr >' +
             '<label for="rgroup_qid_%qid">' +
             '<span class="en">City</span>' +
             '<span class="fr">Ville</span>' +
@@ -319,7 +319,7 @@ _E.core.templates.library = {
         "pick one language": '' +
             '<div class="row">' + // id="autocomplete-input-department" // REFACTOR: add new subtype (note the rgroup)
             '<div class="col s12 input-field">' +
-            '<input type="text" id="rgroup_qid_%qid" class="autocomplete autoc_language %reqcls" %reqattr >' +
+            '<input type="text" id="rgroup_qid_%qid" name="rgroup_qid_%qid" class="autocomplete autoc_language %reqcls" %reqattr >' +
             '<label for="rgroup_qid_%qid">' +
             '<span class="en">Language</span>' +
             '<span class="fr">Langue</span>' +
@@ -330,7 +330,7 @@ _E.core.templates.library = {
         "pick one department": '' +
             '<div class="row">' + // id="autocomplete-input-department" // REFACTOR: add new subtype (note the rgroup)
             '<div class="col s12 input-field">' +
-            '<input type="text" id="rgroup_qid_%qid" class="autocomplete tombstone_department %reqcls" %reqattr >' +
+            '<input type="text" id="rgroup_qid_%qid" name="rgroup_qid_%qid" class="autocomplete tombstone_department %reqcls" %reqattr >' +
             '<label for="rgroup_qid_%qid">' +
             '<span class="en">Department</span>' +
             '<span class="fr">Ministère</span>' +
@@ -341,7 +341,7 @@ _E.core.templates.library = {
         "pick one offering": '' +
             '<div class="row">' + // id="autocomplete-input-department" // REFACTOR: add new subtype (note the rgroup)
             '<div class="col s12 input-field">' +
-            '<input type="text" id="rgroup_qid_%qid" class="autocomplete autoc_offering %reqcls" %reqattr >' +
+            '<input type="text" id="rgroup_qid_%qid" name="rgroup_qid_%qid" class="autocomplete autoc_offering %reqcls" %reqattr >' +
             '<label for="rgroup_qid_%qid">' +
             '<span class="en">Offering</span>' +
             '<span class="fr">Offre</span>' +

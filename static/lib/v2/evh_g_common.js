@@ -131,7 +131,7 @@ _E.fxn.common.get_params_as_object = function (query) {
     var decodeRE = /\+/g;
 
     var decode = function (str) {
-        return safe(decodeURIComponent(str.replace(decodeRE, " ")));
+        return _E.fxn.common.safe(decodeURIComponent(str.replace(decodeRE, " ")));
     };
 
     var params = {}, e;

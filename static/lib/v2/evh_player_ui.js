@@ -203,14 +203,27 @@ _E.feature.player.evalhalla_submit = function () {
     json_o["meta_entry_method"] = _E.fxn.common.safe(_E.feature.qparam.settings.entry); // "email", "QR", "web", "altered"
     json_o["meta_evalhalla_sur"] = _E.fxn.common.safe(_E.feature.qparam.settings.sur);
 
+    for (let key in _E.core.interpreter.g_qindex) {
+        let value = _E.core.interpreter.g_qindex[key];
+        if (_E.core.interpreter.g_qindex.hasOwnProperty(key)) {
+            json_o["textofquestion_qid_" + key] = value;
+        }
+    }
+
     var json_o_string = (JSON.stringify(json_o, null, 4));
     //console.log(json_o_string);
     // save response to local storage
+
+    // TODO: turn back on
     _E.feature.localstore.ls_save_survey_response(json_o_string);
+
     // save response to survista
 
     // TODO: turn back on
     _E.feature.player.api_upload_survey_result(json_o_string);
+
+    //console.log(json_o_string);
+    //console.log(_E.core.interpreter.g_qindex);
 
     // show local storage items
     _E.feature.localstore.ls_view_saved_entries();

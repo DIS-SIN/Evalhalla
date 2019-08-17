@@ -153,6 +153,46 @@ _E.core.interpreter.pack_text = function (src_a, i, pack, join) {
     return { "pack": pack, "pack_json": pack_json, "i": i };
 }
 
+// 3. Dereference Question Text
+_E.core.interpreter.g_qindex = {}; // derefrence question text here
+
+_E.core.interpreter.parse_question_text = function (sur_text) {
+    var sa = sur_text.replace(/\n/g, "").split("Q:");
+    for (let i = 1; i < sa.length; i++) {
+        let evh_sai = sa[i];
+        evh_sai = evh_sai.split("/open")[0].split("/OPEN")[0]
+            .split("/any")[0].split("/ANY")[0]
+            .split("/one")[0].split("/ONE")[0]
+            .split("/department")[0].split("/DEPARTMENT")[0]
+            .split("/location")[0].split("/LOCATION")[0]
+            .split("/offering")[0].split("/OFFERING")[0]
+            .split("/classification")[0].split("/CLASSIFICATION")[0]
+            .split("/dropdown")[0].split("/DROPDOWN")[0]
+            .split("/language")[0].split("/LANGUAGE")[0]
+            .split("/scale")[0].split("/SCALE")[0]
+            .split("/scale1-5")[0].split("/SCALE1-5")[0];
+        evh_sai = evh_sai;
+
+        // split by lang (en for now)
+        evh_sai = evh_sai.split("/;")[0];
+        evh_sai = evh_sai.replace("/en", "");
+        _E.core.interpreter.g_qindex["" + i] = evh_sai;
+    }
+};
+// get the text of the question by index
+_E.core.interpreter.get_qindex_text = function (key) {
+    let keya = key.split("_");
+    try {
+        let t = _E.core.interpreter.g_qindex[parseInt(keya[2], 10)];
+        if (typeof t === "undefined") {
+            t = key;
+        }
+        return t;
+    } catch (e) {
+        return "N/A";
+    }
+};
+
 //
 // Command Handlers
 //
@@ -506,6 +546,10 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
     var evalhalla = [];
     var cmd = "";
 
+    // build q_index
+    _E.core.interpreter.parse_question_text(src);
+    //console.log(_E.core.interpreter.g_qindex);
+
     for (i = 0; i < src_a.length; i++) {
         cmd = _E.core.interpreter.detect_command(src_a[i]);
         if (cmd != "null") {
@@ -671,6 +715,7 @@ _E.core.interpreter.render = function () {
     _E.core.state.render_state_reset();
     // E V A L H A L L A
     var survey_html = _E.core.interpreter.raise_src_to_evalhalla(src);
+
     // load render
     _E.core.state.store["el"]["c_render"].html(_E.core.templates.form_wrap(survey_html));
     // reinit submit, lang refresh
@@ -741,6 +786,7 @@ _E.core.interpreter.parse = function () {
     _E.core.state.store["el"]["c_editor"].val(
         g_intro_script
     );
+
     // REFACTOR_PREP: detangle render
     // render
     _E.core.state.store["el"]["c_editor"].trigger("change");

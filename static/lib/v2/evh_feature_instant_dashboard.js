@@ -57,6 +57,9 @@ _E.feature.instadash.parse_question_text = function (sur_text) {
 
 _E.feature.instadash.render_data = function (response) {
     _E.feature.instadash.g_chart_data = (typeof response !== "undefined") ? response : [];
+
+    //console.log(_E.feature.instadash.g_chart_data);
+
     // dont refresh if we have no new data
     if (_E.feature.instadash.g_response.length == _E.feature.instadash.g_chart_data.length) {
         return;
@@ -72,7 +75,7 @@ _E.feature.instadash.render_data = function (response) {
             if (data_point.hasOwnProperty(key)) {
                 let key_tokens = key.split("_");
                 let data_type = key_tokens[0];
-                if (data_type == "meta" || data_type == "tombstone") {
+                if (data_type == "meta" || data_type == "tombstone" || data_type == "textofquestion") {
                     continue;
                 } else {
                     let data_qid = key_tokens[2];
@@ -84,6 +87,8 @@ _E.feature.instadash.render_data = function (response) {
             }
         }
     }
+
+    //console.log(questions_to_chart);
 
     questions_to_chart.sort(function (a, b) { return a - b; });
     $("#render_target").append('<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">' +
@@ -100,6 +105,7 @@ _E.feature.instadash.render_data = function (response) {
             "d_data_sentences": []
         });
     }
+
     $("#render_target").append('<div class="col s12"><h4>General Information</h4></div>');
     _E.feature.instadash.build_meta_charts();
     //build_raw_datatable();
@@ -505,7 +511,8 @@ _E.feature.instadash.build_meta_charts = function () {
 
 _E.feature.instadash.build_charts = function (chartd) {
 
-    //console.log(g_chart_data);
+    //console.log(chartd);
+
     for (var i = 0; i < _E.feature.instadash.g_chart_data.length; i++) {
         let data_point = _E.feature.instadash.g_chart_data[i];
         for (let key in data_point) {
@@ -513,7 +520,7 @@ _E.feature.instadash.build_charts = function (chartd) {
             if (data_point.hasOwnProperty(key)) { //not a property from prototype chain     
                 let key_tokens = key.split("_");
                 let data_type = key_tokens[0];
-                if (data_type == "meta" || data_type == "tombstone") {
+                if (data_type == "meta" || data_type == "tombstone" || data_type == "textofquestion") {
                     continue;
                 } else {
                     let data_qid = key_tokens[2];
