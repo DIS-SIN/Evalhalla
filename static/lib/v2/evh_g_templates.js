@@ -138,10 +138,10 @@ _E.core.templates.library = {
                                 <div class="col s12">
                                     <div class="row center">
                                         <a href="#editor"
-                                            class="btn btn-large purp-canada-ca ev-page-sel-offering left padleft">
+                                            class="btn btn-large purp-canada-ca tombstone-prev left padleft">
                                             <em class="material-icons fab-align">chevron_left</em>
                                         </a>
-                                        <button class="tombstone-set purp-canada-ca btn-large right padright">
+                                        <button class="tombstone-next purp-canada-ca btn-large right padright">
                                             <span class="en">Start</span>
                                             <span class="fr">Début</span>
                                         </button>
@@ -153,7 +153,7 @@ _E.core.templates.library = {
                 </div>
                 <div class="col hide-on-small-only m1"></div>
             </div>`,
-        "step_thank_you_cta": `<div id="step_thank_you_cta" class="row bannerbgbacked center">
+        "step_thank_you_cta": `<div id="step_thank_you_cta" class="row bannerbgbacked center ev-page ev-page-thanks">
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>

@@ -476,9 +476,9 @@ _E.feature.autocomplete.populate_offerings = function () {
                     }
                 }
 
-                _E.core.state.store["render"]["currpageid"] = "tombstone";
+                //_E.core.state.store["render"]["currpageid"] = "tombstone";
                 //console.log(_E.core.state.store["render"]["currpageid"]);
-                _E.feature.player.hs_page_intro_step();
+                _E.feature.player.next_page();
                 //$("#step_offering").hide();
                 //$("#step_tombstone").show();
             });

@@ -739,51 +739,10 @@ _E.core.interpreter.render = function () {
 
     // load render
     _E.core.state.store["el"]["c_render"].html(_E.core.templates.form_wrap(survey_html));
-    // reinit submit, lang refresh
-    $("#evalhalla_submit").on("click", _E.feature.player.evalhalla_submit);
-    _E.feature.lang.refresh_lang();
 
-    // REFACTOR NOTE: Removing /generics demo, replacing w/ /cmd(s) for initial checks.
-    //_E.feature.autocomplete.refresh_generics();
 
-    // pagination
-    $(".ev-page-sel").removeClass("active");
-    $(".ev-page-sel-" + _E.core.state.store["render"]["currpageid"]).addClass("active");
-
-    $(".ev-page").hide();
-    $(".ev-page-" + _E.core.state.store["render"]["currpageid"]).show();
-
-    $("#evalhalla_submit").addClass("disabled accessibledisabled");
-    $(".ev-page-sel-" + "right").removeClass("disabled accessibledisabled");
-    if (_E.core.state.store["render"]["currpageid"] == _E.core.state.store["render"]["pageid"]) {
-        $("#evalhalla_submit").removeClass("disabled accessibledisabled");
-        $(".ev-page-sel-" + "right").addClass("disabled accessibledisabled");
-    }
-
-    for (var i = 1; i <= _E.core.state.store["render"]["pageid"]; i++) {
-        $(".ev-page-sel-" + i).on("click", { "i": i },
-            function (e) {
-                _E.core.state.store["render"]["currpageid"] = e.data.i
-                $(".ev-page").hide();
-                $(".ev-page-" + e.data.i).show();
-                $(".ev-page-sel").removeClass("active");
-                $(".ev-page-sel-" + e.data.i).addClass("active");
-                $(".determinate").css({ "width": ((parseFloat(_E.core.state.store["render"]["currpageid"]) / parseFloat(_E.core.state.store["render"]["pageid"])) * 100).toFixed(0) + "%" });
-                $(".determinate-text").text(((parseFloat(_E.core.state.store["render"]["currpageid"]) / parseFloat(_E.core.state.store["render"]["pageid"])) * 100).toFixed(0) + "%");
-                //alert(e.data.i);
-                $("#evalhalla_submit").addClass("disabled accessibledisabled");
-                $(".ev-page-sel-" + "right").removeClass("disabled accessibledisabled");
-                window.scrollTo(0, 0);
-                if (_E.core.state.store["render"]["currpageid"] == _E.core.state.store["render"]["pageid"]) {
-                    $("#evalhalla_submit").removeClass("disabled accessibledisabled");
-                    $(".ev-page-sel-" + "right").addClass("disabled accessibledisabled");
-                }
-            });
-    }
-
-    // REFACTOR: Note dependencies
-    _E.feature.player.ui_activate_pagedirection_buttons();
-    _E.feature.autocomplete.enable_feature();
+    // enable the buttons
+    //_E.feature.player.activate_html();
 
     // load json
     try {
@@ -799,6 +758,8 @@ _E.core.interpreter.render = function () {
     // todo: accessibility check on materialize dropdown (there's shadow elements causing label issues)
     //$('select').formSelect();
 
+    // activate the language to stop dual showing
+    _E.feature.lang.refresh_lang();
 };
 
 _E.core.interpreter.parse = function () {

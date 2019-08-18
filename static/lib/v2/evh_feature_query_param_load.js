@@ -54,6 +54,10 @@ _E.feature.qparam.startup = function () {
     if (typeof _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur] !== "undefined") {
         _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur];
         _E.feature.qparam.settings.auto_display_mode = true;
+    } else {
+        _E.feature.qparam.settings.sur = "test_sur";
+        _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur];
+        _E.feature.qparam.settings.auto_display_mode = true;
     }
 
     // REFACTOR: detangly player/designer/dash
