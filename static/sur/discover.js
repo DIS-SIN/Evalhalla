@@ -8,6 +8,12 @@ var discover = `# discover
 /en These sessions are reserved for CSPS employees. Please complete this form to register for one of the pilot offerings. /;
 /fr Ces séances sont réservées pour les employés de l'EFPC. Veuillez compléter ce formulaire afin de vous inscire à une des séance du pilote. /;
 
+
+/NOTOMBSTONEPAGE
+
+/NOOFFERINGPAGE
+
+
 //
 /en Note: This platform is open source. The information being shared is public. If you prefer not to submit your application via this platform, please email these details to: csps.digitalacademy-academiedunumerique.efpc@canada.ca. /;
 /fr Note : Cette plateforme est un logiciel libre. L'information partagée est publique. Si vous préférez ne pas soumettre votre candidature via cette plateforme, veuillez envoyer ces informations par courriel à : csps.digitalacademy-academiedunumerique.efpc@canada.ca. /;

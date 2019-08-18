@@ -100,7 +100,9 @@ _E.core.interpreter.evalese = {
     "/OFFERING": { "type": "pick one offering", "html": "<pick>%v</pick>" },
     "/LOCATION": { "type": "pick one location", "html": "<pick>%v</pick>" },
     "/DROPDOWN": { "type": "pick one dropdown", "html": "<pick>%v</pick>" },
-    "/LANGUAGE": { "type": "pick one language", "html": "<pick>%v</pick>" }
+    "/LANGUAGE": { "type": "pick one language", "html": "<pick>%v</pick>" },
+    "/NOOFFERINGPAGE": { "type": "no offering page", "html": "<pick>%v</pick>" },
+    "/NOTOMBSTONEPAGE": { "type": "no tombstone page", "html": "<pick>%v</pick>" },
 };
 
 
@@ -247,6 +249,23 @@ _E.core.interpreter.handle_cmd_pagebreak = function (cmd, src, json) {
     _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"]
         .replace("%questions", jsonsnip + ",%questions")
     return snip;
+}
+
+// parser - handle the pagebreak command
+_E.core.interpreter.handle_cmd_nopresurveypage = function (cmd, src, json) {
+    //json = json || "";
+    // handle html
+    if (cmd == "no tombstone page") {
+        //_E.core.state.store["render"]["currpageid"] = 1; // advance page, note we're switching types here
+        //_E.feature.player.hs_page_step()
+        _E.core.state.store["render"]["no tombstone page"] = true;
+    }
+    if (cmd == "no offering page") {
+        //_E.core.state.store["render"]["currpageid"] = "offering";
+        //_E.feature.player.hs_page_intro_step();
+        _E.core.state.store["render"]["no offering page"] = true;
+    }
+    return "";
 }
 
 // parser - handle the instruction command
@@ -638,6 +657,8 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
                 // handle generic end, custom for random
             } else if (cmd["type"] == "end pick" || cmd["type"] == "end rank") {
                 // skip end tag for now
+            } else if (cmd["type"] == "no offering page" || cmd["type"] == "no tombstone page") {
+                _E.core.interpreter.handle_cmd_nopresurveypage(cmd["type"], pack, pkg["pack_json"]);
             } else {
                 // generic handler, use basic tag wrapping from _E.core.interpreter.evalese
                 evalhalla.push(cmd["html"].replace(/\%v/g, src_a[i]));

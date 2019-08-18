@@ -69,9 +69,29 @@ _E.feature.player.hs_page_intro_step = function () {
         hs_page_step();
         return;
     }*/
+    //console.log(_E.core.state.store["render"]["no offering page"]);
+    if (_E.core.state.store["render"]["no tombstone page"] == true && _E.core.state.store["render"]["no offering page"] == true) {
+        _E.core.state.store["render"]["currpageid"] = "1";
+        _E.feature.player.hs_page_step();
+        return;
+    }
+    if (_E.core.state.store["render"]["no offering page"] == true) {
+        if (_E.core.state.store["render"]["currpageid"] == "offering") {
+            _E.core.state.store["render"]["currpageid"] == "tombstone";
+        }
+    }
+    if (_E.core.state.store["render"]["no tombstone page"] == true) {
+        if (_E.core.state.store["render"]["currpageid"] == "tombstone") {
+            _E.core.state.store["render"]["currpageid"] = "1";
+            _E.feature.player.hs_page_step();
+            return;
+        }
+    }
+
     $(".surveybody").hide();
     $(".ev-page").hide();
     $(".ev-page-" + _E.core.state.store["render"]["currpageid"]).show();
+
 };
 
 _E.feature.player.ui_activate_introlangset_buttons = function () {
@@ -203,26 +223,34 @@ _E.feature.player.evalhalla_submit = function () {
     json_o["meta_entry_method"] = _E.fxn.common.safe(_E.feature.qparam.settings.entry); // "email", "QR", "web", "altered"
     json_o["meta_evalhalla_sur"] = _E.fxn.common.safe(_E.feature.qparam.settings.sur);
 
+
+    let question_count = 0;
     for (let key in _E.core.interpreter.g_qindex) {
         let value = _E.core.interpreter.g_qindex[key];
         if (_E.core.interpreter.g_qindex.hasOwnProperty(key)) {
             json_o["textofquestion_qid_" + key] = value;
+            question_count = question_count + 1;
         }
     }
 
+    json_o["meta_question_count"] = question_count;
+    let date = new Date();
+    let date_string = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
+        .toISOString()
+    json_o["meta_submission_time"] = date_string;
     var json_o_string = (JSON.stringify(json_o, null, 4));
     //console.log(json_o_string);
     // save response to local storage
 
     // TODO: turn back on
-    _E.feature.localstore.ls_save_survey_response(json_o_string);
+    //_E.feature.localstore.ls_save_survey_response(json_o_string);
 
     // save response to survista
 
     // TODO: turn back on
-    _E.feature.player.api_upload_survey_result(json_o_string);
+    //_E.feature.player.api_upload_survey_result(json_o_string);
 
-    //console.log(json_o_string);
+    console.log(json_o_string);
     //console.log(_E.core.interpreter.g_qindex);
 
     // show local storage items
