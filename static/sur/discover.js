@@ -15,8 +15,8 @@ var discover = `# discover
 
 
 //
-/en Note: This platform is open source. The information being shared is public. If you prefer not to submit your application via this platform, please email these details to: csps.digitalacademy-academiedunumerique.efpc@canada.ca. /;
-/fr Note : Cette plateforme est un logiciel libre. L'information partagée est publique. Si vous préférez ne pas soumettre votre candidature via cette plateforme, veuillez envoyer ces informations par courriel à : csps.digitalacademy-academiedunumerique.efpc@canada.ca. /;
+/en Note: This platform is open source. The information being shared is public. If you prefer not to submit your application via this platform, please email these details to: csps.digitalacademy-academiedunumerique.efpc @canada.ca. /;
+/fr Note : Cette plateforme est un logiciel libre. L'information partagée est publique. Si vous préférez ne pas soumettre votre candidature via cette plateforme, veuillez envoyer ces informations par courriel à : csps.digitalacademy-academiedunumerique.efpc @canada.ca. /;
 
 
 *Q:
