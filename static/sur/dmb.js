@@ -4,7 +4,7 @@ var dmb = `
 
 ## 
 /en DM Breakfast /;
-/fr Petit Dejeuner DM /;
+/fr Petit Dejeuner SM /;
 
 ### 
 /en <ul><li>Instant. Insight.</li></ul> /;
@@ -18,7 +18,7 @@ var dmb = `
 
 //
 /en Information becomes available in an instant. /; 
-/fr Veuillez nous faire part de votre expérience jusqu'à présent /; 
+/fr L'information devient disponible en un instant. /; 
 
 *Q: 
 /en What is your first official language? /;
@@ -40,7 +40,7 @@ Q:
 
 *Q: 
 /en How many years were you an executive before you became a DM? /;
-/fr Combien d'années avez-vous été cadre avant de devenir DM? /;
+/fr Combien d'années avez-vous été cadre avant de devenir SM? /;
 /one
 1-5
 5-10
@@ -50,7 +50,7 @@ Q:
 
 *Q: 
 /en How many ministers have you had since you have been a DM? /;
-/fr Combien de ministres avez-vous eu depuis que vous êtes DM? /;
+/fr Combien de ministres avez-vous eu depuis que vous êtes SM? /;
 /one
 1
 2
@@ -61,7 +61,7 @@ Q:
 
 *Q: 
 /en How many clerks have you worked for since you became a DM? /;
-/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu DM? /;
+/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu SM? /;
 /one
 1
 2
@@ -72,7 +72,7 @@ Q:
 
 *Q: 
 /en How many Prime Ministers have you worked for since you became a DM? /;
-/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu DM? /;
+/fr Pour combien de premiers ministres avez-vous travaillé depuis que vous êtes devenu sous-ministre? /;
 /one
 1
 2
@@ -91,7 +91,9 @@ Q:
 /en Doctorate /; /fr Doctorat /;
 ;
 
-*Q: Are any of your degrees from an institution outside of Canada?
+*Q: 
+/en Are any of your degrees from an institution outside of Canada? /;
+/fr Certains de vos diplômes proviennent-ils d'une institution située à l'extérieur du Canada? /;
 /one
 /en Yes /; /fr Oui /;
 /en No /; /fr Non /;
@@ -104,7 +106,7 @@ Q:
 
 *Q: 
 /en Which department are you least interested in leading? /;
-/fr Si vous pouviez être sous-ministre d'un ministère, de quel ministère s'agirait-il? /;
+/fr Quel département êtes-vous le moins intéressé à diriger? /;
 /department
 
 *Q: 
@@ -119,14 +121,14 @@ Q:
 /pagebreak
 
 *Q: 
-/en On weekends I like to: /;
-/fr Qu'aimez-vous pour vous amuser? /;
+/en On the weekend I like to: /;
+/fr Le week-end j'aime? /;
 /any
-Spend time with family
-Learn new things
-Recreation (Active)
-Recreation (Passive)
-Work
+/en Spend time with family /; /fr Passer du temps avec la famille /;
+/en Learn new things /; /fr Apprendre de nouvelles choses /;
+/en Recreation (Active) /; /fr Loisirs (actif) /;
+/en Recreation (Passive) /; /fr Loisirs (Passif) /;
+/en Work /; /fr Travail /;
 ;
 
 *Q: 
@@ -147,7 +149,7 @@ Work
 
 *Q: 
 /en Now that cannabis is legal, have you... /;
-/fr As tu des allergies? /;
+/fr Maintenant que le cannabis est légal, avez-vous ... /;
 /one
 /en Yes /; /fr Oui /;
 /en No  /; /fr Non /;
@@ -165,7 +167,7 @@ Q:
 /en How many? /;
 /fr Combien? /;
 /one
-No children
+/en No children /; /fr Pas d'enfants /;
 1
 2
 3+
@@ -175,14 +177,14 @@ No children
 /en What’s your favorite genre of music? /;
 /fr Quel est votre genre de musique préféré? /;
 /dropdown
-Classical
-Rock
-Country
-Jazz
-Electronic
-Rap
-R&B
-Metal
+/en Classical /; /fr Classique /;
+/en Rock /; /fr Rock /;
+/en Country /; /fr Musique country /;
+/en Jazz /; /fr le jazz /;
+/en Electronic /; /fr Électronique /;
+/en Rap /; /fr Rap /;
+/en R&B /; /fr R & B /;
+/en Metal /; /fr Métal /;
 ;
 
 *Q: 
@@ -219,7 +221,10 @@ Metal
 *Q:
 /en On a scale from 1-5 how ready is your department for disruptive change? /;
 /fr Sur une échelle de 1 à 5, dans quelle mesure votre département est-il prêt pour un changement perturbateur? /;
-/scale1-5 Not Ready / Pas Prêt, Very Ready / Très Prêt, Unsure / Incertain
+/scale1-5 
+/en Not Ready /; /fr Pas Prêt /; , 
+/en Very Ready /; /fr Très Prêt /; ,
+/en Unsure /; /fr  Incertain /;
 
 *Q:
 /en What concrete things do we need to be ready for disruptive change? /;
