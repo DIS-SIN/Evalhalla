@@ -1,19 +1,26 @@
 // DM Breakfast Survey
-var dmb = `# DM-B
+var dmb = `
+# DMB
 
 ## 
 /en DM Breakfast /;
-/fr Petit Dejeuner DM /;
+/fr Petit Dejeuner SM /;
 
 ### 
-/en Integrative. Instant. Insight. /;
-/fr Intégrative. Instant. Perspicacité. /;
+/en <ul><li>Instant. Insight.</li></ul> /;
+/fr <ul><li>Instant. Perspicacité.</li></ul> /;
+
+
+/NOTOMBSTONEPAGE
+
+/NOOFFERINGPAGE
+
 
 //
 /en Information becomes available in an instant. /; 
-/fr Veuillez nous faire part de votre expérience jusqu'à présent /; 
+/fr L'information devient disponible en un instant. /; 
 
-Q: 
+*Q: 
 /en What is your first official language? /;
 /fr Quelle est votre première langue officielle? /;
 /one
@@ -22,21 +29,18 @@ Q:
 ;
 
 Q: 
-/en Are you fluent in any non-official languages? /;
+/en Are you fluent in a non-official language? /;
 /fr Parlez-vous couramment une langue non officielle? /;
-/one
-/en Yes /; /fr Oui /;
-/en No  /; /fr Non /;
-;
+/language
 
-Q: 
-/en What job category did you grow up in before you became an EX? /;
+*Q: 
+/en What job category did you spend most of your career in before you became an EX? /;
 /fr Dans quelle catégorie d'emploi avez-vous grandi avant de devenir un EX? /;
-/open
+/classification
 
-Q: 
+*Q: 
 /en How many years were you an executive before you became a DM? /;
-/fr Combien d'années avez-vous été cadre avant de devenir DM? /;
+/fr Combien d'années avez-vous été cadre avant de devenir SM? /;
 /one
 1-5
 5-10
@@ -44,17 +48,40 @@ Q:
 15+
 ;
 
-Q: 
+*Q: 
 /en How many ministers have you had since you have been a DM? /;
-/fr Combien de ministres avez-vous eu depuis que vous êtes DM? /;
-/scale1-5 , , 5+
+/fr Combien de ministres avez-vous eu depuis que vous êtes SM? /;
+/one
+1
+2
+3
+4
+5+
+;
 
-Q: 
+*Q: 
 /en How many clerks have you worked for since you became a DM? /;
-/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu DM? /;
-/scale1-5 , , 5+
+/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu SM? /;
+/one
+1
+2
+3
+4
+5+
+;
 
-Q: 
+*Q: 
+/en How many Prime Ministers have you worked for since you became a DM? /;
+/fr Pour combien de premiers ministres avez-vous travaillé depuis que vous êtes devenu sous-ministre? /;
+/one
+1
+2
+3
+4
+5+
+;
+
+*Q: 
 /en What’s your highest level of education? /;
 /fr Quel est votre plus haut niveau d’éducation? /;
 /one
@@ -64,12 +91,222 @@ Q:
 /en Doctorate /; /fr Doctorat /;
 ;
 
+*Q: 
+/en Are any of your degrees from an institution outside of Canada? /;
+/fr Certains de vos diplômes proviennent-ils d'une institution située à l'extérieur du Canada? /;
+/one
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
+;
+
+*Q: 
+/en If you could be DM of any department, what department would it be? /;
+/fr Si vous pouviez être sous-ministre d'un ministère, de quel ministère s'agirait-il? /;
+/department
+
+*Q: 
+/en Which department are you least interested in leading? /;
+/fr Quel département êtes-vous le moins intéressé à diriger? /;
+/department
+
+*Q: 
+/en Estimate how many hours a day you work? /;
+/fr Estimez combien d'heures par jour vous travaillez? /;
+/one
+7.5
+8-10
+11+
+;
+
+/pagebreak
+
+*Q: 
+/en On the weekend I like to: /;
+/fr Le week-end j'aime? /;
+/any
+/en Spend time with family /; /fr Passer du temps avec la famille /;
+/en Learn new things /; /fr Apprendre de nouvelles choses /;
+/en Recreation (Active) /; /fr Loisirs (actif) /;
+/en Recreation (Passive) /; /fr Loisirs (Passif) /;
+/en Work /; /fr Travail /;
+;
+
+*Q: 
+/en Are you a vegetarian? /;
+/fr Êtes-vous végétarien? /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+*Q: 
+/en Do you have any allergies? /;
+/fr As tu des allergies? /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+*Q: 
+/en Now that cannabis is legal, have you... /;
+/fr Maintenant que le cannabis est légal, avez-vous ... /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+*Q: 
+/en Do you have children? /;
+/fr Avez-vous des enfants? /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
 Q: 
+/en How many? /;
+/fr Combien? /;
+/one
+/en No children /; /fr Pas d'enfants /;
+1
+2
+3+
+;
+
+*Q: 
+/en What’s your favorite genre of music? /;
+/fr Quel est votre genre de musique préféré? /;
+/dropdown
+/en Classical /; /fr Classique /;
+/en Rock /; /fr Rock /;
+/en Country /; /fr Musique country /;
+/en Jazz /; /fr le jazz /;
+/en Electronic /; /fr Électronique /;
+/en Rap /; /fr Rap /;
+/en R&B /; /fr R & B /;
+/en Metal /; /fr Métal /;
+;
+
+*Q: 
+/en When do you plan to retire (years until)? /;
+/fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;
+/one
+1
+2
+3-5
+10+
+/en Not sure /; /fr Pas certain /;
+/en Not intending on retiring. Ever. /; /fr Pas l'intention de prendre sa retraite. Déjà. /;
+;
+
+*Q: 
+/en How many books did you read last year? /;
+/fr Combien de livres avez-vous lu l'année dernière? /;
+/one
+1
+2
+3
+4
+5+
+;
+
+*Q: 
+/en Do you own a cottage? /;
+/fr Possédez-vous un chalet? /;
+/one
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
+;
+
+*Q:
+/en On a scale from 1-5 how ready is your department for disruptive change? /;
+/fr Sur une échelle de 1 à 5, dans quelle mesure votre département est-il prêt pour un changement perturbateur? /;
+/scale1-5 
+/en Not Ready /; /fr Pas Prêt /; , 
+/en Very Ready /; /fr Très Prêt /; ,
+/en Unsure /; /fr  Incertain /;
+
+*Q:
+/en What concrete things do we need to be ready for disruptive change? /;
+/fr De quelles choses concrètes avons-nous besoin pour être prêts? /;
+/open
+
+//
+/en Thank you for your time! /; /fr Merci pour vos réponses! /;
+
+`;
+/*
+`# DM-B
+
+##
+/en DM Breakfast /;
+/fr Petit Dejeuner DM /;
+
+###
+/en Integrative. Instant. Insight. /;
+/fr Intégrative. Instant. Perspicacité. /;
+
+//
+/en Information becomes available in an instant. /;
+/fr Veuillez nous faire part de votre expérience jusqu'à présent /;
+
+Q:
+/en What is your first official language? /;
+/fr Quelle est votre première langue officielle? /;
+/one
+/en English /; /fr Anglais /;
+/en French /; /fr Français /;
+;
+
+Q:
+/en Are you fluent in any non-official languages? /;
+/fr Parlez-vous couramment une langue non officielle? /;
+/one
+/en Yes /; /fr Oui /;
+/en No  /; /fr Non /;
+;
+
+Q:
+/en What job category did you grow up in before you became an EX? /;
+/fr Dans quelle catégorie d'emploi avez-vous grandi avant de devenir un EX? /;
+/open
+
+Q:
+/en How many years were you an executive before you became a DM? /;
+/fr Combien d'années avez-vous été cadre avant de devenir DM? /;
+/one
+1-5
+5-10
+10-15
+15+
+;
+
+Q:
+/en How many ministers have you had since you have been a DM? /;
+/fr Combien de ministres avez-vous eu depuis que vous êtes DM? /;
+/scale1-5 , , 5+
+
+Q:
+/en How many clerks have you worked for since you became a DM? /;
+/fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu DM? /;
+/scale1-5 , , 5+
+
+Q:
+/en What’s your highest level of education? /;
+/fr Quel est votre plus haut niveau d’éducation? /;
+/one
+/en Secondary /; /fr Secondaire /;
+/en Bachelors /; /fr Les bacheliers /;
+/en Masters /; /fr Maîtrise /;
+/en Doctorate /; /fr Doctorat /;
+;
+
+Q:
 /en If you could be DM of any department, what department would it be? /;
 /fr Si vous pouviez être sous-ministre d'un ministère, de quel ministère s'agirait-il? /;
 /open
 
-Q: 
+Q:
 /en Estimate how many hours a day you work? /;
 /fr Estimez combien d'heures par jour vous travaillez? /;
 /one
@@ -81,12 +318,12 @@ Q:
 
 /pagebreak
 
-Q: 
+Q:
 /en What do you like to do for fun? /;
 /fr Qu'aimez-vous pour vous amuser? /;
 /open
 
-Q: 
+Q:
 /en Are you a vegetarian? /;
 /fr Êtes-vous végétarien? /;
 /one
@@ -95,7 +332,7 @@ Q:
 /en I reduce what I can /; /fr Je réduis ce que je peux /;
 ;
 
-Q: 
+Q:
 /en Do you have any allergies? /;
 /fr As tu des allergies? /;
 /one
@@ -103,7 +340,7 @@ Q:
 /en No  /; /fr Non /;
 ;
 
-Q: 
+Q:
 /en Do you have children? /;
 /fr Avez-vous des enfants? /;
 /one
@@ -111,17 +348,17 @@ Q:
 /en No  /; /fr Non /;
 ;
 
-Q: 
+Q:
 /en How many? /;
 /fr Combien? /;
 /scale1-5 , , 5+
 
-Q: 
+Q:
 /en What’s your favorite genre of music? /;
 /fr Quel est votre genre de musique préféré? /;
 /open
 
-Q: 
+Q:
 /en When do you plan to retire (years until)? /;
 /fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;
 /one
@@ -132,12 +369,12 @@ Q:
 /en Not intending on retiring. Ever. /; /fr Pas l'intention de prendre sa retraite. Déjà. /;
 ;
 
-Q: 
+Q:
 /en How many books did you read last year? /;
 /fr Combien de livres avez-vous lu l'année dernière? /;
 /scale , , 10+
 
-Q: 
+Q:
 /en Do you own a cottage? /;
 /fr Possédez-vous un chalet? /;
 /one

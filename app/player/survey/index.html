@@ -4,17 +4,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites</title>
+    <title>Evalhalla Designer</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
         rel="stylesheet" media="screen" />
-    <link href="static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen" />
-    <link rel="apple-touch-icon" sizes="180x180" href="static/images/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="static/images/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="static/images/icons/favicon-16x16.png">
-    <link rel="manifest" href="static/images/icons/site.webmanifest">
-    <link rel="mask-icon" href="static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link href="../../../static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../static/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="../../../static/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="../../../static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 </head>
@@ -395,174 +395,8 @@
     </ul>
 
     <div id="editor" class="container">
-        <div class="section">
-            <div id="step_lang" class="row bannerbgbacked center ev-page ev-page-lang">
-                <div class="col hide-on-small-only m3"></div>
-                <div class="col s12 m6 center">
-                    <div>
-                        <img src="static/images/csps_flag.png" class="csps-flag-center"
-                            alt="CSPS-EFPC Flag, Maple leaf in book" />
-                    </div>
-                    <div class="card-panel">
-                        <div class="row center">
-                            <h1>
-                                <span class="en">Satisfaction Survey</span>
-                                <span class="fr">Enquête de satisfaction</span>
-                            </h1>
-                            <p>
-                                Language of preference - Langue de préférence
-                            </p>
-                        </div>
-
-                        <div class="row center">
-                            <div class="col s12 m6 center">
-                                <div class="row center">
-                                    <button class="lang-set-en purp-canada-ca btn-large">English</button>
-                                </div>
-                            </div>
-                            <div class="col s12 m6 center">
-                                <div class="row center">
-                                    <button class="lang-set-fr purp-canada-ca btn-large">Français</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col hide-on-small-only m3"></div>
-            </div>
-            <div id="step_offering" class="row bannerbgbacked center ev-page ev-page-offering">
-                <div class="col hide-on-small-only m2"></div>
-                <div class="col s12 m8 center">
-                    <div>
-                        <img src="static/images/csps_flag.png" class="csps-flag-center"
-                            alt="CSPS-EFPC Flag, Maple leaf in book" />
-                    </div>
-                    <div class="card-panel">
-                        <div class="row center">
-                            <h2>
-                                <span class="en">Satisfaction Survey</span>
-                                <span class="fr">Enquête de satisfaction</span>
-                            </h2>
-                            <p>
-                                <span class="en">Please choose your event/course</span>
-                                <span class="fr">Veuillez choisir votre événement/cours</span>
-                            </p>
-                        </div>
-
-                        <div class="row center offering_target">
-                            OFFERINGS
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col hide-on-small-only m2"></div>
-            </div>
-            <div id="step_tombstone" class="row bannerbgbacked center ev-page ev-page-tombstone">
-                <div class="col hide-on-small-only m1"></div>
-                <div class="col s12 m10 center">
-                    <div>
-                        <img src="static/images/csps_flag.png" class="csps-flag-center"
-                            alt="CSPS-EFPC Flag, Maple leaf in book" />
-                    </div>
-                    <div class="card-panel">
-                        <div class="row center">
-                            <h2>
-                                <span class="en">Satisfaction Survey</span>
-                                <span class="fr">Enquête de satisfaction</span>
-                            </h2>
-                            <p>
-                                <span class="en">A bit about you</span>
-                                <span class="fr">Un peu de vous</span>
-                                <span class="badge grey white-text"><span class="en">optional</span><span
-                                        class="fr">optionnel</span></span>
-                            </p>
-                        </div>
-
-                        <div class="row center tombstone_target">
-
-                            <div class="row">
-                                <div class="col s12">
-                                    <div class="input-field col s12">
-                                        <input type="text" id="autocomplete-input-department"
-                                            class="autocomplete tombstone_department">
-                                        <label for="autocomplete-input-department">
-                                            <span class="en">Department</span>
-                                            <span class="fr">Ministère</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col s12">
-                                    <div class="input-field col s12">
-                                        <input type="text" id="autocomplete-input-classification"
-                                            class="autocomplete tombstone_classification">
-                                        <label for="autocomplete-input-classification">
-                                            <span class="en">Classification</span>
-                                            <span class="fr">Niveau du poste</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="col s12">
-                                    <div class="input-field col s12">
-                                        <input type="text" id="autocomplete-input-city"
-                                            class="autocomplete tombstone_city">
-                                        <label for="autocomplete-input-city">
-                                            <span class="en">City</span>
-                                            <span class="fr">Ville</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col s12">
-                                    <div class="row center">
-                                        <a href="#editor"
-                                            class="btn btn-large purp-canada-ca ev-page-sel-offering left padleft">
-                                            <em class="material-icons fab-align">chevron_left</em>
-                                        </a>
-                                        <button class="tombstone-set purp-canada-ca btn-large right padright">
-                                            <span class="en">Start</span>
-                                            <span class="fr">Début</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col hide-on-small-only m1"></div>
-            </div>
-            <div id="step_thank_you_cta" class="row bannerbgbacked center">
-                <div class="col hide-on-small-only m2"></div>
-                <div class="col s12 m8 center">
-                    <div>
-                        <img src="static/images/csps_flag.png" class="csps-flag-center"
-                            alt="CSPS-EFPC Flag, Maple leaf in book" />
-                    </div>
-
-                    <div class="card-panel">
-                        <div class="row center">
-                            <em class="material-icons ok-check" style="font-size:5em;"
-                                aria-hidden="true">check_circle</em>
-                            <h2>
-                                <span class="en">You're Awesome!</span>
-                                <span class="fr">Vous êtes génial!</span>
-                            </h2>
-                            <p>
-                                <span class="en">Thank you for taking the time</span>
-                                <span class="fr">Merci d'avoir pris le temps de répondre</span>
-                            </p>
-
-                            <div class="row center">
-                                <button class="ev-ready-for-next purp-canada-ca btn-large"><span
-                                        class="en">Goodbye</span>
-                                    <span class="fr">Au revoir</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col hide-on-small-only m2"></div>
-            </div>
+        <div class="section" id="pre_survey_panels">
+            <!-- Pre Survey Panels Go Here -->
         </div>
         <div class="section">
             <div class="row">
@@ -695,36 +529,49 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- get Evalhalla init -->
+    <script src="../../../static/lib/v2/evh_g_init.js"></script>
+
     <!-- Default Survey -->
-    <script src="static/sur/example_sur.js"></script>
-    <script src="static/sur/ut1_june18_event.js"></script>
-    <script src="static/sur/ut0_da_interest.js"></script>
-    <script src="static/sur/engage.js"></script>
-    <script src="static/sur/inclusive.js"></script>
-    <script src="static/sur/busrides.js"></script>
-    <script src="static/sur/test_sur.js"></script>
-    <script src="static/sur/ypn.js"></script>
-    <script src="static/sur/dmb.js"></script>
-    <script src="static/sur/dmb2.js"></script>
-    <script src="static/sur/openhouse.js"></script>
-    <script src="static/sur/tsq.js"></script>
+    <script src="../../../static/sur/example_sur.js"></script>
+    <script src="../../../static/sur/ut1_june18_event.js"></script>
+    <script src="../../../static/sur/ut0_da_interest.js"></script>
+    <script src="../../../static/sur/engage.js"></script>
+    <script src="../../../static/sur/inclusive.js"></script>
+    <script src="../../../static/sur/busrides.js"></script>
+    <script src="../../../static/sur/test_sur.js"></script>
+    <script src="../../../static/sur/ypn.js"></script>
+    <script src="../../../static/sur/dmb.js"></script>
+    <script src="../../../static/sur/dmb2.js"></script>
+    <script src="../../../static/sur/openhouse.js"></script>
+    <script src="../../../static/sur/tsq.js"></script>
+    <script src="../../../static/sur/discover.js"></script>
+    <script src="../../../static/sur/eldp.js"></script>
 
     <!-- Autocomplete values local -->
-    <script src="static/assets/departments.js"></script>
-    <script src="static/assets/classifications.js"></script>
-    <script src="static/assets/cities.js"></script>
-    <script src="static/assets/evalese_md_scripts.js"></script>
+    <script src="../../../static/assets/departments.js"></script>
+    <script src="../../../static/assets/classifications.js"></script>
+    <script src="../../../static/assets/cities.js"></script>
+    <script src="../../../static/assets/languages.js"></script>
     <!-- get Evalhalla lib files -->
-    <script src="static/lib/v1/evh_state.js"></script>
-    <script src="static/lib/v1/evh_common.js"></script>
-    <script src="static/lib/v1/evh_templates.js"></script>
-    <script src="static/lib/v1/evh_autocomplete.js"></script>
+    <script src="../../../static/lib/v2/evh_g_state.js"></script>
+    <script src="../../../static/lib/v2/evh_g_common.js"></script>
+    <script src="../../../static/lib/v2/evh_g_templates.js"></script>
+    <script src="../../../static/lib/v2/evh_g_interpreter.js"></script>
+    <!-- get Evalhalla features -->
+    <script src="../../../static/lib/v2/evh_feature_query_param_load.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_language.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_autocomplete.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_local_storage.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_unloadconfirmation.js"></script>
+    <!-- get Evalhalla ui -->
+    <script src="../../../static/lib/v2/evh_player_ui.js"></script>
+
     <!-- API Connection Integrations  -->
-    <script src="integrations/registhor/registhor_v2_key.js"></script>
-    <script src="integrations/survista/survista_key.js"></script>
-    <!-- Evalhalla Core -->
-    <script src="static/lib/v1/evh_unloadconfirmation.js"></script>
-    <script src="static/lib/v1/evh_core.js"></script>
+    <script src="../../../integrations/registhor/registhor_v2_key.js"></script>
+    <script src="../../../integrations/survista/survista_key.js"></script>
+    <!-- Evalhalla Core, start it up -->
+    <script src="../../../static/lib/v2/evh_player_core.js"></script>
 </body>
 
 </html>
