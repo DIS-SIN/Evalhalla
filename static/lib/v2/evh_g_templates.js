@@ -30,8 +30,8 @@ _E.core.templates.library = {
                     <div class="card-panel">
                         <div class="row center">
                             <h1>
-                                <span class="en">Satisfaction Survey</span>
-                                <span class="fr">Enquête de satisfaction</span>
+                                <span class="en">Survey</span>
+                                <span class="fr">Enquête</span>
                             </h1>
                             <p>
                                 Language of preference - Langue de préférence
@@ -66,8 +66,8 @@ _E.core.templates.library = {
                     <div class="card-panel">
                         <div class="row center">
                             <h2>
-                                <span class="en">Satisfaction Survey</span>
-                                <span class="fr">Enquête de satisfaction</span>
+                                <span class="en">Survey</span>
+                                <span class="fr">Enquête</span>
                             </h2>
                             <p>
                                 <span class="en">Please choose your event/course</span>
@@ -93,8 +93,8 @@ _E.core.templates.library = {
                     <div class="card-panel">
                         <div class="row center">
                             <h2>
-                                <span class="en">Satisfaction Survey</span>
-                                <span class="fr">Enquête de satisfaction</span>
+                                <span class="en">Survey</span>
+                                <span class="fr">Enquête</span>
                             </h2>
                             <p>
                                 <span class="en">A bit about you</span>

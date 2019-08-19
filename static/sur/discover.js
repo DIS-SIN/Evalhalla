@@ -26,15 +26,8 @@ var discover = `# discover
 /en Yes /; /fr Oui /;
 ;
 
-Q:
-/en Registration options  /;
-/fr Options d'inscriptions /;
-/one
-/en I wish to register as an individual. /; /fr Je veux m'inscire en tant qu'individu. /;
-/en I wish to register a group of up to 3 people. /; /fr Je veux inscrire un groupe de 3 personnes maximum. /;
-;
 
-Q:
+*Q:
 /en Which session do you wish to attend? /;
 /fr À quelle séance désirez-vous assister? /;
 /one
@@ -42,17 +35,17 @@ Q:
 /en French - September 5, 2019 (111 Sussex, Ottawa, On) /; /fr Français - 5 septembre 2019 (111 Sussex, Ottawa, On) /;
 ;
 
-Q:
+*Q:
 /en Name /;
 /fr Nom /;
 /open
 
-Q:
+*Q:
 /en Department /;
 /fr Ministère /;
 /department
 
-Q:
+*Q:
 /en Email /;
 /fr Courriel /;
 /open
@@ -61,3 +54,13 @@ Q:
 /en Thank you for your time! /; /fr Merci pour vos réponses! /;
 
 `;
+/**
+ *
+Q:
+/en Registration options  /;
+/fr Options d'inscriptions /;
+/one
+/en I wish to register as an individual. /; /fr Je veux m'inscire en tant qu'individu. /;
+/en I wish to register a group of up to 3 people. /; /fr Je veux inscrire un groupe de 3 personnes maximum. /;
+;
+ */

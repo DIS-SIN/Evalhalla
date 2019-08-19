@@ -9,9 +9,6 @@ var busrides = `# SUR-BR1
 /en User Experience check-in.<br /><br />This 1 min assessment will help us get better. /; 
 /fr Enregistrement de l'expérience utilisateur.<br /><br />Cette évaluation, qui vous prendra de 1 minutes, nous aidera en améliorer. /;
 
-/NOOFFERINGPAGE
-
-/NOTOMBSTONEPAGE
 
 //
 /en Please let us know about your experience so far /; 
