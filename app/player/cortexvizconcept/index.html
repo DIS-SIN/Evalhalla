@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evalhalla Concept Design</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
+        rel="stylesheet" media="screen,print" />
+    <link href="../../../static/css/evalhalla.css" type="text/css" rel="stylesheet" media="screen,print" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../static/images/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../static/images/icons/favicon-16x16.png">
+    <link rel="manifest" href="../../../static/images/icons/site.webmanifest">
+    <link rel="mask-icon" href="../../../static/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+
+        #render_target {
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar-fixed no-print">
+        <nav class="white nav-extended">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">Evalhalla<sup>+CORTEX</sup></a>
+                <ul id="nav-mobile" class="adm-function right hide-on-med-and-down">
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" data-target="dropdown1">
+                            Visualizations <em class="material-icons right lhi-menu"
+                                aria-hidden="true">arrow_drop_down</em>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
+    </ul>
+    <div id="editor" class="container">
+        <div id="render_window" class="col s12">
+            <div class="row">
+                <h1 id="viztitle"></h1>
+            </div>
+            <div id="render_target" class="row">
+                <img id="vizim" src="" />
+            </div>
+        </div>
+    </div>
+    <footer id="admin_footer_end" class="page-footer purp-canada-ca">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h3 class="white-text">Evalhalla</h3>
+                    <p class="grey-text text-lighten-4">
+                        <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
+                        <span class="fr">Alpha. Evalhalla est une expérience visant à faciliter la création de
+                            formulaires.</span>
+                    </p>
+
+                    <a class="brown-text text-lighten-3" href="https://github.com/DIS-SIN/">DIS-SIN Github</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <span class="en">Forms that function.</span>
+                <span class="fr">Des formes qui fonctionnent.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Dependencies -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
+        async defer></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+
+    <script src='https://unpkg.com/panzoom@8.0.0/dist/panzoom.min.js'></script>
+    <script>
+        // just grab a DOM element
+        var element = document.querySelector('#render_target');
+
+        // And pass it to panzoom
+        var controller = panzoom(element, {
+            maxZoom: 4,
+            minZoom: 0.1
+        });
+        controller.zoomAbs(
+            200, // initial x position
+            100, // initial y position
+            0.3  // initial zoom 
+        );
+
+
+        (function ($) {
+            $(function () {
+
+                let tmpl =
+                    `<li>
+                        <a class="%cls">
+                            <em class="material-icons" aria-hidden="true">%icon</em> %txt
+                        </a>
+                    </li>`;
+                let viz = [
+                    { "cls": "menu-dd-1", "icon": "assignment", "viztitle": "Most Offerings Taught Group", "imgfile": "insight-1a-top-5-teach-most-offerings-instuctors.png" },
+                    { "cls": "menu-dd-2", "icon": "assignment", "viztitle": "Most Collaborations Group", "imgfile": "insight-1b-top-5-most-collaborating-instructors.png" },
+                    //{ "cls": "menu-dd-3", "icon": "assignment", "viztitle": "Instructor Courses", "imgfile": "gephi-instructor-courses.png" },
+                    { "cls": "menu-dd-3", "icon": "assignment", "viztitle": "Instructor Communities", "imgfile": "instructor-communities.png" },
+                    { "cls": "menu-dd-4", "icon": "assignment", "viztitle": "Instructor Communities Alt View #2", "imgfile": "gephi-instructor-communities.png" },
+                    { "cls": "menu-dd-5", "icon": "assignment", "viztitle": "Instructor Communities Alt View #3", "imgfile": "insight-1c-instructors-communities.png" },
+                    //{ "cls": "menu-dd-7", "icon": "assignment", "viztitle": "Courses: April", "imgfile": "gephi-april-courses.png" },
+                    { "cls": "menu-dd-6", "icon": "assignment", "viztitle": "Offerings Big Picture", "imgfile": "offerings.png" }
+                ];
+                let menu_html = '';
+                for (let i = 0; i < viz.length; i++) {
+                    menu_html += tmpl
+                        //.replace(/\%image/, viz[i].imgfile)
+                        .replace(/\%txt/, viz[i].viztitle)
+                        .replace(/\%cls/, viz[i].cls)
+                        .replace(/\%icon/, viz[i].icon);
+
+
+                }
+                //console.log(menu_html);
+                $("#dropdown1").html(menu_html);
+                for (let i = 1; i <= viz.length; i++) {
+                    $(".menu-dd-" + i).on("click", { "i": i },
+                        function (e) {
+                            $('#vizim').attr('src', "../../../static/images/cortexvizconcept/" + viz[e.data.i - 1].imgfile);
+                            controller.zoomAbs(
+                                300, // initial x position
+                                100, // initial y position
+                                0.3  // initial zoom 
+                            );
+                            $("#viztitle").html(viz[e.data.i - 1].viztitle);
+                        }
+                    );
+                }
+                $(".dropdown-trigger").dropdown();
+                $(".menu-dd-3").trigger("click");
+            });
+        })(jQuery);
+
+    </script>
+</body>
+
+</html>
