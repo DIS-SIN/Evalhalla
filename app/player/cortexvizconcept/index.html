@@ -27,6 +27,23 @@
         #render_target {
             touch-action: none;
         }
+
+        *:focus {
+            outline: none !important
+        }
+
+        /* 
+
+            remove outlines for pan and zoom
+            note this is not a permanent solution
+            removing focus outlines is poor form and introduces accessibility issues
+            as this is just a concept/paper-prototype we're accepting this limitation
+            for conveying the idea. Actual version of visualizer is built using
+            libraries that handle accessibility well. 
+
+            Consider this a mockup, and not an example of production ready products
+
+        */
     </style>
 </head>
 
