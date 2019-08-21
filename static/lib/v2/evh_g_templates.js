@@ -452,6 +452,7 @@ _E.core.templates.library = {
     },
     "json": {
         "header": '{' +
+            '"survey": "%survey",' +
             '"title": "%title",' +
             '"description": "%intro",' +
             '"language": "%lang",' +
@@ -463,6 +464,9 @@ _E.core.templates.library = {
             '"description": "%question",' +
             '"language": "%lang",' +
             '"questionType": "%type",' +
+            '"cortexAtOrder": "%cortexatorder",' +
+            '"cortexQuestionType": "%cortextype",' +
+            '"cortexClassifiedAs": "%cortexclassified",' +
             '"required": "%req",' +
             '"randomOrder": "%rand_order",' +
             '"randomOptions": "%rand_options",' +
@@ -507,6 +511,9 @@ _E.core.templates.library = {
             '"description": "%instruction",' +
             '"language": "%lang",' +
             '"questionType": "instruction",' +
+            '"cortexAtOrder": "%cortexatorder",' +
+            '"cortexQuestionType": "IGNORE",' +
+            '"cortexClassifiedAs": "IGNORE",' +
             '"randomOrder": "%rand_order",' +
             '"randomOptions": "%rand_options",' +
             '"options": []' +
@@ -521,6 +528,9 @@ _E.core.templates.library = {
             '"description": "none",' +
             '"language": "none",' +
             '"questionType": "page break",' +
+            '"cortexAtOrder": "%cortexatorder",' +
+            '"cortexQuestionType": "IGNORE",' +
+            '"cortexClassifiedAs": "IGNORE",' +
             '"randomOrder": "false",' +
             '"randomOptions": "false",' +
             '"options": []' +

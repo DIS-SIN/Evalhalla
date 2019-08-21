@@ -66,16 +66,66 @@
     </div>
     <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
         <li>
-            <a href="?sur=example_nanos_paged" class="demo_ev_loop" title="reload demo survey">
-                <em class="material-icons" aria-hidden="true">lightbulb</em>
+            <a class="adm_save_working_survey">
+                <em class="material-icons" aria-hidden="true">save</em>
                 <span class="en">
-                    Demo
+                    Save Survey
                 </span>
                 <span class="fr">
-                    Demo
+                    Enregistrer
                 </span>
             </a>
         </li>
+        <li>
+            <a class="survista_send">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>CORTEX Upload
+            </a>
+        </li>
+        <li>
+            <a href="../../player/survey/index.html" class="demo_ev_loop" title="reload demo survey">
+                <em class="material-icons" aria-hidden="true">lightbulb</em>
+                <span class="en">
+                    Conduct Survey
+                </span>
+                <span class="fr">
+                    Commencer l'Enquête
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="../../player/dashboard/index.html">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>
+                <span class="en">
+                    Dashboard
+                </span>
+                <span class="fr">
+                    Tableau de bord
+                </span>
+            </a>
+        </li>
+        <!-- REFACTOR: Turning off JSON render until next version 
+        <li>
+            <a class="audit_json_render">
+                <em class="material-icons" aria-hidden="true">gavel</em>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
+        </li>
+        -->
+        <li>
+            <a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Editor</span>
+                <span class="fr">Effacer Editeur</span>
+            </a>
+        </li>
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset LS</span><span class="fr">Réinitialiser LS</span>
+            </a>
+        </li>
+    </ul>
+    <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
         <li>
             <a class="show_me_how">
                 <em class="material-icons" aria-hidden="true">help</em>
@@ -87,51 +137,7 @@
                 </span>
             </a>
         </li>
-        <li>
-            <a class="adm_save_working_survey">
-                <em class="material-icons" aria-hidden="true">save</em>
-                <span class="en">
-                    Save
-                </span>
-                <span class="fr">
-                    Enregistrer
-                </span>
-            </a>
-        </li>
-        <li>
-            <a class="survista_send">
-                <em class="material-icons" aria-hidden="true">cloud_upload</em>Survista
-            </a>
-        </li>
-        <li><a class="audit_json_render">
-                <em class="material-icons" aria-hidden="true">gavel</em>
-                <span class="en">Audit</span><span class="fr">Vérification</span>
-            </a>
-        </li>
-        <li><a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear</span>
-                <span class="fr">Effacer</span>
-            </a></li>
-        <li>
-            <a class="adm_clear_ls">
-                <em class="material-icons" aria-hidden="true">flip_to_back</em>
-                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
-            </a>
-        </li>
-    </ul>
-    <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
-        <li>
-            <a href="https://app.klipfolio.com/published/692bec18aa4e866b9d7fbb5b5c355de3/satisfaction-survey">
-                <em class="material-icons" aria-hidden="true">cloud_upload</em>
-                <span class="en">
-                    Dashboard
-                </span>
-                <span class="fr">
-                    Tableau de bord
-                </span>
-            </a>
-        </li>
+
         <li>
             <a class="hs_render_window">
                 <em class="material-icons" aria-hidden="true">assignment</em>
@@ -183,41 +189,54 @@
         </li>
     </ul>
     <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
-        <li><a class="ev-add-header">
+        <li>
+            <a class="ev-add-header">
                 <em class="material-icons" aria-hidden="true">title</em>
                 <span class="en">Header</span>
                 <span class="fr">En-tête</span>
-            </a></li>
+            </a>
+        </li>
         <li><a class="ev-add-instr">
                 <em class="material-icons" aria-hidden="true">help</em>
                 <span class="en">Instruction</span>
                 <span class="fr">Instruction</span>
-            </a></li>
-        <li><a class="ev-add-qfree">
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qfree">
                 <em class="material-icons" aria-hidden="true">input</em>
                 <span class="en">Open</span>
                 <span class="fr">Libre</span>
-            </a></li>
-        <li><a class="ev-add-qone">
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qone">
                 <em class="material-icons" aria-hidden="true">done</em>
                 <span class="en">One</span>
                 <span class="fr">Une</span>
-            </a></li>
-        <li><a class="ev-add-qany">
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qany">
                 <em class="material-icons" aria-hidden="true">done_all</em>
                 <span class="en">Any</span>
                 <span class="fr">Choisir</span>
-            </a></li>
-        <li><a class="ev-add-qscale">
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qscale">
                 <em class="material-icons" aria-hidden="true">call_made</em>
                 <span class="en">Scale</span>
                 <span class="fr">Echelle</span>
-            </a></li>
-        <li><a class="ev-add-qrank">
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qrank">
                 <em class="material-icons" aria-hidden="true">import_export</em>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
-            </a></li>
+            </a>
+        </li>
     </ul>
     <ul class="adm-function sidenav" id="mobile-demo">
         <li>

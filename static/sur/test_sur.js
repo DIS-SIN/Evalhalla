@@ -6,30 +6,36 @@ var test_sur = `# TEST-007
 /fr Enquête Test /;
 
 ### 
-/en User Experience check-in.<br /><br />This 1 min assessment will help us get better. /; 
-/fr Enregistrement de l'expérience utilisateur.<br /><br />Cette évaluation, qui vous prendra de 1 minutes, nous aidera en améliorer. /;
-
-/NOTOMBSTONEPAGE
-
-/NOOFFERINGPAGE
+/en This is a test survey /; 
+/fr Enregistrement de test. /;
 
 //
 /en Please let us know about your experience so far /; 
 /fr Veuillez nous faire part de votre expérience  jusqu'à présent /; 
 
-Q: Offering
+Q: 
+/en Which offering /;
+/fr Quelle offre /;
 /offering
 
-Q: Department
+Q: 
+/en Which department /;
+/fr Quelle department /;
 /department
 
-Q: Lang
+Q: 
+/en Which language /;
+/fr Quelle langue /;
 /language
 
-Q: class
+Q: 
+/en Which class /;
+/fr Quelle class /;
 /classification
 
-Q: loc
+Q: 
+/en Which city /;
+/fr Quelle ville /;
 /location
 
 /pagebreak 
@@ -38,20 +44,26 @@ Q:
 /en Drop this? /;
 /fr Voulez-vous nous dire pourquoi /;
 /dropdown
-/en This /; /fr Un chose /;
-/en This /; /fr Un chose /;
-/en This /; /fr Un chose /;
+/en This 1 /; /fr Un chose 1 /;
+/en This 2 /; /fr Un chose 2 /;
+/en This 3 /; /fr Un chose 3 /;
 ;
 
 Q:
 /en If you had to rate this episode from 1 (Bad) to 5 (Awesome) what would you give it? /;
 /fr Si vous deviez évaluer cet épisode de 1 (mauvais) à 5 (génial), que lui donneriez-vous? /;
-/scale1-5 /en Bad /; /fr Mauvais /; , /en Awesome /; /fr Génial /; , /en Unsure /; /fr Incertain /;
+/scale1-5 
+/en Bad /; /fr Mauvais /;, 
+/en Awesome /; /fr Génial /;, 
+/en Unsure /; /fr Incertain /;
 
 Q:
 /en If you had to rate this episode from 1 (Bad) to 10 (Awesome) what would you give it? /;
 /fr Si vous deviez évaluer cet épisode de 1 (mauvais) à 10 (génial), que lui donneriez-vous? /;
-/scale /en Bad /; /fr Mauvais /; , /en Awesome /; /fr Génial /; , /en Unsure /; /fr Incertain /;
+/scale 
+/en Bad /; /fr Mauvais /;,
+/en Awesome /; /fr Génial /;,
+/en Unsure /; /fr Incertain /;
 
 Q:
 /en Want to tell us why? /;
@@ -78,7 +90,8 @@ Q:
 /en Unsure /; /fr Incertain /;
 ;
 
-
-// /en Thank you /; /fr Merci! /;
+// 
+/en Thank you /; 
+/fr Merci! /;
 
 `;

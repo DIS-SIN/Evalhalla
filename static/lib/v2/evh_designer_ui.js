@@ -9,19 +9,63 @@ _E["feature"]["designer"]
 // init the package
 _E.feature.designer = {};
 
+_E.feature.designer.debug = true;
 
 _E.feature.designer.enable_ls_ui_buttons = function () {
-    // upload to survista: stub
+    // upload to survista/cortex: stub
     // TODO: Fix with correct code (right now just obj/deobj for test)
     _E.core.state.store["el"]["btn_upload"].on("click", function () {
-        alert(
-            JSON.stringify(JSON.parse(
-                _E.core.state.store["render"]["json"]
-                    .replace(/\,\%questions/g, "")
-                    .replace(/\%questions/g, "")
-                    .replace(/\%options/g, "")
-            ), null, 4)
+        (_E.feature.designer.debug) ? console.log("CORTEX Upload") : true;
+
+        let cortex_survey = {
+            "uid": "",//
+            "title": "",//
+            "description": "",//
+            "valid": {
+                "from": "2019-06-01", // default to 2019-06-01
+                "to": "2020-06-01" // default to 2020-06-01
+            },
+            "version": "0.0.1",
+            "questions": [
+                /*
+                    {
+                        "question_label": "",//"SINGLE_CHOICE|MULTI_CHOICE|CLASSIFIED|BINARY|FREE_TEXT"
+                        "question_interpretation": "",//"AS_CHOICE|AS_TRUTH|AS_FREE_TEXT|CLASSIFIED_AS"
+                        "AT_ORDER": ""//
+                    }
+                */
+            ]
+        };
+
+        let jo = JSON.parse(
+            _E.core.state.store["render"]["json"]
+                .replace(/\,\%questions/g, "")
+                .replace(/\%questions/g, "")
+                .replace(/\%options/g, "")
+                .replace(/\"\/en\ /g, `{ "en": "`)
+                .replace(/\/\;( )+\/fr\ /g, `", "fr": "`)
+                .replace(/\/\;\"\,/g, `"},`)
+                .replace(/\/\;\"\]/g, `"}]`)
+                .replace(/<span class='(en|fr)'>/g, ``)
+                .replace(/<\/span>/g, ``)
+                .replace(/  /g, ' ')
+
+            // "/en When do you plan to retire (years until)? /; /fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;",
         );
+        cortex_survey.uid = jo.survey;
+        cortex_survey.title = jo.title;
+        cortex_survey.description = jo.description;
+        cortex_survey.questions = jo.questions;
+        //for (let i = 0; i < jo.questions; i++) {
+        //jo.questions[i]["cortex_type"] = jo.questions[i].cortexQuestionType;
+        //jo.questions[i]["cortex_classified_as"] = jo.questions[i].cortexClassifiedAs;
+        //jo.questions[i]["cortexAtOrder"] = jo.questions[i].qid;
+        //}
+
+        (_E.feature.designer.debug) ? alert("STUB: Upload to CORTEX.") : true;
+        (_E.feature.designer.debug) ? console.log(
+            JSON.stringify(cortex_survey, null, 4)
+        ) : true;
     });
 
     // Local storage
@@ -33,6 +77,7 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
 
     _E.core.state.store["el"]["adm_save_working_survey"].on("click", function () {
         alert("Saving Working Survey...");
+
         _E.feature.localstore.ls_save_survey_signature(_E.core.state.store["render"]["json"]
             .replace(/\,\%questions/g, "")
             .replace(/\%questions/g, "")

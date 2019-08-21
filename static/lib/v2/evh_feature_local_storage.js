@@ -354,7 +354,7 @@ _E.feature.localstore.ls_get_lsobject = function () {
 // save the current survey in the editor to the ls
 _E.feature.localstore.ls_save_survey_signature = function (signature, src) {
     if (_E.feature.localstore.ls_storageAvailable('localStorage')) {
-        var ev_ls = ls_get_lsobject();
+        var ev_ls = _E.feature.localstore.ls_get_lsobject();
         //console.log(ev_ls);
         ev_ls["saved_survey_signatures"].push({ "survista": JSON.parse(signature), "evalhalla": src });
         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));

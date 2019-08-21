@@ -105,7 +105,71 @@ _E.core.interpreter.evalese = {
     "/NOTOMBSTONEPAGE": { "type": "no tombstone page", "html": "<pick>%v</pick>" },
 };
 
-
+_E.core.interpreter.cortex_questiontypes = {
+    "pick one department": {
+        "type": "CLASSIFIED",
+        "subtype": "DEPARTMENT"
+    },
+    "pick one language": {
+        "type": "CLASSIFIED",
+        "subtype": "LANGUAGE"
+    },
+    "pick one offering": {
+        "type": "CLASSIFIED",
+        "subtype": "OFFFERING"
+    },
+    "pick one classification": {
+        "type": "CLASSIFIED",
+        "subtype": "CLASSIFICATION"
+    },
+    "pick one location": {
+        "type": "CLASSIFIED",
+        "subtype": "LOCATION"
+    },
+    "pick one dropdown": {
+        "type": "SINGLE_CHOICE",
+        "subtype": "RGROUP"
+    },
+    // alt
+    "rgroup": {
+        "type": "SINGLE_CHOICE",
+        "subtype": "RGROUP"
+    },
+    "pick one": {
+        "type": "SINGLE_CHOICE",
+        "subtype": "RGROUP"
+    },
+    "pick any": {
+        "type": "MULTI_CHOICE",
+        "subtype": "CGROUP"
+    },
+    // alt
+    "cgroup": {
+        "type": "MULTI_CHOICE",
+        "subtype": "CGROUP"
+    },
+    "open": {
+        "type": "FREE_TEXT",
+        "subtype": "TEXTAREA"
+    },
+    //
+    "textarea": {
+        "type": "FREE_TEXT",
+        "subtype": "TEXTAREA"
+    },
+    "scale": {
+        "type": "SINGLE_CHOICE",
+        "subtype": "SCALE_1_TO_10"
+    },
+    "scale1-5": {
+        "type": "SINGLE_CHOICE",
+        "subtype": "SCALE_1_TO_5"
+    },
+    "rank": {
+        "type": "FREE_TEXT",
+        "subtype": "RANKKING"
+    }
+};
 
 // REFACTOR_PREP: pull all lang refresh out into lib function, detangle
 // convert the en/fr tags into HTML
@@ -349,8 +413,11 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             jsonsnip = _E.core.templates.get("scale1-5", "json");
         }
         jsonsnip = jsonsnip.replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
-        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%type/g, "dropdown");
 
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%type/g, "dropdown");
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
 
         _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]] = {};
         _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] = '';
@@ -432,6 +499,9 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["question"]["form"] = snip;
         // handle json
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace("%options", "").replace(/\%type/g, "text");
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
     } else if (cmd == "generics") {
         // handle html
         snip = _E.core.state.store["render"]["question"]["form"];
@@ -444,10 +514,15 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["question"]["form"] = snip;
         // todo: handle json
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace("%options", '"dept","role","region","office"').replace(/\%type/g, "text");
+        //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
+        //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
+        //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
     } else if (cmd == "pick one"
         || cmd == "pick one dropdown"
         || cmd == "pick any"
         || cmd == "rank") {
+
+
         snip = _E.core.state.store["render"]["question"]["form"];
         var opts = src.split("[OPT]")
         opts.shift(); // remove first null item
@@ -544,12 +619,25 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["question"]["form"] = snip;
         // handle json
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%type/g, "mcq");
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
+
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace("%options", jsonsnip
             .replace(/(^[,\s]+)|([,\s]+$)/g, ''));
     }
     // TODO: Lang override, replace with actual language control
-    _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%lang/g, _E.core.state.store["ui"]["lang"]);
-
+    _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"]
+        .replace(/\%lang/g, _E.core.state.store["ui"]["lang"])
+        .replace(/\"\/en\ /g, `{ "en": "`)
+        .replace(/\/\;( )+\/fr\ /g, `", "fr": "`)
+        .replace(/\/\;\"\,/g, `"},`)
+        .replace(/\/\;\"\]/g, `"}]`)
+        .replace(/<span class='(en|fr)'>/g, ``)
+        .replace(/<\/span>/g, ``)
+        .replace(/<(li|ul)>/g, ``)
+        .replace(/<\/(li|ul)>/g, ``)
+        .replace(/  /g, ' ');
     return snip;
 }
 
@@ -702,6 +790,7 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
     }
 
 
+    console.log(_E.core.state.store["render"]["json"]);
     // save current survey signature
     _E.feature.localstore.ls_update_working_survey(_E.core.state.store["render"]["json"]
         .replace(/\,\%questions/g, "")

@@ -11,7 +11,7 @@ _E.feature.player = {};
 
 // REFACTOR_PREP: paginator
 // pagination
-_E.feature.player.debug = false;
+_E.feature.player.debug = true;
 
 // transitions for the survey
 _E.feature.player.transitions_state = "lang";
@@ -260,6 +260,12 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
     _E.fxn.common.api_post_to_route(api_route, data_in);
 };
 
+// send to cortex
+_E.feature.player.cortex_upload_survey_result = function (data_in) {
+    // STUB
+    alert(data_in);
+}
+
 // validate the survey
 _E.feature.player.ui_evalhalla_submit_validate = function (formElement) {
     // REFACTOR_PREP: api, detangle the render and local storage, submit the form result
@@ -318,17 +324,108 @@ _E.feature.player.evalhalla_submit = function () {
     let date_string = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
         .toISOString()
     json_o["meta_submission_time"] = date_string;
+
+
+    let cortex_response = {
+        "cortexUserAgent": "",
+        "cortexSurveyEntryMethod": "",
+        "cortexConducted": "",
+        "respondent": {
+            "fluent_at": "",// "tombstone_language",
+            "in_department": "",// "tombstone_department",
+            "located_in": "",// "tombstone_city",
+            "work_as": "",// "tombstone_classification"
+        },
+        "questions": [
+            /*
+            {
+                "question_label": "",//key[0] -> map -> "rgroup SINGLE_CHOICE|cgroup MULTI_CHOICE|tombstone CLASSIFIED|n/a, unimplemented BINARY| textarea FREE_TEXT",
+                "question_interpretation": "",//"AS_CHOICE|AS_TRUTH|AS_FREE_TEXT|CLASSIFIED_AS",
+                "at_order": "",//key[2],
+                "question_answer": "",//key,
+                "question_text": "",//"textofquestion_qid_" key[2],
+            }*/
+        ],
+        "created": {
+            "from": "", // default to 2019-06-01
+            "to": "" // default to 2020-06-01
+        }
+    };
+    let cortex_question_tmpl = {
+        "cortexQuestionType": "",//"%qtype",
+        "cortexClassifiedAs": "",//"%qclass",
+        "cortexAtOrder": "",//"%qatorder",
+        "cortexQuestionAnswer": "",//"%qanswer",
+        "cortexQuestionTest": ""//"%qtext"
+    };
+    //jo.questions[i]["cortex_type"] = jo.questions[i].cortexQuestionType;
+    //jo.questions[i]["cortex_classified_as"] = jo.questions[i].cortexClassifiedAs;
+    //jo.questions[i]["cortexAtOrder"] = jo.questions[i].qid;
+    //}
+    /*
+    "tombstone_department": "",
+    "tombstone_city": "",
+    "tombstone_classification": "",
+    "tombstone_offering_id": "",
+    "tombstone_language": "en",
+
+    "meta_useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36",
+    "meta_entry_method": "",
+    "meta_question_count": 14,
+    "meta_evalhalla_sur": "eldp",
+    "meta_submission_time": "2019-08-17T22:03:26.727Z"*/
+
+
+    let jo = json_o;
+    cortex_response.cortexConducted = jo["meta_evalhalla_sur"];
+    cortex_response.cortexSurveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
+    cortex_response.cortexUserAgent = jo["meta_useragent"];
+
+    cortex_response.respondent.fluent_at = jo["tombstone_language"];
+    cortex_response.respondent.in_department = jo["tombstone_department"];
+    cortex_response.respondent.located_in = jo["tombstone_city"];
+    cortex_response.respondent.work_as = jo["tombstone_classification"];
+
+    cortex_response.respondent.cortexConducted = jo["meta_evalhalla_sur"];
+
+    cortex_response.created.from = jo["meta_submission_time"];
+    cortex_response.created.to = jo["meta_submission_time"];
+
+    for (let key in jo) {
+        let tokens = key.split("_");
+        if (tokens[0] == "tombstone") {
+            continue;
+        } else if (tokens[0] == "meta") {
+            continue;
+        } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale" ||
+            tokens[0] == "scale1-5" || tokens[0] == "textarea") {
+
+            cortex_response.questions.push(
+                {
+                    "cortexQuestionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
+                    "cortexClassifiedAs": _E.core.interpreter.cortex_questiontypes[tokens[0]].subtype,
+                    "cortexAtOrder": tokens[2],
+                    "cortexQuestionAnswer": jo[key],
+                    "cortexQuestionTest": jo["textofquestion_qid_" + tokens[1]]
+                }
+            );
+        }
+    }
+
     var json_o_string = (JSON.stringify(json_o, null, 4));
-    //console.log(json_o_string);
+    var cortex_json_o_string = (JSON.stringify(cortex_response, null, 4));
+    (_E.feature.player.debug) ? console.log(cortex_json_o_string) : true;
     // save response to local storage
 
     //
     // SAVE RESPONSES
     //
-    // TODO: turn back on
+    // TODO: turn back on (localstorage)
     (_E.feature.player.debug) ? true : _E.feature.localstore.ls_save_survey_response(json_o_string);
-    // TODO: turn back on
+    // TODO: turn back on (survista)
     (_E.feature.player.debug) ? true : _E.feature.player.api_upload_survey_result(json_o_string);
+    // TODO: Add CORTEX send here
+    (_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o_string);
 
     console.log(json_o_string);
     //console.log(_E.core.interpreter.g_qindex);
