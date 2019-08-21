@@ -9,7 +9,7 @@ _E["feature"]["designer"]
 // init the package
 _E.feature.designer = {};
 
-_E.feature.designer.debug = true;
+_E.feature.designer.debug = false;
 
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
@@ -48,6 +48,8 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
                 .replace(/\/\;\"\]/g, `"}]`)
                 .replace(/<span class='(en|fr)'>/g, ``)
                 .replace(/<\/span>/g, ``)
+                .replace(/<(li|ul)>/g, ``)
+                .replace(/<\/(li|ul)>/g, ``)
                 .replace(/  /g, ' ')
 
             // "/en When do you plan to retire (years until)? /; /fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;",

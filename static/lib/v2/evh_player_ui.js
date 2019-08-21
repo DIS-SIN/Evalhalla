@@ -11,7 +11,7 @@ _E.feature.player = {};
 
 // REFACTOR_PREP: paginator
 // pagination
-_E.feature.player.debug = true;
+_E.feature.player.debug = false;
 
 // transitions for the survey
 _E.feature.player.transitions_state = "lang";
@@ -249,7 +249,7 @@ _E.feature.player.ui_activate_pagedirection_buttons = function () {
 };
 
 //
-//
+// SUBMISSION
 //
 
 // send to storage
@@ -264,6 +264,7 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
 _E.feature.player.cortex_upload_survey_result = function (data_in) {
     // STUB
     alert(data_in);
+    console.log(data_in);
 }
 
 // validate the survey
