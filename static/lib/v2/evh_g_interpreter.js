@@ -481,12 +481,12 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
 
             } else if (opti == 1) {
                 scale = scale.replace(/\%high/g, opts[opti]);
-                jsonsnip = jsonsnip.replace(/\%high/g, opts[opti].trim());
+                //jsonsnip = jsonsnip.replace(/\%high/g, opts[opti].trim());
                 jsonsnip = jsonsnip.replace(/\%high/g, `{"en": "${opt_input_value["en"]}", "fr": "${opt_input_value["fr"]}"}`); //using en for val
 
             } else if (opti == 2) {
                 scale = scale.replace(/\%unsure/g, opts[opti]);
-                jsonsnip = jsonsnip.replace(/\%unsure/g, opts[opti].trim());
+                //jsonsnip = jsonsnip.replace(/\%unsure/g, opts[opti].trim());
                 jsonsnip = jsonsnip.replace(/\%unsure/g, `{"en": "${opt_input_value["en"]}", "fr": "${opt_input_value["fr"]}"}`); //using en for val
 
             }
