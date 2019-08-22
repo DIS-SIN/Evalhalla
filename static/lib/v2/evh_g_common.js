@@ -103,6 +103,14 @@ _E.fxn.common.hackernoon_pie = function (elid, slices) {
     }
 }
 
+_E.fxn.common.trim_json_object_keyvalues = function (obj) {
+    //if (!Array.isArray(obj) && typeof obj != 'object') return obj;
+    if (obj === null || !Array.isArray(obj) && typeof obj != 'object') return obj;
+    return Object.keys(obj).reduce(function (acc, key) {
+        acc[key.trim()] = typeof obj[key] == 'string' ? obj[key].trim() : _E.fxn.common.trim_json_object_keyvalues(obj[key]);
+        return acc;
+    }, Array.isArray(obj) ? [] : {});
+}
 
 // Clean HTML string and write into our DIV
 // string sanitizer  // <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>

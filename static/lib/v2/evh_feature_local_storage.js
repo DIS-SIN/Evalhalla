@@ -369,7 +369,7 @@ _E.feature.localstore.ls_save_survey_signature = function (signature, src) {
 _E.feature.localstore.ls_update_working_survey = function (signature) {
     if (_E.feature.localstore.ls_storageAvailable('localStorage')) {
         var ev_ls = _E.feature.localstore.ls_get_lsobject();
-        ev_ls["working_survey"] = JSON.parse(signature);
+        ev_ls["working_survey"] = JSON.parse(_E.core.interpreter.evh_clean_json(signature));
         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
         //todo: timer on refreshes
         //ls_show_local_storage();

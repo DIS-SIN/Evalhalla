@@ -263,7 +263,8 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
 // send to cortex
 _E.feature.player.cortex_upload_survey_result = function (data_in) {
     // STUB
-    alert(data_in);
+    //alert(data_in);
+    console.log("CORTEX Upload Stub");
     console.log(data_in);
 }
 
@@ -328,9 +329,11 @@ _E.feature.player.evalhalla_submit = function () {
 
 
     let cortex_response = {
-        "cortexUserAgent": "",
-        "cortexSurveyEntryMethod": "",
-        "cortexConducted": "",
+        "response": {
+            "userAgent": "",
+            "surveyEntryMethod": "",
+            "conducted": ""
+        },
         "respondent": {
             "fluent_at": "",// "tombstone_language",
             "in_department": "",// "tombstone_department",
@@ -353,16 +356,14 @@ _E.feature.player.evalhalla_submit = function () {
         }
     };
     let cortex_question_tmpl = {
-        "cortexQuestionType": "",//"%qtype",
-        "cortexClassifiedAs": "",//"%qclass",
-        "cortexAtOrder": "",//"%qatorder",
-        "cortexQuestionAnswer": "",//"%qanswer",
-        "cortexQuestionTest": ""//"%qtext"
+        "uid": "",
+        "questionType": "",//"%qtype",
+        "classifiedAs": "",//"%qclass",
+        "atOrder": "",//"%qatorder",
+        "questionAnswer": "",//"%qanswer",
+        "questionText": ""//"%qtext"
     };
-    //jo.questions[i]["cortex_type"] = jo.questions[i].cortexQuestionType;
-    //jo.questions[i]["cortex_classified_as"] = jo.questions[i].cortexClassifiedAs;
-    //jo.questions[i]["cortexAtOrder"] = jo.questions[i].qid;
-    //}
+
     /*
     "tombstone_department": "",
     "tombstone_city": "",
@@ -374,20 +375,21 @@ _E.feature.player.evalhalla_submit = function () {
     "meta_entry_method": "",
     "meta_question_count": 14,
     "meta_evalhalla_sur": "eldp",
-    "meta_submission_time": "2019-08-17T22:03:26.727Z"*/
+    "meta_submission_time": "2019-08-17T22:03:26.727Z"
+    */
 
 
     let jo = json_o;
-    cortex_response.cortexConducted = jo["meta_evalhalla_sur"];
-    cortex_response.cortexSurveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
-    cortex_response.cortexUserAgent = jo["meta_useragent"];
+    cortex_response.response.conducted = jo["meta_evalhalla_sur"];
+    cortex_response.response.surveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
+    cortex_response.response.userAgent = jo["meta_useragent"];
+    //cortex_response.response.conducted = jo["meta_evalhalla_sur"];
 
     cortex_response.respondent.fluent_at = jo["tombstone_language"];
     cortex_response.respondent.in_department = jo["tombstone_department"];
     cortex_response.respondent.located_in = jo["tombstone_city"];
     cortex_response.respondent.work_as = jo["tombstone_classification"];
 
-    cortex_response.respondent.cortexConducted = jo["meta_evalhalla_sur"];
 
     cortex_response.created.from = jo["meta_submission_time"];
     cortex_response.created.to = jo["meta_submission_time"];
@@ -403,11 +405,12 @@ _E.feature.player.evalhalla_submit = function () {
 
             cortex_response.questions.push(
                 {
-                    "cortexQuestionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
-                    "cortexClassifiedAs": _E.core.interpreter.cortex_questiontypes[tokens[0]].subtype,
-                    "cortexAtOrder": tokens[2],
-                    "cortexQuestionAnswer": jo[key],
-                    "cortexQuestionTest": jo["textofquestion_qid_" + tokens[1]]
+                    "uid": cortex_response.response.conducted + "_q_" + tokens[2],
+                    "questionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
+                    "classifiedAs": _E.core.interpreter.cortex_questiontypes[tokens[0]].subtype,
+                    "atOrder": tokens[2],
+                    "questionAnswer": jo[key],
+                    "questionText": jo["textofquestion_qid_" + tokens[1]]
                 }
             );
         }

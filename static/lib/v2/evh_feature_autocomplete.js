@@ -463,10 +463,15 @@ _E.feature.autocomplete.populate_offerings = function () {
 
             $(".offering_target").html(offs_html);
             _E.feature.lang.refresh_lang();
+
+            let prepop_city_with_offering_location = false;
             $(".select-offering").on("click", function () {
                 //alert($(this).attr("id").split("_")[1]);
                 _E.core.state.store["tombstone"]["offering_id"] = $(this).attr("id").split("_")[1];
                 for (var i = 0; i < _E.core.state.store["tombstone"]["offerings"].length; i++) {
+                    if (prepop_city_with_offering_location == false) {
+                        break;
+                    }
                     if (_E.core.state.store["tombstone"]["offering_id"] == _E.core.state.store["tombstone"]["offerings"][i]["offering_id"]) {
                         $("#autocomplete-input-city").val(
                             _E.core.state.store["tombstone"]["offerings"][i]["offering_city"] + ", " +

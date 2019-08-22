@@ -1,5 +1,5 @@
 // Generic Test Survey
-var test_sur = `# TEST-007 
+var test_sur = `# test_sur 
 
 ##
 /en Test Survey /;

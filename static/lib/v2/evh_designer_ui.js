@@ -17,7 +17,7 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
     _E.core.state.store["el"]["btn_upload"].on("click", function () {
         (_E.feature.designer.debug) ? console.log("CORTEX Upload") : true;
 
-        let cortex_survey = {
+        let msg_cortex_survey_json = {
             "uid": "",//
             "title": "",//
             "description": "",//
@@ -36,37 +36,38 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
                 */
             ]
         };
+        let msg_cortex_survey_evalese = {
+            "uid": "",//
+            "sur_evalese": ""
+        };
 
         let jo = JSON.parse(
-            _E.core.state.store["render"]["json"]
-                .replace(/\,\%questions/g, "")
-                .replace(/\%questions/g, "")
-                .replace(/\%options/g, "")
-                .replace(/\"\/en\ /g, `{ "en": "`)
-                .replace(/\/\;( )+\/fr\ /g, `", "fr": "`)
-                .replace(/\/\;\"\,/g, `"},`)
-                .replace(/\/\;\"\]/g, `"}]`)
-                .replace(/<span class='(en|fr)'>/g, ``)
-                .replace(/<\/span>/g, ``)
-                .replace(/<(li|ul)>/g, ``)
-                .replace(/<\/(li|ul)>/g, ``)
-                .replace(/  /g, ' ')
-
-            // "/en When do you plan to retire (years until)? /; /fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;",
+            _E.core.interpreter.evh_clean_json(
+                _E.core.state.store["render"]["json"]
+                    .replace(/\,\%questions/g, "")
+                    .replace(/\%questions/g, "")
+                    .replace(/\%options/g, "")
+            )
         );
-        cortex_survey.uid = jo.survey;
-        cortex_survey.title = jo.title;
-        cortex_survey.description = jo.description;
-        cortex_survey.questions = jo.questions;
-        //for (let i = 0; i < jo.questions; i++) {
-        //jo.questions[i]["cortex_type"] = jo.questions[i].cortexQuestionType;
-        //jo.questions[i]["cortex_classified_as"] = jo.questions[i].cortexClassifiedAs;
-        //jo.questions[i]["cortexAtOrder"] = jo.questions[i].qid;
-        //}
 
-        (_E.feature.designer.debug) ? alert("STUB: Upload to CORTEX.") : true;
+        msg_cortex_survey_json.uid = jo.survey.trim();
+        msg_cortex_survey_json.title = jo.title;
+        msg_cortex_survey_json.description = jo.description;
+        msg_cortex_survey_json.questions = jo.questions;
+
+
+        msg_cortex_survey_evalese.uid = jo.survey.trim();
+        msg_cortex_survey_evalese.sur_evalese = _E.core.interpreter.sur_evalese.trim();
+
+
+        (_E.feature.designer.debug) ? alert("STUB: Upload Full Survey JSON to CORTEX.") : true;
         (_E.feature.designer.debug) ? console.log(
-            JSON.stringify(cortex_survey, null, 4)
+            JSON.stringify(_E.fxn.common.trim_json_object_keyvalues(msg_cortex_survey_json), null, 4)
+        ) : true;
+
+        (_E.feature.designer.debug) ? alert("STUB: Upload Survey Evalese to CORTEX.") : true;
+        (_E.feature.designer.debug) ? console.log(
+            JSON.stringify(_E.fxn.common.trim_json_object_keyvalues(msg_cortex_survey_evalese), null, 4)
         ) : true;
     });
 

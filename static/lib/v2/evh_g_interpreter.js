@@ -31,6 +31,9 @@ _E.core.interpreter = {};
 // These are the "EVALESE" command. This is the markdown that builds the forms.
 // You can easily add new aliases for the core commands. Just make sure you check
 // yourself. There's not much in the way of error catching here. It trusts you.
+
+_E.core.interpreter.sur_evalese = ""; // our evalese to render
+
 _E.core.interpreter.evalese = {
     // CMDS in ALLCAPS, but input is any case
     // interpreter v0.1
@@ -108,23 +111,23 @@ _E.core.interpreter.evalese = {
 _E.core.interpreter.cortex_questiontypes = {
     "pick one department": {
         "type": "CLASSIFIED",
-        "subtype": "DEPARTMENT"
+        "subtype": "GC_Org"
     },
     "pick one language": {
         "type": "CLASSIFIED",
-        "subtype": "LANGUAGE"
+        "subtype": "GC_Language"
     },
     "pick one offering": {
         "type": "CLASSIFIED",
-        "subtype": "OFFFERING"
+        "subtype": "CSPS_Offering"
     },
     "pick one classification": {
         "type": "CLASSIFIED",
-        "subtype": "CLASSIFICATION"
+        "subtype": "GC_ClsLvl"
     },
     "pick one location": {
         "type": "CLASSIFIED",
-        "subtype": "LOCATION"
+        "subtype": "CP_CSD"
     },
     "pick one dropdown": {
         "type": "SINGLE_CHOICE",
@@ -171,6 +174,23 @@ _E.core.interpreter.cortex_questiontypes = {
     }
 };
 
+_E.core.interpreter.evh_clean_json = function (pack) {
+    pack = pack
+        .replace(/\%lang/g, _E.core.state.store["ui"]["lang"])
+        .replace(/\"\/en\ /g, `{ "en": "`)
+        .replace(/\/\;( )+\/fr\ /g, `", "fr": "`)
+        .replace(/\/\;\"\,/g, `"},`)
+        .replace(/\/\;\"\]/g, `"}]`)
+        .replace(/<span class='(en|fr)'>/g, ``)
+        .replace(/<\/span>/g, ``)
+        .replace(/<(li|ul)>/g, ``)
+        .replace(/<\/(li|ul)>/g, ``)
+        .replace(/  /g, ' ')
+        .replace(/\"\{/g, '{')
+        .replace(/\}\"/g, '}')
+        ;
+    return pack;
+}
 // REFACTOR_PREP: pull all lang refresh out into lib function, detangle
 // convert the en/fr tags into HTML
 // might belong to parser/interpreter
@@ -312,6 +332,9 @@ _E.core.interpreter.handle_cmd_pagebreak = function (cmd, src, json) {
     jsonsnip = jsonsnip.replace(/\%instruction/g, json.replace(json.split(" ")[0], "").trim());
     _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"]
         .replace("%questions", jsonsnip + ",%questions")
+        .replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"])
+        .replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_p_" + _E.core.state.store["render"]["question"]["qid"]);
+
     return snip;
 }
 
@@ -340,7 +363,15 @@ _E.core.interpreter.handle_cmd_instruction = function (cmd, src, json) {
     snip = snip.replace(/\%instruction/g, src.replace(src.split(" ")[0], "").trim());
     // handle json
     var jsonsnip = _E.core.templates.get("instruction", "json");
-    jsonsnip = jsonsnip.replace(/\%instruction/g, json.replace(json.split(" ")[0], "").trim());
+    jsonsnip = jsonsnip
+        .replace(/\%instruction/g, json.replace(json.split(" ")[0], "").trim())
+        //.replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"])
+        //.replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type)
+        //.replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype)
+        .replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"])
+        .replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_i_" + _E.core.state.store["render"]["question"]["qid"]);
+
+
     _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"]
         .replace("%questions", jsonsnip + ",%questions")
         .replace("%rand_order", _E.core.state.store["render"]["question"]["random"]["order"])
@@ -418,6 +449,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_q_" + _E.core.state.store["render"]["question"]["qid"]);
 
         _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]] = {};
         _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] = '';
@@ -426,15 +458,37 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         // NOTE: You cant stuff a span inside an <option>, it's bad form.
         // Gotta find another way to biling the option values
         for (var opti = 0; opti < opts.length; opti++) {
+            opt_input_value = {
+                "en": opts[opti].trim(),
+                "fr": opts[opti].trim()
+            };
+
+            var oa = [];
+            oa = opts[opti].trim().split("</span>");
+            for (var m = 0; m < oa.length; m++) {
+                if (oa[m].indexOf("<span class='fr'>") !== -1) {
+                    opt_input_value["fr"] = oa[m].replace("<span class='fr'>", "").trim();
+                }
+                if (oa[m].indexOf("<span class='en'>") !== -1) {
+                    opt_input_value["en"] = oa[m].replace("<span class='en'>", "").trim();
+                }
+            }
+
             if (opti == 0) {
                 scale = scale.replace(/\%low/g, opts[opti]);
-                jsonsnip = jsonsnip.replace(/\%low/g, opts[opti].trim());
+                //jsonsnip = jsonsnip.replace(/\%low/g, opts[opti].trim());
+                jsonsnip = jsonsnip.replace(/\%low/g, `{"en": "${opt_input_value["en"]}", "fr": "${opt_input_value["fr"]}"}`); //using en for val
+
             } else if (opti == 1) {
                 scale = scale.replace(/\%high/g, opts[opti]);
                 jsonsnip = jsonsnip.replace(/\%high/g, opts[opti].trim());
+                jsonsnip = jsonsnip.replace(/\%high/g, `{"en": "${opt_input_value["en"]}", "fr": "${opt_input_value["fr"]}"}`); //using en for val
+
             } else if (opti == 2) {
                 scale = scale.replace(/\%unsure/g, opts[opti]);
                 jsonsnip = jsonsnip.replace(/\%unsure/g, opts[opti].trim());
+                jsonsnip = jsonsnip.replace(/\%unsure/g, `{"en": "${opt_input_value["en"]}", "fr": "${opt_input_value["fr"]}"}`); //using en for val
+
             }
             else {
                 // do nothing
@@ -447,6 +501,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         jsonsnip = jsonsnip.replace(/\%low/g, "")
             .replace(/\%high/g, "")
             .replace(/\%unsure/g, "");
+
 
         _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] += '<option value="" disabled selected></option>' +
             scale.split('<option value="" disabled selected></option>')[1]
@@ -502,6 +557,8 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_q_" + _E.core.state.store["render"]["question"]["qid"]);
+
     } else if (cmd == "generics") {
         // handle html
         snip = _E.core.state.store["render"]["question"]["form"];
@@ -517,6 +574,8 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
         //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
         //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
+        //_E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_q_" + _E.core.state.store["render"]["question"]["qid"]);
+
     } else if (cmd == "pick one"
         || cmd == "pick one dropdown"
         || cmd == "pick any"
@@ -545,8 +604,10 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         }
         for (var opti = 0; opti < opts.length; opti++) {
 
-            opt_input_value = opts[opti].trim()
-
+            opt_input_value = {
+                "en": opts[opti].trim(),
+                "fr": opts[opti].trim()
+            };
             //
             // WARN: Brittle code. Tied to HTML structure.
             // See pack_text, activate_lang
@@ -554,29 +615,37 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             // also, address the JSON render (it will have evalese in the mix)
             // 
 
+            //console.log("-----" + JSON.stringify(opt_input_value));
             var oa = [];
-            oa = opt_input_value.split("</span>");
+            oa = opts[opti].trim().split("</span>");
             for (var m = 0; m < oa.length; m++) {
-                if (oa[m].indexOf("<span class='" + _E.core.state.store["ui"]["lang"] + "'>") !== -1) {
-                    opt_input_value = oa[m].replace("<span class='" + _E.core.state.store["ui"]["lang"] + "'>", "");
+                if (oa[m].indexOf("<span class='fr'>") !== -1) {
+                    opt_input_value["fr"] = oa[m].replace("<span class='fr'>", "").trim();
+                }
+                if (oa[m].indexOf("<span class='en'>") !== -1) {
+                    opt_input_value["en"] = oa[m].replace("<span class='en'>", "").trim();
                 }
             }
-
+            //console.log("-----" + JSON.stringify(opt_input_value));
             // end WARN
 
             temp_snip = _E.core.templates.get(cmd)
                 .replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"])
                 .replace(/\%pick/g, opts[opti].trim())
                 .replace(/\%oid/g, opti)
-                .replace(/\%vpick/g, opt_input_value.trim())
+                .replace(/\%vpick/g, opt_input_value[_E.core.state.store["ui"]["lang"]].trim())
                 ;
             form += temp_snip;
 
             random_shuffle.push(temp_snip);
 
             jsonsnip += "," + _E.core.templates.get(cmd, "json")
-                .replace(/\%pick/g, opts_json[opti].trim());
+                .replace(/\%vpick/g, opts_json[opti].trim())
+                .replace(/\%pick/g, `{"en": "${opt_input_value["en"]}", "fr": "${opt_input_value["fr"]}"}`); //using en for val
+
+
         }
+
 
         if (cmd == "pick one dropdown") {
             _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] += form.replace(/<\/?span class='fr'.[^>]*>/g, '').replace(/\<span class='en'\>/g, '').replace(/\<\/span\>/g, '').trim();
@@ -622,12 +691,16 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortextype/g, _E.core.interpreter.cortex_questiontypes[cmd].type);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexclassified/g, _E.core.interpreter.cortex_questiontypes[cmd].subtype);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
+        _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_q_" + _E.core.state.store["render"]["question"]["qid"]);
 
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace("%options", jsonsnip
             .replace(/(^[,\s]+)|([,\s]+$)/g, ''));
+
+        //console.log(`-------||| ${jsonsnip}`);
     }
     // TODO: Lang override, replace with actual language control
-    _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"]
+    _E.core.state.store["render"]["json"] = _E.core.interpreter.evh_clean_json(_E.core.state.store["render"]["json"]);
+    /*
         .replace(/\%lang/g, _E.core.state.store["ui"]["lang"])
         .replace(/\"\/en\ /g, `{ "en": "`)
         .replace(/\/\;( )+\/fr\ /g, `", "fr": "`)
@@ -637,7 +710,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         .replace(/<\/span>/g, ``)
         .replace(/<(li|ul)>/g, ``)
         .replace(/<\/(li|ul)>/g, ``)
-        .replace(/  /g, ' ');
+        .replace(/  /g, ' ');*/
     return snip;
 }
 
@@ -789,8 +862,7 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
         //M.toast({ html: 'JSON ' + e.toString(), classes: 'rounded' });
     }
 
-
-    console.log(_E.core.state.store["render"]["json"]);
+    //console.log(_E.core.state.store["render"]["json"]);
     // save current survey signature
     _E.feature.localstore.ls_update_working_survey(_E.core.state.store["render"]["json"]
         .replace(/\,\%questions/g, "")
@@ -821,6 +893,7 @@ _E.core.interpreter.render = function () {
     // end render timer
     // get source
     var src = _E.fxn.common.safe(_E.core.state.store["el"]["c_editor"].val().replace(/\t/g, ""));
+    _E.core.interpreter["sur_evalese"] = src;
     // prep
     _E.core.state.render_state_reset();
     // E V A L H A L L A

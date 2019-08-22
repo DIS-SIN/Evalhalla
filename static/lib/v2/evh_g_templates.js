@@ -259,7 +259,7 @@ _E.core.templates.library = {
             '<option value="8">8</option>' +
             '<option value="9">9</option>' +
             '<option value="10">10 %high</option>' +
-            '<option value="77">%unsure</option>' +
+            '<option value="Unsure">%unsure</option>' +
             '%scale_multilang_split' +
             '</select>' +
             '</div>' +
@@ -277,7 +277,7 @@ _E.core.templates.library = {
             '<option value="3">3</option>' +
             '<option value="4">4</option>' +
             '<option value="5">5 %high</option>' +
-            '<option value="77">%unsure</option>' +
+            '<option value="Unsure">%unsure</option>' +
             '%scale_multilang_split' +
             '</select>' +
             '</div>' +
@@ -450,6 +450,9 @@ _E.core.templates.library = {
             '',
         "page break": '</div><div class="ev-page ev-page-%pageid card-panel">',
     },
+    //
+    // JSON FORMATS
+    //
     "json": {
         "header": '{' +
             '"survey": "%survey",' +
@@ -460,60 +463,83 @@ _E.core.templates.library = {
             '}',
         "question": '{' +
             '"qid": "%qid",' +
+            '"cortex": {' +
+            '"uid": "%cortexquestionuid",' +
+            '"atOrder": "%cortexatorder",' +
+            '"questionType": "%cortextype",' +
+            '"classifiedAs": "%cortexclassified"' +
+            '},' +
             '"question": "%question",' +
             '"description": "%question",' +
             '"language": "%lang",' +
             '"questionType": "%type",' +
-            '"cortexAtOrder": "%cortexatorder",' +
-            '"cortexQuestionType": "%cortextype",' +
-            '"cortexClassifiedAs": "%cortexclassified",' +
             '"required": "%req",' +
             '"randomOrder": "%rand_order",' +
             '"randomOptions": "%rand_options",' +
             '"options": [%options]' +
             '}',
         "scale": '' +
-            '"1 %low",' +
-            '"2",' +
-            '"3",' +
-            '"4",' +
-            '"5",' +
-            '"6",' +
-            '"7",' +
-            '"8",' +
-            '"9",' +
-            '"10 %high",' +
-            '"%unsure"' +
+            '{"value": "1", "description": "%low"},' +
+            '{"value": "2", "description": "2"},' +
+            '{"value": "3", "description": "3"},' +
+            '{"value": "4", "description": "4"},' +
+            '{"value": "5", "description": "5"},' +
+            '{"value": "6", "description": "6"},' +
+            '{"value": "7", "description": "7"},' +
+            '{"value": "8", "description": "8"},' +
+            '{"value": "9", "description": "9"},' +
+            '{"value": "10", "description": "%high"},' +
+            '{"value": "Unsure", "description": "%unsure"}' +
+            /*
+                        '"1 %low",' +
+                        '"2",' +
+                        '"3",' +
+                        '"4",' +
+                        '"5",' +
+                        '"6",' +
+                        '"7",' +
+                        '"8",' +
+                        '"9",' +
+                        '"10 %high",' +
+                        '"%unsure"' +*/
             '',
         "scale1-5": '' +
-            '"1 %low",' +
-            '"2",' +
-            '"3",' +
-            '"4",' +
-            '"5 %high",' +
-            '"%unsure"' +
+            '{"value": "1", "description": "%low"},' +
+            '{"value": "2", "description": "2"},' +
+            '{"value": "3", "description": "3"},' +
+            '{"value": "4", "description": "4"},' +
+            '{"value": "5", "description": "%high"},' +
+            '{"value": "Unsure", "description": "%unsure"}' +
             '',
         "open": '',
+
         // REFACTOR: interpreter v0.2 updates
         "pick one department": '"%pick"',
         "pick one classification": '"%pick"',
         "pick one location": '"%pick"',
         "pick one offering": '"%pick"',
         "pick one pop language": '"%pick"',
-        "pick one dropdown": '"%pick"',
+        //"pick one dropdown": '"%pick"',
+        "pick one dropdown": '{"value": "%vpick", "description": "%pick"}',
         // end interpreter v0.2 updates
-        "pick one": '"%pick"',
-        "pick any": '"%pick"',
+
+        //"pick one": '"%pick"',
+        "pick one": '{"value": "%vpick", "description": "%pick"}',
+        //"pick any": '"%pick"',
+        "pick any": '{"value": "%vpick", "description": "%pick"}',
         "rank": '"%pick"',
         "instruction": '{' +
             '"qid": "none",' +
+            '"cortex": {' +
+            '"uid": "%cortexquestionuid",' +
+            '"atOrder": "%cortexatorder",' +
+            '"questionType": "RENDER",' +
+            '"classifiedAs": "INSTRUCTIVE_TEXT"' +
+            '},' +
             '"question": "%instruction",' +
             '"description": "%instruction",' +
             '"language": "%lang",' +
             '"questionType": "instruction",' +
-            '"cortexAtOrder": "%cortexatorder",' +
-            '"cortexQuestionType": "IGNORE",' +
-            '"cortexClassifiedAs": "IGNORE",' +
             '"randomOrder": "%rand_order",' +
             '"randomOptions": "%rand_options",' +
             '"options": []' +
@@ -524,13 +550,15 @@ _E.core.templates.library = {
         "qlib entry": '',
         "page break": '{' +
             '"qid": "none",' +
+            '"cortex": {' +
+            '"atOrder": "%cortexatorder",' +
+            '"questionType": "RENDER",' +
+            '"classifiedAs": "PAGE_BREAK"' +
+            '},' +
             '"question": "none",' +
             '"description": "none",' +
             '"language": "none",' +
             '"questionType": "page break",' +
-            '"cortexAtOrder": "%cortexatorder",' +
-            '"cortexQuestionType": "IGNORE",' +
-            '"cortexClassifiedAs": "IGNORE",' +
             '"randomOrder": "false",' +
             '"randomOptions": "false",' +
             '"options": []' +
