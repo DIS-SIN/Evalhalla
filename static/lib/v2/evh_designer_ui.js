@@ -9,7 +9,7 @@ _E["feature"]["designer"]
 // init the package
 _E.feature.designer = {};
 
-_E.feature.designer.debug = true;
+_E.feature.designer.debug = false;
 
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
