@@ -26,6 +26,8 @@
         _E.feature.lang.enable_feature();
         // from evh_feature_question_library.js
         _E.feature.localstore.questionlib.enable_feature();
+        // from evh_feature_data_recordpumper.js
+        _E.feature.data.recordpumper.enable_feature();
         // from evh_designer_ui.js
         _E.feature.designer.enable_feature();
         // from evh_tutorial_demo.js

@@ -96,11 +96,16 @@
             <a href="../../player/dashboard/index.html">
                 <em class="material-icons" aria-hidden="true">cloud_upload</em>
                 <span class="en">
-                    Dashboard
+                    View Dashboard
                 </span>
                 <span class="fr">
                     Tableau de bord
                 </span>
+            </a>
+        </li>
+        <li>
+            <a class="generate_test_data">
+                <em class="material-icons" aria-hidden="true">gavel</em>CORTEX Populate Test Data
             </a>
         </li>
         <!-- REFACTOR: Turning off JSON render until next version 
@@ -111,19 +116,6 @@
             </a>
         </li>
         -->
-        <li>
-            <a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear Editor</span>
-                <span class="fr">Effacer Editeur</span>
-            </a>
-        </li>
-        <li>
-            <a class="adm_clear_ls">
-                <em class="material-icons" aria-hidden="true">flip_to_back</em>
-                <span class="en">Reset LS</span><span class="fr">Réinitialiser LS</span>
-            </a>
-        </li>
     </ul>
     <ul id="dropdown2" class="adm-function dropdown-content hide-on-small-only">
         <li>
@@ -187,8 +179,21 @@
                 </span>
             </a>
         </li>
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset LS</span><span class="fr">Réinitialiser LS</span>
+            </a>
+        </li>
     </ul>
     <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
+        <li>
+            <a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Editor</span>
+                <span class="fr">Effacer Editeur</span>
+            </a>
+        </li>
         <li>
             <a class="ev-add-header">
                 <em class="material-icons" aria-hidden="true">title</em>
@@ -588,6 +593,9 @@
     <script src="../../../static/lib/v2/evh_feature_local_storage.js"></script>
     <script src="../../../static/lib/v2/evh_feature_questionlib.js"></script>
     <script src="../../../static/lib/v2/evh_feature_unloadconfirmation.js"></script>
+    <!-- CORTEX and Data Populator -->
+    <script src="../../../static/lib/v2/evh_cortex_messages.js"></script>
+    <script src="../../../static/lib/v2/evh_feature_data_recordpumper.js"></script>
     <!-- get Evalhalla ui -->
     <script src="../../../static/lib/v2/evh_player_ui.js"></script>
     <script src="../../../static/lib/v2/evh_designer_ui.js"></script>

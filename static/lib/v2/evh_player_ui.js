@@ -11,7 +11,7 @@ _E.feature.player = {};
 
 // REFACTOR_PREP: paginator
 // pagination
-_E.feature.player.debug = false;
+_E.feature.player.debug = true;
 
 // transitions for the survey
 _E.feature.player.transitions_state = "true";
@@ -328,96 +328,12 @@ _E.feature.player.evalhalla_submit = function () {
     json_o["meta_submission_time"] = date_string;
 
 
-    let cortex_response = {
-        "response": {
-            "userAgent": "",
-            "surveyEntryMethod": "",
-            "conducted": ""
-        },
-        "respondent": {
-            "fluent_at": "",// "tombstone_language",
-            "in_department": "",// "tombstone_department",
-            "located_in": "",// "tombstone_city",
-            "work_as": "",// "tombstone_classification"
-        },
-        "questions": [
-            /*
-            {
-                "question_label": "",//key[0] -> map -> "rgroup SINGLE_CHOICE|cgroup MULTI_CHOICE|tombstone CLASSIFIED|n/a, unimplemented BINARY| textarea FREE_TEXT",
-                "question_interpretation": "",//"AS_CHOICE|AS_TRUTH|AS_FREE_TEXT|CLASSIFIED_AS",
-                "at_order": "",//key[2],
-                "question_answer": "",//key,
-                "question_text": "",//"textofquestion_qid_" key[2],
-            }*/
-        ],
-        "created": {
-            "from": "", // default to 2019-06-01
-            "to": "" // default to 2020-06-01
-        }
-    };
-    let cortex_question_tmpl = {
-        "uid": "",
-        "questionType": "",//"%qtype",
-        "classifiedAs": "",//"%qclass",
-        "atOrder": "",//"%qatorder",
-        "questionAnswer": "",//"%qanswer",
-        "questionText": ""//"%qtext"
-    };
-
-    /*
-    "tombstone_department": "",
-    "tombstone_city": "",
-    "tombstone_classification": "",
-    "tombstone_offering_id": "",
-    "tombstone_language": "en",
-
-    "meta_useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36",
-    "meta_entry_method": "",
-    "meta_question_count": 14,
-    "meta_evalhalla_sur": "eldp",
-    "meta_submission_time": "2019-08-17T22:03:26.727Z"
-    */
-
-
     let jo = json_o;
-    cortex_response.response.conducted = jo["meta_evalhalla_sur"];
-    cortex_response.response.surveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
-    cortex_response.response.userAgent = jo["meta_useragent"];
-    //cortex_response.response.conducted = jo["meta_evalhalla_sur"];
 
-    cortex_response.respondent.fluent_at = jo["tombstone_language"];
-    cortex_response.respondent.in_department = jo["tombstone_department"];
-    cortex_response.respondent.located_in = jo["tombstone_city"];
-    cortex_response.respondent.work_as = jo["tombstone_classification"];
-
-
-    cortex_response.created.from = jo["meta_submission_time"];
-    cortex_response.created.to = jo["meta_submission_time"];
-
-    for (let key in jo) {
-        let tokens = key.split("_");
-        if (tokens[0] == "tombstone") {
-            continue;
-        } else if (tokens[0] == "meta") {
-            continue;
-        } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale1to10" ||
-            tokens[0] == "scale1to5" || tokens[0] == "textarea") {
-
-            cortex_response.questions.push(
-                {
-                    "uid": cortex_response.response.conducted + "_q_" + tokens[2],
-                    "questionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
-                    "classifiedAs": _E.core.interpreter.cortex_questiontypes[tokens[0]].subtype,
-                    "atOrder": tokens[2],
-                    "questionAnswer": jo[key],
-                    "questionText": jo["textofquestion_qid_" + tokens[1]]
-                }
-            );
-        }
-    }
-
+    // for survista
     var json_o_string = (JSON.stringify(json_o, null, 4));
-    var cortex_json_o_string = (JSON.stringify(cortex_response, null, 4));
+    // for cortex
+    var cortex_json_o_string = (JSON.stringify(_E.feature.cortex.messages.create_survey_response_msg(jo), null, 4));
     (_E.feature.player.debug) ? console.log(cortex_json_o_string) : true;
     // save response to local storage
 

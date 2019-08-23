@@ -9,37 +9,13 @@ _E["feature"]["designer"]
 // init the package
 _E.feature.designer = {};
 
-_E.feature.designer.debug = false;
+_E.feature.designer.debug = true;
 
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
     // TODO: Fix with correct code (right now just obj/deobj for test)
     _E.core.state.store["el"]["btn_upload"].on("click", function () {
         (_E.feature.designer.debug) ? console.log("CORTEX Upload") : true;
-
-        let msg_cortex_survey_json = {
-            "uid": "",//
-            "title": "",//
-            "description": "",//
-            "valid": {
-                "from": "2019-06-01", // default to 2019-06-01
-                "to": "2020-06-01" // default to 2020-06-01
-            },
-            "version": "0.0.1",
-            "questions": [
-                /*
-                    {
-                        "question_label": "",//"SINGLE_CHOICE|MULTI_CHOICE|CLASSIFIED|BINARY|FREE_TEXT"
-                        "question_interpretation": "",//"AS_CHOICE|AS_TRUTH|AS_FREE_TEXT|CLASSIFIED_AS"
-                        "AT_ORDER": ""//
-                    }
-                */
-            ]
-        };
-        let msg_cortex_survey_evalese = {
-            "uid": "",//
-            "sur_evalese": ""
-        };
 
         let jo = JSON.parse(
             _E.core.interpreter.evh_clean_json(
@@ -50,25 +26,32 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
             )
         );
 
-        msg_cortex_survey_json.uid = jo.survey.trim();
-        msg_cortex_survey_json.title = jo.title;
-        msg_cortex_survey_json.description = jo.description;
-        msg_cortex_survey_json.questions = jo.questions;
-
-
-        msg_cortex_survey_evalese.uid = jo.survey.trim();
-        msg_cortex_survey_evalese.sur_evalese = _E.core.interpreter.sur_evalese.trim();
-
-
+        // cortex feature
         (_E.feature.designer.debug) ? alert("STUB: Upload Full Survey JSON to CORTEX.") : true;
         (_E.feature.designer.debug) ? console.log(
-            JSON.stringify(_E.fxn.common.trim_json_object_keyvalues(msg_cortex_survey_json), null, 4)
+            JSON.stringify(_E.feature.cortex.messages.create_survey_template_msg(jo), null, 4)
         ) : true;
 
         (_E.feature.designer.debug) ? alert("STUB: Upload Survey Evalese to CORTEX.") : true;
         (_E.feature.designer.debug) ? console.log(
-            JSON.stringify(_E.fxn.common.trim_json_object_keyvalues(msg_cortex_survey_evalese), null, 4)
+            JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo), null, 4)
         ) : true;
+    });
+
+    // generate test data
+    $(".generate_test_data").on("click", function () {
+        let jo = JSON.parse(
+            _E.core.interpreter.evh_clean_json(
+                _E.core.state.store["render"]["json"]
+                    .replace(/\,\%questions/g, "")
+                    .replace(/\%questions/g, "")
+                    .replace(/\%options/g, "")
+            )
+        );
+        let stempl = _E.feature.cortex.messages.create_survey_template_msg(jo)
+
+        _E.feature.data.recordpumper.execute_load(stempl);
+        // add enabling functions
     });
 
     // Local storage
