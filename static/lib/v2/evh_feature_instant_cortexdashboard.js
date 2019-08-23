@@ -184,7 +184,68 @@ _E.feature.cortexinstantdash.cortex_reply = []; // CORTEX INTEGRATION - data pul
 _E.feature.cortexinstantdash.render_data = function (response) {
     let render_html = "";
     for (let i = 0; i < response.length; i++) {
-        render_html += `<div class="col s6" style="float:top;"><div class="card-panel"><pre>${JSON.stringify(response[i], null, 2)}</pre></div></div>`;
+        //Inital html to show
+        render_html = `<div class="col s6" style="float:top;"><div class="card-panel"><canvas id="${'chart_' + response[i].uid}" width="300" height="300"></canvas><pre>${JSON.stringify(response[i], null, 2)}</pre></div></div>`;
+
+        //Render the intial HTML
+        $("#render_target").append(render_html);
+
+        resp_to_chart = {
+            target_qid: response[i].uid,
+            d_labels: [],
+            d_data: []
+        };
+
+        //Depending on the type of the question, build a different type of chart
+        if (response[i].classifiedAs.includes('SCALE')) {
+
+            //For each of the values in stats
+            for (let ii = 0; ii < response[i].stats.values.length; ii++) {
+                resp_to_chart.d_labels.push(response[i].stats.values[ii].option);
+                resp_to_chart.d_data.push(response[i].stats.values[ii].count);
+            }
+            _E.feature.cortexinstantdash.build_bar_chart(resp_to_chart);
+        }
+
+        //Depending on the type of the question, build a different type of chart
+        if (response[i].classifiedAs.includes('CGROUP')) {
+            let statsKeys = Object.keys(response[i].stats);
+            for (let ii = 0; ii < statsKeys.length; ii++) {
+                resp_to_chart.d_labels.push(statsKeys[ii]);
+                resp_to_chart.d_data.push(response[i].stats[statsKeys[ii]][0]);
+            }
+
+            _E.feature.cortexinstantdash.build_pie_chart(resp_to_chart);
+        }
+
+        if (response[i].classifiedAs.includes('RGROUP')) {
+            let statsKeys = Object.keys(response[i].stats);
+            for (let ii = 0; ii < statsKeys.length; ii++) {
+                resp_to_chart.d_labels.push(statsKeys[ii]);
+                resp_to_chart.d_data.push(response[i].stats[statsKeys[ii]][0]);
+            }
+
+            _E.feature.cortexinstantdash.build_pie_chart(resp_to_chart);
+        }
+
+        if (response[i].questionType.includes('CLASSIFIED')) {
+            let statsKeys = Object.keys(response[i].stats);
+            for (let ii = 0; ii < statsKeys.length; ii++) {
+                resp_to_chart.d_labels.push(statsKeys[ii]);
+                resp_to_chart.d_data.push(response[i].stats[statsKeys[ii]][0]);
+            }
+
+            _E.feature.cortexinstantdash.build_pie_chart(resp_to_chart);
+        }
+
+        if (response[i].questionType.includes('FREE_TEXT')) {
+            for (let ii = 0; ii < response[i].stats.responses.length; ii++) {
+                resp_to_chart.d_labels.push(response[i].stats.responses[ii].questionAnswer);
+                resp_to_chart.d_data.push(response[i].stats.responses[ii].count);
+            }
+
+            _E.feature.cortexinstantdash.build_bar_chart(resp_to_chart);
+        }
         /*
                 $("#render_target").append('<div class="col s6" style="float:top;"><div class="card-panel"><span class="badge">(' +
                     response[i].uid + ')</span><p style="font-weight:bold;font-size:0.8em;bottom:0.25rem;line-height:1.2em;">' +
@@ -193,12 +254,13 @@ _E.feature.cortexinstantdash.render_data = function (response) {
         
         */
     }
-    $("#render_target").html(render_html);
+
 }
 
 _E.feature.cortexinstantdash.cortex_get_survey = function (survey) {
     //$.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
     let response = _E.feature.cortexinstantdash.cortex_reply;
+    console.log(response);
     _E.feature.cortexinstantdash.render_data(response);
     //});
 }
