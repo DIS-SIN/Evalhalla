@@ -185,6 +185,13 @@ _E.feature.cortexinstantdash.render_data = function (response) {
     let render_html = "";
     for (let i = 0; i < response.length; i++) {
         render_html += `<div class="col s6" style="float:top;"><div class="card-panel"><pre>${JSON.stringify(response[i], null, 2)}</pre></div></div>`;
+        /*
+                $("#render_target").append('<div class="col s6" style="float:top;"><div class="card-panel"><span class="badge">(' +
+                    response[i].uid + ')</span><p style="font-weight:bold;font-size:0.8em;bottom:0.25rem;line-height:1.2em;">' +
+                    response[i].questionType + " " + response[i].classifiedAs +
+                    '</p><canvas id="chart_' + response[i].uid + '" width="300" height="300"></canvas></div></div>');
+        
+        */
     }
     $("#render_target").html(render_html);
 }
@@ -197,7 +204,7 @@ _E.feature.cortexinstantdash.cortex_get_survey = function (survey) {
 }
 
 _E.feature.cortexinstantdash.build_bar_chart = function (chartd) {
-    var ctx = document.getElementById('chart_scale_' + chartd.target_qid + '').getContext('2d');
+    var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
@@ -237,7 +244,7 @@ _E.feature.cortexinstantdash.build_bar_chart = function (chartd) {
 };
 
 _E.feature.cortexinstantdash.build_pie_chart = function (chartd) {
-    var ctx = document.getElementById('chart_scale_' + chartd.target_qid + '').getContext('2d');
+    var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
     // And for a doughnut chart
     var myDoughnutChart = new Chart(ctx, {
         "type": "doughnut",

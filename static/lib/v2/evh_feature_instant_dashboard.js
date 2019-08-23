@@ -569,7 +569,11 @@ _E.feature.instadash.build_charts = function (chartd) {
         }
     }
 
-    if (chartd.chart_type == "scale1to10" || chartd.chart_type == "scale1to5") {
+    //console.log(chartd.chart_type);
+    if (chartd.chart_type == "scale" || chartd.chart_type == "scale1to10" || chartd.chart_type == "scale1to5") {
+        if (chartd.chart_type == "scale") {
+            chartd.chart_type == "scale1to10";
+        }
         _E.feature.instadash.build_scale(chartd);
     } else if (chartd.chart_type == "rgroup") {
         _E.feature.instadash.build_rgroup(chartd);
