@@ -52,7 +52,7 @@ Q:
 Q:
 /en If you had to rate this episode from 1 (Bad) to 5 (Awesome) what would you give it? /;
 /fr Si vous deviez évaluer cet épisode de 1 (mauvais) à 5 (génial), que lui donneriez-vous? /;
-/scale1-5 
+/scale1to5 
 /en Bad /; /fr Mauvais /;, 
 /en Awesome /; /fr Génial /;, 
 /en Unsure /; /fr Incertain /;

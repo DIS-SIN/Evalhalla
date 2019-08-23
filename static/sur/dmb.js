@@ -221,7 +221,7 @@ Q:
 *Q:
 /en On a scale from 1-5 how ready is your department for disruptive change? /;
 /fr Sur une échelle de 1 à 5, dans quelle mesure votre département est-il prêt pour un changement perturbateur? /;
-/scale1-5 
+/scale1to5 
 /en Not Ready /; /fr Pas Prêt /; , 
 /en Very Ready /; /fr Très Prêt /; ,
 /en Unsure /; /fr  Incertain /;
@@ -284,12 +284,12 @@ Q:
 Q:
 /en How many ministers have you had since you have been a DM? /;
 /fr Combien de ministres avez-vous eu depuis que vous êtes DM? /;
-/scale1-5 , , 5+
+/scale1to5 , , 5+
 
 Q:
 /en How many clerks have you worked for since you became a DM? /;
 /fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu DM? /;
-/scale1-5 , , 5+
+/scale1to5 , , 5+
 
 Q:
 /en What’s your highest level of education? /;
@@ -351,7 +351,7 @@ Q:
 Q:
 /en How many? /;
 /fr Combien? /;
-/scale1-5 , , 5+
+/scale1to5 , , 5+
 
 Q:
 /en What’s your favorite genre of music? /;
@@ -422,7 +422,7 @@ Q:
 Q:
 /en On a scale from 1-5 how ready is your department for disruptive change? /;
 /fr Sur une échelle de 1 à 5, dans quelle mesure votre département est-il prêt pour un changement perturbateur? /;
-/scale1-5 Not Ready / Pas Prêt, Very Ready / Très Prêt, Unsure / Incertain
+/scale1to5 Not Ready / Pas Prêt, Very Ready / Très Prêt, Unsure / Incertain
 
 Q:
 /en What concrete things do we need to be ready for disruptive change? /;

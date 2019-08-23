@@ -49,7 +49,7 @@ Q:
 Q:
 /en Overall, how useful did you find the online learning experience? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;
 /fr Dans l'ensemble, dans quelle mesure l'expérience en ligne (Moodle) vous a-t-elle été utile?  Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;
-/scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
+/scale1to5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain
 
 Q:
 /en We’d love to hear more! Why did you give the score that you did? /;
@@ -59,7 +59,7 @@ Q:
 Q:
 /en Overall, how useful did you find the learning materials and resources? Rate your experience on a scale of 1 to 5, with 1 being not useful and 5 being very useful. /;
 /fr Dans l’ensemble,  dans quelle mesure la plate-forme de session en direct (WebEx) vous a-t-elle été utile ? Évaluez votre experience sur une échelle de 1 à 5, où 1 correspond à « inutile » et 5 correspond à « très utile ». /;
-/scale1-5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
+/scale1to5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
 
 Q:
 /en We’d love to hear more! Why did you give the score that you did? /;
@@ -69,7 +69,7 @@ Q:
 Q: 
 /en How useful did you find the live session speakers on a scale of 1 to 5, with 1 being not useful and 5 being very useful. /;
 /fr Dans quelle mesure les conférenciers de la séance en direct vous ont-ils été utiles sur une échelle de 1 à 5, 1 étant inutile et 5 étant très utile. /;
-/scale1-5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
+/scale1to5 Not useful / Très inutile, Very useful / Très utile, Unsure / Incertain
 
 Q:
 /en We’d love to hear more! Why did you give the score that you did? /;

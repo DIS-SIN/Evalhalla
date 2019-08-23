@@ -20,7 +20,7 @@ var busrides = `# SUR-BR1
 Q:
 /en If you had to rate this episode from 1 (Bad) to 5 (Awesome) what would you give it? /;
 /fr Si vous deviez évaluer cet épisode de 1 (mauvais) à 5 (génial), que lui donneriez-vous? /;
-/scale1-5 Bad / Mauvais, Awesome / Génial, Unsure / Incertain
+/scale1to5 Bad / Mauvais, Awesome / Génial, Unsure / Incertain
 
 Q:
 /en Want to tell us why? /;

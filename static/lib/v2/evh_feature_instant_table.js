@@ -52,7 +52,7 @@ _E.feature.instatable.parse_question_text = function (sur_text) {
             .split("/dropdown")[0].split("/DROPDOWN")[0]
             .split("/language")[0].split("/LANGUAGE")[0]
             .split("/scale")[0].split("/SCALE")[0]
-            .split("/scale1-5")[0].split("/SCALE1-5")[0];
+            .split("/scale1to5")[0].split("/SCALE1TO5")[0];
         evh_sai = evh_sai;
 
         // split by lang (en for now)

@@ -47,11 +47,11 @@ _E.core.interpreter.evalese = {
     "Q:": { "type": "question", "html": "<question>%v</question>" },
     "[*QUESTION]": { "type": "req question", "html": "<question>%v</question>" },
     "*Q:": { "type": "req question", "html": "<question>%v</question>" },
-    "[SCALE]": { "type": "scale", "html": "<scale>%v</scale>" },
-    "/SCALE": { "type": "scale", "html": "<scale>%v</scale>" },
-    "/SCALE1-5": { "type": "scale1-5", "html": "<scale>%v</scale>" },
-    "/ÉCHELLE": { "type": "scale", "html": "<scale>%v</scale>" },
-    "|": { "type": "scale", "html": "<scale>%v</scale>" },
+    "[SCALE]": { "type": "scale1to10", "html": "<scale>%v</scale>" },
+    "/SCALE": { "type": "scale1to10", "html": "<scale>%v</scale>" },
+    "/SCALE1TO5": { "type": "scale1to5", "html": "<scale>%v</scale>" },
+    "/ÉCHELLE": { "type": "scale1to10", "html": "<scale>%v</scale>" },
+    "|": { "type": "scale1to10", "html": "<scale>%v</scale>" },
     "[OPEN]": { "type": "open", "html": "<open>%v</open>" },
     "/OPEN": { "type": "open", "html": "<open>%v</open>" },
     "/OUVRIR": { "type": "open", "html": "<open>%v</open>" },
@@ -160,11 +160,11 @@ _E.core.interpreter.cortex_questiontypes = {
         "type": "FREE_TEXT",
         "subtype": "TEXTAREA"
     },
-    "scale": {
+    "scale1to10": {
         "type": "SINGLE_CHOICE",
         "subtype": "SCALE_1_TO_10"
     },
-    "scale1-5": {
+    "scale1to5": {
         "type": "SINGLE_CHOICE",
         "subtype": "SCALE_1_TO_5"
     },
@@ -256,7 +256,7 @@ _E.core.interpreter.parse_question_text = function (sur_text) {
             .split("/dropdown")[0].split("/DROPDOWN")[0]
             .split("/language")[0].split("/LANGUAGE")[0]
             .split("/scale")[0].split("/SCALE")[0]
-            .split("/scale1-5")[0].split("/SCALE1-5")[0];
+            .split("/scale1to5")[0].split("/SCALE1TO5")[0];
         evh_sai = evh_sai;
 
         // split by lang (en for now)
@@ -417,31 +417,31 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"]
                 .replace("%req", "false");
         }
-    } else if (cmd == "scale" || cmd == "scale1-5") {
+    } else if (cmd == "scale1to10" || cmd == "scale1to5") {
         // handle html
         snip = _E.core.state.store["render"]["question"]["form"];
         var scale = "";
-        if (cmd == "scale") {
-            scale = _E.core.templates.get("scale").replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
-        } else if (cmd == "scale1-5") {
-            scale = _E.core.templates.get("scale1-5").replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
+        if (cmd == "scale1to10") {
+            scale = _E.core.templates.get("scale1to10").replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
+        } else if (cmd == "scale1to5") {
+            scale = _E.core.templates.get("scale1to5").replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
         }
 
         var opts = src.split(",")
         // clean opts
         opts[0] = opts[0]
             .replace("[SCALE]", "")
-            .replace(/(\/SCALE1\-5|\/scale1\-5)/g, "") // 1-5 scale
+            .replace(/(\/SCALE1TO5|\/scale1to5)/g, "") // 1-5 scale
             .replace(/(\/SCALE|\/scale)/g, "")
             .replace(/(\/ÉCHELLE|\/échelle)/g, "")
             .replace("|", "")
             .trim();
         // handle json
         var jsonsnip = "";
-        if (cmd == "scale") {
-            jsonsnip = _E.core.templates.get("scale", "json");
-        } else if (cmd == "scale1-5") {
-            jsonsnip = _E.core.templates.get("scale1-5", "json");
+        if (cmd == "scale1to10") {
+            jsonsnip = _E.core.templates.get("scale1to10", "json");
+        } else if (cmd == "scale1to5") {
+            jsonsnip = _E.core.templates.get("scale1to5", "json");
         }
         jsonsnip = jsonsnip.replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"]);
 
@@ -746,8 +746,8 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
                 //}
                 evalhalla = [_E.core.interpreter.handle_cmd_header(cmd["type"], pack, pkg["pack_json"])];
             } else if (cmd["type"] == "question" || cmd["type"] == "req question"
-                || cmd["type"] == "scale"
-                || cmd["type"] == "scale1-5"
+                || cmd["type"] == "scale1to10"
+                || cmd["type"] == "scale1to5"
                 || cmd["type"] == "open"
                 || cmd["type"] == "generics"
                 || cmd["type"] == "pick one"
@@ -770,8 +770,8 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
                 pack = pkg["pack"];
                 i = pkg["i"];
 
-                if (cmd["type"] == "scale"
-                    || cmd["type"] == "scale1-5"
+                if (cmd["type"] == "scale1to10"
+                    || cmd["type"] == "scale1to5"
                     || cmd["type"] == "open"
                     || cmd["type"] == "generics"
                     || cmd["type"] == "pick one"

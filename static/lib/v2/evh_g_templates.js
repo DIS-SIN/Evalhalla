@@ -242,11 +242,11 @@ _E.core.templates.library = {
             '%req</span> %question</blockquote><div class="padbox">%form</div>' +
             '</div>' +
             '',
-        "scale": '' +
+        "scale1to10": '' +
             '<div class="row">' +
             '<div class="col s12" >' +
-            '<label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en evh-parser-ignore">Select one</span><span class="fr evh-parser-ignore">Veuillez choisir</span></label>' +
-            '<select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">' +
+            '<label class="lg-lbl" for="scale1to10_qid_%qid" id="lbl_scale1to10_qid_%qid"><span class="en evh-parser-ignore">Select one</span><span class="fr evh-parser-ignore">Veuillez choisir</span></label>' +
+            '<select class="%reqcls browser-default" %reqattr id="scale1to10_qid_%qid" name="scale1to10_qid_%qid" aria-labelledby="lbl_scale1to10_qid_%qid">' +
             '%scale_multilang_split' +
             '<option value="" disabled selected></option>' +
             '<option value="1">1 %low</option>' +
@@ -265,11 +265,11 @@ _E.core.templates.library = {
             '</div>' +
             '</div>' +
             '',
-        "scale1-5": '' +
+        "scale1to5": '' +
             '<div class="row">' +
             '<div class="col s12" >' +
-            '<label class="lg-lbl" for="scale_qid_%qid" id="lbl_scale_qid_%qid"><span class="en">Select one</span><span class="fr">Veuillez choisir</span></label>' +
-            '<select class="%reqcls browser-default" %reqattr id="scale_qid_%qid" name="scale_qid_%qid" aria-labelledby="lbl_scale_qid_%qid">' +
+            '<label class="lg-lbl" for="scale1to5_qid_%qid" id="lbl_scale1to5_qid_%qid"><span class="en">Select one</span><span class="fr">Veuillez choisir</span></label>' +
+            '<select class="%reqcls browser-default" %reqattr id="scale1to5_qid_%qid" name="scale1to5_qid_%qid" aria-labelledby="lbl_scale1to5_qid_%qid">' +
             '%scale_multilang_split' +
             '<option value="" disabled selected></option>' +
             '<option value="1">1 %low</option>' +
@@ -478,7 +478,7 @@ _E.core.templates.library = {
             '"randomOptions": "%rand_options",' +
             '"options": [%options]' +
             '}',
-        "scale": '' +
+        "scale1to10": '' +
             '{"value": "1", "description": "%low"},' +
             '{"value": "2", "description": "2"},' +
             '{"value": "3", "description": "3"},' +
@@ -503,7 +503,7 @@ _E.core.templates.library = {
                         '"10 %high",' +
                         '"%unsure"' +*/
             '',
-        "scale1-5": '' +
+        "scale1to5": '' +
             '{"value": "1", "description": "%low"},' +
             '{"value": "2", "description": "2"},' +
             '{"value": "3", "description": "3"},' +
@@ -584,16 +584,16 @@ _E.core.templates.get = function (snip, format) {
             return _E.core.templates.library["json"]["question"];
         }
         return _E.core.templates.library["html"]["question"];
-    } else if (snip == "scale") {
+    } else if (snip == "scale1to10") {
         if (format == "json") {
-            return _E.core.templates.library["json"]["scale"];
+            return _E.core.templates.library["json"]["scale1to10"];
         }
-        return _E.core.templates.library["html"]["scale"];
-    } else if (snip == "scale1-5") {
+        return _E.core.templates.library["html"]["scale1to10"];
+    } else if (snip == "scale1to5") {
         if (format == "json") {
-            return _E.core.templates.library["json"]["scale1-5"];
+            return _E.core.templates.library["json"]["scale1to5"];
         }
-        return _E.core.templates.library["html"]["scale1-5"];
+        return _E.core.templates.library["html"]["scale1to5"];
     } else if (snip == "open") {
         if (format == "json") {
             return _E.core.templates.library["json"]["open"];

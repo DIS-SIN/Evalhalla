@@ -14,7 +14,7 @@ _E.feature.player = {};
 _E.feature.player.debug = false;
 
 // transitions for the survey
-_E.feature.player.transitions_state = "lang";
+_E.feature.player.transitions_state = "true";
 _E.feature.player.transitions = {
     "lang": {
         "next": "offering",
@@ -400,8 +400,8 @@ _E.feature.player.evalhalla_submit = function () {
             continue;
         } else if (tokens[0] == "meta") {
             continue;
-        } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale" ||
-            tokens[0] == "scale1-5" || tokens[0] == "textarea") {
+        } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale1to10" ||
+            tokens[0] == "scale1to5" || tokens[0] == "textarea") {
 
             cortex_response.questions.push(
                 {

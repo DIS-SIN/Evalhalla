@@ -49,7 +49,7 @@ _E.feature.exportJSON.audit_json = function () {
         var render_opts = [];
         var opts_snip = "";
         if (qs[k]["questionType"] == "dropdown") {
-            opts_snip = _E.core.templates.get("scale")
+            opts_snip = _E.core.templates.get("scale1to10")
                 .replace(/\%qid/g, qs[k]["qid"])
                 .replace(/\%low/g, "Low")
                 .replace(/\%high/g, "High")
