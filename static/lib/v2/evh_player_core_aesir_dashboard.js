@@ -12,7 +12,7 @@
         // from evh_feature_language.js
         //_E.feature.lang.enable_feature();
         // from evh_feature_instant_dashboard.js
-        _E.feature.cortexinstantdash.enable_feature();
+        _E.feature.aesir.enable_feature();
 
     });
 })(jQuery);

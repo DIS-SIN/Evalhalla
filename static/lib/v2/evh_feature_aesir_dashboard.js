@@ -172,16 +172,16 @@ as placeholders as they pull from the same data.
 
 
 */
-_E.feature.cortexinstantdash = {};
+_E.feature.aesir = {};
 
-_E.feature.cortexinstantdash.g_chart_data = [];
-_E.feature.cortexinstantdash.g_qindex = {} // derefrence question text here
-_E.feature.cortexinstantdash.g_meta_data = {};
-_E.feature.cortexinstantdash.g_response = []; // CORTEX INTEGRATION - data pull
+_E.feature.aesir.g_chart_data = [];
+_E.feature.aesir.g_qindex = {} // derefrence question text here
+_E.feature.aesir.g_meta_data = {};
+_E.feature.aesir.g_response = []; // CORTEX INTEGRATION - data pull
 
-_E.feature.cortexinstantdash.cortex_reply = []; // CORTEX INTEGRATION - data pull
+_E.feature.aesir.cortex_reply = []; // CORTEX INTEGRATION - data pull
 
-_E.feature.cortexinstantdash.render_data = function (response) {
+_E.feature.aesir.render_data = function (response) {
     let render_html = "";
     for (let i = 0; i < response.length; i++) {
         if (response[i].stats == null) {
@@ -212,24 +212,24 @@ _E.feature.cortexinstantdash.render_data = function (response) {
 
         //Depending on the type of the question, build a different type of chart
         if (response[i].classifiedAs.includes('SCALE')) {
-            _E.feature.cortexinstantdash.build_bar_chart(resp_to_chart);
+            _E.feature.aesir.build_bar_chart(resp_to_chart);
         }
 
         //Depending on the type of the question, build a different type of chart
         if (response[i].classifiedAs.includes('CGROUP')) {
-            _E.feature.cortexinstantdash.build_pie_chart(resp_to_chart);
+            _E.feature.aesir.build_pie_chart(resp_to_chart);
         }
 
         if (response[i].classifiedAs.includes('RGROUP')) {
-            _E.feature.cortexinstantdash.build_pie_chart(resp_to_chart);
+            _E.feature.aesir.build_pie_chart(resp_to_chart);
         }
 
         if (response[i].questionType.includes('CLASSIFIED')) {
-            _E.feature.cortexinstantdash.build_pie_chart(resp_to_chart);
+            _E.feature.aesir.build_pie_chart(resp_to_chart);
         }
 
         if (response[i].questionType.includes('FREE_TEXT')) {
-            _E.feature.cortexinstantdash.build_bar_chart(resp_to_chart);
+            _E.feature.aesir.build_bar_chart(resp_to_chart);
         }
         /*
                 $("#render_target").append('<div class="col s6" style="float:top;"><div class="card-panel"><span class="badge">(' +
@@ -242,14 +242,14 @@ _E.feature.cortexinstantdash.render_data = function (response) {
     $(".ctx_msg").hide();
 }
 
-_E.feature.cortexinstantdash.cortex_get_survey = function (survey) {
+_E.feature.aesir.cortex_get_survey = function (survey) {
     //$.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
 
 
     let response = _E.feature.cortex.messages.get_stat_nodes();
     console.log(response);
 
-    _E.feature.cortexinstantdash.cortex_reply = response.payload.data;
+    _E.feature.aesir.cortex_reply = response.payload.data;
     /*
     payload": {
     "uid": "e443f49d82d692e8e1dcd0c6d540b137",
@@ -267,11 +267,11 @@ _E.feature.cortexinstantdash.cortex_get_survey = function (survey) {
         "classifiedAs": "GC_Org"
     },
     */
-    _E.feature.cortexinstantdash.render_data(_E.feature.cortexinstantdash.cortex_reply);
+    _E.feature.aesir.render_data(_E.feature.aesir.cortex_reply);
     //});
 }
 
-_E.feature.cortexinstantdash.build_bar_chart = function (chartd) {
+_E.feature.aesir.build_bar_chart = function (chartd) {
     console.log(chartd);
     var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -312,7 +312,7 @@ _E.feature.cortexinstantdash.build_bar_chart = function (chartd) {
     });
 };
 
-_E.feature.cortexinstantdash.build_pie_chart = function (chartd) {
+_E.feature.aesir.build_pie_chart = function (chartd) {
     console.log(chartd);
     var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
     // And for a doughnut chart
@@ -342,7 +342,7 @@ _E.feature.cortexinstantdash.build_pie_chart = function (chartd) {
 
 }
 
-_E.feature.cortexinstantdash.convert_to_star_rating = function (a) {
+_E.feature.aesir.convert_to_star_rating = function (a) {
     /* STAR RATING FOR SENTIMENT
          +1 = 5*
         0.4 = 4*
@@ -367,7 +367,7 @@ _E.feature.cortexinstantdash.convert_to_star_rating = function (a) {
     return h;
 }
 
-_E.feature.cortexinstantdash.convert_to_color_rating = function (a) {
+_E.feature.aesir.convert_to_color_rating = function (a) {
     /* STAR RATING FOR SENTIMENT
          +1 = 5*
         0.4 = 4*
@@ -392,9 +392,9 @@ _E.feature.cortexinstantdash.convert_to_color_rating = function (a) {
 }
 
 
-_E.feature.cortexinstantdash.push_replies_v0 = function () {
+_E.feature.aesir.push_replies_v0 = function () {
     // check box
-    _E.feature.cortexinstantdash.cortex_reply.push(
+    _E.feature.aesir.cortex_reply.push(
         {
             "uid": "test_sur_q_3",
             "questionType": "MULTI_CHOICE",
@@ -408,7 +408,7 @@ _E.feature.cortexinstantdash.push_replies_v0 = function () {
     );
 
     // free text
-    _E.feature.cortexinstantdash.cortex_reply.push(
+    _E.feature.aesir.cortex_reply.push(
         {
             "uid": "test_sur_q_9",
             "questionType": "FREE_TEXT",
@@ -449,7 +449,7 @@ _E.feature.cortexinstantdash.push_replies_v0 = function () {
     );
 
     //SINGLE_CHOICE SCALE_1_TO_5
-    _E.feature.cortexinstantdash.cortex_reply.push(
+    _E.feature.aesir.cortex_reply.push(
         {
             "uid": "test_sur_q_7",
             "questionType": "SINGLE_CHOICE",
@@ -467,7 +467,7 @@ _E.feature.cortexinstantdash.push_replies_v0 = function () {
     );
 
     //SINGLE_CHOICE SCALE_1_TO_10
-    _E.feature.cortexinstantdash.cortex_reply.push(
+    _E.feature.aesir.cortex_reply.push(
         {
             "uid": "test_sur_q_8",
             "questionType": "SINGLE_CHOICE",
@@ -485,7 +485,7 @@ _E.feature.cortexinstantdash.push_replies_v0 = function () {
     );
 
     //SINGLE_CHOICE RGROUP
-    _E.feature.cortexinstantdash.cortex_reply.push(
+    _E.feature.aesir.cortex_reply.push(
         {
             "uid": "test_sur_q_10",
             "questionType": "SINGLE_CHOICE",
@@ -503,7 +503,7 @@ _E.feature.cortexinstantdash.push_replies_v0 = function () {
     //CLASSIFIED CP_CSD
     //CLASSIFIED GC_ClsLvl
     //CLASSIFIED CSPS_Offering
-    _E.feature.cortexinstantdash.cortex_reply.push(
+    _E.feature.aesir.cortex_reply.push(
         {
             "uid": "test_sur_q_1",
             "questionType": "CLASSIFIED",
@@ -519,7 +519,7 @@ _E.feature.cortexinstantdash.push_replies_v0 = function () {
 
 }
 
-_E.feature.cortexinstantdash.enable_feature = function () {
+_E.feature.aesir.enable_feature = function () {
     // Test Data
-    _E.feature.cortexinstantdash.cortex_get_survey();
+    _E.feature.aesir.cortex_get_survey();
 }

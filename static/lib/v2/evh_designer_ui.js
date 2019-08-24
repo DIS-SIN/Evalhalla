@@ -36,6 +36,8 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
         (_E.feature.designer.debug) ? console.log(
             JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo), null, 4)
         ) : true;
+
+        alert("STUB: CORTEX Upload Complete");
     });
 
     // generate test data
