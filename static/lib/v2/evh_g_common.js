@@ -103,6 +103,10 @@ _E.fxn.common.hackernoon_pie = function (elid, slices) {
     }
 }
 
+_E.fxn.common.get_random_int = function (max) {
+    return Math.floor(Math.random() * Math.floor(max));
+};
+
 _E.fxn.common.trim_json_object_keyvalues = function (obj) {
     //if (!Array.isArray(obj) && typeof obj != 'object') return obj;
     if (obj === null || !Array.isArray(obj) && typeof obj != 'object') return obj;

@@ -42,43 +42,43 @@ Q:
 /en How many years were you an executive before you became a DM? /;
 /fr Combien d'années avez-vous été cadre avant de devenir SM? /;
 /one
-1-5
-5-10
-10-15
-15+
+/en 1-5 /; /fr /;
+/en 5-10 /; /fr /;
+/en 10-15 /; /fr /;
+/en 15+ /; /fr /;
 ;
 
 *Q: 
 /en How many ministers have you had since you have been a DM? /;
 /fr Combien de ministres avez-vous eu depuis que vous êtes SM? /;
 /one
-1
-2
-3
-4
-5+
+/en 1 /; /fr 1 /;
+/en 2 /; /fr 2 /;
+/en 3 /; /fr 3 /;
+/en 4 /; /fr 4 /;
+/en 5+ /; /fr 5+ /;
 ;
 
 *Q: 
 /en How many clerks have you worked for since you became a DM? /;
 /fr Pour combien de commis avez-vous travaillé depuis que vous êtes devenu SM? /;
 /one
-1
-2
-3
-4
-5+
+/en 1 /; /fr 1 /;
+/en 2 /; /fr 2 /;
+/en 3 /; /fr 3 /;
+/en 4 /; /fr 4 /;
+/en 5+ /; /fr 5+ /;
 ;
 
 *Q: 
 /en How many Prime Ministers have you worked for since you became a DM? /;
 /fr Pour combien de premiers ministres avez-vous travaillé depuis que vous êtes devenu sous-ministre? /;
 /one
-1
-2
-3
-4
-5+
+/en 1 /; /fr 1 /;
+/en 2 /; /fr 2 /;
+/en 3 /; /fr 3 /;
+/en 4 /; /fr 4 /;
+/en 5+ /; /fr 5+ /;
 ;
 
 *Q: 
@@ -113,9 +113,9 @@ Q:
 /en Estimate how many hours a day you work? /;
 /fr Estimez combien d'heures par jour vous travaillez? /;
 /one
-7.5
-8-10
-11+
+/en 7.5 /; /fr 7.5 /;
+/en 8-10 /; /fr 8-10 /;
+/en 11+ /; /fr 11+ /;
 ;
 
 /pagebreak
@@ -168,9 +168,9 @@ Q:
 /fr Combien? /;
 /one
 /en No children /; /fr Pas d'enfants /;
-1
-2
-3+
+/en 1 /; /fr 1 /;
+/en 2 /; /fr 2 /;
+/en 3+ /; /fr 3+ /;
 ;
 
 *Q: 
@@ -191,10 +191,10 @@ Q:
 /en When do you plan to retire (years until)? /;
 /fr Quand comptez-vous prendre votre retraite (années jusqu'à)? /;
 /one
-1
-2
-3-5
-10+
+/en 1 /; /fr 1 /;
+/en 2 /; /fr 2 /;
+/en 3-5 /; /fr 3-5 /;
+/en 10+ /; /fr 10+ /;
 /en Not sure /; /fr Pas certain /;
 /en Not intending on retiring. Ever. /; /fr Pas l'intention de prendre sa retraite. Déjà. /;
 ;
@@ -203,11 +203,11 @@ Q:
 /en How many books did you read last year? /;
 /fr Combien de livres avez-vous lu l'année dernière? /;
 /one
-1
-2
-3
-4
-5+
+/en 1 /; /fr 1 /;
+/en 2 /; /fr 2 /;
+/en 3 /; /fr 3 /;
+/en 4 /; /fr 4 /;
+/en 5+ /; /fr 5+ /;
 ;
 
 *Q: 

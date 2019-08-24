@@ -245,7 +245,56 @@
     </ul>
     <ul class="adm-function sidenav" id="mobile-demo">
         <li>
-            <span class="mob-span center-align">MENU</span>
+            <span class="mob-span center-align">CORTEX</span>
+            <hr>
+        </li>
+        <li>
+            <a class="adm_save_working_survey">
+                <em class="material-icons" aria-hidden="true">save</em>
+                <span class="en">
+                    Save Survey
+                </span>
+                <span class="fr">
+                    Enregistrer
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="survista_send">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>CORTEX Upload
+            </a>
+        </li>
+        <li>
+            <a href="../../player/survey/index.html" class="demo_ev_loop" title="reload demo survey">
+                <em class="material-icons" aria-hidden="true">lightbulb</em>
+                <span class="en">
+                    Conduct Survey
+                </span>
+                <span class="fr">
+                    Commencer l'Enquête
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="../../player/dashboard/index.html">
+                <em class="material-icons" aria-hidden="true">cloud_upload</em>
+                <span class="en">
+                    View Dashboard
+                </span>
+                <span class="fr">
+                    Tableau de bord
+                </span>
+            </a>
+        </li>
+        <li>
+            <a class="generate_test_data">
+                <em class="material-icons" aria-hidden="true">gavel</em>CORTEX Populate Test Data
+            </a>
+        </li>
+        <li>
+            <span class="mob-span center-align">
+                <span class="en">MENU</span><span class="fr">MENU</span>
+            </span>
             <hr>
         </li>
         <li>
@@ -417,7 +466,16 @@
             </a>
         </li>
     </ul>
-
+    <!-- Modal Structure -->
+    <div id="cortex_test_data_modal" class="modal">
+        <div class="modal-content">
+            <h4>CORTEX Test Data</h4>
+            <textarea id="cortex_test_data">A bunch of text</textarea>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat clr-cortex-test-data">Dismiss</a>
+        </div>
+    </div>
     <div id="editor" class="container">
         <div class="section" id="pre_survey_panels">
             <!-- Pre Survey Panels Go Here -->

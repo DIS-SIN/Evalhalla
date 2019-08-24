@@ -9,7 +9,7 @@ _E["feature"]["designer"]
 // init the package
 _E.feature.designer = {};
 
-_E.feature.designer.debug = true;
+_E.feature.designer.debug = false;
 
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
@@ -39,6 +39,9 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
     });
 
     // generate test data
+    $(".clr-cortex-test-data").on("click", function () {
+        $("#cortex_test_data").val("");
+    });
     $(".generate_test_data").on("click", function () {
         let jo = JSON.parse(
             _E.core.interpreter.evh_clean_json(
@@ -225,6 +228,7 @@ _E.feature.designer.ui_resize_textareas = function () {
     M.textareaAutoResize(_E.core.state.store["el"]["c_json"]);
 }
 
+_E.feature.designer.modal_cortex_test_data = null;
 _E.feature.designer.enable_feature = function () {
     _E.feature.designer.enable_ls_ui_buttons();
     _E.feature.designer.enable_editor_panel_menu_buttons();
@@ -237,6 +241,8 @@ _E.feature.designer.enable_feature = function () {
     $('.modal').modal();
     $(".dropdown-trigger").dropdown();
 
+    //var elems = document.querySelectorAll('.modal');
+    //var instances = M.Modal.init(elems, options);
 
     // not presentation mode
     $("#step_lang").hide();

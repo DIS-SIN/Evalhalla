@@ -15,7 +15,7 @@ _E["feature"]["exportJSON"]
 (_E.feature.cortex) ? true : _E.feature.cortex = {};
 
 _E.feature.cortex.messages = {};
-_E.feature.cortex.messages.debug = true;
+_E.feature.cortex.messages.debug = false;
 
 
 _E.feature.cortex.messages.get_stat_nodes = function () {
@@ -140,6 +140,19 @@ _E.feature.cortex.messages.create_survey_evalese_msg = function (jo) {
     return msg_cortex;
 };
 
+
+
+_E.feature.cortex.messages.create_survey_response_qa_part = function (jo) {
+    let msg_cortex = {
+        "uid": "",
+        "questionType": "",
+        "classifiedAs": "",
+        "atOrder": "",
+        "questionAnswer": "",
+        "questionText": ""
+    };
+    return msg_cortex;
+}
 _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
 
     let msg_cortex = {
