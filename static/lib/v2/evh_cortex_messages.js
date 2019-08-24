@@ -19,78 +19,23 @@ _E.feature.cortex.messages.debug = false;
 
 
 _E.feature.cortex.messages.get_stat_nodes = function () {
-    let stat_node_response = `{
+    let stat_node_response = {
         "payload": {
-            "uid": "e443f49d82d692e8e1dcd0c6d540b137",
-            "data": [{
-                "uid": "test_sur_q_1",
-                "total": null,
-                "stats": null,
-                "questionType": "CLASSIFIED",
-                "classifiedAs": "CSPS_Offering"
-            }, {
-                "uid": "test_sur_q_2",
-                "total": 2,
-                "stats": "{\"Transports Canada\":2}",
-                "questionType": "CLASSIFIED",
-                "classifiedAs": "GC_Org"
-            }, {
-                "uid": "test_sur_q_3",
-                "total": 2,
-                "stats": "{\"Turkish\":2}",
-                "questionType": "CLASSIFIED",
-                "classifiedAs": "GC_Language"
-            }, {
-                "uid": "test_sur_q_4",
-                "total": 2,
-                "stats": "{\"CS-03\":2}",
-                "questionType": "CLASSIFIED",
-                "classifiedAs": "GC_ClsLvl"
-            }, {
-                "uid": "test_sur_q_5",
-                "total": 2,
-                "stats": "{\"Botwood\":2}",
-                "questionType": "CLASSIFIED",
-                "classifiedAs": "CP_CSD"
-            }, {
-                "uid": "test_sur_q_6",
-                "total": 2,
-                "stats": "{\"This 1\":2}",
-                "questionType": "SINGLE_CHOICE",
-                "classifiedAs": "RGROUP"
-            }, {
-                "uid": "test_sur_q_7",
-                "total": 2,
-                "stats": "{\"5\":2}",
-                "questionType": "SINGLE_CHOICE",
-                "classifiedAs": "SCALE_1_TO_5"
-            }, {
-                "uid": "test_sur_q_8",
-                "total": 2,
-                "stats": "{\"8\":2}",
-                "questionType": "SINGLE_CHOICE",
-                "classifiedAs": "SCALE_1_TO_10"
-            }, {
-                "uid": "test_sur_q_9",
-                "total": 2,
-                "stats": "{\"This is what\":2}",
-                "questionType": "FREE_TEXT",
-                "classifiedAs": "TEXTAREA"
-            }, {
-                "uid": "test_sur_q_10",
-                "total": 2,
-                "stats": "{\"Yes\":2}",
-                "questionType": "SINGLE_CHOICE",
-                "classifiedAs": "RGROUP"
-            }, {
-                "uid": "test_sur_q_11",
-                "total": 4,
-                "stats": "{\"No\":2}",
-                "questionType": "MULTI_CHOICE",
-                "classifiedAs": "CGROUP"
-            }]
+            "uid": "e443f49d82d692e8e1dcd0c6d540b137", "data": [
+                { "uid": "test_sur_q_1", "total": null, "stats": null, "questionType": "CLASSIFIED", "classifiedAs": "CSPS_Offering" },
+                { "uid": "test_sur_q_2", "total": 2, "stats": "{\"Transports Canada\":2,\"CSPS\":5,\"TBS\":5}", "questionType": "CLASSIFIED", "classifiedAs": "GC_Org" },
+                { "uid": "test_sur_q_3", "total": 2, "stats": "{\"Turkish\":2,\"English\":9,\"French\":2}", "questionType": "CLASSIFIED", "classifiedAs": "GC_Language" },
+                { "uid": "test_sur_q_4", "total": 2, "stats": "{\"CS-03\":2,\"CS-01\":4}", "questionType": "CLASSIFIED", "classifiedAs": "GC_ClsLvl" },
+                { "uid": "test_sur_q_5", "total": 2, "stats": "{\"Botwood\":2,\"Ottawa\":20}", "questionType": "CLASSIFIED", "classifiedAs": "CP_CSD" },
+                { "uid": "test_sur_q_6", "total": 2, "stats": "{\"This 1\":2,\"That 1\":2}", "questionType": "SINGLE_CHOICE", "classifiedAs": "RGROUP" },
+                { "uid": "test_sur_q_7", "total": 2, "stats": "{\"5\":8,\"2\":1}", "questionType": "SINGLE_CHOICE", "classifiedAs": "SCALE_1_TO_5" },
+                { "uid": "test_sur_q_8", "total": 2, "stats": "{\"8\":1,\"10\":2}", "questionType": "SINGLE_CHOICE", "classifiedAs": "SCALE_1_TO_10" },
+                { "uid": "test_sur_q_9", "total": 2, "stats": "{\"This is what\":2,\"This is how\":2,\"This is when\":2}", "questionType": "FREE_TEXT", "classifiedAs": "TEXTAREA" },
+                { "uid": "test_sur_q_10", "total": 2, "stats": "{\"Yes\":2,\"No\":2}", "questionType": "SINGLE_CHOICE", "classifiedAs": "RGROUP" },
+                { "uid": "test_sur_q_11", "total": 4, "stats": "{\"Yes\":2,\"No\":2}", "questionType": "MULTI_CHOICE", "classifiedAs": "CGROUP" }
+            ]
         }
-    }`;
+    };
     return stat_node_response;
 };
 
