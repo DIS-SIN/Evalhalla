@@ -18,7 +18,7 @@ _E.feature.data.recordpumper = {};
 _E.feature.data.recordpumper.debug = false;
 
 _E.feature.data.recordpumper.generate_this_many = 3;
-
+_E.feature.data.recordpumper.skewness_of_responses = null;//
 
 _E.feature.data.recordpumper.test_freetexts = [
     "I enjoyed it very much. It was well laid out and everything worked perfectly. This is the absolute best thing ever.",
@@ -59,14 +59,14 @@ _E.feature.data.recordpumper.create_response = function (qas, survey_template) {
     cortex_json_o.created.to = date_string;
     cortex_json_o.questions = qas;
 
-    cortex_json_o.response.userAgent = _E.feature.data.recordpumper.test_uas[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.test_uas.length)];
+    cortex_json_o.response.userAgent = _E.feature.data.recordpumper.test_uas[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.test_uas.length, _E.feature.data.recordpumper.skewness_of_responses)];
     cortex_json_o.response.surveyEntryMethod = "TEST_DATA_GENERATOR";
     cortex_json_o.response.conducted = survey_template.uid;
 
-    cortex_json_o.respondent.fluent_at = _E.feature.data.recordpumper.fluent_ats[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.fluent_ats.length)];
-    cortex_json_o.respondent.in_department = autoc_departments[_E.fxn.common.get_random_int(autoc_departments.length)];
-    cortex_json_o.respondent.located_in = autoc_cities[_E.fxn.common.get_random_int(autoc_cities.length)];
-    cortex_json_o.respondent.work_as = autoc_classifications[_E.fxn.common.get_random_int(autoc_classifications.length)];
+    cortex_json_o.respondent.fluent_at = _E.feature.data.recordpumper.fluent_ats[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.fluent_ats.length, _E.feature.data.recordpumper.skewness_of_responses)];
+    cortex_json_o.respondent.in_department = autoc_departments[_E.fxn.common.get_random_int(autoc_departments.length, _E.feature.data.recordpumper.skewness_of_responses)];
+    cortex_json_o.respondent.located_in = autoc_cities[_E.fxn.common.get_random_int(autoc_cities.length, _E.feature.data.recordpumper.skewness_of_responses)];
+    cortex_json_o.respondent.work_as = autoc_classifications[_E.fxn.common.get_random_int(autoc_classifications.length, _E.feature.data.recordpumper.skewness_of_responses)];
 
     (_E.feature.data.recordpumper.debug) ? console.log(JSON.stringify(cortex_json_o)) : true;
     return cortex_json_o;
@@ -96,15 +96,15 @@ _E.feature.data.recordpumper.cortexKeyMap = {
 
 _E.feature.data.recordpumper.make_data_point = function (action) {
     if (action == "USE_TEXT") {
-        return _E.feature.data.recordpumper.test_freetexts[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.test_freetexts.length)];
+        return _E.feature.data.recordpumper.test_freetexts[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.test_freetexts.length, _E.feature.data.recordpumper.skewness_of_responses)];
     } else if (action == "USE_CLASSIFIED_LANG") {
-        return autoc_languages[_E.fxn.common.get_random_int(autoc_departments.length)];
+        return autoc_languages[_E.fxn.common.get_random_int(autoc_languages.length, _E.feature.data.recordpumper.skewness_of_responses)];
     } else if (action == "USE_CLASSIFIED_ORG") {
-        return autoc_departments[_E.fxn.common.get_random_int(autoc_departments.length)];
+        return autoc_departments[_E.fxn.common.get_random_int(autoc_departments.length, _E.feature.data.recordpumper.skewness_of_responses)];
     } else if (action == "USE_CLASSIFIED_CITY") {
-        return autoc_cities[_E.fxn.common.get_random_int(autoc_cities.length)];
+        return autoc_cities[_E.fxn.common.get_random_int(autoc_cities.length, _E.feature.data.recordpumper.skewness_of_responses)];
     } else if (action == "USE_CLASSIFIED_ROLE") {
-        return autoc_classifications[_E.fxn.common.get_random_int(autoc_classifications.length)]
+        return autoc_classifications[_E.fxn.common.get_random_int(autoc_classifications.length, _E.feature.data.recordpumper.skewness_of_responses)]
     } else if (action == "USE_CLASSIFIED_OFFERING") {
         return "EVALHALLA_TEST_OFFERING";
     }
@@ -142,7 +142,7 @@ _E.feature.data.recordpumper.generate_all_responses = function (survey_template)
                 q_part.questionText = qs[i].question;
 
                 if (rec_data_action == "USE_OPTION" || rec_data_action == "USE_OPTION_SCALE") {
-                    let rindex = _E.fxn.common.get_random_int(qs[i].options.length);
+                    let rindex = _E.fxn.common.get_random_int(qs[i].options.length, _E.feature.data.recordpumper.skewness_of_responses);
 
                     if (rec_data_action == "USE_OPTION_SCALE") {
                         q_part.questionAnswer = qs[i].options[rindex].value;
@@ -168,12 +168,20 @@ _E.feature.data.recordpumper.execute_load = function (survey_template) {
 
     if (confirm("Generate and Load Test Data?")) {
         let generate_this_many_in = prompt("How many responses?");
+        let generate_with_skew_in = prompt("Skew value?");
         try {
             let generate_this_many_in_int = parseInt(generate_this_many_in);
-            _E.feature.data.recordpumper.generate_this_many = generate_this_many_in;
+            _E.feature.data.recordpumper.generate_this_many = generate_this_many_in_int;
         } catch (e) {
             _E.feature.data.recordpumper.generate_this_many = 100;
         }
+        try {
+            let generate_with_skew_in_float = parseFloat(generate_with_skew_in);
+            _E.feature.data.recordpumper.skewness_of_responses = generate_with_skew_in_float;
+        } catch (e) {
+            _E.feature.data.recordpumper.skewness_of_responses = null;
+        }
+
         _E.feature.data.recordpumper.generate_all_responses(survey_template);
     }
 };

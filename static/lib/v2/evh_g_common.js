@@ -103,8 +103,17 @@ _E.fxn.common.hackernoon_pie = function (elid, slices) {
     }
 }
 
-_E.fxn.common.get_random_int = function (max) {
-    return Math.floor(Math.random() * Math.floor(max));
+_E.fxn.common.get_random_int = function (max, skew) {
+    // https://stackoverflow.com/questions/11383242/how-to-generate-skewed-random-numbers-in-javascript
+    // Raise Math.random() to a power to get a gamma curve - this changes the distribution between 0 and 1, 
+    // but 0 and 1 stay constant endpoints.
+    // For gamma > 1, you will get darker output; for 0 < gamma < 1 you get lighter. 
+    // (Here, '2' gives you the x - squared curve; the equidistant lightness would be '0.5' for the square - root curve.)
+    // var r = Math.pow(Math.random(), 2);
+    let lskew = (typeof skew === "undefined" || skew == null) ? "normal" : skew;
+    let r = (lskew != "normal") ? Math.pow(Math.random(), lskew) : Math.random();
+
+    return Math.floor(r * Math.floor(max));
 };
 
 _E.fxn.common.trim_json_object_keyvalues = function (obj) {
