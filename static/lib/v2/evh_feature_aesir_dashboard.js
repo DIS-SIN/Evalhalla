@@ -184,6 +184,7 @@ _E.feature.aesir.cortex_reply = []; // CORTEX INTEGRATION - data pull
 _E.feature.aesir.truncate_length = 10;
 
 _E.feature.aesir.render_data = function (response) {
+    $("#render_target").html("");
     let render_html = "";
     for (let i = 0; i < response.length; i++) {
         let cr = response[i];
@@ -300,18 +301,27 @@ _E.feature.aesir.render_data = function (response) {
     $(".ctx_msg").hide();
 }
 
+_E.feature.aesir.g_chart_data_counter = 0;
 _E.feature.aesir.cortex_get_survey = function (survey) {
     //$.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
-    let response = _E.feature.cortex.messages.get_stat_nodes();
-    console.log(response);
-
-    _E.feature.aesir.cortex_reply = response.payload.data;
+    _E.feature.aesir.g_chart_data = _E.feature.cortex.messages.get_stat_nodes();
+    //console.log(_E.feature.aesir.g_chart_data.length);
+    _E.feature.aesir.cortex_reply = _E.feature.aesir.g_chart_data[_E.feature.aesir.g_chart_data_counter].payload.data;
     _E.feature.aesir.render_data(_E.feature.aesir.cortex_reply);
+    _E.feature.aesir.g_chart_data_counter = _E.feature.aesir.g_chart_data_counter + 1;
+    _E.feature.aesir.renderinterval = setInterval(function () {
+        _E.feature.aesir.cortex_reply = _E.feature.aesir.g_chart_data[_E.feature.aesir.g_chart_data_counter].payload.data;
+        _E.feature.aesir.render_data(_E.feature.aesir.cortex_reply);
+        _E.feature.aesir.g_chart_data_counter = _E.feature.aesir.g_chart_data_counter + 1;
+        _E.feature.aesir.g_chart_data_counter = (_E.feature.aesir.g_chart_data_counter >= _E.feature.aesir.g_chart_data.length) ? 0 : _E.feature.aesir.g_chart_data_counter;
+    }, 8000);
     //});
 }
 
+
+
 _E.feature.aesir.build_bar_chart = function (chartd) {
-    console.log(chartd);
+    //console.log(chartd);
     var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -382,7 +392,7 @@ _E.feature.aesir.populate_background_colors = function () {
     //_E.fxn.common.shuffle_array(_E.feature.aesir.backgroundColors);
 };
 _E.feature.aesir.build_pie_chart = function (chartd) {
-    console.log(chartd);
+    //console.log(chartd);
     var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
     // And for a doughnut chart
     var myDoughnutChart = new Chart(ctx, {
