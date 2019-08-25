@@ -103,6 +103,11 @@ _E.fxn.common.hackernoon_pie = function (elid, slices) {
     }
 }
 
+_E.fxn.common.label_truncate = function (str, length) {
+    var dots = str.length > length ? '...' : '';
+    return str.substring(0, length) + dots;
+};
+
 _E.fxn.common.get_random_int = function (max, skew) {
     // https://stackoverflow.com/questions/11383242/how-to-generate-skewed-random-numbers-in-javascript
     // Raise Math.random() to a power to get a gamma curve - this changes the distribution between 0 and 1, 

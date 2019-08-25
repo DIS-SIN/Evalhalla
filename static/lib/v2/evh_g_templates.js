@@ -249,16 +249,16 @@ _E.core.templates.library = {
             '<select class="%reqcls browser-default" %reqattr id="scale1to10_qid_%qid" name="scale1to10_qid_%qid" aria-labelledby="lbl_scale1to10_qid_%qid">' +
             '%scale_multilang_split' +
             '<option value="" disabled selected></option>' +
-            '<option value="1">1 %low</option>' +
-            '<option value="2">2</option>' +
-            '<option value="3">3</option>' +
-            '<option value="4">4</option>' +
-            '<option value="5">5</option>' +
-            '<option value="6">6</option>' +
-            '<option value="7">7</option>' +
-            '<option value="8">8</option>' +
-            '<option value="9">9</option>' +
             '<option value="10">10 %high</option>' +
+            '<option value="9">9</option>' +
+            '<option value="8">8</option>' +
+            '<option value="7">7</option>' +
+            '<option value="6">6</option>' +
+            '<option value="5">5</option>' +
+            '<option value="4">4</option>' +
+            '<option value="3">3</option>' +
+            '<option value="2">2</option>' +
+            '<option value="1">1 %low</option>' +
             '<option value="Unsure">%unsure</option>' +
             '%scale_multilang_split' +
             '</select>' +
@@ -272,11 +272,11 @@ _E.core.templates.library = {
             '<select class="%reqcls browser-default" %reqattr id="scale1to5_qid_%qid" name="scale1to5_qid_%qid" aria-labelledby="lbl_scale1to5_qid_%qid">' +
             '%scale_multilang_split' +
             '<option value="" disabled selected></option>' +
-            '<option value="1">1 %low</option>' +
-            '<option value="2">2</option>' +
-            '<option value="3">3</option>' +
-            '<option value="4">4</option>' +
             '<option value="5">5 %high</option>' +
+            '<option value="4">4</option>' +
+            '<option value="3">3</option>' +
+            '<option value="2">2</option>' +
+            '<option value="1">1 %low</option>' +
             '<option value="Unsure">%unsure</option>' +
             '%scale_multilang_split' +
             '</select>' +
@@ -479,16 +479,16 @@ _E.core.templates.library = {
             '"options": [%options]' +
             '}',
         "scale1to10": '' +
-            '{"value": "1", "description": "%low"},' +
-            '{"value": "2", "description": "2"},' +
-            '{"value": "3", "description": "3"},' +
-            '{"value": "4", "description": "4"},' +
-            '{"value": "5", "description": "5"},' +
-            '{"value": "6", "description": "6"},' +
-            '{"value": "7", "description": "7"},' +
-            '{"value": "8", "description": "8"},' +
-            '{"value": "9", "description": "9"},' +
             '{"value": "10", "description": "%high"},' +
+            '{"value": "9", "description": "9"},' +
+            '{"value": "8", "description": "8"},' +
+            '{"value": "7", "description": "7"},' +
+            '{"value": "6", "description": "6"},' +
+            '{"value": "5", "description": "5"},' +
+            '{"value": "4", "description": "4"},' +
+            '{"value": "3", "description": "3"},' +
+            '{"value": "2", "description": "2"},' +
+            '{"value": "1", "description": "%low"},' +
             '{"value": "Unsure", "description": "%unsure"}' +
             /*
                         '"1 %low",' +
@@ -504,11 +504,11 @@ _E.core.templates.library = {
                         '"%unsure"' +*/
             '',
         "scale1to5": '' +
-            '{"value": "1", "description": "%low"},' +
-            '{"value": "2", "description": "2"},' +
-            '{"value": "3", "description": "3"},' +
-            '{"value": "4", "description": "4"},' +
             '{"value": "5", "description": "%high"},' +
+            '{"value": "4", "description": "4"},' +
+            '{"value": "3", "description": "3"},' +
+            '{"value": "2", "description": "2"},' +
+            '{"value": "1", "description": "%low"},' +
             '{"value": "Unsure", "description": "%unsure"}' +
             '',
         "open": '',

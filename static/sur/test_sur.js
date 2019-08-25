@@ -95,7 +95,8 @@ Q:
 /open
 
 *Q:
-/en In your opinion, what are the most useful features of Evalhalla? /; /fr A votre avis, quelles sont les fonctionnalités les plus utiles d'Evalhalla? /; 
+/en In your opinion, what are the most useful features of Evalhalla? /; 
+/fr A votre avis, quelles sont les fonctionnalités les plus utiles d'Evalhalla? /; 
 /any
 /en Survey designer tool /; /fr Outil de conception d'enquête /;
 /en Survey preview, while designing the survey /; /fr Aperçu de l'enquête, lors de la conception de l'enquête /;
@@ -132,7 +133,7 @@ Q:
 ;
 
 *Q:
-/en On a scale from 1 (not at all likely) to 10 (extremely likely), how likely would you recommend Evalhalla to others? 
+/en On a scale from 1 (not at all likely) to 10 (extremely likely), how likely would you recommend Evalhalla to others? /;
 /fr Sur une échelle de 1 (pas du tout probable) à 10 (extrêmement probable), dans quelle mesure recommanderiez-vous Evalhalla à d'autres? /;
 /scale 
 /en Not at all likely /; /fr Pas du tout probable /; , 
@@ -143,7 +144,7 @@ Q:
 
 //
 /en Tell us about your overall impressions of today’s presentation and demo. /;
- /fr Dites-nous au sujet de vos impressions générales sur la présentation et la démo d’aujourd’hui. /;
+/fr Dites-nous au sujet de vos impressions générales sur la présentation et la démo d’aujourd’hui. /;
 
 *Q:
 /en Overall, how satisfied are you with the presentation? /;
@@ -168,7 +169,7 @@ Q:
 ;
 
 Q:
-/en Is there anything else you would like to share about the presentation, demo or Evalhalla?
+/en Is there anything else you would like to share about the presentation, demo or Evalhalla? /;
 /fr Y a-t-il autre chose que vous voudriez partager au sujet de la présentation, de la démo ou d'Evalhalla? /;
 /open
 
