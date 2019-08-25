@@ -183,142 +183,53 @@ _E.feature.aesir.cortex_reply = []; // CORTEX INTEGRATION - data pull
 
 _E.feature.aesir.truncate_length = 10;
 
-_E.feature.aesir.render_data = function (response) {
-    $("#render_target").html("");
-    let render_html = "";
-    for (let i = 0; i < response.length; i++) {
-        let cr = response[i];
-        let ql = JSON.parse(cr.question);
-        if (cr.stats == null) {
-            continue;
-        }
-        //Inital html to show
-        render_html = `
-            <div class="col s12 m6 l4" style="float:top;"><div class="card-panel">
-                <span class="badge">(${cr.uid})</span>
-                <p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
-                    <span class='en'>${ql[0] ? ql[0] : cr.uid}</span>
-                    <!-- <span class='fr'>${ql[1] ? ql[1] : cr.uid}</span> -->
-                </p>
-                <canvas id="${'chart_' + cr.uid}" width="300" height="300"></canvas>
-                <div id="edtable_${'chart_' + cr.uid}" class="ctx_datatable"></div>
-                <pre class="ctx_msg">${JSON.stringify(cr, null, 2)}</pre>
-            </div></div>`;
-
-        //Render the intial HTML
-        $("#render_target").append(render_html);
-
-        resp_to_chart = {
-            target_qid: cr.uid,
-            d_labels: [],
-            d_data: []
-        };
-
-
-        let stats = JSON.parse(cr.stats);
-        let statsKeys = (stats) ? Object.keys(stats) : true;
-        let statDataTable = [];
-        for (let ii = 0; ii < statsKeys.length; ii++) {
-            (stats) ? statDataTable.push(
-                { "statKey": statsKeys[ii], "statValue": parseInt(stats[statsKeys[ii]], 10), "statBg": _E.feature.aesir.backgroundColors[ii] }
-            ) : true;
-        }
-
-        statDataTable.sort(function (a, b) {
-            return b.statValue - a.statValue;
-        });
-
-        for (let ii = 0; ii < statDataTable.length; ii++) {
-            resp_to_chart.d_labels.push(_E.fxn.common.label_truncate(statDataTable[ii].statKey, _E.feature.aesir.truncate_length));
-            (stats) ? resp_to_chart.d_data.push(
-                parseInt(statDataTable[ii].statValue, 10)
-            ) : true;
-        }
-
-
-        let recLimit = 11;
-        let item_count = (statDataTable.length < recLimit) ? statDataTable.length : recLimit;
-        let others = {
-            "statValue": 0,
-            "statKey": `Other Answers`,
-            "statOtherCategories": `(${statDataTable.length - recLimit} Categories)`,
-            "statBg": "#333333"
-        };
-        if (statDataTable.length > recLimit) {
-            for (let iii = recLimit; iii < statDataTable.length; iii++) {
-                others.statValue += statDataTable[iii].statValue;
-            }
-            // truncate arrays
-            resp_to_chart.d_data = resp_to_chart.d_data.slice(0, recLimit)
-            resp_to_chart.d_labels = resp_to_chart.d_labels.slice(0, recLimit)
-            // add others
-            resp_to_chart.d_data.push(others.statValue);
-            resp_to_chart.d_labels.push(others.statKey + " " + others.statOtherCategories);
-        }
-
-
-        //Depending on the type of the question, build a different type of chart
-        if (cr.classifiedAs.includes('SCALE')) {
-            _E.feature.aesir.build_bar_chart(resp_to_chart);
-        }
-        //Depending on the type of the question, build a different type of chart
-        if (cr.classifiedAs.includes('CGROUP')) {
-            _E.feature.aesir.build_pie_chart(resp_to_chart);
-        }
-        if (cr.classifiedAs.includes('RGROUP')) {
-            _E.feature.aesir.build_pie_chart(resp_to_chart);
-        }
-        if (cr.questionType.includes('CLASSIFIED')) {
-            _E.feature.aesir.build_pie_chart(resp_to_chart);
-        }
-        if (cr.questionType.includes('FREE_TEXT')) {
-            _E.feature.aesir.build_bar_chart(resp_to_chart);
-        }
-
-        let statDataTableHTML = `<table>`;
-        for (let iii = 0; iii < item_count; iii++) {
-            statDataTableHTML += `<tr>
-                <td>${statDataTable[iii].statKey}</td>
-                <td>
-                    <strong style="color:${statDataTable[iii].statBg}">${statDataTable[iii].statValue}</strong> <sup>(${((statDataTable[iii].statValue / cr.total) * 100).toFixed(1)}%)</sup>
-                </td></tr>`;
-        }
-        // TODO: RESUME HERE
-        if (statDataTable.length > recLimit) {
-            statDataTableHTML += `<tr>
-                <td>${others.statKey} <sup>${others.statOtherCategories}</sup></td>
-                <td>
-                    <strong style="color:${others.statBg}">${others.statValue}</strong> <sup>(${((others.statValue / cr.total) * 100).toFixed(1)}%)</sup>
-                </td></tr>`;
-        }
-        statDataTableHTML += `</table>`;
-        //statDataTable.sort();
-
-
-        $(`#edtable_${'chart_' + cr.uid}`).html(statDataTableHTML);
-
-    }
-    $(".ctx_msg").hide();
-}
-
 _E.feature.aesir.g_chart_data_counter = 0;
 _E.feature.aesir.cortex_get_survey = function (survey) {
     //$.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
     _E.feature.aesir.g_chart_data = _E.feature.cortex.messages.get_stat_nodes();
     //console.log(_E.feature.aesir.g_chart_data.length);
+
     _E.feature.aesir.cortex_reply = _E.feature.aesir.g_chart_data[_E.feature.aesir.g_chart_data_counter].payload.data;
     _E.feature.aesir.render_data(_E.feature.aesir.cortex_reply);
     _E.feature.aesir.g_chart_data_counter = _E.feature.aesir.g_chart_data_counter + 1;
+
     _E.feature.aesir.renderinterval = setInterval(function () {
         _E.feature.aesir.cortex_reply = _E.feature.aesir.g_chart_data[_E.feature.aesir.g_chart_data_counter].payload.data;
         _E.feature.aesir.render_data(_E.feature.aesir.cortex_reply);
         _E.feature.aesir.g_chart_data_counter = _E.feature.aesir.g_chart_data_counter + 1;
+        if (_E.feature.aesir.g_chart_data_counter >= _E.feature.aesir.g_chart_data.length) {
+            clearInterval(_E.feature.aesir.renderinterval);
+        }
         _E.feature.aesir.g_chart_data_counter = (_E.feature.aesir.g_chart_data_counter >= _E.feature.aesir.g_chart_data.length) ? 0 : _E.feature.aesir.g_chart_data_counter;
-    }, 8000);
+    }, 30000);
     //});
 }
 
 
+_E.feature.aesir.backgroundColors = [];
+_E.feature.aesir.populate_background_colors = function () {
+    _E.feature.aesir.backgroundColors = [];
+    //for (let i = 0; i < 1000; i++) {
+    //    _E.feature.aesir.backgroundColors.push(_E.fxn.common.randomHsl());
+    //}
+
+    //https://gka.github.io/palettes/#/50|d|96ffea,0000c8,ffb179|fbff7c,ff005e,93003a|0|1
+
+    let main_colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)',
+        '#fdd835', '#fbc02d', '#a8f925', '#f5177f', '#ff7c4d'];
+    let extended_colors = ['#ffb179', '#f4a481', '#e99889', '#df8e90', '#d58596', '#cc7e9c', '#c378a1', '#bb74a7', '#b371ac', '#ac6fb1', '#a66fb5', '#a070ba', '#9b72be', '#9776c3', '#937ac7', '#9080cb', '#8e87cf', '#8d90d3', '#8c99d6', '#8ca4da', '#8dafdd', '#8ebde0', '#90cbe3', '#92dbe6', '#94ece8', '#fef17a', '#ffe378', '#ffd575', '#ffc873', '#ffbb71', '#feaf6e', '#fca26c', '#fa9769', '#f78b66', '#f38064', '#ef7461', '#ea6a5e', '#e55f5c', '#e05559', '#da4b56', '#d44253', '#ce3850', '#c72f4e', '#c1264b', '#ba1e48', '#b21545', '#ab0d42', '#a30540', '#9b013d', '#93003a'];
+    _E.fxn.common.shuffle_array(extended_colors);
+
+
+    _E.feature.aesir.backgroundColors = main_colors.concat(extended_colors);
+
+
+    for (let i = 0; i < 1000; i++) {
+        _E.feature.aesir.backgroundColors.push(_E.fxn.common.randomHsl());
+    }
+    //_E.fxn.common.shuffle_array(_E.feature.aesir.backgroundColors);
+};
 
 _E.feature.aesir.build_bar_chart = function (chartd) {
     //console.log(chartd);
@@ -367,30 +278,6 @@ _E.feature.aesir.build_bar_chart = function (chartd) {
     });
 };
 
-_E.feature.aesir.backgroundColors = [];
-_E.feature.aesir.populate_background_colors = function () {
-    _E.feature.aesir.backgroundColors = [];
-    //for (let i = 0; i < 1000; i++) {
-    //    _E.feature.aesir.backgroundColors.push(_E.fxn.common.randomHsl());
-    //}
-
-    //https://gka.github.io/palettes/#/50|d|96ffea,0000c8,ffb179|fbff7c,ff005e,93003a|0|1
-
-    let main_colors = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)',
-        '#fdd835', '#fbc02d', '#a8f925', '#f5177f', '#ff7c4d'];
-    let extended_colors = ['#ffb179', '#f4a481', '#e99889', '#df8e90', '#d58596', '#cc7e9c', '#c378a1', '#bb74a7', '#b371ac', '#ac6fb1', '#a66fb5', '#a070ba', '#9b72be', '#9776c3', '#937ac7', '#9080cb', '#8e87cf', '#8d90d3', '#8c99d6', '#8ca4da', '#8dafdd', '#8ebde0', '#90cbe3', '#92dbe6', '#94ece8', '#fef17a', '#ffe378', '#ffd575', '#ffc873', '#ffbb71', '#feaf6e', '#fca26c', '#fa9769', '#f78b66', '#f38064', '#ef7461', '#ea6a5e', '#e55f5c', '#e05559', '#da4b56', '#d44253', '#ce3850', '#c72f4e', '#c1264b', '#ba1e48', '#b21545', '#ab0d42', '#a30540', '#9b013d', '#93003a'];
-    _E.fxn.common.shuffle_array(extended_colors);
-
-
-    _E.feature.aesir.backgroundColors = main_colors.concat(extended_colors);
-
-
-    for (let i = 0; i < 1000; i++) {
-        _E.feature.aesir.backgroundColors.push(_E.fxn.common.randomHsl());
-    }
-    //_E.fxn.common.shuffle_array(_E.feature.aesir.backgroundColors);
-};
 _E.feature.aesir.build_pie_chart = function (chartd) {
     //console.log(chartd);
     var ctx = document.getElementById('chart_' + chartd.target_qid + '').getContext('2d');
@@ -487,132 +374,126 @@ _E.feature.aesir.convert_to_color_rating = function (a) {
 }
 
 
-_E.feature.aesir.push_replies_v0 = function () {
-    // check box
-    _E.feature.aesir.cortex_reply.push(
-        {
-            "uid": "test_sur_q_3",
-            "questionType": "MULTI_CHOICE",
-            "classifiedAs": "CGROUP",
-            "stats": {
-                "English": [50, 0.5],
-                "French": [40, 0.4],
-                "Turkish": [10, 0.1]
-            }
+_E.feature.aesir.render_data = function (response) {
+    $("#render_target").html("");
+    let render_html = "";
+    for (let i = 0; i < response.length; i++) {
+        let cr = response[i];
+        let ql = JSON.parse(cr.question);
+        if (cr.stats == null) {
+            continue;
         }
-    );
+        //Inital html to show
+        render_html = `
+            <div class="col s12 m6 l4" style="float:top;"><div class="card-panel">
+                <span class="badge">(${cr.uid})</span>
+                <p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
+                    <span class='en'>${ql[0] ? ql[0] : cr.uid}</span>
+                    <!-- <span class='fr'>${ql[1] ? ql[1] : cr.uid}</span> -->
+                </p>
+                <canvas id="${'chart_' + cr.uid}" width="300" height="300"></canvas>
+                <div id="edtable_${'chart_' + cr.uid}" class="ctx_datatable"></div>
+                <pre class="ctx_msg">${JSON.stringify(cr, null, 2)}</pre>
+            </div></div>`;
 
-    // free text
-    _E.feature.aesir.cortex_reply.push(
-        {
-            "uid": "test_sur_q_9",
-            "questionType": "FREE_TEXT",
-            "classifiedAs": "TEXTAREA",
-            "stats": {
-                "responses": [
-                    { "questionAnswer": "Blah", "count": 14 },
-                    { "questionAnswer": "Blah 2", "count": 4 }
-                ],
-                "avgSentimentScore": "0.0",
-                "avgMaginitudeScore": "0.0",
-                "top5PositiveResponses": [
-                    {
-                        "questionAnswer": "Blah",
-                        "sentimentScore": "0.0",
-                        "maginitudeScore": "0.0"
-                    },
-                    {
-                        "questionAnswer": "Blah 10",
-                        "sentimentScore": "0.0",
-                        "maginitudeScore": "0.0"
-                    }
-                ],
-                "top5NegativeResponses": [
-                    {
-                        "questionAnswer": "Blah",
-                        "sentimentScore": "0.0",
-                        "maginitudeScore": "0.0"
-                    },
-                    {
-                        "questionAnswer": "Blah 10",
-                        "sentimentScore": "0.0",
-                        "maginitudeScore": "0.0"
-                    }
-                ]
-            }
+        //Render the intial HTML
+        $("#render_target").append(render_html);
+
+        resp_to_chart = {
+            target_qid: cr.uid,
+            d_labels: [],
+            d_data: []
+        };
+
+
+        let stats = JSON.parse(cr.stats);
+        let statsKeys = (stats) ? Object.keys(stats) : true;
+        let statDataTable = [];
+        for (let ii = 0; ii < statsKeys.length; ii++) {
+            (stats) ? statDataTable.push(
+                { "statKey": statsKeys[ii], "statValue": parseInt(stats[statsKeys[ii]], 10), "statBg": _E.feature.aesir.backgroundColors[ii] }
+            ) : true;
         }
-    );
 
-    //SINGLE_CHOICE SCALE_1_TO_5
-    _E.feature.aesir.cortex_reply.push(
-        {
-            "uid": "test_sur_q_7",
-            "questionType": "SINGLE_CHOICE",
-            "classifiedAs": "SCALE_1_TO_5",
-            "stats": {
-                "averageValue": "2.5",
-                "values": [
-                    { "option": "1", "count": "14", "percentage": "0.3" },
-                    { "option": "2", "count": "5", "percentage": "0.1" },
-                    { "option": "5", "count": "90", "percentage": "0.87" },
-                    { "option": "Unsure", "count": "5", "percentage": "0.1" }
-                ]
-            }
+        statDataTable.sort(function (a, b) {
+            return b.statValue - a.statValue;
+        });
+
+
+        for (let ii = 0; ii < statDataTable.length; ii++) {
+            _E.feature.aesir.backgroundColors[ii] = statDataTable[ii].statBg;
+            resp_to_chart.d_labels.push(_E.fxn.common.label_truncate(statDataTable[ii].statKey, _E.feature.aesir.truncate_length));
+            (stats) ? resp_to_chart.d_data.push(
+                parseInt(statDataTable[ii].statValue, 10)
+            ) : true;
         }
-    );
 
-    //SINGLE_CHOICE SCALE_1_TO_10
-    _E.feature.aesir.cortex_reply.push(
-        {
-            "uid": "test_sur_q_8",
-            "questionType": "SINGLE_CHOICE",
-            "classifiedAs": "SCALE_1_TO_10",
-            "stats": {
-                "averageValue": "5",
-                "values": [
-                    { "option": "1", "count": "14", "percentage": "0.3" },
-                    { "option": "2", "count": "5", "percentage": "0.1" },
-                    { "option": "10", "count": "90", "percentage": "0.87" },
-                    { "option": "Unsure", "count": "5", "percentage": "0.1" }
-                ]
+
+        let recLimit = 11;
+        let item_count = (statDataTable.length < recLimit) ? statDataTable.length : recLimit;
+        let others = {
+            "statValue": 0,
+            "statKey": `Other Answers`,
+            "statOtherCategories": `(${statDataTable.length - recLimit} Categories)`,
+            "statBg": "#333333"
+        };
+        if (statDataTable.length > recLimit) {
+            for (let iii = recLimit; iii < statDataTable.length; iii++) {
+                others.statValue += statDataTable[iii].statValue;
             }
+            // truncate arrays
+            resp_to_chart.d_data = resp_to_chart.d_data.slice(0, recLimit)
+            resp_to_chart.d_labels = resp_to_chart.d_labels.slice(0, recLimit)
+            // add others
+            resp_to_chart.d_data.push(others.statValue);
+            resp_to_chart.d_labels.push(others.statKey + " " + others.statOtherCategories);
         }
-    );
 
-    //SINGLE_CHOICE RGROUP
-    _E.feature.aesir.cortex_reply.push(
-        {
-            "uid": "test_sur_q_10",
-            "questionType": "SINGLE_CHOICE",
-            "classifiedAs": "RGROUP",
-            "stats": {
-                "Pizza": [50, 0.5],
-                "Fish": [40, 0.4],
-                "Fishza": [10, 0.1]
-            }
+
+        //Depending on the type of the question, build a different type of chart
+        if (cr.classifiedAs.includes('SCALE')) {
+            _E.feature.aesir.build_bar_chart(resp_to_chart);
         }
-    );
-
-    //CLASSIFIED GC_Language
-    //CLASSIFIED GC_Org
-    //CLASSIFIED CP_CSD
-    //CLASSIFIED GC_ClsLvl
-    //CLASSIFIED CSPS_Offering
-    _E.feature.aesir.cortex_reply.push(
-        {
-            "uid": "test_sur_q_1",
-            "questionType": "CLASSIFIED",
-            "classifiedAs": "GC_Language",
-            "stats": {
-                "English": [50, 0.5],
-                "French": [40, 0.4],
-                "Urdu": [10, 0.1]
-            }
+        //Depending on the type of the question, build a different type of chart
+        if (cr.classifiedAs.includes('CGROUP')) {
+            _E.feature.aesir.build_pie_chart(resp_to_chart);
         }
-    );
-    // end demo dat
+        if (cr.classifiedAs.includes('RGROUP')) {
+            _E.feature.aesir.build_pie_chart(resp_to_chart);
+        }
+        if (cr.questionType.includes('CLASSIFIED')) {
+            _E.feature.aesir.build_pie_chart(resp_to_chart);
+        }
+        if (cr.questionType.includes('FREE_TEXT')) {
+            _E.feature.aesir.build_bar_chart(resp_to_chart);
+        }
 
+        let statDataTableHTML = `<table>`;
+        for (let iii = 0; iii < item_count; iii++) {
+            statDataTableHTML += `<tr>
+                <td>${statDataTable[iii].statKey}</td>
+                <td>
+                    <strong style="color:${statDataTable[iii].statBg}">${statDataTable[iii].statValue}</strong> <sup>(${((statDataTable[iii].statValue / cr.total) * 100).toFixed(1)}%)</sup>
+                </td></tr>`;
+        }
+        // TODO: RESUME HERE
+        if (statDataTable.length > recLimit) {
+            statDataTableHTML += `<tr>
+                <td>${others.statKey} <sup>${others.statOtherCategories}</sup></td>
+                <td>
+                    <strong style="color:${others.statBg}">${others.statValue}</strong> <sup>(${((others.statValue / cr.total) * 100).toFixed(1)}%)</sup>
+                </td></tr>`;
+        }
+        statDataTableHTML += `</table>`;
+        //statDataTable.sort();
+
+
+        $(`#edtable_${'chart_' + cr.uid}`).html(statDataTableHTML);
+
+    }
+    $(".ctx_msg").hide();
 }
+
 
 _E.feature.aesir.enable_feature = function () {
     _E.feature.aesir.populate_background_colors();
