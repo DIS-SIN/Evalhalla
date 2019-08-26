@@ -31,13 +31,18 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
         (_E.feature.designer.debug) ? console.log(
             JSON.stringify(_E.feature.cortex.messages.create_survey_template_msg(jo), null, 4)
         ) : true;
-
         (_E.feature.designer.debug) ? alert("STUB: Upload Survey Evalese to CORTEX.") : true;
         (_E.feature.designer.debug) ? console.log(
             JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo), null, 4)
         ) : true;
 
-        alert("STUB: CORTEX Upload Complete");
+        console.log("Evalhalla -[produceSurveyTemplate]-> CORTEX");
+        (_E.feature.designer.debug) ? true : produceSurveyTemplate(JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo)));
+        console.log("Evalhalla -[produceEvalese]-> CORTEX");
+        (_E.feature.designer.debug) ? true : produceEvalese(JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo)));
+        console.log("Evalhalla CORTEX Upload Complete");
+
+        alert("CORTEX Upload Complete");
     });
 
     // generate test data

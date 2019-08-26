@@ -264,8 +264,9 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
 _E.feature.player.cortex_upload_survey_result = function (data_in) {
     // STUB
     //alert(data_in);
-    console.log("CORTEX Upload Stub");
+    console.log("Evalhalla -[surveyResponse] CORTEX");
     console.log(data_in);
+    produceSurveyResponse(data_in);
 }
 
 // validate the survey
@@ -347,7 +348,7 @@ _E.feature.player.evalhalla_submit = function () {
     // TODO: Add CORTEX send here
     (_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o_string);
 
-    console.log(json_o_string);
+    (_E.feature.player.debug) ? console.log(json_o_string) : true;
     //console.log(_E.core.interpreter.g_qindex);
 
     // show local storage items
