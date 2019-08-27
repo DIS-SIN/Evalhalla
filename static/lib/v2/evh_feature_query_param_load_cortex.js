@@ -14,6 +14,7 @@ _E.feature.qparam.settings = {
 };
 _E.feature.qparam.cortex = {
     //"evalese": ///
+
 };
 _E.feature.qparam.startup_builtinsurveys = {
     "test_sur": (typeof test_sur !== "undefined") ? test_sur : "",

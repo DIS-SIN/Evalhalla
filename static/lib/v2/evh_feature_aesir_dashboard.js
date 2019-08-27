@@ -232,7 +232,7 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
     consumeSurveyMetrics(
         _E.feature.qparam.settings.sur,
         _E.feature.aesir.cortex_chart_data,
-        _E.feature.aesir.cortex_get_survey_callback_error,
+        _E.feature.aesir.cortex_get_survey_callback,
         _E.feature.aesir.cortex_get_survey_callback_error
     );
 }
