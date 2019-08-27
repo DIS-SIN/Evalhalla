@@ -264,7 +264,7 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
 _E.feature.player.cortex_upload_survey_result = function (data_in) {
     // STUB
     //alert(data_in);
-    console.log("Evalhalla -[surveyResponse] CORTEX");
+    console.log("Evalhalla -[surveyResponse]-> CORTEX");
     console.log(data_in);
     produceSurveyResponse(data_in);
 }

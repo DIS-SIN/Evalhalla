@@ -9,29 +9,63 @@ _E.feature.qparam.settings = {
     "entry": "direct", // the entry method to the survey
     "params": null, // the search params
     "sur": "", // the survey to load
-    "sur_evh": ""
+    "sur_evh": "",
+    "fallback": false
 };
 _E.feature.qparam.cortex = {
     //"evalese": ///
 };
 _E.feature.qparam.startup_builtinsurveys = {
-    "test_sur": (test_sur) ? test_sur : "",
-    "example_nanos": (example_nanos) ? example_nanos : "",
-    "example_nanos_paged": (example_nanos_paged) ? example_nanos_paged : "",
-    "ut1_june18_event": (ut1_june18_event) ? ut1_june18_event : "",
-    "ut0_da_interest": (ut0_da_interest) ? ut0_da_interest : "",
-    "engage": (engage) ? engage : "",
-    "inclusive": (inclusive) ? inclusive : "",
-    "busrides": (busrides) ? busrides : "",
-    "ypn": (ypn) ? ypn : "",
-    "eldp": (eldp) ? eldp : "",
-    "dmb": (dmb) ? dmb : "",
-    "dmb2": (dmb2) ? dmb2 : "",
-    "openhouse": (openhouse) ? openhouse : "",
-    "tsq": (tsq) ? tsq : "",
-    "discover": (discover) ? discover : "",
+    "test_sur": (typeof test_sur !== "undefined") ? test_sur : "",
+    "example_nanos": (typeof example_nanos !== "undefined") ? example_nanos : "",
+    "example_nanos_paged": (typeof example_nanos_paged !== "undefined") ? example_nanos_paged : "",
+    "ut1_june18_event": (typeof ut1_june18_event !== "undefined") ? ut1_june18_event : "",
+    "ut0_da_interest": (typeof ut0_da_interest !== "undefined") ? ut0_da_interest : "",
+    "engage": (typeof engage !== "undefined") ? engage : "",
+    "inclusive": (typeof inclusive !== "undefined") ? inclusive : "",
+    "busrides": (typeof busrides !== "undefined") ? busrides : "",
+    "ypn": (typeof ypn !== "undefined") ? ypn : "",
+    "eldp": (typeof eldp !== "undefined") ? eldp : "",
+    "dmb": (typeof dmb !== "undefined") ? dmb : "",
+    "dmb2": (typeof dmb2 !== "undefined") ? dmb2 : "",
+    "openhouse": (typeof openhouse !== "undefined") ? openhouse : "",
+    "tsq": (typeof tsq !== "undefined") ? tsq : "",
+    "discover": (typeof discover !== "undefined") ? discover : "",
 };
 _E.feature.qparam.startupcallback = function () { };
+_E.feature.qparam.consume_evalese_error = function () {
+    console.log("CORTEX Connection Issue, CREATE or FALLBACK check");
+    // WARN: Messing with the sur lookup case. fix this with slugify and detangling demo code
+    if (typeof _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()] !== "undefined") {
+        console.log("... Using pre-baked survey from demo");
+        _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()];
+        _E.feature.qparam.settings.auto_display_mode = true;
+    } else {
+        if (_E.feature.qparam.settings.fallback == "true") {
+            console.log("... FALLBACK. Using test_sur demo default");
+            _E.feature.qparam.settings.sur = "TEST_SUR"; // WARN: Case survey id changes
+            _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()];
+        }
+        _E.feature.qparam.settings.auto_display_mode = true;
+    }
+    console.log("Evalhalla qparam statup, using sur = " + _E.feature.qparam.settings.sur);
+    g_intro_script = _E.feature.qparam.settings.sur_evh;
+    _E.feature.qparam.startupcallback();
+};
+_E.feature.qparam.consume_evalese_success = function () {
+    console.log("Evalhalla <-[consumeEvalese]- CORTEX");
+    let jo = JSON.parse(_E.feature.qparam.cortex.evalese);
+    //console.log(jo.sur_evalese);
+
+    g_intro_script = jo.sur_evalese; //_E.feature.qparam.settings.sur_evh;
+    _E.feature.qparam.settings.auto_display_mode = true;
+    _E.feature.qparam.settings.sur_evh = jo.sur_evalese;
+
+    console.log("Evalhalla startupcallback post CORTEX");
+
+    console.log("Evalhalla qparam statup, using sur = " + _E.feature.qparam.settings.sur);
+    _E.feature.qparam.startupcallback();
+};
 _E.feature.qparam.startup = function (callback) {
     console.log("Evalhalla qparam statup");
     _E.feature.qparam.startupcallback = callback;
@@ -41,7 +75,7 @@ _E.feature.qparam.startup = function (callback) {
         _E.feature.qparam.settings.sur = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("sur"));
         _E.feature.qparam.settings.entry = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("entry"));
         _E.feature.qparam.settings.weasel = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("weasel"));
-
+        _E.feature.qparam.settings.fallback = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("fallback"));
     } catch (e) {
         // IE11 Unsupported
         alert("Apologies. Evalhalla is built using modern code. If you can, please make urgent requests to your leadership to enter the modern era. Everything will improve, you will get more done will less friction. Chrome, Firefox, or Edge all will work.");
@@ -76,30 +110,8 @@ _E.feature.qparam.startup = function (callback) {
     consumeEvalese(
         _E.feature.qparam.settings.sur,
         _E.feature.qparam.cortex,
-        function () {
-            console.log("Evalhalla <-[consumeEvalese]- CORTEX");
-            _E.feature.qparam.settings.auto_display_mode = true;
-            g_intro_script = _E.feature.qparam.cortex.evalese; //_E.feature.qparam.settings.sur_evh;
-
-            if (typeof callback !== "undefined") {
-                console.log("Evalhalla startupcallback post CORTEX");
-                _E.feature.qparam.startupcallback();
-            }
-        },
-        function () {
-            console.log("CORTEX Connection Issue, Falling back on demo data");
-            if (typeof _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur] !== "undefined") {
-                _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur];
-                _E.feature.qparam.settings.auto_display_mode = true;
-            } else {
-                _E.feature.qparam.settings.sur = "test_sur";
-                _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur];
-                _E.feature.qparam.settings.auto_display_mode = true;
-            }
-            g_intro_script = _E.feature.qparam.settings.sur_evh;
-            _E.feature.qparam.startupcallback();
-        });
-
-
+        (_E.feature.qparam.settings.fallback == "true") ? _E.feature.qparam.consume_evalese_error : _E.feature.qparam.consume_evalese_success,
+        _E.feature.qparam.consume_evalese_error
+    );
 };
 

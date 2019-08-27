@@ -251,8 +251,10 @@ _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
     "meta_submission_time": "2019-08-17T22:03:26.727Z"
     */
 
-
-    msg_cortex.response.conducted = jo["meta_evalhalla_sur"];
+    // WARN: Might only work for ELDP
+    msg_cortex.response.conducted = jo["meta_evalhalla_sur"].toUpperCase(); // WARN: Uppercase, this will cause issues
+    // need to slugify and fix
+    // TODO
     msg_cortex.response.surveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
     msg_cortex.response.userAgent = jo["meta_useragent"];
     //cortex_response.response.conducted = jo["meta_evalhalla_sur"];

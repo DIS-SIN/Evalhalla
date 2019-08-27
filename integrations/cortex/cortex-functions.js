@@ -10,8 +10,8 @@ const adminUrl = "http://cortex.da-an.ca/admin"
 //
 
 const survey_metrics_avro_template = {
-  "namespace": "cortex.evalhalla.surveyTemplate",
-  "name": "survey_template",
+  "namespace": "cortex.evalhalla.surveyMetrics",
+  "name": "survey_metrics",
   "type": "record",
   "fields": [
     {
@@ -393,7 +393,7 @@ const survey_response_avro_template = {
 _C.consumeEvaleseCallback = function () { };
 _C.consumeEvaleseCallbackError = function () { };
 const consumeEvalese = function (survey_name, variable, callback, callbackerror) {
-  console.log("Message to CORTEX (consumeEvalese)");
+  console.log(`Message to CORTEX (consumeEvalese) ${survey_name}`);
 
   if (typeof callback !== "undefined") {
     _C.consumeEvaleseCallback = callback;
@@ -402,7 +402,11 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
     _C.consumeEvaleseCallbackError = callbackerror;
   }
   // variable must be a plain javascript object
-  var url = adminUrl + "/topics/" + survey_name + "/consume";
+  //console.log("WARN: Overriding " + survey_name + " to survey_evalese");
+  //survey_name = "survey_evalese";
+  // end WARN
+
+  var url = adminUrl + "/topics/" + survey_name + "_survey_evalese/consume";
   $.ajax(
     url
   ).success(
@@ -415,8 +419,9 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
         );
       }
       else {
+        console.log("CORTEX Success");
         variable.evalese = data.evalese;
-        console.log(variable);
+        //console.log(variable);
         _C.consumeEvaleseCallback();
       }
     }
@@ -435,7 +440,7 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
 _C.consumeSurveyMetricsCallback = function () { };
 _C.consumeSurveyMetricsCallbackError = function () { };
 const consumeSurveyMetrics = function (survey_name, variable, callback, callbackerror) {
-  console.log("Message to CORTEX (consumeSurveyMetrics)");
+  console.log(`Message to CORTEX (consumeSurveyMetrics) ${survey_name}`);
 
   if (typeof callback !== "undefined") {
     _C.consumeSurveyMetricsCallback = callback;
@@ -444,28 +449,33 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
     _C.consumeSurveyMetricsCallbackError = callbackerror;
   }
   // variable must be a plain javascript object
+  // TODO: Update cortex to provide targeted survey metrics vs. most recent
+  console.log("WARN: Overriding " + survey_name + " to survey_metrics");
+  survey_name = "survey_metrics";
+
   var url = adminUrl + "/topics/" + survey_name + "/consume";
   $.ajax(
     url
   ).success(
     function (data, textStatus, jqXHR) {
-      if (typeof data.evalese === "undefined") {
+      if (typeof data.payload === "undefined") {
         console.log(data);
         console.log(
-          "Failed to consume Metrics for survey " + survey_name +
+          "Failed to consume Metrics for survey [" + survey_name + "]" +
           "Message is not the correct expected structure"
         );
       }
       else {
-        variable.playload = data.payload;
-        console.log(variable);
+        console.log("CORTEX Success");
+        variable.payload = data.payload;
+        //console.log(variable);
         _C.consumeSurveyMetricsCallback();
       }
     }
   ).error(
     function (jqXHR, textStatus, errorThrown) {
       console.log(
-        "Failed to consume Metrics for survey " + survey_name
+        "Failed to consume Metrics for survey [" + survey_name + "]" +
         + "with error " + errorThrown + " || " + jqXHR.responseText
       );
       error = true;
@@ -479,9 +489,9 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
 // Producers
 //
 
-const produceEvalese = function (evalese) {
+const produceEvalese = function (survey_name, evalese) {
   var data = {
-    "topic": survey_name,
+    "topic": survey_name + "_survey_evalese",
     "avro_schema": evalese_avro_template,
     "message": {
       "evalese": evalese
@@ -510,10 +520,11 @@ const produceEvalese = function (evalese) {
 const produceSurveyTemplate = function (survey_template) {
   // TODO: Unstub, Check AVRO format
   console.log("Message to CORTEX (produceSurveyTemplate)");
+  console.log("STUBBED");
   return;
 
   var data = {
-    "topic": "survey_template",
+    "topic": "survey_json",
     "avro_schema": survey_template_avro_template,
     "message": survey_template
   }
