@@ -103,6 +103,32 @@ _E.fxn.common.hackernoon_pie = function (elid, slices) {
     }
 }
 
+_E.fxn.common.label_truncate = function (str, length) {
+    var dots = str.length > length ? '...' : '';
+    return str.substring(0, length) + dots;
+};
+
+_E.fxn.common.get_random_int = function (max, skew) {
+    // https://stackoverflow.com/questions/11383242/how-to-generate-skewed-random-numbers-in-javascript
+    // Raise Math.random() to a power to get a gamma curve - this changes the distribution between 0 and 1, 
+    // but 0 and 1 stay constant endpoints.
+    // For gamma > 1, you will get darker output; for 0 < gamma < 1 you get lighter. 
+    // (Here, '2' gives you the x - squared curve; the equidistant lightness would be '0.5' for the square - root curve.)
+    // var r = Math.pow(Math.random(), 2);
+    let lskew = (typeof skew === "undefined" || skew == null) ? "normal" : skew;
+    let r = (lskew != "normal") ? Math.pow(Math.random(), lskew) : Math.random();
+
+    return Math.floor(r * Math.floor(max));
+};
+
+_E.fxn.common.trim_json_object_keyvalues = function (obj) {
+    //if (!Array.isArray(obj) && typeof obj != 'object') return obj;
+    if (obj === null || !Array.isArray(obj) && typeof obj != 'object') return obj;
+    return Object.keys(obj).reduce(function (acc, key) {
+        acc[key.trim()] = typeof obj[key] == 'string' ? obj[key].trim() : _E.fxn.common.trim_json_object_keyvalues(obj[key]);
+        return acc;
+    }, Array.isArray(obj) ? [] : {});
+}
 
 // Clean HTML string and write into our DIV
 // string sanitizer  // <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>

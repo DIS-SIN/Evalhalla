@@ -22,10 +22,10 @@ _E.feature.instadash.reinit_meta = function () {
         evalhalla: { target_qid: "Sur", chart_type: "none", d_data: [], d_labels: [] },
         useragent: { target_qid: "Method", chart_type: "rgroup", d_data: [], d_labels: [] },
         language: { target_qid: "Lang", chart_type: "rgroup", d_data: [], d_labels: [] },
-        department: { target_qid: "Department", chart_type: "scale", d_data: [], d_labels: [] },
+        department: { target_qid: "Department", chart_type: "scale1to10", d_data: [], d_labels: [] },
         offering: { target_qid: "Offering", chart_type: "none", d_data: [], d_labels: [] },
-        classification: { target_qid: "Classification", chart_type: "scale", d_data: [], d_labels: [] },
-        city: { target_qid: "City", chart_type: "scale", d_data: [], d_labels: [] }
+        classification: { target_qid: "Classification", chart_type: "scale1to10", d_data: [], d_labels: [] },
+        city: { target_qid: "City", chart_type: "scale1to10", d_data: [], d_labels: [] }
     };
 }
 _E.feature.instadash.g_qindex = {} // derefrence question text here
@@ -44,7 +44,7 @@ _E.feature.instadash.parse_question_text = function (sur_text) {
             .split("/dropdown")[0].split("/DROPDOWN")[0]
             .split("/language")[0].split("/LANGUAGE")[0]
             .split("/scale")[0].split("/SCALE")[0]
-            .split("/scale1-5")[0].split("/SCALE1-5")[0];
+            .split("/scale1to5")[0].split("/scale1to5")[0];
         evh_sai = evh_sai;
 
         // split by lang (en for now)
@@ -115,7 +115,7 @@ _E.feature.instadash.survista_get_survey = function (survey) {
     if (survey == "" || typeof survey === "undefined") {
         survey = "test_sur";
     }
-    $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
+    $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey.toUpperCase(), function (response) {
 
         _E.feature.instadash.render_data(response);
 
@@ -384,7 +384,7 @@ _E.feature.instadash.build_raw_datatable = function () {
             if (data_point.hasOwnProperty(key)) { //not a property from prototype chain  
                 let key_tokens = key.split("_");
                 let data_type = key_tokens[0];
-                if (data_type == "textarea" || data_type == "rgroup" || data_type == "cgroup" || data_type == "scale") {
+                if (data_type == "textarea" || data_type == "rgroup" || data_type == "cgroup" || data_type == "scale1to10" || data_type == "scale1to5") {
                     let data_detail = (typeof (key_tokens[3]) === "undefined") ? "data" : key_tokens[3];
                     if (data_detail != "data") {
                         continue;
@@ -496,7 +496,7 @@ _E.feature.instadash.build_meta_charts = function () {
         let value = _E.feature.instadash.g_meta_data[key];
         if (_E.feature.instadash.g_meta_data.hasOwnProperty(key)) {
             //g_qindex[key] = key;
-            if (value.chart_type == "scale") {
+            if (value.chart_type == "scale1to10") {
                 value.layout = "s12 m12";
                 _E.feature.instadash.build_scale(value);
             } else if (value.chart_type == "rgroup") {
@@ -545,7 +545,7 @@ _E.feature.instadash.build_charts = function (chartd) {
                             }
                         }
 
-                        if (data_type == "scale") {
+                        if (data_type == "scale1to10" || data_type == "scale1to5") {
                             chartd.d_data.push(parseInt(value, 10));
                         } else if (data_type == "rgroup") {
                             chartd.d_data.push(value);
@@ -569,7 +569,11 @@ _E.feature.instadash.build_charts = function (chartd) {
         }
     }
 
-    if (chartd.chart_type == "scale") {
+    //console.log(chartd.chart_type);
+    if (chartd.chart_type == "scale" || chartd.chart_type == "scale1to10" || chartd.chart_type == "scale1to5") {
+        if (chartd.chart_type == "scale") {
+            chartd.chart_type == "scale1to10";
+        }
         _E.feature.instadash.build_scale(chartd);
     } else if (chartd.chart_type == "rgroup") {
         _E.feature.instadash.build_rgroup(chartd);

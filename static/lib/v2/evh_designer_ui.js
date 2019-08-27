@@ -9,19 +9,67 @@ _E["feature"]["designer"]
 // init the package
 _E.feature.designer = {};
 
+_E.feature.designer.debug = false;
 
 _E.feature.designer.enable_ls_ui_buttons = function () {
-    // upload to survista: stub
+    // upload to survista/cortex: stub
     // TODO: Fix with correct code (right now just obj/deobj for test)
     _E.core.state.store["el"]["btn_upload"].on("click", function () {
-        alert(
-            JSON.stringify(JSON.parse(
+        (_E.feature.designer.debug) ? console.log("CORTEX Upload") : true;
+
+        let jo = JSON.parse(
+            _E.core.interpreter.evh_clean_json(
                 _E.core.state.store["render"]["json"]
                     .replace(/\,\%questions/g, "")
                     .replace(/\%questions/g, "")
                     .replace(/\%options/g, "")
-            ), null, 4)
+            )
         );
+
+        // cortex feature
+        (_E.feature.designer.debug) ? alert("STUB: Upload Full Survey JSON to CORTEX.") : true;
+        (_E.feature.designer.debug) ? console.log(
+            JSON.stringify(_E.feature.cortex.messages.create_survey_template_msg(jo), null, 4)
+        ) : true;
+        (_E.feature.designer.debug) ? alert("STUB: Upload Survey Evalese to CORTEX.") : true;
+        (_E.feature.designer.debug) ? console.log(
+            JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo), null, 4)
+        ) : true;
+
+        console.log("Evalhalla -[produceSurveyTemplate]-> CORTEX");
+        (_E.feature.designer.debug) ? true : produceSurveyTemplate(
+            //_E.feature.qparam.settings.sur,
+            //JSON.stringify(
+            _E.feature.cortex.messages.create_survey_template_msg(jo)
+            //)
+        );
+        console.log("Evalhalla -[produceEvalese]-> CORTEX");
+        (_E.feature.designer.debug) ? true : produceEvalese(
+            _E.feature.qparam.settings.sur,
+            JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo))
+        );
+        console.log("Evalhalla CORTEX Upload Complete");
+
+        alert("CORTEX Upload Complete");
+    });
+
+    // generate test data
+    $(".clr-cortex-test-data").on("click", function () {
+        $("#cortex_test_data").val("");
+    });
+    $(".generate_test_data").on("click", function () {
+        let jo = JSON.parse(
+            _E.core.interpreter.evh_clean_json(
+                _E.core.state.store["render"]["json"]
+                    .replace(/\,\%questions/g, "")
+                    .replace(/\%questions/g, "")
+                    .replace(/\%options/g, "")
+            )
+        );
+        let stempl = _E.feature.cortex.messages.create_survey_template_msg(jo)
+
+        _E.feature.data.recordpumper.execute_load(stempl);
+        // add enabling functions
     });
 
     // Local storage
@@ -33,6 +81,7 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
 
     _E.core.state.store["el"]["adm_save_working_survey"].on("click", function () {
         alert("Saving Working Survey...");
+
         _E.feature.localstore.ls_save_survey_signature(_E.core.state.store["render"]["json"]
             .replace(/\,\%questions/g, "")
             .replace(/\%questions/g, "")
@@ -194,6 +243,7 @@ _E.feature.designer.ui_resize_textareas = function () {
     M.textareaAutoResize(_E.core.state.store["el"]["c_json"]);
 }
 
+_E.feature.designer.modal_cortex_test_data = null;
 _E.feature.designer.enable_feature = function () {
     _E.feature.designer.enable_ls_ui_buttons();
     _E.feature.designer.enable_editor_panel_menu_buttons();
@@ -206,10 +256,15 @@ _E.feature.designer.enable_feature = function () {
     $('.modal').modal();
     $(".dropdown-trigger").dropdown();
 
+    //var elems = document.querySelectorAll('.modal');
+    //var instances = M.Modal.init(elems, options);
 
     // not presentation mode
     $("#step_lang").hide();
     $("#step_offering").hide();
     $("#step_tombstone").hide();
     $("#step_thank_you_cta").hide();
+
+    // Focus on the editor
+    _E.core.state.store["el"]["c_editor"].focus();
 };

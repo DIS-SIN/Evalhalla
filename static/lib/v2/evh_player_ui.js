@@ -14,7 +14,7 @@ _E.feature.player = {};
 _E.feature.player.debug = false;
 
 // transitions for the survey
-_E.feature.player.transitions_state = "lang";
+_E.feature.player.transitions_state = "true";
 _E.feature.player.transitions = {
     "lang": {
         "next": "offering",
@@ -249,7 +249,7 @@ _E.feature.player.ui_activate_pagedirection_buttons = function () {
 };
 
 //
-//
+// SUBMISSION
 //
 
 // send to storage
@@ -259,6 +259,15 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
     api_route = sv_api_post_surv_resp_route + sv_api_key;
     _E.fxn.common.api_post_to_route(api_route, data_in);
 };
+
+// send to cortex
+_E.feature.player.cortex_upload_survey_result = function (data_in) {
+    // STUB
+    //alert(data_in);
+    console.log("Evalhalla -[surveyResponse]-> CORTEX");
+    console.log(data_in);
+    produceSurveyResponse(data_in);
+}
 
 // validate the survey
 _E.feature.player.ui_evalhalla_submit_validate = function (formElement) {
@@ -318,19 +327,54 @@ _E.feature.player.evalhalla_submit = function () {
     let date_string = new Date(date.getTime() - (date.getTimezoneOffset() * 60000))
         .toISOString()
     json_o["meta_submission_time"] = date_string;
+
+
+    // for survista
     var json_o_string = (JSON.stringify(json_o, null, 4));
-    //console.log(json_o_string);
+    // for cortex
+    let jo = json_o;
+    var cortex_json_o = _E.feature.cortex.messages.create_survey_response_msg(jo);
+    var cortex_json_o_string = (JSON.stringify(cortex_json_o, null, 4));
+    (_E.feature.player.debug) ? console.log(cortex_json_o_string) : true;
     // save response to local storage
+
+    let jot = JSON.parse(
+        _E.core.interpreter.evh_clean_json(
+            _E.core.state.store["render"]["json"]
+                .replace(/\,\%questions/g, "")
+                .replace(/\%questions/g, "")
+                .replace(/\%options/g, "")
+        )
+    );
+
+    let jot_tmplo = _E.feature.cortex.messages.create_survey_template_msg(jot);
+    let template_qs = jot_tmplo.questions;
+
+    let derefQuestionText = function (match) {
+        for (let ii = 0; ii < template_qs.length; ii++) {
+            if (template_qs[ii].cortex.uid == match) {
+                return template_qs[ii].question;
+            }
+        }
+    }
+    for (let ii = 0; ii < cortex_json_o.questions.length; ii++) {
+        cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
+    }
+
+    console.log("HEY ");
+    console.log(cortex_json_o);
 
     //
     // SAVE RESPONSES
     //
-    // TODO: turn back on
+    // TODO: turn back on (localstorage)
     (_E.feature.player.debug) ? true : _E.feature.localstore.ls_save_survey_response(json_o_string);
-    // TODO: turn back on
+    // TODO: turn back on (survista)
     (_E.feature.player.debug) ? true : _E.feature.player.api_upload_survey_result(json_o_string);
+    // TODO: Add CORTEX send here
+    (_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o);
 
-    console.log(json_o_string);
+    (_E.feature.player.debug) ? console.log(json_o_string) : true;
     //console.log(_E.core.interpreter.g_qindex);
 
     // show local storage items

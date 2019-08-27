@@ -286,19 +286,19 @@ Q:
     "// On a scale from 1-5 where 1 is Not Relevant and 5 is Very Relevant\n" +
     "\n" +
     "*Q: Cloud (AWS, Azure) \n" +
-    "/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
+    "/scale1to5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
     "\n" +
     "Q: Python\n" +
-    "/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
+    "/scale1to5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
     "\n" +
     "Q: Continuous Integration / Continuous Delivery\n" +
-    "/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
+    "/scale1to5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
     "\n" +
     "Q: Open Source\n" +
-    "/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
+    "/scale1to5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
     "\n" +
     "*Q: Cloud Native Development\n" +
-    "/scale1-5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
+    "/scale1to5 Not Relevant / Pas pertinent, Very Relevant / Très pertinent, Unsure / Incertain\n" +
     "\n" +
     "/pagebreak\n" +
     "\n" +

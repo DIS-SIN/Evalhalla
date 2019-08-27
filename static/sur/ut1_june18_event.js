@@ -20,7 +20,7 @@ var ut1_june18_event = "# /en UT1-J18 /; /fr UT1-J18 /;\n" +
     "*Q: \n" +
     "/en 2. Overall, how satisfied were you with this learning event? Rate your satisfaction on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;\n" +
     "/fr 2. Dans l’ensemble, à quel point êtes-vous satisfait(e) de cette activité d’apprentissage? Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait ». /;\n" +
-    "/scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain\n" +
+    "/scale1to5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain\n" +
     "\n" +
     "*Q: \n" +
     "/en 3a. Did this event meet your expectations as it was outlined in the advertisement? /;\n" +
@@ -40,7 +40,7 @@ var ut1_june18_event = "# /en UT1-J18 /; /fr UT1-J18 /;\n" +
     "*Q:\n" +
     "/en 4a. How satisfied were you with the speaker(s) for this event on a scale of 1 to 5, with 1 being very unsatisfied and 5 being very satisfied. /;\n" +
     "/fr 4a. À quel point êtes-vous satisfait(e) du ou des conférenciers ayant participé à cette activité? Évaluez votre satisfaction sur une échelle de 1 à 5, où 1 correspond à « très insatisfait » et 5 correspond à « très satisfait » /;\n" +
-    "/scale1-5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain\n" +
+    "/scale1to5 Very Unsatisfied / Très insatisfait, Very Satisfied / Très satisfait, Unsure / Incertain\n" +
     "\n" +
     "Q: \n" +
     "/en 4b. Why did you give the score that you did? /;\n" +

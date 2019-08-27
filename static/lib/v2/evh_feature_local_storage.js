@@ -354,7 +354,7 @@ _E.feature.localstore.ls_get_lsobject = function () {
 // save the current survey in the editor to the ls
 _E.feature.localstore.ls_save_survey_signature = function (signature, src) {
     if (_E.feature.localstore.ls_storageAvailable('localStorage')) {
-        var ev_ls = ls_get_lsobject();
+        var ev_ls = _E.feature.localstore.ls_get_lsobject();
         //console.log(ev_ls);
         ev_ls["saved_survey_signatures"].push({ "survista": JSON.parse(signature), "evalhalla": src });
         localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
@@ -369,8 +369,13 @@ _E.feature.localstore.ls_save_survey_signature = function (signature, src) {
 _E.feature.localstore.ls_update_working_survey = function (signature) {
     if (_E.feature.localstore.ls_storageAvailable('localStorage')) {
         var ev_ls = _E.feature.localstore.ls_get_lsobject();
-        ev_ls["working_survey"] = JSON.parse(signature);
-        localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+        try {
+            ev_ls["working_survey"] = JSON.parse(_E.core.interpreter.evh_clean_json(signature));
+            localStorage.setItem('ev_ls', JSON.stringify(ev_ls));
+            _E.core.interpreter.dismiss_parse_error();
+        } catch (e) {
+            _E.core.interpreter.show_parse_error();
+        }
         //todo: timer on refreshes
         //ls_show_local_storage();
         //ui_resize_textareas();

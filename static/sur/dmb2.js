@@ -45,7 +45,7 @@ Q:
 Q:
 /en On a scale from 1-5 how ready is your department for disruptive change? /;
 /fr Sur une échelle de 1 à 5, dans quelle mesure votre département est-il prêt pour un changement perturbateur? /;
-/scale1-5 Not Ready / Pas Prêt, Very Ready / Très Prêt, Unsure / Incertain
+/scale1to5 Not Ready / Pas Prêt, Very Ready / Très Prêt, Unsure / Incertain
 
 Q:
 /en What concrete things do we need to be ready for disruptive change? /;
