@@ -3,7 +3,7 @@
 //
 
 var _C = {};
-const adminUrl = "http://cortex.da-an.ca/admin"
+const adminUrl = "https://cortex.da-an.ca/admin"
 
 //
 // Messages
