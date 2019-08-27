@@ -115,7 +115,7 @@ _E.feature.instadash.survista_get_survey = function (survey) {
     if (survey == "" || typeof survey === "undefined") {
         survey = "test_sur";
     }
-    $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
+    $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey.toUpperCase(), function (response) {
 
         _E.feature.instadash.render_data(response);
 

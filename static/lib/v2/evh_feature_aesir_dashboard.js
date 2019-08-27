@@ -202,7 +202,7 @@ _E.feature.aesir.cortex_get_survey_callback = function () {
     }, 1000);*/
 };
 _E.feature.aesir.cortex_get_survey_callback_error = function () {
-    console.log("CORTEX Connection Issue, Falling Back on Demo Data");
+    console.log("CORTEX Connection Issue, Falling Back on Demo Data get_stat_nodes");
     _E.feature.aesir.cortex_chart_data = _E.feature.cortex.messages.get_stat_nodes();
     _E.feature.aesir.cortex_chart_data = _E.feature.aesir.cortex_chart_data[_E.feature.aesir.cortex_chart_data.length - 1];
     _E.feature.aesir.cortex_get_survey_callback();
@@ -232,7 +232,7 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
     consumeSurveyMetrics(
         _E.feature.qparam.settings.sur,
         _E.feature.aesir.cortex_chart_data,
-        _E.feature.aesir.cortex_get_survey_callback,
+        (_E.feature.qparam.settings.fallback == "true") ? _E.feature.aesir.cortex_get_survey_callback_error : _E.feature.aesir.cortex_get_survey_callback,
         _E.feature.aesir.cortex_get_survey_callback_error
     );
 }

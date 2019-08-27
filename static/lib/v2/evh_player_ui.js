@@ -329,14 +329,40 @@ _E.feature.player.evalhalla_submit = function () {
     json_o["meta_submission_time"] = date_string;
 
 
-    let jo = json_o;
-
     // for survista
     var json_o_string = (JSON.stringify(json_o, null, 4));
     // for cortex
-    var cortex_json_o_string = (JSON.stringify(_E.feature.cortex.messages.create_survey_response_msg(jo), null, 4));
+    let jo = json_o;
+    var cortex_json_o = _E.feature.cortex.messages.create_survey_response_msg(jo);
+    var cortex_json_o_string = (JSON.stringify(cortex_json_o, null, 4));
     (_E.feature.player.debug) ? console.log(cortex_json_o_string) : true;
     // save response to local storage
+
+    let jot = JSON.parse(
+        _E.core.interpreter.evh_clean_json(
+            _E.core.state.store["render"]["json"]
+                .replace(/\,\%questions/g, "")
+                .replace(/\%questions/g, "")
+                .replace(/\%options/g, "")
+        )
+    );
+
+    let jot_tmplo = _E.feature.cortex.messages.create_survey_template_msg(jot);
+    let template_qs = jot_tmplo.questions;
+
+    let derefQuestionText = function (match) {
+        for (let ii = 0; ii < template_qs.length; ii++) {
+            if (template_qs[ii].cortex.uid == match) {
+                return template_qs[ii].question;
+            }
+        }
+    }
+    for (let ii = 0; ii < cortex_json_o.questions.length; ii++) {
+        cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
+    }
+
+    console.log("HEY ");
+    console.log(cortex_json_o);
 
     //
     // SAVE RESPONSES
@@ -346,7 +372,7 @@ _E.feature.player.evalhalla_submit = function () {
     // TODO: turn back on (survista)
     (_E.feature.player.debug) ? true : _E.feature.player.api_upload_survey_result(json_o_string);
     // TODO: Add CORTEX send here
-    (_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o_string);
+    (_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o);
 
     (_E.feature.player.debug) ? console.log(json_o_string) : true;
     //console.log(_E.core.interpreter.g_qindex);

@@ -279,6 +279,14 @@ _E.core.interpreter.get_qindex_text = function (key) {
     }
 };
 
+_E.core.interpreter.dismiss_parse_error = function () {
+    $("#parser_alert").html("");
+    $("#parser_alert").hide();
+};
+_E.core.interpreter.show_parse_error = function () {
+    $("#parser_alert").html("Evalese Error Detected");
+    $("#parser_alert").show();
+};
 //
 // Command Handlers
 //
@@ -915,7 +923,8 @@ _E.core.interpreter.render = function () {
                 .replace(/\%questions/g, "")
         ), null, 4));
     } catch (e) {
-        M.toast({ html: 'Hint: Use single quotes, JSON ' + e.toString(), classes: 'rounded' });
+        //M.toast({ html: 'Hint: Use single quotes, JSON ' + e.toString(), classes: 'rounded' });
+        _E.core.interpreter.show_parse_error();
     }
     // todo: accessibility check on materialize dropdown (there's shadow elements causing label issues)
     //$('select').formSelect();

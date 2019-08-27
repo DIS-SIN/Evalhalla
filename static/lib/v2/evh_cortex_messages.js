@@ -235,6 +235,7 @@ _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
         }
     };
     if (typeof jo === "undefined") {
+        console.log("Exiting early from create_survey_response_msg");
         return msg_cortex;
     }
     /*

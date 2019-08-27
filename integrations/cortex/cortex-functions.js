@@ -349,12 +349,18 @@ const survey_response_avro_template = {
                 "fields": [
                   {
                     "name": "en",
-                    "type": ["string", "null"],
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "default": ""
                   },
                   {
                     "name": "fr",
-                    "type": ["string", "null"],
+                    "type": [
+                      "string",
+                      "null"
+                    ],
                     "default": ""
                   }
                 ]
@@ -520,8 +526,6 @@ const produceEvalese = function (survey_name, evalese) {
 const produceSurveyTemplate = function (survey_template) {
   // TODO: Unstub, Check AVRO format
   console.log("Message to CORTEX (produceSurveyTemplate)");
-  console.log("STUBBED");
-  return;
 
   var data = {
     "topic": "survey_json",

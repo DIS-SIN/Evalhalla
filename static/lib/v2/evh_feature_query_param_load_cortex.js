@@ -39,16 +39,17 @@ _E.feature.qparam.consume_evalese_error = function () {
     // WARN: Messing with the sur lookup case. fix this with slugify and detangling demo code
     if (typeof _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()] !== "undefined") {
         console.log("... Using pre-baked survey from demo");
-        _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()];
-        _E.feature.qparam.settings.auto_display_mode = true;
+        if (_E.feature.qparam.settings.fallback == "true") {
+            _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()];
+        }
     } else {
         if (_E.feature.qparam.settings.fallback == "true") {
             console.log("... FALLBACK. Using test_sur demo default");
             _E.feature.qparam.settings.sur = "TEST_SUR"; // WARN: Case survey id changes
             _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()];
         }
-        _E.feature.qparam.settings.auto_display_mode = true;
     }
+    _E.feature.qparam.settings.auto_display_mode = true;
     console.log("Evalhalla qparam statup, using sur = " + _E.feature.qparam.settings.sur);
     g_intro_script = _E.feature.qparam.settings.sur_evh;
     _E.feature.qparam.startupcallback();
