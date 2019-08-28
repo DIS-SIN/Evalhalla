@@ -88,7 +88,7 @@ _E.feature.qparam.startup = function (callback) {
     // ok let's load it up
     // TODO: Remove hardcode demos and replace with API
     if (_E.feature.qparam.settings.sur == "" || typeof _E.feature.qparam.settings.sur === "undefined") {
-        _E.feature.qparam.settings.sur = "test_sur"; // the survey to load
+        _E.feature.qparam.settings.sur = "TEST_SUR"; // the survey to load
     }
 
     // pull in the evalese

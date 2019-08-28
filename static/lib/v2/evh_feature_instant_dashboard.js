@@ -93,9 +93,9 @@ _E.feature.instadash.render_data = function (response) {
     questions_to_chart.sort(function (a, b) { return a - b; });
     $("#render_target").append('<div class="col s12 m12 center"><div class="card-panel purp-canada-ca-edged"><span class="badge">Live</span><sub>Survey Feedback</sub><div id="chart_textarea_responses" width="300" height="300">' +
         '<div class="row">' +
-        '<div class="col s12 m4 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">' + _E.feature.instadash.g_chart_data.length + '</span></p></div>' +
-        '<div class="col s12 m4 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>' +
-        '<div class="col s12 m4 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>' +
+        '<div class="col s12 m6 center"><p><strong># Responses</strong><br/><span style="color:#66b66a;font-size:2.3em;">' + _E.feature.instadash.g_chart_data.length + '</span></p></div>' +
+        '<div class="col s12 m6 center"><p><strong>Unique Roles</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_roles"></span></p></div>' +
+        '<div class="col s12 m6 center"><p><strong>Unique Departments</strong><br/><span style="color:#66b66a;font-size:2.3em;" class="cht_depts"></span></p></div>' +
         '</div></div></div></div>');
     for (let i = 0; i < questions_to_chart.length; i++) {
         _E.feature.instadash.build_charts({
@@ -141,7 +141,7 @@ _E.feature.instadash.start_auto_refresh = function () {
 _E.feature.instadash.build_scale = function (chartd) {
     chartd.d_data.sort();
     chartd.d_labels.sort();
-    let layout = chartd.layout ? chartd.layout : "s12 m4";
+    let layout = chartd.layout ? chartd.layout : "s12 m6";
     $("#render_target").append('<div class="col ' + layout + '" style="float:top;"><div class="card-panel"><span class="badge">(' + chartd.target_qid + ')</span><p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">' + (_E.feature.instadash.g_qindex[chartd.target_qid] ? _E.feature.instadash.g_qindex[chartd.target_qid] : "") + '</p><canvas id="chart_scale_' + chartd.target_qid + '" width="300" height="300"></canvas><p id="chart_avg_' + chartd.target_qid + '"></p></div></div>');
 
     var sum = 0;
@@ -232,7 +232,7 @@ _E.feature.instadash.build_scale = function (chartd) {
 _E.feature.instadash.build_rgroup = function (chartd) {
     chartd.d_data.sort();
     chartd.d_labels.sort();
-    let layout = chartd.layout ? chartd.layout : "s12 m4";
+    let layout = chartd.layout ? chartd.layout : "s12 m6";
     $("#render_target").append('<div class="col ' + layout + '" style="float:top;"><div class="card-panel"><span class="badge">(' +
         chartd.target_qid + ')</span><p style="font-weight:bold;font-size:0.8em;bottom:0.25rem;line-height:1.2em;">' +
         (_E.feature.instadash.g_qindex[chartd.target_qid] ? _E.feature.instadash.g_qindex[chartd.target_qid] : "") +
@@ -347,7 +347,7 @@ _E.feature.instadash.convert_to_color_rating = function (a) {
 _E.feature.instadash.build_textarea = function (chartd) {
     chartd.d_data.sort();
     chartd.d_labels.sort();
-    let layout = chartd.layout ? chartd.layout : "s12 m4";
+    let layout = chartd.layout ? chartd.layout : "s12 m6";
     $("#render_target").append('<div class="col ' + layout +
         '" style="float:top;"><div class="card-panel"><span class="badge">(' +
         chartd.target_qid + ')</span><sub style="font-weight:normal;font-size:1.3em;bottom:0.25rem;line-height:1.2em;">' +
@@ -532,16 +532,19 @@ _E.feature.instadash.build_charts = function (chartd) {
                         || data_detail == "sentimentScore"
                         || data_detail == "sentences"
                     ) {
+                        value = (value == "") ? "Blank" : value;
                         if (data_type == "cgroup") {
                             for (let k = 0; k < value.length; k++) {
-                                if (!chartd.d_labels.includes(value[k])) {
-                                    chartd.d_labels.push(value[k]);
+                                let lbl = (value[k] == "") ? "Blank" : value[k];
+                                if (!chartd.d_labels.includes(lbl)) {
+                                    chartd.d_labels.push(lbl);
                                 }
-                                chartd.d_data.push(value[k]);
+                                chartd.d_data.push(lbl);
                             }
                         } else {
-                            if (!chartd.d_labels.includes(value)) {
-                                chartd.d_labels.push(value);
+                            let lbl = (value == "") ? "Blank" : value;
+                            if (!chartd.d_labels.includes(lbl)) {
+                                chartd.d_labels.push(lbl);
                             }
                         }
 

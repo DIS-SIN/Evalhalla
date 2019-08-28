@@ -39,14 +39,16 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
         console.log("Evalhalla -[produceSurveyTemplate]-> CORTEX");
         (_E.feature.designer.debug) ? true : produceSurveyTemplate(
             //_E.feature.qparam.settings.sur,
-            //JSON.stringify(
-            _E.feature.cortex.messages.create_survey_template_msg(jo)
-            //)
+            JSON.stringify(
+                _E.feature.cortex.messages.create_survey_template_msg(jo)
+            )
         );
         console.log("Evalhalla -[produceEvalese]-> CORTEX");
         (_E.feature.designer.debug) ? true : produceEvalese(
             _E.feature.qparam.settings.sur,
-            JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo))
+            JSON.stringify(
+                _E.feature.cortex.messages.create_survey_evalese_msg(jo)
+            )
         );
         console.log("Evalhalla CORTEX Upload Complete");
 

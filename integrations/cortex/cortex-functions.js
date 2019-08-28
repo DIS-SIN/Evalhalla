@@ -9,7 +9,9 @@ const adminUrl = "https://cortex.da-an.ca/admin"
 // Messages
 //
 
-const survey_metrics_avro_template = {
+const survey_metrics_avro_template = {}
+/*
+{
   "namespace": "cortex.evalhalla.surveyMetrics",
   "name": "survey_metrics",
   "type": "record",
@@ -66,7 +68,7 @@ const survey_metrics_avro_template = {
     }
   ]
 }
-
+*/
 
 const evalese_avro_template = {
   "namespace": "cortex.evalhalla.evalese",
@@ -80,9 +82,21 @@ const evalese_avro_template = {
   ]
 }
 
-const survey_template_avro_template = {
-  "namespace": "cortex.evalhalla.surveyTemplate",
-  "name": "survey_template",
+const survey_template_avro_template =
+{
+  "namespace": "CORTEX",
+  "name": "Survey",
+  "type": "record",
+  "fields": [
+    { "name": "uid", "type": "string" },
+    { "name": "format", "type": "string" },
+    { "name": "content", "type": "string" }
+  ]
+}
+/*
+{
+  "namespace": "CORTEX",
+  "name": "survey_json",
   "type": "record",
   "fields": [
     {
@@ -261,8 +275,20 @@ const survey_template_avro_template = {
     }
   ]
 }
+*/
 
-const survey_response_avro_template = {
+const survey_response_avro_template =
+{
+  "namespace": "CORTEX",
+  "name": "survey_response",
+  "type": "record",
+  "fields": [
+    { "name": "uid", "type": "string" },
+    { "name": "content", "type": "string" }
+  ]
+}
+/*
+{
   "namespace": "cortex.evalhalla.surveyResponse",
   "name": "survey_response",
   "type": "record",
@@ -391,6 +417,7 @@ const survey_response_avro_template = {
     }
   ]
 }
+*/
 
 //
 // Consumers

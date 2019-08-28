@@ -1,5 +1,5 @@
 // Generic Test Survey
-var test_sur = `# test_sur
+var test_sur = `# TEST_SUR
 
 ##
 /en Evalhalla /;
