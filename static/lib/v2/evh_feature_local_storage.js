@@ -412,7 +412,8 @@ _E.feature.localstore.ls_save_survey_response = function (response) {
         // _E.core.state.store["generics"]["generic_fetched"] = false;
         // api_get_generics();
 
-        _E.core.state.store["el"]["c_editor"].trigger("change");
+        // Bug fix, after paginator, this was causing the buttons to not have click events
+        //_E.core.state.store["el"]["c_editor"].trigger("change");
     } else {
         _E.feature.localstore.warn_user_alert();
     }

@@ -85,6 +85,11 @@ _E.feature.player.transitions_update_paths = function () {
 };
 // reset survey for another survey taker
 _E.feature.player.reset_page = function () {
+    (_E.feature.player.debug) ? console.log(`<-- _E.feature.player.reset_page ${prevstate} > ${nextstate} | pg ${_E.core.state.store["render"]["currpageid"]} / ${_E.core.state.store["render"]["pageid"]}`) : true;
+    _E.core.state.store["el"]["c_editor"].trigger("change"); // render
+    _E.feature.player.activate_html();
+    /*
+    REFACTOR: Moved to enable_feature
     // set state to end of survey
     _E.feature.player.transitions_state = "thanks";
 
@@ -95,13 +100,14 @@ _E.feature.player.reset_page = function () {
     let prevstate = _E.feature.player.transitions_state;
     let nextstate = _E.feature.player.getnextpage(_E.feature.player.transitions_state);
 
-    (_E.feature.player.debug) ? console.log(`<-- _E.feature.player.reset_page ${prevstate} > ${nextstate} | pg ${_E.core.state.store["render"]["currpageid"]} / ${_E.core.state.store["render"]["pageid"]}`) : true;
-
+    
     _E.feature.player.transitions_state = nextstate;
     _E.core.state.store["render"]["currpageid"] = 0;
     _E.feature.player.set_page(_E.feature.player.transitions_state, "intro_page");
 
+    */
     (_E.feature.player.debug) ? console.log(`--> _E.feature.player.reset_page ${_E.feature.player.transitions_state} | pg ${_E.core.state.store["render"]["currpageid"]} / ${_E.core.state.store["render"]["pageid"]}`) : true;
+
 };
 // set the progress bar details
 _E.feature.player.set_progress_percent = function () {
@@ -254,6 +260,7 @@ _E.feature.player.ui_activate_pagedirection_buttons = function () {
 
 // send to storage
 _E.feature.player.api_upload_survey_result = function (data_in) {
+    //return;
     // upload the survey reponse to our integrations
     let api_route = "";
     api_route = sv_api_post_surv_resp_route + sv_api_key;
@@ -262,11 +269,16 @@ _E.feature.player.api_upload_survey_result = function (data_in) {
 
 // send to cortex
 _E.feature.player.cortex_upload_survey_result = function (data_in) {
+    //return;
     // STUB
     //alert(data_in);
     console.log("Evalhalla -[surveyResponse]-> CORTEX");
     console.log(data_in);
-    produceSurveyResponse(data_in);
+    produceSurveyResponse(
+        JSON.stringify(
+            data_in
+        )
+    );
 }
 
 // validate the survey
@@ -368,7 +380,7 @@ _E.feature.player.evalhalla_submit = function () {
     // SAVE RESPONSES
     //
     // TODO: turn back on (localstorage)
-    (_E.feature.player.debug) ? true : _E.feature.localstore.ls_save_survey_response(json_o_string);
+    //(_E.feature.player.debug) ? true : _E.feature.localstore.ls_save_survey_response(json_o_string);
     // TODO: turn back on (survista)
     (_E.feature.player.debug) ? true : _E.feature.player.api_upload_survey_result(json_o_string);
     // TODO: Add CORTEX send here
@@ -378,7 +390,9 @@ _E.feature.player.evalhalla_submit = function () {
     //console.log(_E.core.interpreter.g_qindex);
 
     // show local storage items
-    _E.feature.localstore.ls_view_saved_entries();
+    // REFACTOR player no long needs this. 
+    // TODO: Update localstorage features to queue CORTEX responses and send when internet available
+    //_E.feature.localstore.ls_view_saved_entries();
     //alert(json_o_string);
 
     // advance page
@@ -460,8 +474,28 @@ _E.feature.player.init_feature = function () {
 
     // advance page to start
     //_E.feature.player.set_page("lang"); // start survey
-    _E.feature.player.reset_page();
+    //_E.feature.player.reset_page();
+
+    /// RESET PAGE
+    _E.feature.player.transitions_state = "thanks";
+
+    $("#autocomplete-input-department").val("");
+    $("#autocomplete-input-city").val("");
+    $("#autocomplete-input-classification").val("");
+
+    let prevstate = _E.feature.player.transitions_state;
+    let nextstate = _E.feature.player.getnextpage(_E.feature.player.transitions_state);
+
+    (_E.feature.player.debug) ? console.log(`<-- _E.feature.player.reset_page ${prevstate} > ${nextstate} | pg ${_E.core.state.store["render"]["currpageid"]} / ${_E.core.state.store["render"]["pageid"]}`) : true;
+
+    _E.feature.player.transitions_state = nextstate;
+    _E.core.state.store["render"]["currpageid"] = 0;
+    _E.feature.player.set_page(_E.feature.player.transitions_state);
+
+    (_E.feature.player.debug) ? console.log(`--> _E.feature.player.reset_page ${_E.feature.player.transitions_state} | pg ${_E.core.state.store["render"]["currpageid"]} / ${_E.core.state.store["render"]["pageid"]}`) : true;
+
 };
+
 
 // used by interpreter. Seperate function in case custom calls needed
 _E.feature.player.activate_html = function () {
