@@ -252,14 +252,14 @@ _E.feature.aesir.populate_background_colors = function () {
         "#77259A",
         "#235BC1",
         "#9C233E",
-        "#EA7F5A",
+        "#D0481B",
         "#3C3D6B",
         "#208088",//"#61CFDA", fails wcag
-        "#E75D7A",
+        "#DF2A51",
         "#3A8248",//"#51B063", fails wvg
         "#008533",//"#00EE5C", fails wvag
         "#6B5A30",
-        "#9B84B1",
+        "#876AA0",
         "#CA16DA",//"#EA82F3", fails wcag
         "#9CB237",
         "#38870D",//"#B4F690", fails wcag
