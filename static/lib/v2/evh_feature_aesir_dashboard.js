@@ -248,27 +248,28 @@ _E.feature.aesir.populate_background_colors = function () {
 
     let main_colors = [
         // Elmina Color Safe Pallette
-        "#2E6D80",
+        "#1E6D80",
         "#77259A",
         "#235BC1",
-        "#459FF3",
-        "#EA82F3",
-        "#61CFDA",
         "#9C233E",
         "#EA7F5A",
-        "#51B063",
-        "#00E6C2",
-        "#B4F690",
-        "#00EE5C",
         "#3C3D6B",
+        "#208088",//"#61CFDA", fails wcag
         "#E75D7A",
+        "#3A8248",//"#51B063", fails wvg
+        "#008533",//"#00EE5C", fails wvag
         "#6B5A30",
         "#9B84B1",
+        "#CA16DA",//"#EA82F3", fails wcag
         "#9CB237",
+        "#38870D",//"#B4F690", fails wcag
         "#6F362C",
+        "#0E76D8",//"#459FF3", fails wcag
         "#F7E6C2",
+        "#008571",//"#00E6C2", fails wcag
         // Additional Colors
-        '#fdd835', '#fbc02d', '#a8f925', '#f5177f', '#ff7c4d', '#00429d', '#204fa3', '#315ca9', '#4069af',
+        '#fdd835',
+        '#fbc02d', '#a8f925', '#f5177f', '#ff7c4d', '#00429d', '#204fa3', '#315ca9', '#4069af',
         '#4d77b5', '#5985bb', '#6593c0', '#71a1c6', '#7eafcb', '#8bbdd0', '#ffe5cc', '#ffcab9', '#ffaea5',
         '#fd9291', '#f4777f', '#e75d6f', '#d84360', '#c52a52', '#ae1045', '#93003a',
         'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)',
@@ -573,7 +574,7 @@ _E.feature.aesir.render_data = function (response) {
             statDataTableHTML += `<tr>
                 <td>${statDataTable[iii].statKey}</td>
                 <td>
-                    <strong style="color:${statDataTable[iii].statBg}">${statDataTable[iii].statValue}</strong> <sup>(${((statDataTable[iii].statValue / cr.total) * 100).toFixed(1)}%)</sup>
+                    <strong style="font-weight:bold;color:${statDataTable[iii].statBg}">${statDataTable[iii].statValue}</strong> <sup>(${((statDataTable[iii].statValue / cr.total) * 100).toFixed(1)}%)</sup>
                 </td></tr>`;
         }
         // TODO: RESUME HERE
@@ -581,7 +582,7 @@ _E.feature.aesir.render_data = function (response) {
             statDataTableHTML += `<tr>
                 <td>${others.statKey} <sup>${others.statOtherCategories}</sup></td>
                 <td>
-                    <strong style="color:${others.statBg}">${others.statValue}</strong> <sup>(${((others.statValue / cr.total) * 100).toFixed(1)}%)</sup>
+                    <strong style="font-weight:bold;color:${others.statBg}">${others.statValue}</strong> <sup>(${((others.statValue / cr.total) * 100).toFixed(1)}%)</sup>
                 </td></tr>`;
         }
         statDataTableHTML += `</table>`;
