@@ -191,7 +191,7 @@ _E.feature.data.recordpumper.submit_response = function (responses) {
     //console.log(responses);
 
     $("#cortex_test_data").val(JSON.stringify(responses));
-    $('.modal').modal('open');
+    $('#cortex_test_data_modal').modal('open');
 
 };
 

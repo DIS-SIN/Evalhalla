@@ -111,14 +111,18 @@ _E.feature.instadash.render_data = function (response) {
     //build_raw_datatable();
 }
 
+
 _E.feature.instadash.survista_get_survey = function (survey) {
     if (survey == "" || typeof survey === "undefined") {
-        survey = "test_sur";
+        survey = "DEMO";
     }
     $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey.toUpperCase(), function (response) {
-
         _E.feature.instadash.render_data(response);
 
+        //let converted_aesir_format = _E.feature.cortex.messages.convert_survista_to_aesir(response);
+        //$("#render_target").append(`<div><pre>${JSON.stringify(converted_aesir_format, null, 4)}</pre></div>`);
+
+        //_E.feature.instadash.stop_auto_refresh();
     });
 
 }
@@ -135,7 +139,7 @@ _E.feature.instadash.start_auto_refresh = function () {
     _E.feature.instadash.tmr = null;
     _E.feature.instadash.tmr = setInterval(function () {
         _E.feature.instadash.survista_get_survey(_E.feature.qparam.settings.sur);
-    }, 4500);
+    }, 15000);
 }
 
 _E.feature.instadash.build_scale = function (chartd) {

@@ -641,7 +641,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
                 .replace(/\%qid/g, _E.core.state.store["render"]["question"]["qid"])
                 .replace(/\%pick/g, opts[opti].trim())
                 .replace(/\%oid/g, opti)
-                .replace(/\%vpick/g, opt_input_value[_E.core.state.store["ui"]["lang"]].trim())
+                .replace(/\%vpick/g, opt_input_value["en"/*_E.core.state.store["ui"]["lang"]*/].trim())
                 ;
             form += temp_snip;
 
@@ -931,6 +931,12 @@ _E.core.interpreter.render = function () {
 
     // activate the language to stop dual showing
     _E.feature.lang.refresh_lang();
+
+    if (_E.core.interpreter.designermode == true) {
+        $(".hide-on-designer").hide();
+        //console.log("Interpreter: Clear Hide Items");
+
+    }
 };
 
 _E.core.interpreter.parse = function () {
@@ -945,6 +951,7 @@ _E.core.interpreter.parse = function () {
     _E.core.state.store["el"]["c_editor"].trigger("change");
     // resize
     M.textareaAutoResize(_E.core.state.store["el"]["c_editor"]);//ui_resize_textareas();
+
 };
 
 _E.core.interpreter.enable_feature = function () {
@@ -953,7 +960,15 @@ _E.core.interpreter.enable_feature = function () {
 
 };
 
-_E.core.interpreter.startup = function () {
+_E.core.interpreter.designermode = false;
+_E.core.interpreter.startup = function (emodule) {
+
+    if (emodule == "designer") {
+        _E.core.interpreter.designermode = true;
+        console.log("Interpreter: Design Mode");
+    }
+
     _E.core.interpreter.enable_feature();
     _E.core.interpreter.parse();
+
 };
