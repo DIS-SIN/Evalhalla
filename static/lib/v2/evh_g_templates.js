@@ -20,7 +20,8 @@ _E.core.templates = {};
 
 _E.core.templates.library = {
     "html": {
-        "step_lang": `<div id="step_lang" class="row bannerbgbacked center ev-page ev-page-lang">
+        "step_lang": `
+            <div id="step_lang" class="row bannerbgbacked center ev-page ev-page-lang">
                 <div class="col hide-on-small-only m3"></div>
                 <div class="col s12 m6 center">
                     <div>
@@ -50,13 +51,13 @@ _E.core.templates.library = {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col hide-on-small-only m3"></div>
             </div>
             `,
-        "step_offering": `<div id="step_offering" class="row bannerbgbacked center ev-page ev-page-offering">
+        "step_offering": `
+            <div id="step_offering" class="row bannerbgbacked center ev-page ev-page-offering">
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
@@ -83,7 +84,8 @@ _E.core.templates.library = {
                 </div>
                 <div class="col hide-on-small-only m2"></div>
             </div>`,
-        "step_tombstone": `<div id="step_tombstone" class="row bannerbgbacked center ev-page ev-page-tombstone">
+        "step_tombstone": `
+            <div id="step_tombstone" class="row bannerbgbacked center ev-page ev-page-tombstone">
                 <div class="col hide-on-small-only m1"></div>
                 <div class="col s12 m10 center">
                     <div>
@@ -153,7 +155,8 @@ _E.core.templates.library = {
                 </div>
                 <div class="col hide-on-small-only m1"></div>
             </div>`,
-        "step_thank_you_cta": `<div id="step_thank_you_cta" class="row bannerbgbacked center ev-page ev-page-thanks">
+        "step_thank_you_cta": `
+            <div id="step_thank_you_cta" class="row bannerbgbacked center ev-page ev-page-thanks">
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
@@ -185,7 +188,7 @@ _E.core.templates.library = {
             </div>`,
         "form wrap": '' +
             '<div class="surveybody">' +
-            '<div class="row">' +
+            '<div class="row hide-on-designer">' +
             '<div class="col s12 center">' +
             '<strong class="center-align determinate-text">%pctdisplay%</strong>' +
             '</div>' +
@@ -193,7 +196,7 @@ _E.core.templates.library = {
             '<div class="determinate" style="width: %pct%"></div>' +
             '</div>' +
             '</div>' +
-            '<div class="row">' +
+            '<div class="row hide-on-designer">' +
             '<div class="col s12 center bannered">' +
             '<img src="../../../static/images/csps_flag.png" class="responsive-img csps-flag" alt="CSPS-EFPC Flag, Maple leaf in book" />' +
             '</div>' +
@@ -203,14 +206,14 @@ _E.core.templates.library = {
             '%src' +
             '</div>' +
             '<div class="row">' +
-            '<div class="col s12 center">' +
+            '<div class="col s12 center hide-on-designer">' +
             '<a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-left left"><em class="material-icons fab-align dark-grey-text">chevron_left</em></a>' +
-            '<a href="#editor" id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large ">' +
+            '<a href="#editor" id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large right">' +
             '<span class="en">SUBMIT</span><span class="fr">SOUMETTRE</span></a>' +
             '<a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-right right"><em class="material-icons fab-align dark-grey-text">chevron_right</em></a>' +
             '</div>' +
             '</div>' +
-            '<div class="row">' +
+            '<div class="row hide-on-designer">' +
             '<ul class="pagination center-align" style="marigin:0;">' +
             '%pages' +
             '</ul>' +
@@ -231,7 +234,8 @@ _E.core.templates.library = {
         "header": '' +
             '<div class="row">' +
             '<div class="col s12 center">' +
-            '<h2>%title<br/>(%survey)</h2>' +
+            //'<span class="card-title">%survey</span>' +
+            '<h2 style="margin-top:0.2em;">%title</h2>' + // <br/>(%survey)
             '<p class="flow-text left-align light">%intro</p>' +
             '</div>' +
             '</div>' +

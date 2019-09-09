@@ -28,7 +28,7 @@
                     aria-label="Open menu">
                     <em class="material-icons mhi-menu" aria-hidden="true">menu</em>
                 </a>
-                <ul class="right">
+                <ul class="loader-prep right">
                     <li>
                         <div>
                             <a class="lang" href="#editor">
@@ -393,14 +393,34 @@
             </a>
         </li>
     </ul>
-
+    <div class="container  loader-remprep">
+        <div class="row">
+            <div class="col s12 center">
+                <div class="card-panel">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-purple-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="gap-patch">
+                                <div class="circle"></div>
+                            </div>
+                            <div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="editor" class="container">
         <div class="section" id="pre_survey_panels">
             <!-- Pre Survey Panels Go Here -->
         </div>
         <div class="section">
             <div class="row">
-                <div id="editor_window" class="col s12 m6">
+                <div id="editor_window" class="hide-on-player col s12 m6" style="display:none;">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
@@ -423,7 +443,7 @@
                         <div id="render_target"></div>
                     </div>
                 </div>
-                <div id="ls_window" class="col s12 m12">
+                <div id="ls_window" style="display:none;" class="hide-on-player col s12 m12">
                     <div class="row">
                         <form class="col s12">
                             <div class="input-field col s12">
@@ -446,7 +466,7 @@
                         </form>
                     </div>
                 </div>
-                <div id="json_window" class="col s12 m12">
+                <div id="json_window" style="display:none;" class="hide-on-player col s12 m12">
                     <div class="row">
                         <form class="col s12">
                             <div class="input-field col s12">
@@ -464,7 +484,7 @@
                         </form>
                     </div>
                 </div>
-                <div id="qlib_window" class="col s12 m12">
+                <div id="qlib_window" style="display:none;" class="hide-on-player col s12 m12">
                     <div class="row">
                         <nav>
                             <div class="nav-wrapper blue-canada-ca darken-1">
@@ -497,7 +517,7 @@
             </div>
         </div>
     </div>
-    <footer id="admin_footer_end" class="page-footer purp-canada-ca">
+    <footer id="admin_footer_end" class="page-footer purp-canada-ca" style="display:none;">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">

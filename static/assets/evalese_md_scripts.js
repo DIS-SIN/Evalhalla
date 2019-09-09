@@ -63,7 +63,46 @@ const g_tutorial_script = "" +
     "\n" +
     "[INSTRUCTION] Thank you!\n";
 
-var g_shorthand_script = "" +
+var g_shorthand_script = `
+
+# DEMO
+
+##
+/en Evalhalla /;
+/fr Evalhalla /;
+
+###
+/en Thank you for taking part in this survey. /; 
+/fr Merci de participer à cette enquête. /;
+
+*Q:
+/en Are you here in person? /;
+/fr Êtes-vous ici en personne? /;
+/one
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
+;
+
+/pagebreak
+
+*Q:
+/en Overall, how satisfied were you with this presentation? /;
+/fr Dans l’ensemble, à quel point êtes-vous satisfait(e) de cette présentation? /;
+/scale1to5 
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Any other thoughts? /;
+/fr D'autres pensées? /;
+/open
+
+/NOOFFERINGPAGE
+
+`;
+/*
+"" +
     "# 1234 \n" +
     "## This is my title \n" +
     "### This is a cool survey, you should fill it out. \n" +
@@ -97,8 +136,9 @@ var g_shorthand_script = "" +
     "\n" +
     "// Thank you!\n" +
     "";
-
-var g_shorthand_script_fr = "" +
+*/
+var g_shorthand_script_fr = g_shorthand_script;
+/*"" +
     "# 1234\n" +
     "## c'est mon titre\n" +
     "### Ceci est une bonne enquête, vous devriez le remplir.\n" +
@@ -132,3 +172,4 @@ var g_shorthand_script_fr = "" +
     "\n" +
     "// Merci!\n" +
     "";
+    */

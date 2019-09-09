@@ -17,6 +17,248 @@ _E["feature"]["exportJSON"]
 _E.feature.cortex.messages = {};
 _E.feature.cortex.messages.debug = false;
 
+_E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
+    let formatted_json;
+
+
+    //_E.feature.instadash.render_data(response);
+    /*
+     {
+        "rgroup_qid_1": "Yes",
+        "meta_useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36",
+        "textarea_qid_3": "This is a test",
+        "tombstone_city": "Conception Harbour, NL [T]",
+        "scale1to5_qid_2": "5",
+        "meta_entry_method": "",
+        "meta_evalhalla_sur": "DEMO",
+        "tombstone_language": "en",
+        "meta_question_count": 3,
+        "meta_submission_time": "2019-09-08T16:49:42.563Z",
+        "textofquestion_qid_1": " Are you here in person? ",
+        "textofquestion_qid_2": " Overall, how satisfied were you with this presentation? ",
+        "textofquestion_qid_3": " Any other thoughts? ",
+        "tombstone_department": "Canada Deposit Insurance Corporation (CDIC-SADC)",
+        "tombstone_offering_id": "",
+        "textarea_qid_3_language": "en",
+        "textarea_qid_3_sentences": [
+            {
+                "text": "This is a test",
+                "magnitudeScore": 0.10000000149011612,
+                "sentimentScore": 0.10000000149011612
+            }
+        ],
+        "tombstone_classification": "CS-02",
+        "textarea_qid_3_magnitudeScore": 0.10000000149011612,
+        "textarea_qid_3_sentimentScore": 0.10000000149011612
+    }
+    
+    */
+    let converted_aesir_format = {
+        "payload": {
+            "uid": "a417b5032161a1f927c58bb85d40cc1f",
+            "survey_uid": _E.feature.qparam.settings.sur,
+            "data": [
+                /*{
+                    "uid": "test_sur_q_1",
+                    "total": 1000,
+                    "question": "[\"What is your first official language?\",\"Quelle est votre première langue officielle?\"]",
+                    "stats": "{\"Gwich’in\":11,\"Malecite\":7,\"Punjabi\":17}",
+                    "questionType": "CLASSIFIED",
+                    "classifiedAs": "GC_Language"
+                }*/
+            ]
+        }
+    }
+
+    let questions = [];
+    let qcount = 0;
+    for (let i = 0; i < response.length; i++) {
+        let r = response[i];
+        let rkeys = (r) ? Object.keys(r) : [];
+        qcount = r["meta_question_count"];
+        for (let q = 1; q <= qcount; q++) {
+            let qp = {};
+            let stats = {
+                "uid": `${_E.feature.qparam.settings.sur}_q_${q}`,
+                "total": 0,
+                "question": "",//"[\"What is your first official language?\",\"Quelle est votre première langue officielle?\"]",
+                "stats": "",//"{\"Gwich’in\":11,\"Malecite\":7,\"Punjabi\":17}",
+                "questionType": "",
+                "classifiedAs": ""
+            }
+            for (let ii = 0; ii < rkeys.length; ii++) {
+                let rk = rkeys[ii];
+                if (rk.indexOf("qid_" + q) != -1) {
+                    //stats[rk] = r[rk];
+
+                    let metainf = rk.split("_");
+                    let qtype = (metainf[0]) ? metainf[0] : "undefined";
+                    let qidlbl = (metainf[1]) ? metainf[1] : "undefined";
+                    let qid = (metainf[2]) ? metainf[2] : "undefined";
+                    let submeta = (metainf[3]) ? metainf[3] : "undefined";
+
+                    if (qtype == "textofquestion") {
+                        stats["question"] = [(r[rk]) ? r[rk] : ""];
+                    } else if (qtype != "textofquestion" && submeta == "undefined") {
+                        stats["answer"] = [(r[rk]) ? r[rk] : "Blank"];
+                        stats["questionType"] = _E.core.interpreter.cortex_questiontypes[qtype].type;
+                        stats["classifiedAs"] = _E.core.interpreter.cortex_questiontypes[qtype].subtype;
+
+                    } else if (qtype == "textarea" && submeta == "sentimentScore") {
+                        stats["sentimentScore"] = [(r[rk]) ? r[rk] : 0.0];
+                    }
+                }
+            }
+            questions.push(stats);
+        }
+    }
+
+    //
+    let stats_metrics = [];
+    // load stats into here
+
+    // now get the tombstone data
+    for (let i = 0; i < response.length; i++) {
+        let r = response[i];
+        let rkeys = (r) ? Object.keys(r) : [];
+        //qcount = r["meta_question_count"];
+        //for (let q = 1; q <= qcount; q++) {
+        //    let qp = {};
+
+        for (let ii = 0; ii < rkeys.length; ii++) {
+            let stats = {
+                "uid": `${_E.feature.qparam.settings.sur}_q_tombstone`,
+                "total": 0,
+                "question": "",//"[\"What is your first official language?\",\"Quelle est votre première langue officielle?\"]",
+                "stats": "",//"{\"Gwich’in\":11,\"Malecite\":7,\"Punjabi\":17}",
+                "questionType": "",
+                "classifiedAs": ""
+            }
+            let rk = rkeys[ii];
+            if (rk.indexOf("tombstone") != -1) {
+                //stats[rk] = r[rk];
+
+                let metainf = rk.split("_");
+                let qtype = (metainf[0]) ? metainf[0] : "undefined";
+                let qidlbl = (metainf[1]) ? metainf[1] : "undefined";
+                let qid = (metainf[2]) ? metainf[2] : "undefined";
+                let submeta = (metainf[3]) ? metainf[3] : "undefined";
+
+                if (qtype == "tombstone" && qidlbl != "undefined") {
+                    if (qidlbl == "city") {
+                        qidlbl = "location";
+                    }
+                    qtype = "pick one " + qidlbl;
+                    stats["uid"] = `${_E.feature.qparam.settings.sur}_q_${qidlbl}`;
+                    stats["answer"] = [(r[rk]) ? r[rk] : "Blank"];
+                    stats["questionType"] = _E.core.interpreter.cortex_questiontypes[qtype].type;
+                    stats["classifiedAs"] = _E.core.interpreter.cortex_questiontypes[qtype].subtype;
+
+                    questions.push(stats);
+                }
+            }
+        }
+        //}
+    }
+
+
+    //console.log(questions);
+
+    // create shells for q metrics
+    for (let q = 1; q <= qcount; q++) {
+        stats_metrics.push({
+            "uid": `${_E.feature.qparam.settings.sur}_q_${q}`,
+            "total": 0,
+            "question": [],//"[\"What is your first official language?\",\"Quelle est votre première langue officielle?\"]",
+            "stats": {},//"{\"Gwich’in\":11,\"Malecite\":7,\"Punjabi\":17}",
+            "questionType": "",
+            "classifiedAs": "",
+            "answer": [],
+            "sentimentScore": []
+        });
+    }
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_location`,
+        "total": 0, "question": ["Location", "Location"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_language`,
+        "total": 0, "question": ["Language", "Language"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_department`,
+        "total": 0, "question": ["Department", "Department"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_offering`,
+        "total": 0, "question": ["Offering", "Offering"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_classification`,
+        "total": 0, "question": ["Classification", "Classification"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+
+    //console.log(stats_metrics);
+    // fill shellse
+    for (let ii = 0; ii < stats_metrics.length; ii++) {
+        for (let i = 0; i < questions.length; i++) {
+
+
+            let q = questions[i];
+
+            if (stats_metrics[ii].uid != q.uid) {
+                continue;
+            }
+            //console.log(stats_metrics[ii]);
+
+            // find arr index of target q
+            stats_metrics[ii].total += 1;
+            //console.log(stats_metrics[ii].question);
+            stats_metrics[ii].question = stats_metrics[ii].question.concat(q.question).slice(0, 2);
+            stats_metrics[ii].answer = stats_metrics[ii].answer.concat(q.answer);
+            stats_metrics[ii].sentimentScore = stats_metrics[ii].sentimentScore.concat(q.sentimentScore);
+            //stats_metrics[qmetrics].stats = "";
+            stats_metrics[ii].questionType = q.questionType;
+            stats_metrics[ii].classifiedAs = q.classifiedAs;
+        }
+    }
+    // build stats
+    for (let ii = 0; ii < stats_metrics.length; ii++) {
+        stats_metrics[ii].question = JSON.stringify(stats_metrics[ii].question);
+        //stats_metrics[ii].stats["avgSentimentScore"] = 0;
+        for (let j = 0; j < stats_metrics[ii].answer.length; j++) {
+            let answer = stats_metrics[ii].answer[j];
+            if (typeof stats_metrics[ii].stats[answer] !== "undefined") {
+                stats_metrics[ii].stats[answer] += 1;
+            } else {
+                stats_metrics[ii].stats[answer] = 1;
+            }
+        }
+        stats_metrics[ii].stats = JSON.stringify(stats_metrics[ii].stats);
+    }
+    // build sentiment avg
+    for (let ii = 0; ii < stats_metrics.length; ii++) {
+
+        if (stats_metrics[ii].questionType == "FREE_TEXT") {
+            stats_metrics[ii]["avgSentimentScore"] = 0;
+
+            for (let iii = 0; iii < stats_metrics[ii].sentimentScore.length; iii++) {
+                stats_metrics[ii]["avgSentimentScore"] += stats_metrics[ii].sentimentScore[iii];
+            }
+            stats_metrics[ii]["avgSentimentScore"] = stats_metrics[ii]["avgSentimentScore"] / stats_metrics[ii].sentimentScore.length;
+        }
+    }
+    // TOOD
+    converted_aesir_format.payload.data = stats_metrics;
+    formatted_json = converted_aesir_format;
+
+    return formatted_json;
+};
 
 _E.feature.cortex.messages.get_stat_nodes = function () {
 

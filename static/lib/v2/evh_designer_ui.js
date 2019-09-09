@@ -10,7 +10,7 @@ _E["feature"]["designer"]
 _E.feature.designer = {};
 
 _E.feature.designer.debug = false;
-
+_E.feature.designer.qrinit = false;
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
     // TODO: Fix with correct code (right now just obj/deobj for test)
@@ -52,12 +52,39 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
         );
         console.log("Evalhalla CORTEX Upload Complete");
 
-        alert("CORTEX Upload Complete");
+        //alert("CORTEX Upload Complete");
+        $(".cortex_conduct_survey").trigger("click");
     });
 
     // generate test data
     $(".clr-cortex-test-data").on("click", function () {
         $("#cortex_test_data").val("");
+    });
+    $(".cortex_view_dashboard").on("click", function () {
+        window.location = "https://app.evalhalla.ca/app/player/dashboard/?sur=" + _E.feature.qparam.settings.sur;
+    });
+    $(".cortex_conduct_survey").on("click", function () {
+        $("#cortex_qr_text").html(
+            `<h3>
+            <a href="https://app.evalhalla.ca/app/player/survey/?sur=${_E.feature.qparam.settings.sur}&entry=QR">
+                https://app.evalhalla.ca/app/player/survey/?sur=${_E.feature.qparam.settings.sur}
+            </a></h3>
+            `
+        );
+        if (_E.feature.designer.qrinit == false) {
+            _E.feature.designer.qrinit = new QRCode("cortex_qr", {
+                text: "https://app.evalhalla.ca/app/player/survey/?sur=" + _E.feature.qparam.settings.sur + "&entry=QR",
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        } else {
+            _E.feature.designer.qrinit.clear(); // clear the code.
+            _E.feature.designer.qrinit.makeCode("https://app.evalhalla.ca/app/player/survey/?sur=" + _E.feature.qparam.settings.sur + "&entry=QR"); // make another code.
+        }
+        $('#cortex_conduct_qr').modal('open');
     });
     $(".generate_test_data").on("click", function () {
         let jo = JSON.parse(
@@ -99,8 +126,8 @@ _E.feature.designer.ui_reset_panels = function () {
     _E.core.state.store["el"]["ui_json"].addClass("m6").removeClass("m12");
     _E.core.state.store["el"]["ui_json"].hide();
     // _E.core.state.store["el"]["ui_ls"].addClass("m4").removeClass("m12");
-    _E.core.state.store["el"]["ui_ls"].show();
-    _E.core.state.store["el"]["ui_qlib"].show();
+    _E.core.state.store["el"]["ui_ls"].hide();
+    _E.core.state.store["el"]["ui_qlib"].hide();
     _E.core.state.store["ui"]["hs_render_window"] = false;
     _E.core.state.store["ui"]["hs_editor_window"] = false;
     _E.core.state.store["ui"]["hs_json_window"] = false;
@@ -247,6 +274,8 @@ _E.feature.designer.ui_resize_textareas = function () {
 
 _E.feature.designer.modal_cortex_test_data = null;
 _E.feature.designer.enable_feature = function () {
+    _E.feature.designer.ui_reset_panels();
+
     _E.feature.designer.enable_ls_ui_buttons();
     _E.feature.designer.enable_editor_panel_menu_buttons();
     _E.feature.designer.enable_editor_buttons();

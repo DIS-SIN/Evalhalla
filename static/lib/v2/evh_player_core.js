@@ -10,6 +10,8 @@
         // PRERENDER
         // from evh_feature_query_params.js
         console.log("Evalhalla Startup");
+        $(".hide-on-player").hide();
+        $(".loader-prep").hide();
         _E.feature.qparam.startup(function () {
             console.log("Evalhalla qparam startup callback post CORTEX");
             // from evh_feature_unloadconfirmation.js
@@ -28,6 +30,8 @@
             _E.feature.lang.enable_feature();
             // from evh_player_ui.js
             _E.feature.player.enable_feature();
+            $(".loader-prep").show();
+            $(".loader-remprep").remove();
         });
 
     });

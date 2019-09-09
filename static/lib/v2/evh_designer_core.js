@@ -6,7 +6,8 @@
         // Just type. It will make your form HTML and JSON
         // Think more code less.
         //
-
+        $("#editor").hide();
+        $(".loader-prep").hide();
         // from evh_feature_query_params.js
         _E.feature.qparam.startup(
             function () {
@@ -18,7 +19,7 @@
                 _E.feature.localstore.enable_feature();
 
                 // from evh_g_interpreter.js
-                _E.core.interpreter.startup();
+                _E.core.interpreter.startup("designer");
 
                 // from evh_autocomplete.js
                 _E.feature.autocomplete.enable_feature();
@@ -37,6 +38,9 @@
                 // from evh_player_ui.js
                 //    enable_feature_player_ui();
                 //}
+                $("#editor").show();
+                $(".loader-prep").show();
+                $(".loader-remprep").remove();
             });
     });
 })(jQuery);

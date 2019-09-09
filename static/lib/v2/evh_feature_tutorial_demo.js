@@ -51,6 +51,8 @@ _E.feature.designer_tutorial.run_type_it = function (type_this) {
 };
 
 _E.feature.designer_tutorial.enable_feature = function () {
+    // Focus on the editor
+    _E.core.state.store["el"]["c_editor"].focus();
     _E.core.state.store["tut"] = {
         "type_it": g_tutorial_script.split(""),
         "type_it_short": g_shorthand_script.split(""),

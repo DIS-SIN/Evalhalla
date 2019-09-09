@@ -157,12 +157,16 @@ blockquote {
     background-color: #ffffff !important;  /* works with white text wcag aaa */
     color: #595959 !important;
     border: 2px #595959 solid !important;
+    /* hiding button until needed */
+    display: none;
 }
 
 .btn.accessibledisabled {
     background-color: #ffffff !important;  /* works with white text wcag aaa */
     color: #595959 !important;
     border: 2px #595959 solid !important;
+    /* hiding button until needed */
+    display: none;
 }
 
 .grey-canada-ca-block-header {
@@ -232,8 +236,8 @@ input {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right;
-    height: 250px;
-    max-height: 250px;
+    height: 150px;
+    max-height: 150px;
     /*min-height: 100px;*/
     width: 100%;
 }
