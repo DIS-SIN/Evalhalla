@@ -1,69 +1,96 @@
 var tsq = `
-# tsq
-## Transferable Skills Questionnaire
-### Lorem ipsum dolor
+# 
+TSQ1
 
-// Privacy details, contact
+## 
+/en Transferable Skills Questionnaire /;
+/fr NEED_TLX Transferable Skills Questionnaire /;
 
-Q: Have you taken a CSPS course in the past two years
+### 
+/en Description of the form /;
+/fr NEED_TLX  Description of the form /;
+
+// 
+/en Privacy details, contact info, etc /;
+/fr NEED_TLX Privacy details, contact info, etc /;
+
+Q: 
+/en Have you taken a CSPS course in the past two years /;
+/en NEED_TLX Have you taken a CSPS course in the past two years /;
 /one
-Yes
-No
+/en Yes /; /fr Oui /;
+/en No /; /fr Non /;
 ;
 
-Q: If yes, which course did you take?
+Q: 
+/en If yes, which course did you take? /;
+/fr NEED_TLX If yes, which course did you take? /;
 /open
 
-Q: How can we help you and your department better receive and.or deliver information?
+Q: 
+/en How can we help you and your department better receive and.or deliver information? /;
+/fr NEED_TLX How can we help you and your department better receive and.or deliver information? /;
 /any
-Course Development
-Create a collaborate space
-Course Facilitate
-Information Guidance
-Other
+/en Course Development /; /fr NEED_TLX Course Development /;
+/en Create a collaborate space /; /fr NEED_TLX Create a collaborate space /;
+/en Course Facilitate /; /fr NEED_TLX Course Facilitate /;
+/en Information Guidance /; /fr NEED_TLX Information Guidance /;
+/en Other /; /fr Autres /;
 ;
 
-Q: What else can we do to help?
+Q: 
+/en What else can we do to help? /;
+/fr NEED_TLX What else can we do to help? /;
 /open
 
 /pagebreak
 
-// Business Acumen: Definitions of the term
+// 
+/en Business Acumen: Definitions of the term /;
+/fr NEED_TLX Business Acumen: Definitions of the term /;
 
-Q: In regards to Business Acumen, what subject areas do you most want to learn about?
+Q: 
+/en In regards to Business Acumen, what subject areas do you most want to learn about? /;
+/fr NEED_TLX In regards to Business Acumen, what subject areas do you most want to learn about? /;
 /any
-Planning
-Finance
-Operations
-Strategy
-Integrated Risk Management
-Portfolios
-Alignment Goals
-Utilizing Social Media
-Digital Marketing
-Project Management
-Risk Management 
-Other
+/en Planning /; /fr NEED_TLX /;
+/en Finance /; /fr NEED_TLX /;
+/en Operations /; /fr NEED_TLX /;
+/en Strategy /; /fr NEED_TLX /;
+/en Integrated Risk Management /; /fr NEED_TLX /;
+/en Portfolios /; /fr NEED_TLX /;
+/en Alignment Goals /; /fr NEED_TLX /;
+/en Utilizing Social Media /; /fr NEED_TLX /;
+/en Digital Marketing /; /fr NEED_TLX /;
+/en Project Management /; /fr NEED_TLX /;
+/en Risk Management  /; /fr NEED_TLX /;
+/en Other /; /fr NEED_TLX /;
 ;
 
-Q: What other subject areas do you want to learn about?
+Q: 
+/en What other subject areas do you want to learn about? /;
+/fr NEED_TLX What other subject areas do you want to learn about? /;
 /open
 
-Q: In regards to Leadership Fundamentals, what subject areas do you most want to learn about?
+Q: 
+/en In regards to Leadership Fundamentals, what subject areas do you most want to learn about? /;
+/fr In regards to Leadership Fundamentals, what subject areas do you most want to learn about? /;
 /any
-Leadership Coaching
-Employee Engagement
-Resilience
-Change Management
-Leading Strategically
-Leading Virtual Teams
-Introspective Leadership
-Mental Health Peer Coaching
-Emotional Intelligence
-Other
+/en Leadership Coaching /; /fr NEED_TLX /;
+/en Employee Engagement /; /fr NEED_TLX /;
+/en Resilience /; /fr NEED_TLX /;
+/en Change Management /; /fr NEED_TLX /;
+/en Leading Strategically /; /fr NEED_TLX /;
+/en Leading Virtual Teams /; /fr NEED_TLX /;
+/en Introspective Leadership /; /fr NEED_TLX /;
+/en Mental Health Peer Coaching /; /fr NEED_TLX /;
+/en Emotional Intelligence /; /fr NEED_TLX /;
+/en Other /; /fr NEED_TLX /;
 ;
 
-Q: What other leadership fundamentals do you want to learn about?
+Q: 
+/en What other leadership fundamentals do you want to learn about? /;
+/fr NEED_TLX What other leadership fundamentals do you want to learn about? /;
 /open
 
 Q: In regards to Enabling Skills what subject areas do you most want  to learn about?

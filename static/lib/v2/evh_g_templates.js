@@ -32,7 +32,7 @@ _E.core.templates.library = {
                         <div class="row center">
                             <h1>
                                 <span class="en">Survey</span>
-                                <span class="fr">Enquête</span>
+                                <span class="fr">Sondage</span>
                             </h1>
                             <p>
                                 Language of preference - Langue de préférence
@@ -68,7 +68,7 @@ _E.core.templates.library = {
                         <div class="row center">
                             <h2>
                                 <span class="en">Survey</span>
-                                <span class="fr">Enquête</span>
+                                <span class="fr">Sondage</span>
                             </h2>
                             <p>
                                 <span class="en">Please choose your event/course</span>
@@ -96,7 +96,7 @@ _E.core.templates.library = {
                         <div class="row center">
                             <h2>
                                 <span class="en">Survey</span>
-                                <span class="fr">Enquête</span>
+                                <span class="fr">Sondage</span>
                             </h2>
                             <p>
                                 <span class="en">A bit about you</span>
@@ -392,7 +392,7 @@ _E.core.templates.library = {
             '<table class="highlight responsive-table">' +
             '<thead>' +
             '<tr>' +
-            '<th><span class="en">Survey</span><span class="fr">Enquête</span></th>' +
+            '<th><span class="en">Survey</span><span class="fr">Sondage</span></th>' +
             '<th><span class="en">Details</span><span class="fr">Details</span></th>' +
             '<th><span class="en">Lang</span><span class="fr">Lang</span></th>' +
             '<th><span class="en">Items</span><span class="fr">Articles</span></th>' +
