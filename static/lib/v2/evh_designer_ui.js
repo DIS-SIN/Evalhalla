@@ -10,6 +10,8 @@ _E["feature"]["designer"]
 _E.feature.designer = {};
 
 _E.feature.designer.debug = true;
+
+
 _E.feature.designer.qrinit = false;
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub

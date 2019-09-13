@@ -467,12 +467,12 @@ _E.core.templates.library = {
             '}',
         "question": '{' +
             '"qid": "%qid",' +
-            '"cortex": {' +
+            //'"cortex": {' +
             '"uid": "%cortexquestionuid",' +
             '"atOrder": "%cortexatorder",' +
-            '"questionType": "%cortextype",' +
-            '"classifiedAs": "%cortexclassified"' +
-            '},' +
+            '"cortexQuestionType": "%cortextype",' +
+            '"classifiedAs": "%cortexclassified",' +
+            //'},' +
             '"question": "%question",' +
             '"description": "%question",' +
             '"language": "%lang",' +

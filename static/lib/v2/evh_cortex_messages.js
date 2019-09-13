@@ -433,11 +433,11 @@ _E.feature.cortex.messages.create_survey_evalese_msg = function (jo) {
 };
 
 
-
+// qa = question answer
 _E.feature.cortex.messages.create_survey_response_qa_part = function (jo) {
     let msg_cortex = {
         "uid": "",
-        "questionType": "",
+        "cortexQuestionType": "",
         "classifiedAs": "",
         "atOrder": "",
         "questionAnswer": "",
@@ -448,19 +448,20 @@ _E.feature.cortex.messages.create_survey_response_qa_part = function (jo) {
 _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
 
     let msg_cortex = {
-        "response": {
-            "userAgent": "",
-            "surveyEntryMethod": "",
-            "conducted": ""
-        },
+        "uid": "PENDING_TODO",
         "respondent": {
             "fluent_at": "",// "tombstone_language",
             "in_department": "",// "tombstone_department",
             "located_in": "",// "tombstone_city",
             "work_as": "",// "tombstone_classification"
+            //},
+            //"response": {
+            "userAgent": "",
+            "surveyEntryMethod": "",
+            "conducted": ""
         },
-        "questions": [
-            /*
+        "data": {
+            /*questions:[
                 {
                     "uid": cortex_response.response.conducted + "_q_" + tokens[2],
                     "questionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
@@ -469,8 +470,9 @@ _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
                     "questionAnswer": jo[key],
                     "questionText": jo["textofquestion_qid_" + tokens[1]]
                 }
-            }*/
-        ],
+            }
+        ]*/
+        },
         "created": {
             "from": "", // default to 2019-06-01
             "to": "" // default to 2020-06-01
@@ -495,11 +497,11 @@ _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
     */
 
     // WARN: Might only work for ELDP
-    msg_cortex.response.conducted = jo["meta_evalhalla_sur"].toUpperCase(); // WARN: Uppercase, this will cause issues
+    msg_cortex.respondent.conducted = jo["meta_evalhalla_sur"].toUpperCase(); // WARN: Uppercase, this will cause issues
     // need to slugify and fix
     // TODO
-    msg_cortex.response.surveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
-    msg_cortex.response.userAgent = jo["meta_useragent"];
+    msg_cortex.respondent.surveyEntryMethod = (jo["meta_entry_method"] == "") ? "DIRECT_LINK" : jo["meta_entry_method"];
+    msg_cortex.respondent.userAgent = jo["meta_useragent"];
     //cortex_response.response.conducted = jo["meta_evalhalla_sur"];
 
     msg_cortex.respondent.fluent_at = jo["tombstone_language"];
@@ -520,16 +522,18 @@ _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
         } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale1to10" ||
             tokens[0] == "scale1to5" || tokens[0] == "textarea") {
 
-            msg_cortex.questions.push(
+            msg_cortex.data[msg_cortex.respondent.conducted + "_q_" + tokens[2]] = jo[key];
+
+            /*msg_cortex.questions.push(
                 {
-                    "uid": msg_cortex.response.conducted + "_q_" + tokens[2],
-                    "questionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
+                    "uid": msg_cortex.respondent.conducted + "_q_" + tokens[2],
+                    "cortexQuestionType": _E.core.interpreter.cortex_questiontypes[tokens[0]].type,
                     "classifiedAs": _E.core.interpreter.cortex_questiontypes[tokens[0]].subtype,
                     "atOrder": tokens[2],
                     "questionAnswer": jo[key],
                     "questionText": jo["textofquestion_qid_" + tokens[1]]
                 }
-            );
+            );*/
         }
     }
     return msg_cortex;

@@ -11,7 +11,7 @@ _E.feature.player = {};
 
 // REFACTOR_PREP: paginator
 // pagination
-_E.feature.player.debug = false;
+_E.feature.player.debug = true;
 
 // transitions for the survey
 _E.feature.player.transitions_state = "true";
@@ -362,16 +362,16 @@ _E.feature.player.evalhalla_submit = function () {
     let jot_tmplo = _E.feature.cortex.messages.create_survey_template_msg(jot);
     let template_qs = jot_tmplo.questions;
 
-    let derefQuestionText = function (match) {
-        for (let ii = 0; ii < template_qs.length; ii++) {
-            if (template_qs[ii].cortex.uid == match) {
-                return template_qs[ii].question;
-            }
-        }
-    }
-    for (let ii = 0; ii < cortex_json_o.questions.length; ii++) {
-        cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
-    }
+    //let derefQuestionText = function (match) {
+    //    for (let ii = 0; ii < template_qs.length; ii++) {
+    //        if (template_qs[ii].uid == match) {
+    //            return template_qs[ii].question;
+    //        }
+    //    }
+    //}
+    //for (let ii = 0; ii < cortex_json_o.questions.length; ii++) {
+    //    cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
+    //}
 
     console.log("HEY ");
     console.log(cortex_json_o);
