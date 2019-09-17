@@ -52,9 +52,9 @@ _E.feature.localstore.ls_storageAvailable = function (type) {
 
 _E.feature.localstore.warn_user_alert = function () {
     // Too bad, no localStorage for us
-    if (_E.feature.localstore.setting.warn_user_no_storage == false) {
+    if (_E.feature.localstore.settings.warn_user_no_storage == false) {
         alert("This device does not support local storage. Save feature disabled.");
-        _E.feature.localstore.setting.warn_user_no_storage = true;
+        _E.feature.localstore.settings.warn_user_no_storage = true;
     }
 }
 

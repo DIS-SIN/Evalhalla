@@ -11,7 +11,7 @@ _E.feature.player = {};
 
 // REFACTOR_PREP: paginator
 // pagination
-_E.feature.player.debug = true;
+_E.feature.player.debug = false;
 
 // transitions for the survey
 _E.feature.player.transitions_state = "true";

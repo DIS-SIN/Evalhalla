@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Evalhalla Designer</title>
+    <title>Evalhalla Player</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
@@ -544,20 +544,19 @@
         </a>
     </div>
     <!-- Dependencies -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
-        async defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js" async defer></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- get Evalhalla init -->
+    <script src="../../../static/dist/evalhalla_player_dist.js"></script>
+    <!-- 
+    get Evalhalla init
     <script src="../../../static/lib/v2/evh_g_init.js"></script>
-
-    <!-- API Connection Integrations  -->
+    API Connection Integrations
     <script src="../../../integrations/registhor/registhor_v2_key.js"></script>
     <script src="../../../integrations/survista/survista_key.js"></script>
     <script src="../../../integrations/cortex/cortex-functions.js"></script>
-
-    <!-- Default Survey -->
+    Default Survey
     <script src="../../../static/sur/example_sur.js"></script>
     <script src="../../../static/sur/ut1_june18_event.js"></script>
     <script src="../../../static/sur/ut0_da_interest.js"></script>
@@ -572,30 +571,28 @@
     <script src="../../../static/sur/tsq.js"></script>
     <script src="../../../static/sur/discover.js"></script>
     <script src="../../../static/sur/eldp.js"></script>
-
-    <!-- Autocomplete values local -->
+    Autocomplete values local
     <script src="../../../static/assets/departments.js"></script>
     <script src="../../../static/assets/classifications.js"></script>
     <script src="../../../static/assets/cities.js"></script>
     <script src="../../../static/assets/languages.js"></script>
-    <!-- get Evalhalla lib files -->
+    get Evalhalla lib files
     <script src="../../../static/lib/v2/evh_g_state.js"></script>
     <script src="../../../static/lib/v2/evh_g_common.js"></script>
     <script src="../../../static/lib/v2/evh_g_templates.js"></script>
     <script src="../../../static/lib/v2/evh_g_interpreter.js"></script>
-    <!-- get Evalhalla features -->
+    get Evalhalla features
     <script src="../../../static/lib/v2/evh_feature_query_param_load_cortex.js"></script>
     <script src="../../../static/lib/v2/evh_feature_language.js"></script>
     <script src="../../../static/lib/v2/evh_feature_autocomplete.js"></script>
     <script src="../../../static/lib/v2/evh_feature_local_storage.js"></script>
     <script src="../../../static/lib/v2/evh_feature_unloadconfirmation.js"></script>
     <script src="../../../static/lib/v2/evh_cortex_messages.js"></script>
-
-    <!-- get Evalhalla ui -->
+    get Evalhalla ui
     <script src="../../../static/lib/v2/evh_player_ui.js"></script>
-
-    <!-- Evalhalla Core, start it up -->
+    Evalhalla Core, start it up
     <script src="../../../static/lib/v2/evh_player_core.js"></script>
+    -->
 </body>
 
 </html>

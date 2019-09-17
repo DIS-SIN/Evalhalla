@@ -257,6 +257,8 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
     converted_aesir_format.payload.data = stats_metrics;
     formatted_json = converted_aesir_format;
 
+    //console.log(JSON.stringify(formatted_json));
+
     return formatted_json;
 };
 
