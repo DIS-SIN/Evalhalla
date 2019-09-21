@@ -39,8 +39,9 @@
                     </li>
                 </ul>
                 <ul id="nav-mobile" class="loader-prep adm-function right hide-on-med-and-down">
-                    <li class="hide-on-small-only">
+                    <li class="hide-on-small-only wide-dd">
                         <a class="dropdown-trigger" data-target="dropdown3">
+                            <em class="material-icons" aria-hidden="true">insert_comment</em>
                             <span class="en">
                                 Insert
                             </span>
@@ -49,14 +50,16 @@
                             </span> <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
-                    <li class="hide-on-small-only">
+                    <li class="hide-on-small-only wide-dd">
                         <a class="dropdown-trigger" data-target="dropdown2">
+                            <em class="material-icons" aria-hidden="true">layers</em>
                             <span class="en">View</span><span class="fr">Vue</span> <em
                                 class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
-                    <li class="hide-on-small-only">
+                    <li class="hide-on-small-only wide-dd">
                         <a class="dropdown-trigger" data-target="dropdown1">
+                            <em class="material-icons" aria-hidden="true">launch</em>
                             Menu <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
@@ -113,7 +116,7 @@
         </li>
         <li>
             <a class="generate_test_data">
-                <em class="material-icons" aria-hidden="true">gavel</em>Create Test Data
+                <em class="material-icons" aria-hidden="true">gavel</em>Test Data
             </a>
         </li>
         <!-- REFACTOR: Turning off JSON render until next version 
@@ -196,13 +199,6 @@
     </ul>
     <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
         <li>
-            <a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear Editor</span>
-                <span class="fr">Effacer Editeur</span>
-            </a>
-        </li>
-        <li>
             <a class="ev-add-header">
                 <em class="material-icons" aria-hidden="true">title</em>
                 <span class="en">Header</span>
@@ -244,16 +240,16 @@
             </a>
         </li>
         <li>
-            <a class="ev-add-qrank">
-                <em class="material-icons" aria-hidden="true">import_export</em>
-                <span class="en">Rate</span>
-                <span class="fr">Taux</span>
+            <a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Editor</span>
+                <span class="fr">Effacer Editeur</span>
             </a>
         </li>
     </ul>
     <ul class="adm-function sidenav" id="mobile-demo">
         <li>
-            <span class="mob-span center-align">CORTEX</span>
+            <span class="mob-span center-align">MENU</span>
             <hr>
         </li>
         <li>
@@ -307,9 +303,23 @@
                 <em class="material-icons" aria-hidden="true">gavel</em>Create Test Data
             </a>
         </li>
+
+        <!--<li>
+            <a class="audit_json_render">
+                <em class="material-icons" aria-hidden="true">gavel</em>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
+        </li>-->
+
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset Local Store</span><span class="fr">Réinitialiser</span>
+            </a>
+        </li>
         <li>
             <span class="mob-span center-align">
-                <span class="en">MENU</span><span class="fr">MENU</span>
+                <span class="en">VIEW</span><span class="fr">VUE</span>
             </span>
             <hr>
         </li>
@@ -323,29 +333,6 @@
                     Explication
                 </span>
             </a>
-        </li>
-        <li>
-            <a class="audit_json_render">
-                <em class="material-icons" aria-hidden="true">gavel</em>
-                <span class="en">Audit</span><span class="fr">Vérification</span>
-            </a>
-        </li>
-        <li><a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear</span>
-                <span class="fr">Effacer</span>
-            </a></li>
-        <li>
-            <a class="adm_clear_ls">
-                <em class="material-icons" aria-hidden="true">flip_to_back</em>
-                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
-            </a>
-        </li>
-        <li>
-            <span class="mob-span center-align">
-                <span class="en">VIEW</span><span class="fr">VUE</span>
-            </span>
-            <hr>
         </li>
         <li>
             <a class="hs_render_window">
@@ -405,6 +392,11 @@
             <span class="mob-span center-align"><span class="en">INSERT</span><span class="fr">INSÉRER</span></span>
             <hr>
         </li>
+        <li><a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Text</span>
+                <span class="fr">Effacer</span>
+            </a></li>
         <li>
             <a class="ev-add-header">
                 <em class="material-icons" aria-hidden="true">title</em>
@@ -447,13 +439,13 @@
                 <span class="fr">Echelle</span>
             </a>
         </li>
-        <li>
+        <!--<li>
             <a class="ev-add-qrank">
                 <em class="material-icons" aria-hidden="true">import_export</em>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
             </a>
-        </li>
+        </li>-->
     </ul>
     <!-- Modal Structure -->
     <div id="cortex_test_data_modal" class="modal">
@@ -506,7 +498,7 @@
         <div class="section" id="pre_survey_panels">
             <!-- Pre Survey Panels Go Here -->
         </div>
-        <div class="section">
+        <div class="section" style="background-color: white;">
             <div class="row">
                 <div id="editor_window" class="col s12 m6">
                     <form class="col s12">

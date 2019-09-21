@@ -10,12 +10,6 @@ var dmb = `
 /en <ul><li>Instant. Insight.</li></ul> /;
 /fr <ul><li>Instant. Perspicacité.</li></ul> /;
 
-
-/NOTOMBSTONEPAGE
-
-/NOOFFERINGPAGE
-
-
 //
 /en Information becomes available in an instant. /; 
 /fr L'information devient disponible en un instant. /; 

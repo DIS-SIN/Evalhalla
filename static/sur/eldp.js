@@ -10,12 +10,6 @@ ELDP
 /en Executive Leadership Development Program /;
 /fr Programme de développement en leadership pour les cadres supérieurs /;
 
-
-/NOTOMBSTONEPAGE
-
-/NOOFFERINGPAGE
-
-
 Q:
 /en 1) Your group and level /; 
 /fr 1) Votre groupe et niveau /;

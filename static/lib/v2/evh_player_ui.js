@@ -134,9 +134,11 @@ _E.feature.player.set_page = function (pageindex) {
 
     if (ttype == "survey_page") {
         $(".surveybody").show();
+        $(".hslang").show();
         _E.core.state.store["el"]["ui_render"].show();
     } else {
         $(".surveybody").hide();
+        $(".hslang").hide();
         _E.core.state.store["el"]["ui_render"].hide();
     }
 
@@ -284,7 +286,7 @@ _E.feature.player.cortex_upload_survey_result = function (data_in) {
 // validate the survey
 _E.feature.player.ui_evalhalla_submit_validate = function (formElement) {
     // REFACTOR_PREP: api, detangle the render and local storage, submit the form result
-    alert("Missing data / Données manquantes");
+    alert("Please fill out required questions / S'il vous plaît remplir les questions requises.");
     $(".ev-page").show();
     $(".ev-page-lang").hide();
     $(".ev-page-offering").hide();

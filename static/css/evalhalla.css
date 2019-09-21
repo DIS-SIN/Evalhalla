@@ -66,11 +66,20 @@ nav ul .tab i {
     height: 20px;
 }
 
+.wide-dd{
+    width: 150px;
+}
+
 /* overrides mcss */
 html {
     font-family: 'Lato', sans-serif;
     color: #333333;
     font-size:16px;
+
+    background-image: url('../images/lp_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
 }
 
 blockquote {
@@ -91,6 +100,10 @@ blockquote {
 
 .purp-canada-ca {
     background-color: #3f2a56;
+}
+
+.purp-canada-ca:hover {
+    background-color: #6B4794;
 }
 
 .green-canada-ca {

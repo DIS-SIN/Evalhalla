@@ -237,7 +237,8 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
             _E.feature.aesir.cache = _E.feature.aesir.cortex_chart_data;
 
             _E.feature.aesir.cortex_get_survey_callback();
-            //_E.feature.aesir.stop_auto_refresh();
+            // TODO: Renable for refresh
+            _E.feature.aesir.stop_auto_refresh();
         }
         //_E.feature.instadash.stop_auto_refresh();
     });
@@ -412,7 +413,7 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
             <div class="col s12" style="float:top;"><div class="card-panel">
                 <span class="badge">(General)</span>
                 <p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
-                    <span class='en'>General Statistics</span>
+                    <span class='en'>General Information</span>
                     <!-- <span class='fr'>Statistique Generale/span> -->
                 </p>
                 <div id="edtable_general" class="ctx_datatable">${chartd.html}</div>
@@ -484,9 +485,9 @@ _E.feature.aesir.render_data = function (response) {
 
         //Inital html to show
         render_html = `
-            <div class="col s12 m6 l4" style="float:top;"><div class="card-panel">
+            <div class="col s12 m6 l6" style="float:top;"><div class="card-panel">
                 <span class="badge">(${cr.uid})</span>
-                <p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
+                <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
                     <span class='en'>${ql[0] ? ql[0] : cr.uid}</span>
                     <!-- <span class='fr'>${ql[1] ? ql[1] : cr.uid}</span> -->
                 </p>

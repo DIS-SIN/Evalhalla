@@ -34,6 +34,10 @@ _E.core.interpreter = {};
 
 _E.core.interpreter.sur_evalese = ""; // our evalese to render
 
+// pre-survey templates, off by default
+_E.core.state.store["render"]["no tombstone page"] = true;
+_E.core.state.store["render"]["no offering page"] = true;
+
 _E.core.interpreter.evalese = {
     // CMDS in ALLCAPS, but input is any case
     // interpreter v0.1
@@ -104,8 +108,8 @@ _E.core.interpreter.evalese = {
     "/LOCATION": { "type": "pick one location", "html": "<pick>%v</pick>" },
     "/DROPDOWN": { "type": "pick one dropdown", "html": "<pick>%v</pick>" },
     "/LANGUAGE": { "type": "pick one language", "html": "<pick>%v</pick>" },
-    "/NOOFFERINGPAGE": { "type": "no offering page", "html": "<pick>%v</pick>" },
-    "/NOTOMBSTONEPAGE": { "type": "no tombstone page", "html": "<pick>%v</pick>" },
+    "/OFFERINGPAGE": { "type": "no offering page", "html": "<pick>%v</pick>" },
+    "/TOMBSTONEPAGE": { "type": "no tombstone page", "html": "<pick>%v</pick>" },
 };
 
 _E.core.interpreter.cortex_questiontypes = {
@@ -350,15 +354,16 @@ _E.core.interpreter.handle_cmd_pagebreak = function (cmd, src, json) {
 _E.core.interpreter.handle_cmd_nopresurveypage = function (cmd, src, json) {
     //json = json || "";
     // handle html
+    // REFACTOR: Badly named, it TURNS OFF the no X page. They are off by default.
     if (cmd == "no tombstone page") {
         //_E.core.state.store["render"]["currpageid"] = 1; // advance page, note we're switching types here
         //_E.feature.player.hs_page_step()
-        _E.core.state.store["render"]["no tombstone page"] = true;
+        _E.core.state.store["render"]["no tombstone page"] = false;
     }
     if (cmd == "no offering page") {
         //_E.core.state.store["render"]["currpageid"] = "offering";
         //_E.feature.player.hs_page_intro_step();
-        _E.core.state.store["render"]["no offering page"] = true;
+        _E.core.state.store["render"]["no offering page"] = false;
     }
     return "";
 }

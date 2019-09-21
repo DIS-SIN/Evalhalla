@@ -74,6 +74,7 @@ END
 EVH_AESIRDASHBOARD_PKG=$(cat <<-END
 ~/Development/Evalhalla/static/lib/v2/evh_g_init.js \
 ~/Development/Evalhalla/integrations/cortex/cortex-functions.js \
+~/Development/Evalhalla/static/lib/v2/evh_g_state.js \
 ~/Development/Evalhalla/static/lib/v2/evh_g_common.js \
 ~/Development/Evalhalla/static/lib/v2/evh_cortex_messages.js \
 ~/Development/Evalhalla/static/lib/v2/evh_feature_query_param_load_cortex.js \
@@ -110,6 +111,7 @@ EVH_TABLEVIEW_PKG=$(cat <<-END
 ~/Development/Evalhalla/static/sur/discover.js \
 ~/Development/Evalhalla/static/sur/eldp.js \
 ~/Development/Evalhalla/static/lib/v2/evh_g_common.js \
+~/Development/Evalhalla/static/lib/v2/evh_g_state.js \
 ~/Development/Evalhalla/static/lib/v2/evh_feature_query_param_load_cortex.js \
 ~/Development/Evalhalla/static/lib/v2/evh_feature_instant_table.js \
 ~/Development/Evalhalla/static/lib/v2/evh_player_core_tableview.js \

@@ -21,7 +21,7 @@ _E.core.templates = {};
 _E.core.templates.library = {
     "html": {
         "step_lang": `
-            <div id="step_lang" class="row bannerbgbacked center ev-page ev-page-lang">
+            <div id="step_lang" class="row  center ev-page ev-page-lang">
                 <div class="col hide-on-small-only m3"></div>
                 <div class="col s12 m6 center">
                     <div>
@@ -31,11 +31,10 @@ _E.core.templates.library = {
                     <div class="card-panel">
                         <div class="row center">
                             <h1>
-                                <span class="en">Survey</span>
-                                <span class="fr">Sondage</span>
+                                Evalhalla
                             </h1>
                             <p>
-                                Language of preference - Langue de préférence
+                               Welcome to Evalhalla | Bienvenue à Evalhalla
                             </p>
                         </div>
 
@@ -57,7 +56,7 @@ _E.core.templates.library = {
             </div>
             `,
         "step_offering": `
-            <div id="step_offering" class="row bannerbgbacked center ev-page ev-page-offering">
+            <div id="step_offering" class="row center ev-page ev-page-offering">
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
@@ -85,7 +84,7 @@ _E.core.templates.library = {
                 <div class="col hide-on-small-only m2"></div>
             </div>`,
         "step_tombstone": `
-            <div id="step_tombstone" class="row bannerbgbacked center ev-page ev-page-tombstone">
+            <div id="step_tombstone" class="row center ev-page ev-page-tombstone">
                 <div class="col hide-on-small-only m1"></div>
                 <div class="col s12 m10 center">
                     <div>
@@ -99,8 +98,8 @@ _E.core.templates.library = {
                                 <span class="fr">Sondage</span>
                             </h2>
                             <p>
-                                <span class="en">A bit about you</span>
-                                <span class="fr">Un peu de vous</span>
+                                <span class="en">Tell us a bit about yourself</span>
+                                <span class="fr">Parlez nous un peu de vous</span>
                                 <span class="badge accessiblegrey white-text"><span class="en">optional</span><span
                                         class="fr">optionnel</span></span>
                             </p>
@@ -144,8 +143,7 @@ _E.core.templates.library = {
                                             <em class="material-icons fab-align">chevron_left</em>
                                         </a>
                                         <button class="tombstone-next purp-canada-ca btn-large right padright">
-                                            <span class="en">Start</span>
-                                            <span class="fr">Début</span>
+                                           <em class="material-icons fab-align">chevron_right</em>
                                         </button>
                                     </div>
                                 </div>
@@ -154,9 +152,9 @@ _E.core.templates.library = {
                     </div>
                 </div>
                 <div class="col hide-on-small-only m1"></div>
-            </div>`,
+            </div>`, //bannerbgbacked
         "step_thank_you_cta": `
-            <div id="step_thank_you_cta" class="row bannerbgbacked center ev-page ev-page-thanks">
+            <div id="step_thank_you_cta" class="row center ev-page ev-page-thanks">
                 <div class="col hide-on-small-only m2"></div>
                 <div class="col s12 m8 center">
                     <div>
@@ -188,35 +186,32 @@ _E.core.templates.library = {
             </div>`,
         "form wrap": '' +
             '<div class="surveybody">' +
+
+            //'<div class="row hide-on-designer">' +
+            //'<div class="col s12 center bannered">' +
+            //'<div class="col s12 center">' +
+            //'<img src="../../../static/images/csps_flag.png" class="responsive-img csps-flag" alt="CSPS-EFPC Flag, Maple leaf in book" />' +
+            //'</div>' +
+            //'</div>' +
+            '<form id="evalhalla_form" action="#" class="card-panel">' +
             '<div class="row hide-on-designer">' +
-            '<div class="col s12 center">' +
-            '<strong class="center-align determinate-text">%pctdisplay%</strong>' +
+            '<div class="col s12 center"><strong class="center-align determinate-text">%pctdisplay%</strong></div>' +
+            '<div class="progress"><div class="determinate" style="width: %pct%"></div></div>' +
             '</div>' +
-            '<div class="progress">' +
-            '<div class="determinate" style="width: %pct%"></div>' +
-            '</div>' +
-            '</div>' +
-            '<div class="row hide-on-designer">' +
-            '<div class="col s12 center bannered">' +
-            '<img src="../../../static/images/csps_flag.png" class="responsive-img csps-flag" alt="CSPS-EFPC Flag, Maple leaf in book" />' +
-            '</div>' +
-            '</div>' +
-            '<form id="evalhalla_form" action="#">' +
             '<div class="ev-page ev-page-1 card-panel">' +
             '%src' +
             '</div>' +
             '<div class="row">' +
             '<div class="col s12 center hide-on-designer">' +
             '<a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-left left"><em class="material-icons fab-align dark-grey-text">chevron_left</em></a>' +
-            '<a href="#editor" id="evalhalla_submit" class="waves-effect waves-light green-canada-ca btn-large right">' +
-            '<span class="en">SUBMIT</span><span class="fr">SOUMETTRE</span></a>' +
+            '<a href="#editor" id="evalhalla_submit" class="waves-effect waves-light purp-canada-ca btn-large right">' +
+            '<em class="material-icons fab-align dark-grey-text">cloud_done</em>' +
+            //'<span class="en">SUBMIT</span><span class="fr">SOUMETTRE</span></a>' +
             '<a href="#editor" class="btn btn-large purp-canada-ca ev-page-sel-right right"><em class="material-icons fab-align dark-grey-text">chevron_right</em></a>' +
             '</div>' +
             '</div>' +
             '<div class="row hide-on-designer">' +
-            '<ul class="pagination center-align" style="marigin:0;">' +
-            '%pages' +
-            '</ul>' +
+            '<ul class="pagination center-align" style="marigin:0;">%pages</ul>' +
             '</div>' +
             '</form>' +
             '</div>' +

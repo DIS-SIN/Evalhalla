@@ -13,9 +13,9 @@ Please take a few minutes to answer the following questions. /;
 <br>
 Veuillez prendre quelques minutes pour répondre aux questions suivantes. /;
 
-/NOTOMBSTONEPAGE
+/TOMBSTONEPAGE
 
-/NOOFFERINGPAGE
+/OFFERINGPAGE
 
 /pagebreak 
 

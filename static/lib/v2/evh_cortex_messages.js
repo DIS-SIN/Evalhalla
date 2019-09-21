@@ -72,6 +72,7 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
 
     let questions = [];
     let qcount = 0;
+
     for (let i = 0; i < response.length; i++) {
         let r = response[i];
         let rkeys = (r) ? Object.keys(r) : [];
@@ -86,10 +87,13 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
                 "questionType": "",
                 "classifiedAs": ""
             }
+            //console.log(">> " + JSON.stringify(r));
+
             for (let ii = 0; ii < rkeys.length; ii++) {
                 let rk = rkeys[ii];
                 if (rk.indexOf("qid_" + q) != -1) {
                     //stats[rk] = r[rk];
+
 
                     let metainf = rk.split("_");
                     let qtype = (metainf[0]) ? metainf[0] : "undefined";
@@ -100,10 +104,17 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
                     if (qtype == "textofquestion") {
                         stats["question"] = [(r[rk]) ? r[rk] : ""];
                     } else if (qtype != "textofquestion" && submeta == "undefined") {
-                        stats["answer"] = [(r[rk]) ? r[rk] : "Blank"];
                         stats["questionType"] = _E.core.interpreter.cortex_questiontypes[qtype].type;
                         stats["classifiedAs"] = _E.core.interpreter.cortex_questiontypes[qtype].subtype;
 
+                        if (qtype == "cgroup") {
+                            //console.log("> " + JSON.stringify(r[rk]));
+                            stats["answer"] = (r[rk]) ? r[rk] : ["None"];
+
+                        } else {
+                            stats["answer"] = [(r[rk]) ? r[rk] : "Blank"];
+
+                        }
                     } else if (qtype == "textarea" && submeta == "sentimentScore") {
                         stats["sentimentScore"] = [(r[rk]) ? r[rk] : 0.0];
                     }
@@ -220,7 +231,13 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
             stats_metrics[ii].total += 1;
             //console.log(stats_metrics[ii].question);
             stats_metrics[ii].question = stats_metrics[ii].question.concat(q.question).slice(0, 2);
-            stats_metrics[ii].answer = stats_metrics[ii].answer.concat(q.answer);
+
+            if (q.questionType == "MULTI_CHOICE") {
+                //console.log("Type: " + JSON.stringify(q.answer));
+                stats_metrics[ii].answer = stats_metrics[ii].answer.concat(typeof q.answer === "undefined" ? "Blank" : q.answer);
+            } else {
+                stats_metrics[ii].answer = stats_metrics[ii].answer.concat(q.answer);
+            }
             stats_metrics[ii].sentimentScore = stats_metrics[ii].sentimentScore.concat(q.sentimentScore);
             //stats_metrics[qmetrics].stats = "";
             stats_metrics[ii].questionType = q.questionType;
@@ -231,8 +248,11 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
     for (let ii = 0; ii < stats_metrics.length; ii++) {
         stats_metrics[ii].question = JSON.stringify(stats_metrics[ii].question);
         //stats_metrics[ii].stats["avgSentimentScore"] = 0;
+        //console.log("### " + JSON.stringify(stats_metrics[ii].answer));
         for (let j = 0; j < stats_metrics[ii].answer.length; j++) {
-            let answer = stats_metrics[ii].answer[j];
+            let answer = stats_metrics[ii].answer[j] ? stats_metrics[ii].answer[j] : "Blank";
+            //let answer = stats_metrics[ii].answer[j] ? stats_metrics[ii].answer[j] ? "Blank";
+            //console.log("### >> " + JSON.stringify(answer));
             if (typeof stats_metrics[ii].stats[answer] !== "undefined") {
                 stats_metrics[ii].stats[answer] += 1;
             } else {
