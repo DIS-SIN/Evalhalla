@@ -1,7 +1,7 @@
 let g_intro_script = "" +
     "# 123\n\n" +
-    "##\n/en Evalhalla Survey /;\n/fr Enquête Evalhalla /; \n\n" +
-    "###\n/en It's easy to make a survey. /;\n/fr Il est facile de faire une enquête. /; \n" +
+    "##\n/en Evalhalla Survey /;\n/fr Sondage Evalhalla /; \n\n" +
+    "###\n/en It's easy to make a survey. /;\n/fr Il est facile de faire une sondage. /; \n" +
     "\n" +
     "*Q:\n/en Have you clicked on 'tutorial' yet? /;\n/fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
     "/ONE\n" +
@@ -17,8 +17,8 @@ let g_intro_script = "" +
 
 let g_intro_script_fr = "" +
     "# 123\n" +
-    "## /en Evalhalla Survey /; /fr Enquête Evalhalla /; \n" +
-    "### /en It's easy to make a survey. /; /fr Il est facile de faire une enquête. /; \n" +
+    "## /en Evalhalla Survey /; /fr Sondage Evalhalla /; \n" +
+    "### /en It's easy to make a survey. /; /fr Il est facile de faire une sondage. /; \n" +
     "\n" +
     "Q: /en Have you clicked on 'tutorial' yet? /; /fr Avez-vous déjà cliqué sur 'tutorial'? /; \n" +
     "/ONE\n" +
@@ -73,7 +73,7 @@ var g_shorthand_script = `
 
 ###
 /en Thank you for taking part in this survey. /; 
-/fr Merci de participer à cette enquête. /;
+/fr Merci de participer à cette sondage. /;
 
 *Q:
 /en Are you here in person? /;
@@ -141,7 +141,7 @@ var g_shorthand_script_fr = g_shorthand_script;
 /*"" +
     "# 1234\n" +
     "## c'est mon titre\n" +
-    "### Ceci est une bonne enquête, vous devriez le remplir.\n" +
+    "### Ceci est une bonne sondage, vous devriez le remplir.\n" +
     "\n" +
     "Q: Et les pommes\n" +
     "/UN\n" +

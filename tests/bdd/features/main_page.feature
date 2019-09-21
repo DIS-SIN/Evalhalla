@@ -8,5 +8,5 @@ Feature:  Language selection
 
     Scenario: Setting respondent language
         Given I navigate to survey with id "test_sur"
-        Then I expect that the title is "Evalhalla - Surveys and Evaluations done right | Enquêtes et évaluations bien faites" 
+        Then I expect that the title is "Evalhalla - Surveys and Evaluations done right | Sondage et évaluations bien faites" 
         And I expect a button with text "English"

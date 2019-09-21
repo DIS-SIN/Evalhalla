@@ -57,11 +57,18 @@ _E.feature.data.recordpumper.create_response = function (qas, survey_template) {
         .toISOString()
     cortex_json_o.created.from = date_string;
     cortex_json_o.created.to = date_string;
-    cortex_json_o.questions = qas;
+    cortex_json_o.data = qas;
 
-    cortex_json_o.response.userAgent = _E.feature.data.recordpumper.test_uas[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.test_uas.length, _E.feature.data.recordpumper.skewness_of_responses)];
-    cortex_json_o.response.surveyEntryMethod = "TEST_DATA_GENERATOR";
-    cortex_json_o.response.conducted = survey_template.uid;
+    // rewrite the pack for new format
+    let datapkg = {};
+    for (let ii = 0; ii < cortex_json_o.data.length; ii++) {
+        datapkg[cortex_json_o.data[ii].uid] = cortex_json_o.data[ii].questionAnswer;
+    }
+    cortex_json_o.data = datapkg;
+
+    cortex_json_o.respondent.userAgent = _E.feature.data.recordpumper.test_uas[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.test_uas.length, _E.feature.data.recordpumper.skewness_of_responses)];
+    cortex_json_o.respondent.surveyEntryMethod = "TEST_DATA_GENERATOR";
+    cortex_json_o.respondent.conducted = survey_template.uid;
 
     cortex_json_o.respondent.fluent_at = _E.feature.data.recordpumper.fluent_ats[_E.fxn.common.get_random_int(_E.feature.data.recordpumper.fluent_ats.length, _E.feature.data.recordpumper.skewness_of_responses)];
     cortex_json_o.respondent.in_department = autoc_departments[_E.fxn.common.get_random_int(autoc_departments.length, _E.feature.data.recordpumper.skewness_of_responses)];
@@ -127,7 +134,7 @@ _E.feature.data.recordpumper.generate_all_responses = function (survey_template)
         let resp_qa_json = [];
         for (let i = 0; i < qs.length; i++) {
 
-            let rec_data_key = `${qs[i].cortex.questionType} ${qs[i].cortex.classifiedAs}`;
+            let rec_data_key = `${qs[i].cortexQuestionType} ${qs[i].classifiedAs/*cortex.classifiedAs*/}`;
             let rec_data_action = _E.feature.data.recordpumper.determine_action(rec_data_key);
 
             if (rec_data_action == "SKIP") {
@@ -135,10 +142,10 @@ _E.feature.data.recordpumper.generate_all_responses = function (survey_template)
             } else {
                 let q_part = _E.feature.data.recordpumper.create_response_qas(rec_data_action, survey_template);
 
-                q_part.uid = qs[i].cortex.uid;
-                q_part.questionType = qs[i].cortex.questionType;
-                q_part.classifiedAs = qs[i].cortex.classifiedAs;
-                q_part.atOrder = qs[i].cortex.atOrder;
+                q_part.uid = qs[i].uid;//cortex.uid;
+                q_part.questionType = qs[i].cortexQuestionType;
+                q_part.classifiedAs = qs[i].classifiedAs;//cortex.classifiedAs;
+                q_part.atOrder = qs[i].atOrder;//cortex.atOrder;
                 q_part.questionText = qs[i].question;
 
                 if (rec_data_action == "USE_OPTION" || rec_data_action == "USE_OPTION_SCALE") {

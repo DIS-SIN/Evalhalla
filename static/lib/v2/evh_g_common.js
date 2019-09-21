@@ -29,6 +29,7 @@ _E.fxn.common.slugify = function (string) {
         .replace(/\-\-+/g, '-') // Replace multiple - with single -
         .replace(/^-+/, '') // Trim - from start of text
         .replace(/-+$/, '') // Trim - from end of text
+        .replace(/\-/g, '_') // dash with underscore (for ids)
 }
 
 // Random HSL Color value generation

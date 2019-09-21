@@ -263,7 +263,7 @@
                 var tbody = "";
 
 
-                display_str += get_template_snip("ls_header").replace(/\%en/g, "Working Survey").replace(/\%fr/g, "Enquête en cours").replace(/\%count/g, "");
+                display_str += get_template_snip("ls_header").replace(/\%en/g, "Working Survey").replace(/\%fr/g, "Sondage en cours").replace(/\%count/g, "");
                 display_str += get_template_snip("ls");
                 tbody = "";
                 if (ev_ls["working_survey"] != null) {
@@ -282,7 +282,7 @@
                 }
                 display_str = display_str.replace(/\%tbody/g, tbody);
 
-                display_str += get_template_snip("ls_header").replace(/\%en/g, "Saved Survey").replace(/\%fr/g, "Enquête Sauvegardées");
+                display_str += get_template_snip("ls_header").replace(/\%en/g, "Saved Survey").replace(/\%fr/g, "Sondage Sauvegardées");
                 display_str += get_template_snip("ls");
                 tbody = "";
                 if (ev_ls["saved_survey_signatures"] != null

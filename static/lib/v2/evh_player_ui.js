@@ -134,9 +134,11 @@ _E.feature.player.set_page = function (pageindex) {
 
     if (ttype == "survey_page") {
         $(".surveybody").show();
+        $(".hslang").show();
         _E.core.state.store["el"]["ui_render"].show();
     } else {
         $(".surveybody").hide();
+        $(".hslang").hide();
         _E.core.state.store["el"]["ui_render"].hide();
     }
 
@@ -284,7 +286,7 @@ _E.feature.player.cortex_upload_survey_result = function (data_in) {
 // validate the survey
 _E.feature.player.ui_evalhalla_submit_validate = function (formElement) {
     // REFACTOR_PREP: api, detangle the render and local storage, submit the form result
-    alert("Missing data / Données manquantes");
+    alert("Please fill out required questions / S'il vous plaît remplir les questions requises.");
     $(".ev-page").show();
     $(".ev-page-lang").hide();
     $(".ev-page-offering").hide();
@@ -362,16 +364,16 @@ _E.feature.player.evalhalla_submit = function () {
     let jot_tmplo = _E.feature.cortex.messages.create_survey_template_msg(jot);
     let template_qs = jot_tmplo.questions;
 
-    let derefQuestionText = function (match) {
-        for (let ii = 0; ii < template_qs.length; ii++) {
-            if (template_qs[ii].cortex.uid == match) {
-                return template_qs[ii].question;
-            }
-        }
-    }
-    for (let ii = 0; ii < cortex_json_o.questions.length; ii++) {
-        cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
-    }
+    //let derefQuestionText = function (match) {
+    //    for (let ii = 0; ii < template_qs.length; ii++) {
+    //        if (template_qs[ii].uid == match) {
+    //            return template_qs[ii].question;
+    //        }
+    //    }
+    //}
+    //for (let ii = 0; ii < cortex_json_o.questions.length; ii++) {
+    //    cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
+    //}
 
     console.log("HEY ");
     console.log(cortex_json_o);

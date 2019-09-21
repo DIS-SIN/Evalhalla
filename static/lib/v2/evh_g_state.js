@@ -126,7 +126,11 @@ _E.core.state.store = {
         "render_buffering": false,
         "render_manager": null,
         "render_delay": 1300, // 1.3 sec delay between renders
-        "render_requested": false
+        "render_requested": false,
+        // pre-survey templates, off by default
+        "no tombstone page": true,
+        "no offering page": true
+
     }
 };
 

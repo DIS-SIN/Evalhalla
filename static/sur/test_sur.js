@@ -9,13 +9,13 @@ var test_sur = `# TEST_SUR
 /en Thank you for taking part in this survey. The results of this survey will be used to demonstrate how Evalhalla can be used to quickly collect valuable data and provide instant access to survey results through a real-time dashboard for immediate consumption. <br>
 <br>
 Please take a few minutes to answer the following questions. /; 
-/fr Merci de participer à cette enquête. Les résultats de cette enquête serviront à vous montrer comment Evalhalla peut être utilisé pour la collecte rapide des données utiles ainsi que pour fournir un accès instantané aux résultats de l’enquête via un tableau de bord en temps réel pour une consommation immédiate.<br>
+/fr Merci de participer à cette sondage. Les résultats de cette sondage serviront à vous montrer comment Evalhalla peut être utilisé pour la collecte rapide des données utiles ainsi que pour fournir un accès instantané aux résultats de sondage via un tableau de bord en temps réel pour une consommation immédiate.<br>
 <br>
 Veuillez prendre quelques minutes pour répondre aux questions suivantes. /;
 
-/NOTOMBSTONEPAGE
+/TOMBSTONEPAGE
 
-/NOOFFERINGPAGE
+/OFFERINGPAGE
 
 /pagebreak 
 
@@ -98,9 +98,9 @@ Q:
 /en In your opinion, what are the most useful features of Evalhalla? /; 
 /fr A votre avis, quelles sont les fonctionnalités les plus utiles d'Evalhalla? /; 
 /any
-/en Survey designer tool /; /fr Outil de conception d'enquête /;
-/en Survey preview, while designing the survey /; /fr Aperçu de l'enquête, lors de la conception de l'enquête /;
-/en Ease of filling out the survey /; /fr Facilité à remplir l’enquête /;
+/en Survey designer tool /; /fr Outil de conception du sondage /;
+/en Survey preview, while designing the survey /; /fr Aperçu du sondage, lors de la conception du sondage /;
+/en Ease of filling out the survey /; /fr Facilité à remplir du sondage /;
 /en Instant access to real-time dashboards /; /fr Accès instantané aux tableaux de bord en temps réel /;
 /en Overall look and feel /; /fr Apparence générale /;
 /en Overall user experience /; /fr Expérience globale de l'utilisateur /;
@@ -114,7 +114,7 @@ Q:
 
 *Q:
 /en Based on the demo you saw today, does it look easy to create surveys using Evalhalla? /;
-/fr D'après la demo que vous avez vue aujourd'hui, semble-t-il facile de créer des enquêtes à l'aide d'Evalhalla? /;
+/fr D'après la demo que vous avez vue aujourd'hui, semble-t-il facile de créer des sondage à l'aide d'Evalhalla? /;
 /one
 /en Yes /; /fr Oui /;
 /en No /; /fr Non /;

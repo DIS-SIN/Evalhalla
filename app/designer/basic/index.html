@@ -39,8 +39,9 @@
                     </li>
                 </ul>
                 <ul id="nav-mobile" class="loader-prep adm-function right hide-on-med-and-down">
-                    <li class="hide-on-small-only">
+                    <li class="hide-on-small-only wide-dd">
                         <a class="dropdown-trigger" data-target="dropdown3">
+                            <em class="material-icons" aria-hidden="true">insert_comment</em>
                             <span class="en">
                                 Insert
                             </span>
@@ -49,14 +50,16 @@
                             </span> <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
-                    <li class="hide-on-small-only">
+                    <li class="hide-on-small-only wide-dd">
                         <a class="dropdown-trigger" data-target="dropdown2">
+                            <em class="material-icons" aria-hidden="true">layers</em>
                             <span class="en">View</span><span class="fr">Vue</span> <em
                                 class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
-                    <li class="hide-on-small-only">
+                    <li class="hide-on-small-only wide-dd">
                         <a class="dropdown-trigger" data-target="dropdown1">
+                            <em class="material-icons" aria-hidden="true">launch</em>
                             Menu <em class="material-icons right lhi-menu" aria-hidden="true">arrow_drop_down</em>
                         </a>
                     </li>
@@ -95,7 +98,7 @@
                     Conduct
                 </span>
                 <span class="fr">
-                    Commencer l'Enquête
+                    Commencer Sondage
                 </span>
             </a>
         </li>
@@ -113,7 +116,7 @@
         </li>
         <li>
             <a class="generate_test_data">
-                <em class="material-icons" aria-hidden="true">gavel</em>Create Test Data
+                <em class="material-icons" aria-hidden="true">gavel</em>Test Data
             </a>
         </li>
         <!-- REFACTOR: Turning off JSON render until next version 
@@ -145,7 +148,7 @@
                     Survey
                 </span>
                 <span class="fr">
-                    Enquête
+                    Sondage
                 </span>
             </a>
         </li>
@@ -196,13 +199,6 @@
     </ul>
     <ul id="dropdown3" class="adm-function dropdown-content hide-on-small-only">
         <li>
-            <a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear Editor</span>
-                <span class="fr">Effacer Editeur</span>
-            </a>
-        </li>
-        <li>
             <a class="ev-add-header">
                 <em class="material-icons" aria-hidden="true">title</em>
                 <span class="en">Header</span>
@@ -244,16 +240,16 @@
             </a>
         </li>
         <li>
-            <a class="ev-add-qrank">
-                <em class="material-icons" aria-hidden="true">import_export</em>
-                <span class="en">Rate</span>
-                <span class="fr">Taux</span>
+            <a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Editor</span>
+                <span class="fr">Effacer Editeur</span>
             </a>
         </li>
     </ul>
     <ul class="adm-function sidenav" id="mobile-demo">
         <li>
-            <span class="mob-span center-align">CORTEX</span>
+            <span class="mob-span center-align">MENU</span>
             <hr>
         </li>
         <li>
@@ -286,7 +282,7 @@
                     Conduct
                 </span>
                 <span class="fr">
-                    Commencer l'Enquête
+                    Commencer Sondage
                 </span>
             </a>
         </li>
@@ -307,9 +303,23 @@
                 <em class="material-icons" aria-hidden="true">gavel</em>Create Test Data
             </a>
         </li>
+
+        <!--<li>
+            <a class="audit_json_render">
+                <em class="material-icons" aria-hidden="true">gavel</em>
+                <span class="en">Audit</span><span class="fr">Vérification</span>
+            </a>
+        </li>-->
+
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset Local Store</span><span class="fr">Réinitialiser</span>
+            </a>
+        </li>
         <li>
             <span class="mob-span center-align">
-                <span class="en">MENU</span><span class="fr">MENU</span>
+                <span class="en">VIEW</span><span class="fr">VUE</span>
             </span>
             <hr>
         </li>
@@ -325,36 +335,13 @@
             </a>
         </li>
         <li>
-            <a class="audit_json_render">
-                <em class="material-icons" aria-hidden="true">gavel</em>
-                <span class="en">Audit</span><span class="fr">Vérification</span>
-            </a>
-        </li>
-        <li><a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear</span>
-                <span class="fr">Effacer</span>
-            </a></li>
-        <li>
-            <a class="adm_clear_ls">
-                <em class="material-icons" aria-hidden="true">flip_to_back</em>
-                <span class="en">Reset</span><span class="fr">Réinitialiser</span>
-            </a>
-        </li>
-        <li>
-            <span class="mob-span center-align">
-                <span class="en">VIEW</span><span class="fr">VUE</span>
-            </span>
-            <hr>
-        </li>
-        <li>
             <a class="hs_render_window">
                 <em class="material-icons" aria-hidden="true">assignment</em>
                 <span class="en">
                     Survey
                 </span>
                 <span class="fr">
-                    Enquête
+                    Sondage
                 </span>
             </a>
         </li>
@@ -405,6 +392,11 @@
             <span class="mob-span center-align"><span class="en">INSERT</span><span class="fr">INSÉRER</span></span>
             <hr>
         </li>
+        <li><a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Text</span>
+                <span class="fr">Effacer</span>
+            </a></li>
         <li>
             <a class="ev-add-header">
                 <em class="material-icons" aria-hidden="true">title</em>
@@ -447,13 +439,13 @@
                 <span class="fr">Echelle</span>
             </a>
         </li>
-        <li>
+        <!--<li>
             <a class="ev-add-qrank">
                 <em class="material-icons" aria-hidden="true">import_export</em>
                 <span class="en">Rate</span>
                 <span class="fr">Taux</span>
             </a>
-        </li>
+        </li>-->
     </ul>
     <!-- Modal Structure -->
     <div id="cortex_test_data_modal" class="modal">
@@ -506,7 +498,7 @@
         <div class="section" id="pre_survey_panels">
             <!-- Pre Survey Panels Go Here -->
         </div>
-        <div class="section">
+        <div class="section" style="background-color: white;">
             <div class="row">
                 <div id="editor_window" class="col s12 m6">
                     <form class="col s12">
@@ -522,7 +514,7 @@
                                         Survey Source (TYPE HERE).
                                     </span>
                                     <span class="fr">
-                                        Source d'enquête (TYPE ICI).
+                                        Source d'Sondage (TYPE ICI).
                                     </span>
                                 </label>
                             </div>
@@ -635,21 +627,22 @@
         </a>
     </div>
     <!-- Dependencies -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
-        async defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js" async defer></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- get Evalhalla init -->
+    <script src="../../../static/dist/evalhalla_designer_dist.js"></script>
+    <!-- 
+    get Evalhalla init
     <script src="../../../static/lib/v2/evh_g_init.js"></script>
 
-    <!-- API Connection Integrations  -->
+    API Connection Integrations
     <script src="../../../integrations/registhor/registhor_v2_key.js"></script>
     <script src="../../../integrations/survista/survista_key.js"></script>
     <script src="../../../integrations/cortex/cortex-functions.js"></script>
     <script src="../../../integrations/qrcodejs/qrcode.js"></script>
 
-    <!-- Default Survey -->
+    Default Survey
     <script src="../../../static/sur/example_sur.js"></script>
     <script src="../../../static/sur/ut1_june18_event.js"></script>
     <script src="../../../static/sur/ut0_da_interest.js"></script>
@@ -664,20 +657,18 @@
     <script src="../../../static/sur/tsq.js"></script>
     <script src="../../../static/sur/discover.js"></script>
     <script src="../../../static/sur/eldp.js"></script>
-
-
-    <!-- Autocomplete values local -->
+    Autocomplete values local
     <script src="../../../static/assets/departments.js"></script>
     <script src="../../../static/assets/classifications.js"></script>
     <script src="../../../static/assets/cities.js"></script>
     <script src="../../../static/assets/languages.js"></script>
     <script src="../../../static/assets/evalese_md_scripts.js"></script>
-    <!-- get Evalhalla lib files -->
+    get Evalhalla lib files
     <script src="../../../static/lib/v2/evh_g_state.js"></script>
     <script src="../../../static/lib/v2/evh_g_common.js"></script>
     <script src="../../../static/lib/v2/evh_g_templates.js"></script>
     <script src="../../../static/lib/v2/evh_g_interpreter.js"></script>
-    <!-- get Evalhalla features -->
+    get Evalhalla features
     <script src="../../../static/lib/v2/evh_feature_query_param_load_cortex.js"></script>
     <script src="../../../static/lib/v2/evh_feature_language.js"></script>
     <script src="../../../static/lib/v2/evh_feature_autocomplete.js"></script>
@@ -686,15 +677,15 @@
     <script src="../../../static/lib/v2/evh_feature_local_storage.js"></script>
     <script src="../../../static/lib/v2/evh_feature_questionlib.js"></script>
     <script src="../../../static/lib/v2/evh_feature_unloadconfirmation.js"></script>
-    <!-- CORTEX and Data Populator -->
+    CORTEX and Data Populator
     <script src="../../../static/lib/v2/evh_cortex_messages.js"></script>
     <script src="../../../static/lib/v2/evh_feature_data_recordpumper.js"></script>
-    <!-- get Evalhalla ui -->
+    get Evalhalla ui
     <script src="../../../static/lib/v2/evh_player_ui.js"></script>
     <script src="../../../static/lib/v2/evh_designer_ui.js"></script>
-
-    <!-- Evalhalla Core, start it up -->
+    Evalhalla Core, start it up 
     <script src="../../../static/lib/v2/evh_designer_core.js"></script>
+    -->
 </body>
 
 </html>

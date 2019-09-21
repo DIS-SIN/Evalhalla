@@ -11,7 +11,6 @@ _site
 /*.map
 .ipynb_checkpoints
 .vscode
-dist/
 node_modules/
 npm-debug.log
 /test/js

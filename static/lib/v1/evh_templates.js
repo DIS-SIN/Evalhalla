@@ -141,7 +141,7 @@ const evh_templates = {
             '<table class="highlight responsive-table">' +
             '<thead>' +
             '<tr>' +
-            '<th><span class="en">Survey</span><span class="fr">Enquête</span></th>' +
+            '<th><span class="en">Survey</span><span class="fr">Sondage</span></th>' +
             '<th><span class="en">Details</span><span class="fr">Details</span></th>' +
             '<th><span class="en">Lang</span><span class="fr">Lang</span></th>' +
             '<th><span class="en">Items</span><span class="fr">Articles</span></th>' +

@@ -88,7 +88,16 @@ _E.feature.qparam.startup = function (callback) {
     // ok let's load it up
     // TODO: Remove hardcode demos and replace with API
     if (_E.feature.qparam.settings.sur == "" || typeof _E.feature.qparam.settings.sur === "undefined") {
-        _E.feature.qparam.settings.sur = "TEST_SUR"; // the survey to load
+        //$(".fr").hide();
+        let prompted_sur = prompt("Survey ID | Sondage ID");
+        prompted_sur = _E.fxn.common.slugify(_E.fxn.common.safe(prompted_sur));
+        prompted_sur = prompted_sur.toUpperCase();
+        if (prompted_sur == "") {
+            prompted_sur = "DEMO";
+        }
+        window.location.replace(window.location.href.split("?")[0] + "?sur=" + prompted_sur);
+
+        _E.feature.qparam.settings.sur = prompted_sur; // the survey to load
     }
 
     // pull in the evalese

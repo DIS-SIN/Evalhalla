@@ -10,6 +10,8 @@ _E["feature"]["designer"]
 _E.feature.designer = {};
 
 _E.feature.designer.debug = false;
+
+
 _E.feature.designer.qrinit = false;
 _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
@@ -218,19 +220,65 @@ _E.feature.designer.enable_editor_panel_menu_buttons = function () {
 //
 _E.feature.designer.get_editor_tmpl = function (cmd) {
     if (cmd == "header") {
-        return "# 1234\n## Survey Title\n### Survey introduction text\n\n";
+        return `
+# ${_E.feature.qparam.settings.sur}
+
+## 
+/en English Title /;
+/fr Titre Francais /;
+
+### 
+/en Survey introduction text /;
+/fr Texte pour introduire le sondage /;
+
+`;
     } else if (cmd == "instr") {
-        return "// Explanatory text note\n\n";
+        return `// 
+/en Explanatory text note /;
+/fr Texte d'explication en francais /;
+
+`;
     } else if (cmd == "qany") {
-        return "Q: This is my question?\n/any\nOption\nOption\nOption\n;\n\n";
+        return `Q: 
+/en This is my question? /;
+/fr C'est la question? /;
+/any
+/en A Thing /; /fr Un chose /;
+/en A Thing /; /fr Un chose /;
+/en A Thing /; /fr Un chose /;
+;
+
+`;
     } else if (cmd == "qfree") {
-        return "Q: This is my question?\n/open\n\n";
+        return `Q:
+/en This is my question? /;
+/fr C'est la question? /;
+/open
+
+`;
     } else if (cmd == "qone") {
-        return "Q: This is my question?\n/one\nOption\nOption\nOption\n;\n\n";
+        return `Q: 
+/en This is my question? /;
+/fr C'est la question? /;
+/one
+/en A Thing /; /fr Un chose /;
+/en A Thing /; /fr Un chose /;
+/en A Thing /; /fr Un chose /;
+;
+
+`;
     } else if (cmd == "qrank") {
-        return "Q: This is my question?\n/rank\nOption\nOption\nOption\n;\n\n";
+        return "";
     } else if (cmd == "qscale") {
-        return "Q: This is my question?\n/scale Low, High, Unsure\n\n";
+        return `Q: 
+/en This is my question? /;
+/fr C'est la question? /;
+/scale1to5
+/en Low /; /fr Bas /;,
+/en High /; /fr Haut /;,
+/en Unsure /; /fr Incertain /;
+
+`;
     } else {
         return "";
     }
@@ -270,6 +318,7 @@ _E.feature.designer.enable_editor_buttons = function (actions) {
 _E.feature.designer.ui_resize_textareas = function () {
     M.textareaAutoResize(_E.core.state.store["el"]["c_editor"]);
     M.textareaAutoResize(_E.core.state.store["el"]["c_json"]);
+    M.updateTextFields();
 }
 
 _E.feature.designer.modal_cortex_test_data = null;
