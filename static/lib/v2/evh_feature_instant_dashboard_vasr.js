@@ -413,7 +413,10 @@ _E.feature.aesir.build_pie_chart = function (chartd) {
 _E.feature.aesir.build_respondent_chart = function (chartd) {
     let render_html = `
             <div class="col s12" style="float:top;"><div class="card-panel">
-                <span class="badge"> <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button></span>
+                <span class="badge"> 
+                    <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button>
+                    <button class="ctx_live_charts btn purp-canada-ca">Auto-Update</button>
+                </span>
                 <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
                     <span class='en'>${_E.feature.qparam.settings.sur} Dashboard (${_E.feature.aesir.stat_data.total_responses} Replies)</span>
                     <!-- <span class='fr'>Statistique Generale/span> -->
@@ -651,27 +654,51 @@ _E.feature.aesir.render_data = function (response) {
 
     $(".ctx_msg").hide();
     _E.feature.aesir.enable_expand_contract();
+    _E.feature.aesir.enable_livepoll();
     $('.card-panel').matchHeight();
 }
 
 _E.feature.aesir.expanded = true;
+_E.feature.aesir.exp_charts = function () {
+    if (_E.feature.aesir.expanded != true) {
+        $(".ctx_crt").removeClass("m6").addClass("m3");
+        //$(".ctx_msg").hide();
+        $(".ctx_datatable").hide();
+    } else {
+        $(".ctx_crt").removeClass("m3").addClass("m6");
+        //$(".ctx_msg").show();
+        $(".ctx_datatable").show();
+    }
+    for (var id in Chart.instances) {
+        Chart.instances[id].resize();
+    }
+    $('.card-panel').matchHeight();
+}
 _E.feature.aesir.enable_expand_contract = function () {
     $(".ctx_expand_charts").on("click", function () {
         if (_E.feature.aesir.expanded == true) {
             _E.feature.aesir.expanded = false;
-            $(".ctx_crt").removeClass("m6").addClass("m3");
-            //$(".ctx_msg").hide();
-            $(".ctx_datatable").hide();
+            _E.feature.aesir.exp_charts();
         } else {
             _E.feature.aesir.expanded = true;
-            $(".ctx_crt").removeClass("m3").addClass("m6");
-            //$(".ctx_msg").show();
-            $(".ctx_datatable").show();
+            _E.feature.aesir.exp_charts();
         }
-        for (var id in Chart.instances) {
-            Chart.instances[id].resize();
+    });
+}
+
+_E.feature.aesir.livepoll = false;
+_E.feature.aesir.enable_livepoll = function () {
+    $(".ctx_live_charts").on("click", function () {
+        if (_E.feature.aesir.livepoll == true) {
+            _E.feature.aesir.livepoll = false;
+            _E.feature.aesir.stop_auto_refresh();
+            $(".ctx_live_charts").html("Auto-Update");
+        } else {
+            _E.feature.aesir.livepoll = true;
+            _E.feature.aesir.start_auto_refresh();
+            $(".ctx_live_charts").html("Pause Stream");
         }
-        $('.card-panel').matchHeight();
+        _E.feature.aesir.exp_charts();
     });
 }
 
