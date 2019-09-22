@@ -338,6 +338,7 @@ _E.feature.aesir.build_bar_chart = function (chartd) {
             }]
         },
         options: {
+            responsive: true,
             plugins: {
                 labels: {
                     // render 'label', 'value', 'percentage', 'image' or custom function, default is 'percentage'
@@ -384,6 +385,7 @@ _E.feature.aesir.build_pie_chart = function (chartd) {
             ]
         },
         options: {
+            responsive: true,
             plugins: {
                 labels: [
                     {
@@ -415,6 +417,9 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
                 <p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
                     <span class='en'>General Information</span>
                     <!-- <span class='fr'>Statistique Generale/span> -->
+                </p>
+                <p>
+                    <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button>
                 </p>
                 <div id="edtable_general" class="ctx_datatable">${chartd.html}</div>
             </div></div>`;
@@ -485,7 +490,7 @@ _E.feature.aesir.render_data = function (response) {
 
         //Inital html to show
         render_html = `
-            <div class="col s12 m6 l6" style="float:top;"><div class="card-panel">
+            <div class="ctx_crt col s12 m6" style="float:top;"><div class="card-panel">
                 <span class="badge">(${cr.uid})</span>
                 <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
                     <span class='en'>${ql[0] ? ql[0] : cr.uid}</span>
@@ -648,8 +653,28 @@ _E.feature.aesir.render_data = function (response) {
     ));
 
     $(".ctx_msg").hide();
+    _E.feature.aesir.enable_expand_contract();
 }
 
+_E.feature.aesir.expanded = true;
+_E.feature.aesir.enable_expand_contract = function () {
+    $(".ctx_expand_charts").on("click", function () {
+        if (_E.feature.aesir.expanded == true) {
+            _E.feature.aesir.expanded = false;
+            $(".ctx_crt").removeClass("m6").addClass("m3");
+            //$(".ctx_msg").hide();
+            $(".ctx_datatable").hide();
+        } else {
+            _E.feature.aesir.expanded = true;
+            $(".ctx_crt").removeClass("m3").addClass("m6");
+            //$(".ctx_msg").show();
+            $(".ctx_datatable").show();
+        }
+        for (var id in Chart.instances) {
+            Chart.instances[id].resize();
+        }
+    });
+}
 
 _E.feature.aesir.enable_feature = function () {
     _E.feature.aesir.populate_background_colors();
