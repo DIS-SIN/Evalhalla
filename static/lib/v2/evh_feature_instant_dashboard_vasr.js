@@ -413,13 +413,10 @@ _E.feature.aesir.build_pie_chart = function (chartd) {
 _E.feature.aesir.build_respondent_chart = function (chartd) {
     let render_html = `
             <div class="col s12" style="float:top;"><div class="card-panel">
-                <span class="badge">(General)</span>
-                <p style="font-weight:normal;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
-                    <span class='en'>General Information</span>
+                <span class="badge"> <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button></span>
+                <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
+                    <span class='en'>${_E.feature.qparam.settings.sur} Dashboard (${_E.feature.aesir.stat_data.total_responses} Replies)</span>
                     <!-- <span class='fr'>Statistique Generale/span> -->
-                </p>
-                <p>
-                    <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button>
                 </p>
                 <div id="edtable_general" class="ctx_datatable">${chartd.html}</div>
             </div></div>`;
@@ -491,7 +488,7 @@ _E.feature.aesir.render_data = function (response) {
         //Inital html to show
         render_html = `
             <div class="ctx_crt col s12 m6" style="float:top;"><div class="card-panel">
-                <span class="badge">(${cr.uid})</span>
+                <span class="badge">#${cr.uid.split("_").slice(-1)[0]}</span>
                 <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
                     <span class='en'>${ql[0] ? ql[0] : cr.uid}</span>
                     <!-- <span class='fr'>${ql[1] ? ql[1] : cr.uid}</span> -->
@@ -643,8 +640,8 @@ _E.feature.aesir.render_data = function (response) {
                 <div>
                     <table>
                     <tr>
-                        <td>Total Responses<br><strong>${_E.feature.aesir.stat_data.total_responses}</strong></td>
-                        <td>Survey Conducted<br>${_E.feature.qparam.settings.sur}</td>
+                        <td>Total Responses<br><strong style="font-weight:bold;font-size:2em;">${_E.feature.aesir.stat_data.total_responses}</strong></td>
+                        <td>Survey Conducted<br><strong style="font-weight:bold;font-size:2em;">${_E.feature.qparam.settings.sur}</strong></td>
                     </tr>
                     </table>
                 </div>
@@ -654,6 +651,7 @@ _E.feature.aesir.render_data = function (response) {
 
     $(".ctx_msg").hide();
     _E.feature.aesir.enable_expand_contract();
+    $('.card-panel').matchHeight();
 }
 
 _E.feature.aesir.expanded = true;
@@ -673,6 +671,7 @@ _E.feature.aesir.enable_expand_contract = function () {
         for (var id in Chart.instances) {
             Chart.instances[id].resize();
         }
+        $('.card-panel').matchHeight();
     });
 }
 

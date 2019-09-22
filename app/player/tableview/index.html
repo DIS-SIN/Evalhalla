@@ -27,23 +27,25 @@
             </div>
         </nav>
     </div>
-    <div id="editor" class="container">
+    <div id="editor" class="container" style="background-color: #FFFFFF;">
         <div class="row">
-            <div class="col s12 m4 purp-canada-ca-edged-buffered">
+            <div class="col s12 m4 purp-canada-ca-edged-buffered" style="display: none;">
                 <div>
                     <strong>Survey Data<br>From Survista API</strong>
                 </div>
                 <textarea id="render_override" style="background-color: white;color:black;"></textarea>
             </div>
-            <div class="col s12 m4 purp-canada-ca-edged-buffered">
+            <div class="col s12 m4 purp-canada-ca-edged-buffered" style="display: none;">
                 <div>
                     <strong>Survey Evalese<br>From /sur files</strong>
                 </div>
                 <textarea id="render_override_evh" style="background-color: white;color:black;"></textarea>
             </div>
-            <div class="col s12 m4 purp-canada-ca-edged-buffered">
+            <div class="col s12 purp-canada-ca-edged-buffered">
                 <div>
-                    <strong>.TSV Table<br>Paste into Excel as text</strong>
+                    <strong style="font-size:1.8em;">.TSV Table</strong>
+                    <br>
+                    <strong style="font-size:1.4em;">1. Select All - 2. Copy - 3. Paste text into Excel</strong>
                 </div>
                 <textarea id="render_tsv" style="background-color: white;color:black;"></textarea>
             </div>
@@ -54,12 +56,16 @@
             </div>
         </div>
         <div class="row">
-            <div id="render_window" class="col s12  purp-canada-ca-edged-buffered">
+            <div id="render_window" class="col s12  purp-canada-ca-edged-buffered" style="background-color: #FFFFFF;">
                 <div>
+
                     <strong>Table Preview</strong>
                 </div>
-                <div id="render_target" class="row">
-                    Rendering...
+                <div id="render_target_container" class="row">
+                    <div id="render_target" class="col s12">
+                        Rendering...
+
+                    </div>
                 </div>
             </div>
         </div>
