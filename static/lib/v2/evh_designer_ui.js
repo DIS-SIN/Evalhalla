@@ -294,6 +294,7 @@ _E.feature.designer.editor_add_template = function (cmd) {
 _E.feature.designer.trigger_action = function (curr_action) {
     //console.log(curr_action);
     _E.feature.designer.editor_add_template(curr_action);
+    M.textareaAutoResize(_E.core.state.store["el"]["c_editor"]);
 };
 
 _E.feature.designer.enable_editor_buttons = function (actions) {
@@ -322,6 +323,7 @@ _E.feature.designer.ui_resize_textareas = function () {
 }
 
 _E.feature.designer.modal_cortex_test_data = null;
+
 _E.feature.designer.enable_feature = function () {
     _E.feature.designer.ui_reset_panels();
 
@@ -346,5 +348,6 @@ _E.feature.designer.enable_feature = function () {
     $("#step_thank_you_cta").hide();
 
     // Focus on the editor
-    _E.core.state.store["el"]["c_editor"].focus();
+    //_E.core.state.store["el"]["c_editor"].focus();
+
 };

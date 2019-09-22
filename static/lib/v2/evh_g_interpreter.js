@@ -546,6 +546,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             snip = snip.replace(/\%reqattr/g, '').replace(/\%reqcls/g, "");
         }
         _E.core.state.store["render"]["question"]["form"] = snip;
+        _E.core.interpreter.patchLangSelectBoxRegistry.push(cmd + "_qid_" + _E.core.state.store["render"]["question"]["qid"]);
     } else if (cmd == "open"
         || cmd == "pick one department"
         || cmd == "pick one classification"
@@ -666,6 +667,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
 
             form = _E.core.state.store["localmem"]["rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]][_E.core.state.store["ui"]["lang"]];
             //console.log(_E.core.state.store["localmem"]);
+            _E.core.interpreter.patchLangSelectBoxRegistry.push("rgroup_qid_" + _E.core.state.store["render"]["question"]["qid"]);
         }
 
         if (_E.core.state.store["render"]["question"]["random"]["options"] == true) {
@@ -738,6 +740,9 @@ _E.core.interpreter.raise_src_to_evalhalla = function (src) {
     var i = 0;
     var evalhalla = [];
     var cmd = "";
+
+    // FIX: language on selects faisl to switch dynamically
+    _E.core.interpreter.patchLangSelectBoxRegistry = [];
 
     // build q_index
     _E.core.interpreter.parse_question_text(src);
@@ -942,6 +947,9 @@ _E.core.interpreter.render = function () {
         //console.log("Interpreter: Clear Hide Items");
 
     }
+
+    //M.textareaAutoResize(_E.core.state.store["el"]["c_editor"]);
+    //$('.card-panel-designer').matchHeight();
 };
 
 _E.core.interpreter.parse = function () {
@@ -976,4 +984,21 @@ _E.core.interpreter.startup = function (emodule) {
     _E.core.interpreter.enable_feature();
     _E.core.interpreter.parse();
 
+};
+
+// for dynamic language change, we have to swap out the guts
+// this removes their answer unfortunately for select boxes.
+// but it's a trade off. OL tends to take precedence over the 
+// users input here. 
+_E.core.interpreter.patchLangSelectBoxRegistry = [];
+_E.core.interpreter.patchLangSelectBox = function () {
+    let lang = _E.core.state.store["ui"]["lang"];
+    for (let i = 0; i < _E.core.interpreter.patchLangSelectBoxRegistry.length; i++) {
+        let id = _E.core.interpreter.patchLangSelectBoxRegistry[i];
+        //console.log($("#" + id).html());
+        // save any answers so we can reload them
+        let val = $("#" + id).val();
+        $("#" + id).html(_E.core.state.store["localmem"][id.replace("scale1to10", "scale").replace("scale1to5", "scale")][lang]);
+        $("#" + id).val(val);
+    }
 };
