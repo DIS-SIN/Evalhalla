@@ -500,15 +500,17 @@
         </div>
         <div class="section" style="background-color: white;">
             <div class="row">
-                <div id="editor_window" class="col s12 m6">
+                <div id="editor_window" class="col s12 m6 ">
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s12">
                                 <!-- 
                                     TODO: Better alert for errors
-                                    <span id="parser_alert" class="badge accessiblered white-text left"></span>-->
-                                <textarea id="editor_target" class="materialize-textarea"
-                                    data-original-height=0></textarea>
+                                    <span id="parser_alert" class="badge accessiblered white-text left"></span>
+                            -->
+
+                                <textarea id="editor_target" data-original-height=0
+                                    class="materialize-textarea card-panel-designer"></textarea>
                                 <label for="editor_target">
                                     <span class="en">
                                         Survey Source (TYPE HERE).
@@ -521,9 +523,9 @@
                         </div>
                     </form>
                 </div>
-                <div id="render_window" class="col s12 m6">
+                <div id="render_window" class="col s12 m6 ">
                     <div class="row">
-                        <div id="render_target"></div>
+                        <div id="render_target" class="card-panel-designer"></div>
                     </div>
                 </div>
                 <div id="ls_window" class="col s12 m12">
@@ -622,7 +624,7 @@
         </div>
     </footer>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large blue-canada-ca" href="#editor" aria-label="Skip to top">
+        <a class="btn-floating btn-large purp-canada-ca" href="#editor" aria-label="Skip to top">
             <em class="large material-icons fab-align">arrow_upward</em>
         </a>
     </div>
@@ -686,6 +688,7 @@
     Evalhalla Core, start it up 
     <script src="../../../static/lib/v2/evh_designer_core.js"></script>
     -->
+
 </body>
 
 </html>
