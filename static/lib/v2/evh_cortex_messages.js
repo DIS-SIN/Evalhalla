@@ -91,7 +91,8 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
 
             for (let ii = 0; ii < rkeys.length; ii++) {
                 let rk = rkeys[ii];
-                if (rk.indexOf("qid_" + q) != -1) {
+                let check_q = (rk.split("_")[2]) ? rk.split("_")[2] : "undefined";
+                if (check_q == q) {//(rk.indexOf("qid_" + q) != -1) {
                     //stats[rk] = r[rk];
 
 
@@ -541,7 +542,7 @@ _E.feature.cortex.messages.create_survey_response_msg = function (jo) {
             continue;
         } else if (tokens[0] == "meta") {
             continue;
-        } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale1to10" ||
+        } else if (tokens[0] == "rgroup" || tokens[0] == "cgroup" || tokens[0] == "scale" || tokens[0] == "scale1to10" ||
             tokens[0] == "scale1to5" || tokens[0] == "textarea") {
 
             msg_cortex.data[msg_cortex.respondent.conducted + "_q_" + tokens[2]] = jo[key];
