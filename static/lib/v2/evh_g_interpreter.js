@@ -168,6 +168,10 @@ _E.core.interpreter.cortex_questiontypes = {
         "type": "SINGLE_CHOICE",
         "subtype": "SCALE_1_TO_10"
     },
+    "scale": {
+        "type": "SINGLE_CHOICE",
+        "subtype": "SCALE_1_TO_10"
+    },
     "scale1to5": {
         "type": "SINGLE_CHOICE",
         "subtype": "SCALE_1_TO_5"
@@ -260,7 +264,8 @@ _E.core.interpreter.parse_question_text = function (sur_text) {
             .split("/dropdown")[0].split("/DROPDOWN")[0]
             .split("/language")[0].split("/LANGUAGE")[0]
             .split("/scale")[0].split("/SCALE")[0]
-            .split("/scale1to5")[0].split("/SCALE1TO5")[0];
+            .split("/scale1to5")[0].split("/SCALE1TO5")[0]
+            .split("/scale1to10")[0].split("/SCALE1TO10")[0];
         evh_sai = evh_sai;
 
         // split by lang (en for now)
@@ -445,6 +450,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         opts[0] = opts[0]
             .replace("[SCALE]", "")
             .replace(/(\/SCALE1TO5|\/scale1to5)/g, "") // 1-5 scale
+            .replace(/(\/SCALE1TO10|\/scale1to10)/g, "") // 1-5 scale
             .replace(/(\/SCALE|\/scale)/g, "")
             .replace(/(\/ÉCHELLE|\/échelle)/g, "")
             .replace("|", "")

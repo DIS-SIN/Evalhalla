@@ -586,6 +586,7 @@ _E.feature.aesir.render_data = function (response) {
 
 
         //Depending on the type of the question, build a different type of chart
+        //console.log(cr.classifiedAs);
         if (cr.classifiedAs.includes('SCALE')) {
             _E.feature.aesir.build_bar_chart(resp_to_chart);
         }
