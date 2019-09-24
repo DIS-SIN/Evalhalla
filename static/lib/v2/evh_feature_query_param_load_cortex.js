@@ -80,7 +80,7 @@ _E.feature.qparam.startup = function (callback) {
         _E.feature.qparam.settings.fallback = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("fallback"));
     } catch (e) {
         // IE11 Unsupported
-        alert("Apologies. Evalhalla is built using modern code. If you can, please make urgent requests to your leadership to enter the modern era. Everything will improve, you will get more done will less friction. Chrome, Firefox, or Edge all will work.");
+        console.log("WARN: No sur caught in params. Falling back.");
     }
 
     // REFACTOR_PREP: player, survey selection (editor function + api for player)
