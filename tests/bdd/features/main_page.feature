@@ -7,6 +7,6 @@ Feature:  Language selection
     or in the case of surveys their data entered
 
     Scenario: Setting respondent language
-        Given I navigate to survey with id "test_sur"
+        Given I navigate to survey with id "TEST_SUR"
         Then I expect that the title is "Evalhalla - Surveys and Evaluations done right | Sondage et évaluations bien faites" 
         And I expect a button with text "English"
