@@ -704,6 +704,7 @@ _E.feature.aesir.enable_expand_contract = function () {
             _E.feature.aesir.exp_charts();
         }
     });
+    _E.feature.aesir.exp_charts();
 }
 
 _E.feature.aesir.livepoll = false;
