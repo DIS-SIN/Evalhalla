@@ -84,8 +84,8 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
                 "total": 0,
                 "question": "",//"[\"What is your first official language?\",\"Quelle est votre première langue officielle?\"]",
                 "stats": "",//"{\"Gwich’in\":11,\"Malecite\":7,\"Punjabi\":17}",
-                "questionType": "",
-                "classifiedAs": ""
+                "questionType": "SINGLE_CHOICE", // defaults to fix undefined bug
+                "classifiedAs": "RGROUP"// defaults to fix undefined bug
             }
             //console.log(">> " + JSON.stringify(r));
 
@@ -111,10 +111,8 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
                         if (qtype == "cgroup") {
                             //console.log("> " + JSON.stringify(r[rk]));
                             stats["answer"] = (r[rk]) ? r[rk] : ["None"];
-
                         } else {
                             stats["answer"] = [(r[rk]) ? r[rk] : "Blank"];
-
                         }
                     } else if (qtype == "textarea" && submeta == "sentimentScore") {
                         stats["sentimentScore"] = [(r[rk]) ? r[rk] : 0.0];
