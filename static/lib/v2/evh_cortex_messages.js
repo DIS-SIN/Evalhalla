@@ -145,7 +145,9 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
                 "classifiedAs": ""
             }
             let rk = rkeys[ii];
-            if (rk.indexOf("tombstone") != -1) {
+            if (rk.indexOf("tombstone") != -1
+                || rk.indexOf("meta_useragent") != -1
+                || rk.indexOf("meta_entry") != -1) {
                 //stats[rk] = r[rk];
 
                 let metainf = rk.split("_");
@@ -154,11 +156,15 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
                 let qid = (metainf[2]) ? metainf[2] : "undefined";
                 let submeta = (metainf[3]) ? metainf[3] : "undefined";
 
-                if (qtype == "tombstone" && qidlbl != "undefined") {
+                if ((qtype == "tombstone" || qtype == "meta") && qidlbl != "undefined") {
                     if (qidlbl == "city") {
                         qidlbl = "location";
                     }
-                    qtype = "pick one " + qidlbl;
+                    if (qidlbl == "useragent" || qidlbl == "entry") {
+                        qtype = "pick one";
+                    } else {
+                        qtype = "pick one " + qidlbl;
+                    }
                     stats["uid"] = `${_E.feature.qparam.settings.sur}_q_${qidlbl}`;
                     stats["answer"] = [(r[rk]) ? r[rk] : "Blank"];
                     stats["questionType"] = _E.core.interpreter.cortex_questiontypes[qtype].type;
@@ -187,14 +193,26 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
             "sentimentScore": []
         });
     }
-    stats_metrics.push({
-        "uid": `${_E.feature.qparam.settings.sur}_q_location`,
-        "total": 0, "question": ["Location", "Location"], "stats": {},
-        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
-    });
+
     stats_metrics.push({
         "uid": `${_E.feature.qparam.settings.sur}_q_language`,
         "total": 0, "question": ["Language", "Language"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_entry`,
+        "total": 0, "question": ["Entry Method", "Entry Method"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_useragent`,
+        "total": 0, "question": ["User Agent", "User Agent"], "stats": {},
+        "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
+    });
+
+    stats_metrics.push({
+        "uid": `${_E.feature.qparam.settings.sur}_q_location`,
+        "total": 0, "question": ["Location", "Location"], "stats": {},
         "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
     });
     stats_metrics.push({
@@ -212,6 +230,7 @@ _E.feature.cortex.messages.convert_survista_to_aesir = function (response) {
         "total": 0, "question": ["Classification", "Classification"], "stats": {},
         "questionType": "", "classifiedAs": "", "answer": [], "sentimentScore": []
     });
+
 
     //console.log(stats_metrics);
     // fill shellse
