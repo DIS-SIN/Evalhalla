@@ -238,7 +238,7 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
 
             _E.feature.aesir.cortex_get_survey_callback();
             // TODO: Renable for refresh
-            _E.feature.aesir.stop_auto_refresh();
+            //_E.feature.aesir.stop_auto_refresh();
         }
         //_E.feature.instadash.stop_auto_refresh();
     });
@@ -481,12 +481,16 @@ _E.feature.aesir.stat_data = {
 _E.feature.aesir.render_data = function (response) {
     $("#render_target").html("");
     let render_html = "";
+    // console.log("Should see: " + response.length);
     for (let i = 0; i < response.length; i++) {
         let cr = response[i];
+        // console.log(i + " ITEM");
+        // console.log(cr);
         let ql = JSON.parse(cr.question);
         if (cr.stats == null) {
             continue;
         }
+        // console.log("ok")
 
         //Inital html to show
         render_html = `
@@ -502,6 +506,8 @@ _E.feature.aesir.render_data = function (response) {
                 <pre class="ctx_msg">${JSON.stringify(cr, null, 2)}</pre>
             </div></div>`;
 
+        // console.log("ok 2")
+
         //Render the intial HTML
         $("#render_target").append(render_html);
 
@@ -511,6 +517,7 @@ _E.feature.aesir.render_data = function (response) {
             d_data: []
         };
 
+        // console.log("ok 3")
 
         let stats = JSON.parse(cr.stats);
         let statsKeys = (stats) ? Object.keys(stats) : [];
@@ -537,6 +544,8 @@ _E.feature.aesir.render_data = function (response) {
         }
         cr.total = _E.feature.aesir.stat_data.total_responses;
 
+        // console.log("ok 4")
+
         $("#chart_totals_" + cr.uid).html(cr.total);
 
         if (cr.questionType.includes('CLASSIFIED')) {
@@ -552,6 +561,7 @@ _E.feature.aesir.render_data = function (response) {
             return b.statValue - a.statValue;
         });
 
+        //console.log("ok 5")
 
         for (let ii = 0; ii < statDataTable.length; ii++) {
             // color override
@@ -564,7 +574,7 @@ _E.feature.aesir.render_data = function (response) {
         }
 
 
-        let recLimit = 13;
+        let recLimit = 13; // setting to 13, but arbitrary really
         let item_count = (statDataTable.length < recLimit) ? statDataTable.length : recLimit;
         let others = {
             "statValue": 0,
@@ -584,6 +594,8 @@ _E.feature.aesir.render_data = function (response) {
             resp_to_chart.d_labels.push(others.statKey + " " + others.statOtherCategories);
         }
 
+        //console.log("ok 6 CLS:[" + cr.classifiedAs + "]");
+        //console.log(cr);
 
         //Depending on the type of the question, build a different type of chart
         //console.log(cr.classifiedAs);
@@ -613,7 +625,7 @@ _E.feature.aesir.render_data = function (response) {
                 </div>`;
         }
 
-        // &#8203; 
+        // console.log("ok 7")
 
         let statDataTableHTML = `${sentiment_html}<table>`;
         for (let iii = 0; iii < item_count; iii++) {
@@ -635,9 +647,10 @@ _E.feature.aesir.render_data = function (response) {
         statDataTableHTML += `</table>`;
         //statDataTable.sort();
 
-
         $(`#edtable_${'chart_' + cr.uid}`).html(statDataTableHTML);
 
+        //console.log(resp_to_chart);
+        //console.log("ok done");
     }
 
     $("#render_target").prepend(_E.feature.aesir.build_respondent_chart(
@@ -709,6 +722,11 @@ _E.feature.aesir.enable_livepoll = function () {
         }
         _E.feature.aesir.exp_charts();
     });
+    if (_E.feature.aesir.livepoll != true) {
+        $(".ctx_live_charts").html("Auto-Update");
+    } else {
+        $(".ctx_live_charts").html("Pause Stream");
+    }
 }
 
 _E.feature.aesir.enable_feature = function () {
@@ -716,4 +734,5 @@ _E.feature.aesir.enable_feature = function () {
     // Test Data
     //_E.feature.aesir.cortex_get_survey();
     _E.feature.aesir.start_auto_refresh();
+    _E.feature.aesir.stop_auto_refresh();
 }
