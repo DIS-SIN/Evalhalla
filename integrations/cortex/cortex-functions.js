@@ -426,7 +426,7 @@ const survey_response_avro_template =
 _C.consumeEvaleseCallback = function () { };
 _C.consumeEvaleseCallbackError = function () { };
 const consumeEvalese = function (survey_name, variable, callback, callbackerror) {
-  console.log(`Message to CORTEX (consumeEvalese) ${survey_name}`);
+  console.log(`Message to CORTEX (consumeEvalese) ${survey_name.toUpperCase()}`);
 
   if (typeof callback !== "undefined") {
     _C.consumeEvaleseCallback = callback;
@@ -439,7 +439,7 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
   //survey_name = "survey_evalese";
   // end WARN
 
-  var url = adminUrl + "/topics/" + survey_name + "_survey_evalese/consume";
+  var url = adminUrl + "/topics/" + survey_name.toUpperCase() + "_survey_evalese/consume";
   $.ajax(
     url
   ).success(
@@ -447,7 +447,7 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
       if (typeof data.evalese === "undefined") {
         console.log(data);
         console.log(
-          "Failed to consume Evalese for survey " + survey_name +
+          "Failed to consume Evalese for survey " + survey_name.toUpperCase() +
           "Message is not the correct expected structure"
         );
       }
@@ -461,7 +461,7 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
   ).error(
     function (jqXHR, textStatus, errorThrown) {
       console.log(
-        "Failed to consume Evalese for survey " + survey_name
+        "Failed to consume Evalese for survey " + survey_name.toUpperCase()
         + "with error " + errorThrown + " || " + jqXHR.responseText
       );
       error = true;
@@ -473,7 +473,7 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
 _C.consumeSurveyMetricsCallback = function () { };
 _C.consumeSurveyMetricsCallbackError = function () { };
 const consumeSurveyMetrics = function (survey_name, variable, callback, callbackerror) {
-  console.log(`Message to CORTEX (consumeSurveyMetrics) ${survey_name}`);
+  console.log(`Message to CORTEX (consumeSurveyMetrics) ${survey_name.toUpperCase()}`);
 
   if (typeof callback !== "undefined") {
     _C.consumeSurveyMetricsCallback = callback;
@@ -483,10 +483,11 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
   }
   // variable must be a plain javascript object
   // TODO: Update cortex to provide targeted survey metrics vs. most recent
-  console.log("WARN: Overriding " + survey_name + " to survey_metrics");
-  survey_name = "survey_metrics";
 
-  var url = adminUrl + "/topics/" + survey_name + "/consume";
+
+  var url = adminUrl + "/topics/" + survey_name.toUpperCase() + "/consume";
+  console.log("WARN: Overriding " + survey_name.toUpperCase() + " to survey_metrics");
+  url = adminUrl + "/topics/survey_metrics/consume";
   $.ajax(
     url
   ).success(
@@ -494,7 +495,7 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
       if (typeof data.payload === "undefined") {
         console.log(data);
         console.log(
-          "Failed to consume Metrics for survey [" + survey_name + "]" +
+          "Failed to consume Metrics for survey [" + survey_name.toUpperCase() + "]" +
           "Message is not the correct expected structure"
         );
       }
@@ -508,7 +509,7 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
   ).error(
     function (jqXHR, textStatus, errorThrown) {
       console.log(
-        "Failed to consume Metrics for survey [" + survey_name + "]" +
+        "Failed to consume Metrics for survey [" + survey_name.toUpperCase() + "]" +
         + "with error " + errorThrown + " || " + jqXHR.responseText
       );
       error = true;
@@ -524,7 +525,7 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
 
 const produceEvalese = function (survey_name, evalese) {
   var data = {
-    "topic": survey_name + "_survey_evalese",
+    "topic": survey_name.toUpperCase() + "_survey_evalese",
     "avro_schema": evalese_avro_template,
     "message": {
       "evalese": evalese
@@ -541,11 +542,11 @@ const produceEvalese = function (survey_name, evalese) {
     }
   ).success(
     function (returnedData, textStatus, jqXHR) {
-      console.log("Successfully Saved Survey: " + survey_name)
+      console.log("Successfully Saved Survey: " + survey_name.toUpperCase())
     }
   ).error(
     function (jqXHR, textStatus, errorThrown) {
-      console.log("Survey " + survey_name + " not successfully saved " + errorThrown)
+      console.log("Survey " + survey_name.toUpperCase() + " not successfully saved " + errorThrown)
     }
   )
 }
