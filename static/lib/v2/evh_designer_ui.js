@@ -18,6 +18,8 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
     // TODO: Fix with correct code (right now just obj/deobj for test)
     _E.core.state.store["el"]["btn_upload"].on("click", function () {
         (_E.feature.designer.debug) ? console.log("CORTEX Upload") : true;
+        let pc = _E.fxn.common.safe($("#pc").val());
+        pc = (pc == "mw11") ? (11 * 11) : (11 * 0);
 
         let jo = JSON.parse(
             _E.core.interpreter.evh_clean_json(
@@ -39,14 +41,14 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
         ) : true;
 
         console.log("Evalhalla -[produceSurveyTemplate]-> CORTEX");
-        (_E.feature.designer.debug) ? true : produceSurveyTemplate(
+        (_E.feature.designer.debug || pc == 0) ? true : produceSurveyTemplate(
             //_E.feature.qparam.settings.sur,
             JSON.stringify(
                 _E.feature.cortex.messages.create_survey_template_msg(jo)
             )
         );
         console.log("Evalhalla -[produceEvalese]-> CORTEX");
-        (_E.feature.designer.debug) ? true : produceEvalese(
+        (_E.feature.designer.debug || pc == 0) ? true : produceEvalese(
             _E.feature.qparam.settings.sur,
             JSON.stringify(
                 _E.feature.cortex.messages.create_survey_evalese_msg(jo)

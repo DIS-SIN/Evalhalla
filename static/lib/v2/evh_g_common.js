@@ -104,6 +104,15 @@ _E.fxn.common.hackernoon_pie = function (elid, slices) {
     }
 }
 
+_E.fxn.common.label_blackart_spacewrap = function (str) {
+    // https://en.wikipedia.org/wiki/Zero-width_space
+    // &#8203; = zws
+    // chunk it into 8 char chunks (arbitary choice) 
+    str = str.match(/.{1,8}/g); // ["abc..8", "d"]
+    str = str.join("&#8203;"); // inject zws
+    return str; // mischief managed
+}
+
 _E.fxn.common.label_truncate = function (str, length) {
     var dots = str.length > length ? '...' : '';
     return str.substring(0, length) + dots;

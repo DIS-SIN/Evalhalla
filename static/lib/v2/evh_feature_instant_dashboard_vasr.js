@@ -264,7 +264,7 @@ _E.feature.aesir.start_auto_refresh = function () {
     _E.feature.aesir.tmr = null;
     _E.feature.aesir.tmr = setInterval(function () {
         _E.feature.aesir.cortex_get_survey(_E.feature.qparam.settings.sur);
-    }, 7000);
+    }, 4000);
 }
 _E.feature.aesir.backgroundColors = [];
 _E.feature.aesir.populate_background_colors = function () {
@@ -413,12 +413,12 @@ _E.feature.aesir.build_pie_chart = function (chartd) {
 _E.feature.aesir.build_respondent_chart = function (chartd) {
     let render_html = `
             <div class="col s12" style="float:top;"><div class="card-panel">
-                <span class="badge"> 
+                <p> 
                     <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button>
                     <button class="ctx_live_charts btn purp-canada-ca">Auto-Update</button>
-                </span>
+                </p>
                 <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
-                    <span class='en'>${_E.feature.qparam.settings.sur} Dashboard (${_E.feature.aesir.stat_data.total_responses} Replies)</span>
+                    <span class='en'>${_E.fxn.common.label_blackart_spacewrap(_E.feature.qparam.settings.sur)} Dashboard (${_E.feature.aesir.stat_data.total_responses} Replies)</span>
                     <!-- <span class='fr'>Statistique Generale/span> -->
                 </p>
                 <div id="edtable_general" class="ctx_datatable">${chartd.html}</div>
@@ -613,11 +613,13 @@ _E.feature.aesir.render_data = function (response) {
                 </div>`;
         }
 
+        // &#8203; 
 
         let statDataTableHTML = `${sentiment_html}<table>`;
         for (let iii = 0; iii < item_count; iii++) {
+            // break obscenely large strings
             statDataTableHTML += `<tr>
-                <td>${statDataTable[iii].statKey}</td>
+                <td>${_E.fxn.common.label_blackart_spacewrap(statDataTable[iii].statKey)}</td>
                 <td>
                     <strong style="font-weight:bold;color:${statDataTable[iii].statBg}">${statDataTable[iii].statValue}</strong> <sup>(${((statDataTable[iii].statValue / cr.total) * 100).toFixed(1)}%)</sup>
                 </td></tr>`;
@@ -645,7 +647,7 @@ _E.feature.aesir.render_data = function (response) {
                     <table>
                     <tr>
                         <td>Total Responses<br><strong style="font-weight:bold;font-size:2em;">${_E.feature.aesir.stat_data.total_responses}</strong></td>
-                        <td>Survey Conducted<br><strong style="font-weight:bold;font-size:2em;">${_E.feature.qparam.settings.sur}</strong></td>
+                        <td>Survey Conducted<br><strong style="font-weight:bold;font-size:2em;">${_E.fxn.common.label_blackart_spacewrap(_E.feature.qparam.settings.sur)}</strong></td>
                     </tr>
                     </table>
                 </div>
@@ -662,10 +664,12 @@ _E.feature.aesir.render_data = function (response) {
 _E.feature.aesir.expanded = true;
 _E.feature.aesir.exp_charts = function () {
     if (_E.feature.aesir.expanded != true) {
+        // current desire is to compress
         $(".ctx_crt").removeClass("m6").addClass("m3");
         //$(".ctx_msg").hide();
         $(".ctx_datatable").hide();
     } else {
+        // current design is to expand
         $(".ctx_crt").removeClass("m3").addClass("m6");
         //$(".ctx_msg").show();
         $(".ctx_datatable").show();
@@ -678,9 +682,11 @@ _E.feature.aesir.exp_charts = function () {
 _E.feature.aesir.enable_expand_contract = function () {
     $(".ctx_expand_charts").on("click", function () {
         if (_E.feature.aesir.expanded == true) {
+            // currently expanded, now compress
             _E.feature.aesir.expanded = false;
             _E.feature.aesir.exp_charts();
         } else {
+            // currently compressed, now expand
             _E.feature.aesir.expanded = true;
             _E.feature.aesir.exp_charts();
         }
@@ -691,10 +697,12 @@ _E.feature.aesir.livepoll = false;
 _E.feature.aesir.enable_livepoll = function () {
     $(".ctx_live_charts").on("click", function () {
         if (_E.feature.aesir.livepoll == true) {
+            // currently polling, turn off
             _E.feature.aesir.livepoll = false;
             _E.feature.aesir.stop_auto_refresh();
             $(".ctx_live_charts").html("Auto-Update");
         } else {
+            // currently not polling, turn on
             _E.feature.aesir.livepoll = true;
             _E.feature.aesir.start_auto_refresh();
             $(".ctx_live_charts").html("Pause Stream");

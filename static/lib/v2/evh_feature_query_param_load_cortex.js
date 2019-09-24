@@ -45,7 +45,7 @@ _E.feature.qparam.consume_evalese_error = function () {
     } else {
         if (_E.feature.qparam.settings.fallback == "true") {
             console.log("... FALLBACK. Using test_sur demo default");
-            _E.feature.qparam.settings.sur = "TEST_SUR"; // WARN: Case survey id changes
+            _E.feature.qparam.settings.sur = "DEMO"; // WARN: Case survey id changes
             _E.feature.qparam.settings.sur_evh = _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()];
         }
     }
@@ -74,7 +74,7 @@ _E.feature.qparam.startup = function (callback) {
     // REFACTOR_PREP: player, param extraction (likely lib function) 
     try {
         _E.feature.qparam.settings.params = new URLSearchParams(window.location.search);
-        _E.feature.qparam.settings.sur = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("sur"));
+        _E.feature.qparam.settings.sur = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("sur").toUpperCase());
         _E.feature.qparam.settings.entry = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("entry"));
         _E.feature.qparam.settings.weasel = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("weasel"));
         _E.feature.qparam.settings.fallback = _E.fxn.common.safe(_E.feature.qparam.settings.params.get("fallback"));
