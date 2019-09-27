@@ -133,13 +133,19 @@ blockquote {
 
 input[type=range]::-webkit-slider-thumb {
     background-color:  #3f2a56;
-  }
-  input[type=range]::-moz-range-thumb {
+    height: 30px;
+    width: 30px;
+}
+input[type=range]::-moz-range-thumb {
     background-color: #3f2a56;
-  }
-  input[type=range]::-ms-thumb {
+    height: 30px;
+    width: 30px;
+}
+input[type=range]::-ms-thumb {
     background-color: #3f2a56;
-  }
+    height: 30px;
+    width: 30px;
+}
 
 .blue-canada-ca {
     background-color: #26374b;
