@@ -251,7 +251,7 @@ _E.core.templates.library = {
             '</div>' +
             '</div>' +
             '<p class="range-field">' +
-            '<input type="range" min="1" max="10" class="%reqcls purple darken-4" %reqattr id="scale1to10_qid_%qid" name="scale1to10_qid_%qid" value="5" oninput="$(\'#scale1to10_sider_%qid\').html( $(\'#scale1to10_qid_%qid\').val() );"/>' +
+            '<input type="range" min="1" max="10" class="%reqcls" %reqattr id="scale1to10_qid_%qid" name="scale1to10_qid_%qid" value="5" oninput="$(\'#scale1to10_sider_%qid\').html( $(\'#scale1to10_qid_%qid\').val() );"/>' +
             '</p>' +
             '<div class="center-align"><span style="font-weight:bold;font-size:1.3em;" id="scale1to10_sider_%qid">5</span></div>' +
             '</div>' +
@@ -290,7 +290,7 @@ _E.core.templates.library = {
             '</div>' +
             '</div>' +
             '<p class="range-field">' +
-            '<input type="range" min="1" max="5" class="%reqcls purple darken-4" %reqattr id="scale1to5_qid_%qid" name="scale1to5_qid_%qid" value="3" oninput="$(\'#scale1to5_sider_%qid\').html( $(\'#scale1to5_qid_%qid\').val() );"/>' +
+            '<input type="range" min="1" max="5" class="%reqcls" %reqattr id="scale1to5_qid_%qid" name="scale1to5_qid_%qid" value="3" oninput="$(\'#scale1to5_sider_%qid\').html( $(\'#scale1to5_qid_%qid\').val() );"/>' +
             '</p>' +
             '<div class="center-align"><span style="font-weight:bold;font-size:1.3em;" id="scale1to5_sider_%qid">3</span></div>' +
             '</div>' +
