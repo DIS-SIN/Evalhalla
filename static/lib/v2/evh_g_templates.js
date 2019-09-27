@@ -246,8 +246,8 @@ _E.core.templates.library = {
             '<div class="col s12" >' +
             '<div class="container">' +
             '<div class="row">' +
-            '<div class="col s6" style="text-align:left;">%low</div>' +//'<span style="float:left;">%low</span>' +
-            '<div class="col s6" style="text-align:right;">%high</div>' +//'<span style="float:right;">%high</span>' +
+            '<div class="col s6" style="text-align:left;padding-left:0;margin-left:0;">%low</div>' +//'<span style="float:left;">%low</span>' +
+            '<div class="col s6" style="text-align:right;padding-right:0;margin-right:0;">%high</div>' +//'<span style="float:right;">%high</span>' +
             '</div>' +
             '</div>' +
             '<p class="range-field">' +
@@ -285,8 +285,8 @@ _E.core.templates.library = {
             '<div class="col s12" >' +
             '<div class="container">' +
             '<div class="row">' +
-            '<div class="col s6" style="text-align:left;">%low</div>' +//'<span style="float:left;">%low</span>' +
-            '<div class="col s6" style="text-align:right;">%high</div>' +//'<span style="float:right;">%high</span>' +
+            '<div class="col s6" style="text-align:left;padding-left:0;margin-left:0;">%low</div>' +//'<span style="float:left;">%low</span>' +
+            '<div class="col s6" style="text-align:right;padding-right:0;margin-right:0;">%high</div>' +//'<span style="float:right;">%high</span>' +
             '</div>' +
             '</div>' +
             '<p class="range-field">' +
