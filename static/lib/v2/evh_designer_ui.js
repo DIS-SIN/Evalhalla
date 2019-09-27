@@ -281,6 +281,12 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
 /en Unsure /; /fr Incertain /;
 
 `;
+    } else if (cmd == "pagebreak") {
+        return `
+
+/pagebreak
+
+`;
     } else {
         return "";
     }
@@ -307,6 +313,7 @@ _E.feature.designer.enable_editor_buttons = function (actions) {
     _E.core.state.store["el"]["edt_" + "qone"].on("click", function () { _E.feature.designer.trigger_action("qone"); });
     _E.core.state.store["el"]["edt_" + "qrank"].on("click", function () { _E.feature.designer.trigger_action("qrank"); });
     _E.core.state.store["el"]["edt_" + "qscale"].on("click", function () { _E.feature.designer.trigger_action("qscale"); });
+    _E.core.state.store["el"]["edt_" + "pagebreak"].on("click", function () { _E.feature.designer.trigger_action("pagebreak"); });
     //
     _E.core.state.store["el"]["edt_erase"].on("click", function () {
         // probs should confirm here. TODO

@@ -470,9 +470,9 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexatorder/g, _E.core.state.store["render"]["question"]["qid"]);
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace(/\%cortexquestionuid/g, _E.core.state.store["render"]["header"]["survey"] + "_q_" + _E.core.state.store["render"]["question"]["qid"]);
 
-        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]] = {};
-        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] = '';
-        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] = '';
+        //_E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]] = {};
+        //_E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] = '';
+        //_E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] = '';
 
         // NOTE: You cant stuff a span inside an <option>, it's bad form.
         // Gotta find another way to biling the option values
@@ -517,33 +517,34 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
         scale = scale.replace(/\%low/g, "")
             .replace(/\%high/g, "")
             .replace(/\%unsure/g, "");
+
         jsonsnip = jsonsnip.replace(/\%low/g, "")
             .replace(/\%high/g, "")
             .replace(/\%unsure/g, "");
 
-
-        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] += '<option value="" disabled selected></option>' +
-            scale.split('<option value="" disabled selected></option>')[1]
-                .replace(/<\/?span class='fr'.[^>]*>/g, '')
-                .replace(/\<span class='en'\>/g, '')
-                .replace(/\<\/span\>/g, '')
-                .split('</select>')[0]
-                .trim();
-        _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] += '<option value="" disabled selected></option>' +
-            scale.split('<option value="" disabled selected></option>')[1]
-                .replace(/<\/?span class='en'.[^>]*>/g, '')
-                .replace(/\<span class='fr'\>/g, '')
-                .replace(/\<\/span\>/g, '')
-                .split('</select>')[0]
-                .trim();
-
-        let scale_parts = scale.split('%scale_multilang_split');
-
-        scale = scale_parts[0] +
-            _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]][_E.core.state.store["ui"]["lang"]] +
-            scale_parts[2];
-        //console.log(_E.core.state.store["localmem"]);
-
+        /*
+                _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["en"] += '<option value="" disabled selected></option>' +
+                    scale.split('<option value="" disabled selected></option>')[1]
+                        .replace(/<\/?span class='fr'.[^>]*>/g, '')
+                        .replace(/\<span class='en'\>/g, '')
+                        .replace(/\<\/span\>/g, '')
+                        .split('</select>')[0]
+                        .trim();
+                _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]]["fr"] += '<option value="" disabled selected></option>' +
+                    scale.split('<option value="" disabled selected></option>')[1]
+                        .replace(/<\/?span class='en'.[^>]*>/g, '')
+                        .replace(/\<span class='fr'\>/g, '')
+                        .replace(/\<\/span\>/g, '')
+                        .split('</select>')[0]
+                        .trim();
+        
+                let scale_parts = scale.split('%scale_multilang_split');
+        
+                scale = scale_parts[0] +
+                    _E.core.state.store["localmem"]["scale_qid_" + _E.core.state.store["render"]["question"]["qid"]][_E.core.state.store["ui"]["lang"]] +
+                    scale_parts[2];
+                //console.log(_E.core.state.store["localmem"]);
+        */
         _E.core.state.store["render"]["json"] = _E.core.state.store["render"]["json"].replace("%options", jsonsnip);
         snip = snip.replace(/\%form/g, scale).replace(/\%scale_multilang_split/g, '');
         if (_E.core.state.store["render"]["question"]["required"] == true) {
@@ -552,7 +553,7 @@ _E.core.interpreter.handle_cmd_question = function (cmd, src, json) {
             snip = snip.replace(/\%reqattr/g, '').replace(/\%reqcls/g, "");
         }
         _E.core.state.store["render"]["question"]["form"] = snip;
-        _E.core.interpreter.patchLangSelectBoxRegistry.push(cmd + "_qid_" + _E.core.state.store["render"]["question"]["qid"]);
+        //_E.core.interpreter.patchLangSelectBoxRegistry.push(cmd + "_qid_" + _E.core.state.store["render"]["question"]["qid"]);
     } else if (cmd == "open"
         || cmd == "pick one department"
         || cmd == "pick one classification"

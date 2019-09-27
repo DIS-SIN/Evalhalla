@@ -244,6 +244,22 @@ _E.core.templates.library = {
         "scale1to10": '' +
             '<div class="row">' +
             '<div class="col s12" >' +
+            '<div class="container">' +
+            '<div class="row">' +
+            '<div class="col s6" style="text-align:left;">%low</div>' +//'<span style="float:left;">%low</span>' +
+            '<div class="col s6" style="text-align:right;">%high</div>' +//'<span style="float:right;">%high</span>' +
+            '</div>' +
+            '</div>' +
+            '<p class="range-field">' +
+            '<input type="range" min="1" max="10" class="%reqcls purple darken-4" %reqattr id="scale1to10_qid_%qid" name="scale1to10_qid_%qid" value="5" oninput="$(\'#scale1to10_sider_%qid\').html( $(\'#scale1to10_qid_%qid\').val() );"/>' +
+            '</p>' +
+            '<div class="center-align"><span style="font-weight:bold;font-size:1.3em;" id="scale1to10_sider_%qid">5</span></div>' +
+            '</div>' +
+            '</div>' +
+            ''
+            /*
+            '<div class="row">' +
+            '<div class="col s12" >' +
             '<label class="lg-lbl" for="scale1to10_qid_%qid" id="lbl_scale1to10_qid_%qid"><span class="en evh-parser-ignore">Select one</span><span class="fr evh-parser-ignore">Veuillez choisir</span></label>' +
             '<select class="%reqcls browser-default" %reqattr id="scale1to10_qid_%qid" name="scale1to10_qid_%qid" aria-labelledby="lbl_scale1to10_qid_%qid">' +
             '%scale_multilang_split' +
@@ -263,7 +279,40 @@ _E.core.templates.library = {
             '</select>' +
             '</div>' +
             '</div>' +
-            '',
+            ''*/,
+        "scale1to5": '' +
+            '<div class="row">' +
+            '<div class="col s12" >' +
+            '<div class="container">' +
+            '<div class="row">' +
+            '<div class="col s6" style="text-align:left;">%low</div>' +//'<span style="float:left;">%low</span>' +
+            '<div class="col s6" style="text-align:right;">%high</div>' +//'<span style="float:right;">%high</span>' +
+            '</div>' +
+            '</div>' +
+            '<p class="range-field">' +
+            '<input type="range" min="1" max="5" class="%reqcls purple darken-4" %reqattr id="scale1to5_qid_%qid" name="scale1to5_qid_%qid" value="3" oninput="$(\'#scale1to5_sider_%qid\').html( $(\'#scale1to5_qid_%qid\').val() );"/>' +
+            '</p>' +
+            '<div class="center-align"><span style="font-weight:bold;font-size:1.3em;" id="scale1to5_sider_%qid">3</span></div>' +
+            '</div>' +
+            '</div>' +
+            ''
+           // <input name="example" type="range" max="2250000" min="-200000" value="0" step="50000" >
+           // <input id="example-value" type="number" max="2250000" min="-200000" value="0" step="50000" source="[name=example]">
+
+
+            /*
+            '%scale_multilang_split' +
+            '<!-- ' +
+            '<option value="" disabled selected></option>' +
+            '<option value="5">5 %high</option>' +
+            '<option value="4">4</option>' +
+            '<option value="3">3</option>' +
+            '<option value="2">2</option>' +
+            '<option value="1">1 %low</option>' +
+            '<option value="Unsure">%unsure</option>' +
+            ' -->' +
+            '%scale_multilang_split'*/,
+        /*
         "scale1to5": '' +
             '<div class="row">' +
             '<div class="col s12" >' +
@@ -281,7 +330,7 @@ _E.core.templates.library = {
             '</select>' +
             '</div>' +
             '</div>' +
-            '',
+            '',*/
         "open": '' +
             '<div class="row">' +
             '<div class="row">' +
