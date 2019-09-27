@@ -80,6 +80,7 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right;
+    /*height: 100%;*/
 }
 
 .table-responsive {
@@ -129,6 +130,16 @@ blockquote {
     font-size: 1.4em;
     font-weight: bold;
 }
+
+input[type=range]::-webkit-slider-thumb {
+    background-color:  #3f2a56;
+  }
+  input[type=range]::-moz-range-thumb {
+    background-color: #3f2a56;
+  }
+  input[type=range]::-ms-thumb {
+    background-color: #3f2a56;
+  }
 
 .blue-canada-ca {
     background-color: #26374b;

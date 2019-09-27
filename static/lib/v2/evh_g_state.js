@@ -77,6 +77,7 @@ _E.core.state.store = {
         "edt_qone": $(".ev-add-qone"),
         "edt_qrank": $(".ev-add-qrank"),
         "edt_qscale": $(".ev-add-qscale"),
+        "edt_pagebreak": $(".ev-add-pagebreak"),
         // content
         "c_editor": $("#editor_target"),
         "c_json": $("#json_target"),
