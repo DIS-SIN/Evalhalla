@@ -82,13 +82,13 @@ _E.feature.localstore.ls_show_local_storage = function () {
         tbody = "";
         if (ev_ls["working_survey"] != null) {
             tbody += "<tr><td>" +
-                (ev_ls["working_survey"]["title"] != null ? ev_ls["working_survey"]["title"] : "") +
+                (typeof ev_ls["working_survey"]["title"] !== "undefined" && typeof ev_ls["working_survey"]["title"][_E.core.state.store["ui"]["lang"]] !== "undefined" ? ev_ls["working_survey"]["title"][_E.core.state.store["ui"]["lang"]] : "Working Template") +
                 "</td><td>" +
-                (ev_ls["working_survey"]["description"] != null ? ev_ls["working_survey"]["description"] : "") +
+                (typeof ev_ls["working_survey"]["description"] !== "undefined" && typeof ev_ls["working_survey"]["description"][_E.core.state.store["ui"]["lang"]] !== "undefined" ? ev_ls["working_survey"]["description"][_E.core.state.store["ui"]["lang"]] : "Evalese") +
                 "</td><td>" +
-                (ev_ls["working_survey"]["language"] != null ? ev_ls["working_survey"]["language"] : "") +
+                (ev_ls["working_survey"]["language"] != null ? ev_ls["working_survey"]["language"] : "-") +
                 "</td><td>" +
-                (ev_ls["working_survey"]["questions"] != null ? ev_ls["working_survey"]["questions"].length : "") +
+                (ev_ls["working_survey"]["questions"] != null ? ev_ls["working_survey"]["questions"].length : "-") +
                 "</td><tr>" +
                 "";
         } else {
@@ -106,9 +106,9 @@ _E.feature.localstore.ls_show_local_storage = function () {
             for (var l = 0; l < ev_ls["saved_survey_signatures"].length; l++) {
                 cs = ev_ls["saved_survey_signatures"][l]["survista"];
                 tbody += '<tr><td><a id="sv_sr_' + l + '" class="adm_load_survey">' +
-                    (cs["title"] != null ? cs["title"] : "") +
+                    (typeof cs["title"] !== "undefined" && typeof cs["title"][_E.core.state.store["ui"]["lang"]] !== "undefined" ? cs["title"][_E.core.state.store["ui"]["lang"]] : "Saved Template") +
                     "</a></td><td>" +
-                    (cs["description"] != null ? cs["description"] : "") +
+                    (typeof cs["description"] !== "undefined" && typeof cs["description"][_E.core.state.store["ui"]["lang"]] !== "undefined" ? cs["description"][_E.core.state.store["ui"]["lang"]] : "Evalese") +
                     "</td><td>" +
                     (cs["language"] != null ? cs["language"] : "") +
                     "</td><td>" +

@@ -269,13 +269,34 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
 ;
 
 `;
+    } else if (cmd == "qdropdown") {
+        return `Q: 
+/en This is my question? /;
+/fr C'est la question? /;
+/dropdown
+/en A Thing /; /fr Un chose /;
+/en A Thing /; /fr Un chose /;
+/en A Thing /; /fr Un chose /;
+;
+
+`;
     } else if (cmd == "qrank") {
         return "";
-    } else if (cmd == "qscale") {
+    } else if (cmd == "qscale1to5") {
         return `Q: 
 /en This is my question? /;
 /fr C'est la question? /;
 /scale1to5
+/en Low /; /fr Bas /;,
+/en High /; /fr Haut /;,
+/en Unsure /; /fr Incertain /;
+
+`;
+    } else if (cmd == "qscale") {
+        return `Q: 
+/en This is my question? /;
+/fr C'est la question? /;
+/scale
 /en Low /; /fr Bas /;,
 /en High /; /fr Haut /;,
 /en Unsure /; /fr Incertain /;
@@ -311,8 +332,10 @@ _E.feature.designer.enable_editor_buttons = function (actions) {
     _E.core.state.store["el"]["edt_" + "qany"].on("click", function () { _E.feature.designer.trigger_action("qany"); });
     _E.core.state.store["el"]["edt_" + "qfree"].on("click", function () { _E.feature.designer.trigger_action("qfree"); });
     _E.core.state.store["el"]["edt_" + "qone"].on("click", function () { _E.feature.designer.trigger_action("qone"); });
+    _E.core.state.store["el"]["edt_" + "qdropdown"].on("click", function () { _E.feature.designer.trigger_action("qdropdown"); });
     _E.core.state.store["el"]["edt_" + "qrank"].on("click", function () { _E.feature.designer.trigger_action("qrank"); });
     _E.core.state.store["el"]["edt_" + "qscale"].on("click", function () { _E.feature.designer.trigger_action("qscale"); });
+    _E.core.state.store["el"]["edt_" + "qscale1to5"].on("click", function () { _E.feature.designer.trigger_action("qscale1to5"); });
     _E.core.state.store["el"]["edt_" + "pagebreak"].on("click", function () { _E.feature.designer.trigger_action("pagebreak"); });
     //
     _E.core.state.store["el"]["edt_erase"].on("click", function () {
