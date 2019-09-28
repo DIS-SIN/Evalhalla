@@ -75,8 +75,10 @@ _E.core.state.store = {
         "edt_qany": $(".ev-add-qany"),
         "edt_qfree": $(".ev-add-qfree"),
         "edt_qone": $(".ev-add-qone"),
+        "edt_qdropdown": $(".ev-add-qdropdown"),
         "edt_qrank": $(".ev-add-qrank"),
         "edt_qscale": $(".ev-add-qscale"),
+        "edt_qscale1to5": $(".ev-add-qscale1to5"),
         "edt_pagebreak": $(".ev-add-pagebreak"),
         // content
         "c_editor": $("#editor_target"),

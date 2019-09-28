@@ -72,10 +72,10 @@
             <a class="adm_save_working_survey">
                 <em class="material-icons" aria-hidden="true">save</em>
                 <span class="en">
-                    Save Local
+                    Local Save
                 </span>
                 <span class="fr">
-                    Enregistrer
+                    Enregistrer Locale
                 </span>
             </a>
         </li>
@@ -93,7 +93,7 @@
         <li>
             <a class="cortex_conduct_survey">
                 <!--href="../../player/survey/index.html"class="demo_ev_loop" title="reload demo survey"-->
-                <em class="material-icons" aria-hidden="true">lightbulb</em>
+                <em class="material-icons" aria-hidden="true">assignment_ind</em>
                 <span class="en">
                     Conduct
                 </span>
@@ -105,7 +105,7 @@
         <li>
             <a class="cortex_view_dashboard">
                 <!--</a>href="../../player/dashboard/index.html">-->
-                <em class="material-icons" aria-hidden="true">cloud_upload</em>
+                <em class="material-icons" aria-hidden="true">view_quilt</em>
                 <span class="en">
                     Dashboard
                 </span>
@@ -117,6 +117,19 @@
         <li>
             <a class="generate_test_data">
                 <em class="material-icons" aria-hidden="true">gavel</em>Test Data
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-erase">
+                <em class="material-icons" aria-hidden="true">clear</em>
+                <span class="en">Clear Editor</span>
+                <span class="fr">Effacer Editeur</span>
+            </a>
+        </li>
+        <li>
+            <a class="adm_clear_ls">
+                <em class="material-icons" aria-hidden="true">flip_to_back</em>
+                <span class="en">Reset Mem.</span><span class="fr">Réinitialiser Mem.</span>
             </a>
         </li>
         <!-- REFACTOR: Turning off JSON render until next version 
@@ -174,14 +187,10 @@
                 </span>
             </a>
         </li>
-        <li><a class="hs_ls_window">
-                <em class="material-icons" aria-hidden="true">how_to_vote</em>
-                <span class="en">Storage</span><span class="fr">Storage</span>
-            </a>
-        </li>
+
         <li>
             <a class="hs_qlib_window">
-                <em class="material-icons">build</em>
+                <em class="material-icons">note_add</em>
                 <span class="en">
                     Library
                 </span>
@@ -190,10 +199,9 @@
                 </span>
             </a>
         </li>
-        <li>
-            <a class="adm_clear_ls">
-                <em class="material-icons" aria-hidden="true">flip_to_back</em>
-                <span class="en">Reset LS</span><span class="fr">Réinitialiser LS</span>
+        <li><a class="hs_ls_window">
+                <em class="material-icons" aria-hidden="true">how_to_vote</em>
+                <span class="en">Storage</span><span class="fr">Storage</span>
             </a>
         </li>
     </ul>
@@ -221,22 +229,36 @@
         <li>
             <a class="ev-add-qone">
                 <em class="material-icons" aria-hidden="true">done</em>
-                <span class="en">One</span>
+                <span class="en">Pick One</span>
                 <span class="fr">Une</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qdropdown">
+                <em class="material-icons" aria-hidden="true">format_list_bulleted</em>
+                <span class="en">Dropdown</span>
+                <span class="fr">Déroulant</span>
             </a>
         </li>
         <li>
             <a class="ev-add-qany">
                 <em class="material-icons" aria-hidden="true">done_all</em>
-                <span class="en">Any</span>
+                <span class="en">Pick Any</span>
                 <span class="fr">Choisir</span>
             </a>
         </li>
         <li>
             <a class="ev-add-qscale">
                 <em class="material-icons" aria-hidden="true">call_made</em>
-                <span class="en">Scale</span>
-                <span class="fr">Echelle</span>
+                <span class="en">Scale (1-10)</span>
+                <span class="fr">Echelle (1-10)</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qscale1to5">
+                <em class="material-icons" aria-hidden="true">call_made</em>
+                <span class="en">Scale (1-5)</span>
+                <span class="fr">Echelle (1-5)</span>
             </a>
         </li>
         <li>
@@ -246,13 +268,7 @@
                 <span class="fr">Saut de page</span>
             </a>
         </li>
-        <li>
-            <a class="ev-add-erase">
-                <em class="material-icons" aria-hidden="true">clear</em>
-                <span class="en">Clear Editor</span>
-                <span class="fr">Effacer Editeur</span>
-            </a>
-        </li>
+
     </ul>
     <ul class="adm-function sidenav" id="mobile-demo">
         <li>
@@ -284,7 +300,7 @@
         <li>
             <a class="cortex_conduct_survey">
                 <!--href="../../player/survey/index.html"class="demo_ev_loop" title="reload demo survey"-->
-                <em class="material-icons" aria-hidden="true">lightbulb</em>
+                <em class="material-icons" aria-hidden="true">assignment_ind</em>
                 <span class="en">
                     Conduct
                 </span>
@@ -296,7 +312,7 @@
         <li>
             <a class="cortex_view_dashboard">
                 <!--</a>href="../../player/dashboard/index.html">-->
-                <em class="material-icons" aria-hidden="true">cloud_upload</em>
+                <em class="material-icons" aria-hidden="true">view_quilt</em>
                 <span class="en">
                     Dashboard
                 </span>
@@ -310,7 +326,17 @@
                 <em class="material-icons" aria-hidden="true">gavel</em>Create Test Data
             </a>
         </li>
-
+        <li>
+            <a class="show_me_how">
+                <em class="material-icons" aria-hidden="true">help</em>
+                <span class="en">
+                    Tutorial
+                </span>
+                <span class="fr">
+                    Explication
+                </span>
+            </a>
+        </li>
         <!--<li>
             <a class="audit_json_render">
                 <em class="material-icons" aria-hidden="true">gavel</em>
@@ -329,17 +355,6 @@
                 <span class="en">VIEW</span><span class="fr">VUE</span>
             </span>
             <hr>
-        </li>
-        <li>
-            <a class="show_me_how">
-                <em class="material-icons" aria-hidden="true">help</em>
-                <span class="en">
-                    Tutorial
-                </span>
-                <span class="fr">
-                    Explication
-                </span>
-            </a>
         </li>
         <li>
             <a class="hs_render_window">
@@ -374,6 +389,17 @@
                 </span>
             </a>
         </li>
+        <li>
+            <a class="hs_qlib_window">
+                <em class="material-icons" aria-hidden="true">note_add</em>
+                <span class="en">
+                    Library
+                </span>
+                <span class="fr">
+                    Bibliothèque
+                </span>
+            </a>
+        </li>
         <li><a class="hs_ls_window">
                 <em class="material-icons" aria-hidden="true">how_to_vote</em>
                 <span class="en">
@@ -381,17 +407,6 @@
                 </span>
                 <span class="fr">
                     Storage
-                </span>
-            </a>
-        </li>
-        <li>
-            <a class="hs_qlib_window">
-                <em class="material-icons" aria-hidden="true">build</em>
-                <span class="en">
-                    Library
-                </span>
-                <span class="fr">
-                    Bibliothèque
                 </span>
             </a>
         </li>
@@ -433,6 +448,13 @@
             </a>
         </li>
         <li>
+            <a class="ev-add-qdropdown">
+                <em class="material-icons" aria-hidden="true">format_list_bulleted</em>
+                <span class="en">Dropdown</span>
+                <span class="fr">Déroulant</span>
+            </a>
+        </li>
+        <li>
             <a class="ev-add-qany">
                 <em class="material-icons" aria-hidden="true">done_all</em>
                 <span class="en">Any</span>
@@ -442,8 +464,15 @@
         <li>
             <a class="ev-add-qscale">
                 <em class="material-icons" aria-hidden="true">call_made</em>
-                <span class="en">Scale</span>
-                <span class="fr">Echelle</span>
+                <span class="en">Scale (1-10)</span>
+                <span class="fr">Echelle (1-10)</span>
+            </a>
+        </li>
+        <li>
+            <a class="ev-add-qscale1to5">
+                <em class="material-icons" aria-hidden="true">call_made</em>
+                <span class="en">Scale (1-5)</span>
+                <span class="fr">Echelle (1-5)</span>
             </a>
         </li>
         <!--<li>
