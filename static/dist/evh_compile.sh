@@ -56,7 +56,11 @@ MINIFIED_TABLEVIEW=$(cat <<-END
 
 END
 )
+MINIFIED_QRS=$(cat <<-END
+~/Development/Evalhalla/static/dist/evalhalla_qrs_dist.js \
 
+END
+)
 #
 #
 # Set up our "packages" so we can bundle up the files
@@ -231,6 +235,27 @@ EVH_PLAYER_PKG=$(cat <<-END
 END
 )
 
+
+##############################################################################
+##
+## QRS TOOL JS FILES
+##
+# <!-- Default Survey -->
+# <!-- get Evalhalla lib files -->
+# <!-- get Evalhalla features -->
+# <!-- Evalhalla Core, start it up -->
+EVH_QRS_PKG=$(cat <<-END
+~/Development/Evalhalla/static/lib/v2/evh_g_init.js \
+~/Development/Evalhalla/integrations/cortex/cortex-functions.js \
+~/Development/Evalhalla/integrations/qrcodejs/qrcode.js \
+~/Development/Evalhalla/static/lib/v2/evh_g_common.js \
+~/Development/Evalhalla/static/lib/v2/evh_g_state.js \
+~/Development/Evalhalla/static/lib/v2/evh_feature_query_param_load_cortex.js \
+~/Development/Evalhalla/static/lib/v2/evh_player_core_qrs.js \
+
+END
+)
+
 ##############################################################################
 ##
 ## PARTIAL PACKAGES FOR BLENDING A BUILD
@@ -335,9 +360,10 @@ COMPILE_OPTS_PLAYER="player"
 COMPILE_OPTS_DESIGNER="designer"
 COMPILE_OPTS_DASHBOARD="dashboard"
 COMPILE_OPTS_TABLEVIEW="tableview"
+COMPILE_OPTS_QRS="qrs"
 # Check to see if we're doing what we should, 
 # otherwise default compile it
-if [ "$COMPILE_MODE" != "$COMPILE_OPTS_ALL" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_PLAYER" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_DESIGNER" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_DASHBOARD" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_TABLEVIEW" ]; then
+if [ "$COMPILE_MODE" != "$COMPILE_OPTS_ALL" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_PLAYER" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_DESIGNER" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_DASHBOARD" ] && [ "$COMPILE_MODE" != "$COMPILE_OPTS_TABLEVIEW" ]  && [ "$COMPILE_MODE" != "$COMPILE_OPTS_QRS" ] ; then
     COMPILE_MODE="all"
 fi
 echo "Compile Mode Set: $COMPILE_MODE"
@@ -395,6 +421,16 @@ evhcompile_tableview () {
         echo -e "Compiling $MODULE... Done!\n"
     fi
 }
+evhcompile_qrs () {
+    MODULE="<tableview>"
+    if [ "$COMPILE_MODE" == "$COMPILE_OPTS_QRS" ] || [ "$COMPILE_MODE" == "$COMPILE_OPTS_ALL" ]; then
+        echo -e "\nCompiling $MODULE... Start"
+        COMBINED="$EVH_QRS_PKG"
+        MINIFIED="$MINIFIED_QRS"
+        evhcompile "$COMBINED"
+        echo -e "Compiling $MODULE... Done!\n"
+    fi
+}
 
 ##############################################################################
 # Let's figure out what to use
@@ -406,6 +442,7 @@ if [ "$COMPILE_MODE" == "$COMPILE_OPTS_ALL" ]; then
     evhcompile_designer
     evhcompile_dashboard
     evhcompile_tableview
+    evhcompile_qrs
     echo "Compiling <all>... Done!"
 fi
 if [ "$COMPILE_MODE" == "$COMPILE_OPTS_PLAYER" ]; then
@@ -419,6 +456,9 @@ if [ "$COMPILE_MODE" == "$COMPILE_OPTS_DASHBOARD" ]; then
 fi
 if [ "$COMPILE_MODE" == "$COMPILE_OPTS_TABLEVIEW" ]; then
     evhcompile_tableview
+fi
+if [ "$COMPILE_MODE" == "$COMPILE_OPTS_QRS" ]; then
+    evhcompile_qrs
 fi
 
 echo -e "\n> Compilation complete!"

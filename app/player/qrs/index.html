@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Evalhalla Player: TableView</title>
+    <title>Evalhalla Player: QR Loader</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
@@ -29,42 +29,22 @@
     </div>
     <div id="editor" class="container" style="background-color: #FFFFFF;">
         <div class="row">
-            <div class="col s12 m4 purp-canada-ca-edged-buffered" style="display: none;">
+            <div id="render_window" class="col s12 center-align" style="background-color: #FFFFFF;">
                 <div>
-                    <strong>Survey Data<br>From Survista API</strong>
-                </div>
-                <textarea id="render_override" style="background-color: white;color:black;"></textarea>
-            </div>
-            <div class="col s12 m4 purp-canada-ca-edged-buffered" style="display: none;">
-                <div>
-                    <strong>Survey Evalese<br>From /sur files</strong>
-                </div>
-                <textarea id="render_override_evh" style="background-color: white;color:black;"></textarea>
-            </div>
-            <div class="col s12 purp-canada-ca-edged-buffered">
-                <div>
-                    <strong style="font-size:1.8em;">.TSV Table</strong>
-                    <br>
-                    <strong style="font-size:1.4em;">1. Select All - 2. Copy - 3. Paste text into Excel</strong>
-                </div>
-                <textarea id="render_tsv" style="background-color: white;color:black;"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col s12">
-                <a id="render_override_btn" class="btn btn-large purp-canada-ca" href="#editor">Regenerate</a>
-            </div>
-        </div>
-        <div class="row">
-            <div id="render_window" class="col s12  purp-canada-ca-edged-buffered" style="background-color: #FFFFFF;">
-                <div>
-
-                    <strong>Table Preview</strong>
+                    <strong style="font-weight:bold;font-size:1.3em;padding-bottom:10px;">Scan QR to load
+                        Survey</strong>
+                    <p class="left-align" style="line-height:1em;">
+                        On iOS please use your camera. Point and zoom in on QR code.
+                        Tap the popup
+                        that appears. On
+                        Android, please use a QR code scanner app.</p>
                 </div>
                 <div id="render_target_container" class="row">
-                    <div id="render_target" class="col s12">
+                    <div id="qr_render_target" class="col s12 center-align">
                         Rendering...
-
+                    </div>
+                    <div id="render_target" class="col s12 center-align">
+                        Rendering...
                     </div>
                 </div>
             </div>
@@ -73,7 +53,7 @@
     <footer id="admin_footer_end" class="page-footer purp-canada-ca">
         <div class="container">
             <div class="row">
-                <div class="col l6 s12">
+                <div class="col s12">
                     <h3 class="white-text">Evalhalla</h3>
                     <p class="grey-text text-lighten-4">
                         <span class="en">Alpha. Evalhalla is an experiment in making form creation easier.</span>
@@ -104,7 +84,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- get Evalhalla pkg -->
-    <script src="../../../static/dist/evalhalla_tableview_dist.js"></script>
+    <script src="../../../static/dist/evalhalla_qrs_dist.js"></script>
     <!--
     <script src="../../../static/lib/v2/evh_g_init.js"></script>
     <script src="../../../integrations/cortex/cortex-functions.js"></script>
