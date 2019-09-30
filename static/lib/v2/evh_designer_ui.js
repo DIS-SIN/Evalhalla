@@ -235,13 +235,15 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
 
 `;
     } else if (cmd == "instr") {
-        return `// 
+        return `
+// 
 /en Explanatory text note /;
 /fr Texte d'explication en francais /;
 
 `;
     } else if (cmd == "qany") {
-        return `Q: 
+        return `
+Q: 
 /en This is my question? /;
 /fr C'est la question? /;
 /any
@@ -252,14 +254,16 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
 
 `;
     } else if (cmd == "qfree") {
-        return `Q:
+        return `
+Q:
 /en This is my question? /;
 /fr C'est la question? /;
 /open
 
 `;
     } else if (cmd == "qone") {
-        return `Q: 
+        return `
+Q: 
 /en This is my question? /;
 /fr C'est la question? /;
 /one
@@ -270,7 +274,8 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
 
 `;
     } else if (cmd == "qdropdown") {
-        return `Q: 
+        return `
+Q: 
 /en This is my question? /;
 /fr C'est la question? /;
 /dropdown
@@ -283,7 +288,8 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
     } else if (cmd == "qrank") {
         return "";
     } else if (cmd == "qscale1to5") {
-        return `Q: 
+        return `
+Q: 
 /en This is my question? /;
 /fr C'est la question? /;
 /scale1to5
@@ -293,7 +299,8 @@ _E.feature.designer.get_editor_tmpl = function (cmd) {
 
 `;
     } else if (cmd == "qscale") {
-        return `Q: 
+        return `
+Q: 
 /en This is my question? /;
 /fr C'est la question? /;
 /scale

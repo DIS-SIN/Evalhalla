@@ -502,6 +502,7 @@ _E.feature.aesir.render_data = function (response) {
                 </p>
                 <sub><strong id="${'chart_totals_' + cr.uid}"></strong> Responses</sub>
                 <canvas id="${'chart_' + cr.uid}" width="300" height="300"></canvas>
+                <div id="edtable_sentiment_${'chart_' + cr.uid}" class="ctx_datatable_sentiment"></div>
                 <div id="edtable_${'chart_' + cr.uid}" class="ctx_datatable"></div>
                 <pre class="ctx_msg">${JSON.stringify(cr, null, 2)}</pre>
             </div></div>`;
@@ -614,7 +615,8 @@ _E.feature.aesir.render_data = function (response) {
         }
         let sentiment_html = "";
         if (cr.questionType.includes('FREE_TEXT')) {
-            _E.feature.aesir.build_bar_chart(resp_to_chart);
+            //_E.feature.aesir.build_bar_chart(resp_to_chart);
+            $(`#${'chart_' + cr.uid}`).hide();
             let clr = _E.feature.aesir.convert_to_color_rating(cr.avgSentimentScore);
             let avg_senitment_stars = _E.feature.aesir.convert_to_star_rating(cr.avgSentimentScore);
 
@@ -623,11 +625,14 @@ _E.feature.aesir.render_data = function (response) {
                 ${avg_senitment_stars}</span><span style="color:${clr};font-size:1.8em;">${cr.avgSentimentScore.toFixed(2)}
                 </span></p>
                 </div>`;
+            $(`#edtable_sentiment_${'chart_' + cr.uid}`).html(sentiment_html);
+        } else {
+            $(`#edtable_sentiment_${'chart_' + cr.uid}`).hide();
         }
 
         // console.log("ok 7")
 
-        let statDataTableHTML = `${sentiment_html}<table>`;
+        let statDataTableHTML = `<table>`;//`${sentiment_html}<table>`;
         for (let iii = 0; iii < item_count; iii++) {
             // break obscenely large strings
             statDataTableHTML += `<tr>
