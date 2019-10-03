@@ -223,12 +223,90 @@ _E.feature.aesir.cortex_get_survey_callback_error = function () {
     */
 };
 _E.feature.aesir.cache = {};
+_E.feature.aesir.available_dates = [];
+_E.feature.aesir.selected_date_from = "";
+_E.feature.aesir.selected_date_to = "";
+_E.feature.aesir.cortex_chart_data_excluded = [];
+_E.feature.aesir.populate_date_filter_controls = function () {
+    let html_available_dates = `<option value="" disabled selected></option>`;
+    for (let i = 0; i < _E.feature.aesir.available_dates.length; i++) {
+        html_available_dates += `<option value="${_E.feature.aesir.available_dates[i]}">${_E.feature.aesir.available_dates[i]}</option>`;
+    }
+    //alert(html_available_dates);
+    $("#selected_date_from").html(html_available_dates);
+    $("#selected_date_to").html(html_available_dates);
+
+    if (_E.feature.aesir.selected_date_from == "") {
+        $("#selected_date_from").val(_E.feature.aesir.available_dates[0]);
+    } else {
+        $("#selected_date_from").val(_E.feature.aesir.selected_date_from);
+    }
+    $("#selected_date_from").on("change", function () {
+        //alert("from changed");
+        _E.feature.aesir.selected_date_from = $("#selected_date_from").val();
+        _E.feature.aesir.cortex_get_survey(_E.feature.qparam.settings.sur);
+    });
+    if (_E.feature.aesir.selected_date_to == "") {
+        $("#selected_date_to").val(_E.feature.aesir.available_dates[_E.feature.aesir.available_dates.length - 1]);
+    } else {
+        $("#selected_date_to").val(_E.feature.aesir.selected_date_to);
+    }
+    $("#selected_date_to").on("change", function () {
+        //alert("to changed");
+        _E.feature.aesir.selected_date_to = $("#selected_date_to").val();
+        _E.feature.aesir.cortex_get_survey(_E.feature.qparam.settings.sur);
+    });
+};
+_E.feature.aesir.cortex_filter_survey_responses = function (response) {
+    let required_responses = [];
+    let excluded_responses = [];
+    let selected_date_from = "";
+    let selected_date_to = "";
+    if (_E.feature.aesir.selected_date_from == "") {
+        selected_date_from = (typeof $("#selected_date_from").val() === "undefined") ? "2000-01-01" : $("#selected_date_from").val();
+    } else {
+        selected_date_from = _E.feature.aesir.selected_date_from;
+    }
+    if (_E.feature.aesir.selected_date_to == "") {
+        selected_date_to = (typeof $("#selected_date_to").val() === "undefined") ? "2100-01-01" : $("#selected_date_to").val();
+    } else {
+        selected_date_to = _E.feature.aesir.selected_date_to;
+    }
+    //alert(selected_date_from + " -> " + selected_date_to);
+    let available_dates = [];
+    for (let i = 0; i < response.length; i++) {
+        let subtime = response[i]["meta_submission_time"].split("T")[0];
+
+        if (available_dates.includes(subtime) == false) {
+            available_dates.push(subtime);
+        }
+        let curr = new Date(subtime + "T00:00");
+        let from = new Date(selected_date_from + "T00:00");
+        let to = new Date(selected_date_to + "T00:00");
+        if (curr <= to && curr >= from) {
+            required_responses.push(response[i]);
+        } else {
+            excluded_responses.push(response[i]);
+        }
+        // TODO: Add multiday values
+    }
+    _E.feature.aesir.available_dates = available_dates.sort();
+    _E.feature.aesir.cortex_chart_data_excluded = excluded_responses;
+
+    return required_responses;
+}
 _E.feature.aesir.cortex_get_survey = function (survey) {
     //$.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
     //console.log(_E.feature.aesir.g_chart_data.length);
 
     $.get("https://survistaapp.com/api/surveys/schemaless?title=" + _E.feature.qparam.settings.sur.toUpperCase(), function (response) {
         //_E.feature.instadash.render_data(response);
+
+        // sets: _E.feature.aesir.cortex_chart_data_excluded
+        // sets: _E.feature.aesir.available_dates
+        response = _E.feature.aesir.cortex_filter_survey_responses(response);
+
+        //alert(JSON.stringify(_E.feature.aesir.cortex_chart_data_excluded));
 
         _E.feature.aesir.cortex_chart_data = _E.feature.cortex.messages.convert_survista_to_aesir(response);
         //$("#render_target").append(`<div><pre>${JSON.stringify(converted_aesir_format, null, 4)}</pre></div>`);
@@ -410,19 +488,54 @@ _E.feature.aesir.build_pie_chart = function (chartd) {
     });
 }
 
+//_E.feature.aesir.cortex_chart_data_excluded
+//_E.feature.aesir.available_dates
+// <option value="10">10</option>
 _E.feature.aesir.build_respondent_chart = function (chartd) {
     let render_html = `
-            <div class="col s12" style="float:top;"><div class="card-panel">
-                <p> 
-                    <button class="ctx_expand_charts btn purp-canada-ca">Expand / Contract</button>
-                    <button class="ctx_live_charts btn purp-canada-ca">Auto-Update</button>
-                </p>
-                <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
-                    <span class='en'>${_E.fxn.common.label_blackart_spacewrap(_E.feature.qparam.settings.sur)} Dashboard (${_E.feature.aesir.stat_data.total_responses} Replies)</span>
-                    <!-- <span class='fr'>Statistique Generale/span> -->
-                </p>
-                <div id="edtable_general" class="ctx_datatable">${chartd.html}</div>
-            </div></div>`;
+            <div class="col s12 m9" style="float:top;">
+                <div class="card-panel">
+                             <!-- <p style="font-weight:bold;font-size:0.9em;bottom:0.25rem;line-height:1.2em;">
+                                <span class='en'>${_E.fxn.common.label_blackart_spacewrap(_E.feature.qparam.settings.sur)} Dashboard (${_E.feature.aesir.stat_data.total_responses} Replies)</span>
+                               <span class='fr'>Statistique Generale/span>
+                            </p> -->
+                           
+                    <div class="row">
+                        <div class="col s12">
+                            <div id="edtable_general" class="ctx_datatable">${chartd.html}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <button class="ctx_expand_charts btn purp-canada-ca">Grow/Shrink</button>
+                        </div>
+                        <div class="col s12 m6" >
+                            <button class="ctx_live_charts btn purp-canada-ca">Auto-Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3" style="float:top;">
+                <div class="card-panel">
+                    <div class="row">   
+                        <div class="col s12" >
+                            <label class="lg-lbl" for="selected_date_from" id="lbl_selected_date_from">
+                                <span class="en evh-parser-ignore">From Date</span>
+                                <span class="fr evh-parser-ignore">De Date</span>
+                            </label>
+                            <select class="browser-default" id="selected_date_from" name="selected_date_from" aria-labelledby="lbl_selected_date_from">
+                            </select>
+                        </div>
+                        <div class="col s12" >
+                            <label class="lg-lbl" for="selected_date_to" id="lbl_selected_date_to">
+                                <span class="en evh-parser-ignore">To Date</span>
+                                <span class="fr evh-parser-ignore">A Date</span>
+                            </label>
+                            <select class="browser-default" id="selected_date_to" name="selected_date_to" aria-labelledby="lbl_selected_date_to">
+                            </select>
+                        </div>
+                    </div>
+                </div>`;
     return render_html;
 }
 
@@ -661,19 +774,18 @@ _E.feature.aesir.render_data = function (response) {
     $("#render_target").prepend(_E.feature.aesir.build_respondent_chart(
         {
             "html": `
-                <div>
-                    <table>
-                    <tr>
-                        <td>Total Responses<br><strong style="font-weight:bold;font-size:2em;">${_E.feature.aesir.stat_data.total_responses}</strong></td>
-                        <td>Survey Conducted<br><strong style="font-weight:bold;font-size:2em;">${_E.fxn.common.label_blackart_spacewrap(_E.feature.qparam.settings.sur)}</strong></td>
-                    </tr>
-                    </table>
+                <div class="row">
+                    <div class="col s8">Survey Conducted<br><strong style="font-weight:bold;font-size:2em;">${_E.fxn.common.label_blackart_spacewrap(_E.feature.qparam.settings.sur)}</strong></div>
+                    <div class="col s4">Total Responses<br><strong style="font-weight:bold;font-size:2em;">${_E.feature.aesir.stat_data.total_responses}</strong></div>
                 </div>
             `
         }
     ));
 
+
+    _E.feature.aesir.populate_date_filter_controls();
     $(".ctx_msg").hide();
+    $(".fr").hide();
     _E.feature.aesir.enable_expand_contract();
     _E.feature.aesir.enable_livepoll();
     $('.card-panel').matchHeight();
@@ -686,6 +798,7 @@ _E.feature.aesir.exp_charts = function () {
         $(".ctx_crt").removeClass("m6").addClass("m3");
         //$(".ctx_msg").hide();
         $(".ctx_datatable").hide();
+        $("#edtable_general").show();
     } else {
         // current design is to expand
         $(".ctx_crt").removeClass("m3").addClass("m6");
