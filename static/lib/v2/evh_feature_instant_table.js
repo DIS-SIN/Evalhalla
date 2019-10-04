@@ -76,7 +76,10 @@ _E.feature.instatable.get_qindex_text = function (key) {
 };
 // 4. Render Process
 // use these variables for render
-_E.feature.instatable.g_render_table = function () {
+_E.feature.instatable.g_render_table_extended = false;
+_E.feature.instatable.g_render_table_tombstone = false;
+_E.feature.instatable.g_render_table_meta = false;
+_E.feature.instatable.g_render_table = function (etended) {
     let current_sur = $("#render_override_evh").val();
     let in_json = $("#render_override").val();
 
@@ -92,6 +95,27 @@ _E.feature.instatable.g_render_table = function () {
     }
 
     // collect the avaiable columns (not all records have all columns specified)
+
+    if ($("#extended_on").is(":checked") == true) {
+        _E.feature.instatable.g_render_table_extended = true;
+    } else {
+        _E.feature.instatable.g_render_table_extended = false;
+    }
+
+    if ($("#tombstone_on").is(":checked") == true) {
+        _E.feature.instatable.g_render_table_tombstone = true;
+    } else {
+        _E.feature.instatable.g_render_table_tombstone = false;
+    }
+
+    if ($("#meta_on").is(":checked") == true) {
+        _E.feature.instatable.g_render_table_meta = true;
+    } else {
+        _E.feature.instatable.g_render_table_meta = false;
+    }
+
+    //alert($("#extended_on").prop("checked"));
+
     let available_columns = [];
     for (let i = 0; i < ino.length; i++) {
         // now handle each record
@@ -99,11 +123,145 @@ _E.feature.instatable.g_render_table = function () {
         for (let key in record) {
             if (record.hasOwnProperty(key)) {
                 if (!available_columns.includes(key)) {
-                    available_columns.push(key);
+                    let a_keys = key.split("_");
+                    let mod = (typeof a_keys[3] !== "undefined") ? true : false;
+                    let skip = ((a_keys[0] == "meta" && _E.feature.instatable.g_render_table_meta == false) ||
+                        (a_keys[0] == "tombstone" && _E.feature.instatable.g_render_table_tombstone == false) ||
+                        a_keys[0] == "textofquestion") ? true : false;
+                    if ((mod == false && skip == false) || _E.feature.instatable.g_render_table_extended == true) {
+                        available_columns.push(key);
+                    }
                 }
             }
         }
     }
+
+
+    let compareEvhKey = function (a, b) {
+        /*
+        "meta_useragent",
+        "meta_entry_method",
+        "meta_evalhalla_sur",
+        "meta_question_count",
+        "meta_submission_time",
+        "tombstone_language",
+        "tombstone_city",
+        "tombstone_department",
+        "tombstone_offering_id", // note [2] is definied
+        "tombstone_classification",
+        "rgroup_qid_1",
+        "rgroup_qid_2",
+        "textarea_qid_4",
+        "scale1to5_qid_3",
+        "textofquestion_qid_1",
+        "textofquestion_qid_2",
+        "textofquestion_qid_3",
+        "textofquestion_qid_4",
+        "textarea_qid_4_language", // note [2] == [2], if [3] defined then -1
+
+        ORDER
+        meta
+        tombstone
+        qid #1..n & -1 for mod
+        qid #1..n & mod
+
+        */
+
+        let a_keys = a.split("_");
+        let b_keys = b.split("_");
+
+        let a_type = (typeof a_keys[0] === "undefined") ? -1 : a_keys[0];
+        let b_type = (typeof b_keys[0] === "undefined") ? -1 : b_keys[0];
+
+        let a_qid = (typeof a_keys[2] === "undefined") ? -1 : a_keys[2];
+        let b_qid = (typeof b_keys[2] === "undefined") ? -1 : b_keys[2];
+
+        let a_mod = (typeof a_keys[3] === "undefined") ? -1 : a_keys[3];
+        let b_mod = (typeof b_keys[3] === "undefined") ? -1 : b_keys[3];
+
+        // textofquestion counts as mod
+        if (a_type == "textofquestion") {
+            a_mod = "textofquestion";
+        }
+        if (b_type == "textofquestion") {
+            b_mod = "textofquestion";
+        }
+
+        // meta
+        if (a_type == "meta" && b_type != "meta") {
+            //a is less than b by some ordering criterion
+            return -1;
+        }
+        if (a_type != "meta" && b_type == "meta") {
+            // a is greater than b by the ordering criterion
+            return 1;
+        }
+        if (a_type == "meta" && b_type == "meta") {
+            // a must be equal to b
+            return 0;
+        }
+
+        // tombstone
+        if (a_type == "tombstone" && b_type != "tombstone") {
+            //a is less than b by some ordering criterion
+            return -1;
+        }
+        if (a_type != "tombstone" && b_type == "tombstone") {
+            // a is greater than b by the ordering criterion
+            return 1;
+        }
+        if (a_type == "tombstone" && b_type == "tombstone") {
+            // a must be equal to b
+            return 0;
+        }
+
+        // mod
+        if (a_mod == -1 && b_mod != -1) {
+            //a is less than b by some ordering criterion
+            return -1;
+        }
+        if (a_mod != -1 && b_mod == -1) {
+            // a is greater than b by the ordering criterion
+            return 1;
+        }
+
+        // parse ints
+        a_qid = parseInt(a_qid, 10);
+        b_qid = parseInt(b_qid, 10);
+
+        // qid & mod -1
+        if ((a_qid < b_qid) && (a_mod == -1 && b_mod == -1)) {
+            //a is less than b by some ordering criterion
+            return -1;
+        }
+        if ((a_qid > b_qid) && (a_mod == -1 && b_mod == -1)) {
+            // a is greater than b by the ordering criterion
+            return 1;
+        }
+        if ((a_qid == b_qid) && (a_mod == -1 && b_mod == -1)) {
+            // a must be equal to b
+            return 0;
+        }
+
+        // qid & mod
+        if ((a_qid < b_qid) && (a_mod != -1 && b_mod != -1)) {
+            //a is less than b by some ordering criterion
+            return -1;
+        }
+        if ((a_qid > b_qid) && (a_mod != -1 && b_mod != -1)) {
+            // a is greater than b by the ordering criterion
+            return 1;
+        }
+        if ((a_qid == b_qid) && (a_mod != -1 && b_mod != -1)) {
+            // a must be equal to b
+            return 0;
+        }
+
+        // a must be equal to b
+        return 0;
+    };
+
+    available_columns.sort(compareEvhKey);
 
     // dereference the questions from the evalese (optional step to save the human time in matching)
     _E.feature.instatable.parse_question_text(current_sur);
@@ -144,6 +302,15 @@ _E.feature.instatable.g_render_table = function () {
     $("#render_tsv").html(tsv_output);
 };
 
+_E.feature.instatable.download_tsv = function () {
+    $("#render_override_btn").trigger("click");
+    let tsv = $("#render_tsv").val();
+    let dt = new Date().toISOString().replace(/(\-\:)/g, "_");
+    dt = dt.replace(".", "_")
+        .replace("T", "_T");
+    $("#download_as_tsv").attr("href", "data:text/tab-separated-values," + encodeURIComponent(tsv)).attr("download", "evalhalla_" + _E.feature.qparam.settings.sur + "_" + dt + ".tsv");
+}
+
 _E.feature.instatable.enable_feature = function () {
 
     // get survey questions
@@ -153,5 +320,9 @@ _E.feature.instatable.enable_feature = function () {
 
     $("#render_override_btn").on("click", function () {
         _E.feature.instatable.g_render_table();
+    });
+
+    $("#download_as_tsv").on("click", function () {
+        _E.feature.instatable.download_tsv();
     });
 };

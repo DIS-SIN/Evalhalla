@@ -27,42 +27,67 @@
             </div>
         </nav>
     </div>
-    <div id="editor" class="container" style="background-color: #FFFFFF;">
+    <div id="editor" class="container" style="background-color: #FFFFFF;padding:20px;">
         <div class="row">
-            <div class="col s12 m4 purp-canada-ca-edged-buffered" style="display: none;">
+            <div class="col s12">
+                <div class="row">
+
+                    <div class="col s4">
+                        <label>
+                            <input class="with-gap" name="tombstone_on" id="tombstone_on" type="checkbox"
+                                value="tombstone" />
+                            <span>Include Tombstone Data</span>
+                        </label>
+                    </div>
+                    <div class="col s4">
+                        <label>
+                            <input class="with-gap" name="meta_on" id="meta_on" type="checkbox" value="meta" />
+                            <span>Include Meta Data</span>
+                        </label>
+                    </div>
+                    <div class="col s4">
+                        <label>
+                            <input class="with-gap" name="extended_on" id="extended_on" type="checkbox"
+                                value="extended" />
+                            <span>Include Extended Data</span>
+                        </label>
+                    </div>
+                </div>
+                <a id="render_override_btn" class="btn btn-large purp-canada-ca" href="#editor">Regenerate</a>
+                <a id="download_as_tsv" download="evalhalla_table.tsv" class="btn btn-large purp-canada-ca"
+                    href="#editor">Download .tsv</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m4" style="display: none;">
                 <div>
                     <strong>Survey Data<br>From Survista API</strong>
                 </div>
                 <textarea id="render_override" style="background-color: white;color:black;"></textarea>
             </div>
-            <div class="col s12 m4 purp-canada-ca-edged-buffered" style="display: none;">
+            <div class="col s12 m4" style="display: none;">
                 <div>
                     <strong>Survey Evalese<br>From /sur files</strong>
                 </div>
                 <textarea id="render_override_evh" style="background-color: white;color:black;"></textarea>
             </div>
-            <div class="col s12 purp-canada-ca-edged-buffered">
-                <div>
-                    <strong style="font-size:1.8em;">.TSV Table</strong>
-                    <br>
-                    <strong style="font-size:1.4em;">1. Select All - 2. Copy - 3. Paste text into Excel</strong>
-                </div>
-                <textarea id="render_tsv" style="background-color: white;color:black;"></textarea>
-            </div>
-        </div>
-        <div class="row">
             <div class="col s12">
-                <a id="render_override_btn" class="btn btn-large purp-canada-ca" href="#editor">Regenerate</a>
+                <div>
+                    <strong style="font-size:1.8em;">Copyable .TSV Table</strong>
+                    <br>
+                    <strong style="font-size:1.4em;">1. Select All Text - 2. Copy - 3. Paste text into Excel</strong>
+                </div>
+                <textarea id="render_tsv" style="background-color: white;color:black;height:100px;"></textarea>
             </div>
         </div>
         <div class="row">
-            <div id="render_window" class="col s12  purp-canada-ca-edged-buffered" style="background-color: #FFFFFF;">
+            <div id="render_window" class="col s12" style="background-color: #FFFFFF;">
                 <div>
 
                     <strong>Table Preview</strong>
                 </div>
                 <div id="render_target_container" class="row">
-                    <div id="render_target" class="col s12">
+                    <div id="render_target" class="col s12" style="overflow: scroll;">
                         Rendering...
 
                     </div>
