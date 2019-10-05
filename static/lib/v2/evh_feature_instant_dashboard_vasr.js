@@ -409,6 +409,35 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
 
         //console.log(date_condition + " " + dept_condition);
 
+
+        let qfilter = _E.feature.aesir.question_level_filter; //= { "qid": cr.uid, "test": test_val };
+        let q_condition = true;
+        if (typeof qfilter === "undefined") {
+            q_condition = true;
+        } else {
+            if (typeof qfilter["qid"] === "undefined") {
+                q_condition = true;
+            } else {
+                let scaleqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "scale").replace("_q_", "_qid_");
+                let scale15qf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "scale1to5").replace("_q_", "_qid_");
+                let scale110qf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "scale1to10").replace("_q_", "_qid_");
+                let scaletxtqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "textarea").replace("_q_", "_qid_");
+                let scaleddqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "dropdown").replace("_q_", "_qid_");
+                let scalergqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "rgroup").replace("_q_", "_qid_");
+                let scalecgqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "cgroup").replace("_q_", "_qid_");
+
+                q_condition = false ||
+                    response[i][scaleqf] == qfilter["test"] ||
+                    response[i][scale15qf] == qfilter["test"] ||
+                    response[i][scale110qf] == qfilter["test"] ||
+                    response[i][scaletxtqf] == qfilter["test"] ||
+                    response[i][scaleddqf] == qfilter["test"] ||
+                    response[i][scalergqf] == qfilter["test"] ||
+                    response[i][scalecgqf] == qfilter["test"];
+            }
+        }
+
+
         if (date_condition == true &&
             dept_condition == true &&
             classification_condition == true &&
@@ -416,7 +445,8 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
             language_condition == true &&
             useragent_condition == true &&
             entry_condition == true &&
-            offering_condition == true) {
+            offering_condition == true &&
+            q_condition == true) {
             required_responses.push(response[i]);
         } else {
             excluded_responses.push(response[i]);
@@ -837,6 +867,7 @@ _E.feature.aesir.render_data = function (response) {
                 <sub><strong id="${'chart_totals_' + cr.uid}"></strong> Responses</sub>
                 <canvas id="${'chart_' + cr.uid}" width="300" height="300"></canvas>
                 <div id="edtable_sentiment_${'chart_' + cr.uid}" class="ctx_datatable_sentiment"></div>
+                <div id="edtable_filter_${'chart_' + cr.uid}" class="ctx_datatable_filter"></div>
                 <div id="edtable_${'chart_' + cr.uid}" class="ctx_datatable"></div>
                 <pre class="ctx_msg">${JSON.stringify(cr, null, 2)}</pre>
             </div></div>`;
@@ -854,11 +885,14 @@ _E.feature.aesir.render_data = function (response) {
 
         // console.log("ok 3")
 
+
+
         let stats = JSON.parse(cr.stats);
         let statsKeys = (stats) ? Object.keys(stats) : [];
         let statsKeysGrouped = {};
         let statDataTable = [];
 
+        let options_select = `<option value="all" selected>All</option>`;
         _E.feature.aesir.stat_data.total_responses = 0;
         for (let ii = 0; ii < statsKeys.length; ii++) {
             if (cr.questionType.includes('CLASSIFIED')) {
@@ -869,21 +903,59 @@ _E.feature.aesir.render_data = function (response) {
                 } else {
                     statsKeysGrouped[groupedStatsKey] += parseInt(stats[statsKeys[ii]], 10);
                 }
+                options_select += `<option value="${groupedStatsKey}">${groupedStatsKey}</option>`;
                 _E.feature.aesir.stat_data.total_responses += parseInt(stats[statsKeys[ii]], 10);
             } else {
                 (stats) ? statDataTable.push(
                     { "statKey": statsKeys[ii], "statValue": parseInt(stats[statsKeys[ii]], 10), "statBg": _E.feature.aesir.backgroundColors[ii] }
                 ) : true;
                 _E.feature.aesir.stat_data.total_responses += parseInt(stats[statsKeys[ii]], 10);
+                options_select += `<option value="${statsKeys[ii]}">${statsKeys[ii]}</option>`;
             }
         }
         cr.total = _E.feature.aesir.stat_data.total_responses;
+
+
+        $(`#edtable_filter_${'chart_' + cr.uid}`).html(`
+            <div class="advfilters" >
+                <label class="lg-lbl" for="selected_edtable_filter_${'chart_' + cr.uid}" id="lbl_selected_edtable_filter_${'chart_' + cr.uid}">
+                    <span class="en evh-parser-ignore">Filter <sup>(Max 1 per report)</sup></span>
+                    <span class="fr evh-parser-ignore">Filtre <sup>(Max 1 pour report)</sup></span>
+                </label>
+                <select class="browser-default" id="selected_edtable_filter_${'chart_' + cr.uid}" name="selected_edtable_filter_${'chart_' + cr.uid}" aria-labelledby="lbl_selected_edtable_filter_${'chart_' + cr.uid}">
+                ${options_select}
+                </select>
+            </div>
+        `);
+
+        $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val(
+            (typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : _E.feature.aesir.question_level_filter.test
+        );
+        //console.log($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val());
+        if ($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val() == null) {
+            $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val("all");
+        }
+        $(`#selected_edtable_filter_${'chart_' + cr.uid}`).on("change", function () {
+            let test_val = $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val();
+            if (test_val == "all") {
+                _E.feature.aesir.question_level_filter = undefined;
+            } else {
+                _E.feature.aesir.question_level_filter = { "qid": cr.uid, "test": test_val };
+            }
+            //alert($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val());
+            _E.feature.aesir.cortex_get_survey(_E.feature.qparam.settings.sur);
+        })
 
         // console.log("ok 4")
 
         $("#chart_totals_" + cr.uid).html(cr.total);
 
+        if (cr.questionType.includes('CLASSIFIED') || cr.uid.includes('_entry') || cr.uid.includes('_useragent')) {
+            $(`#edtable_filter_${'chart_' + cr.uid}`).remove();
+        }
+
         if (cr.questionType.includes('CLASSIFIED')) {
+            $(`#edtable_filter_${'chart_' + cr.uid}`).remove();
             let statsKeysGroupedIds = (statsKeysGrouped) ? Object.keys(statsKeysGrouped) : [];
             for (let ii = 0; ii < statsKeysGroupedIds.length; ii++) {
                 (stats) ? statDataTable.push(
