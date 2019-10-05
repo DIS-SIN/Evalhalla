@@ -223,10 +223,70 @@ _E.feature.aesir.cortex_get_survey_callback_error = function () {
     */
 };
 _E.feature.aesir.cache = {};
+
 _E.feature.aesir.available_dates = [];
+// tombstone
+_E.feature.aesir.available_depts = [];
+_E.feature.aesir.available_classifications = [];
+_E.feature.aesir.available_locations = [];
+// meta
+_E.feature.aesir.available_languages = [];
+_E.feature.aesir.available_entrys = [];
+_E.feature.aesir.available_useragents = [];
+_E.feature.aesir.available_offerings = [];
+
 _E.feature.aesir.selected_date_from = "";
 _E.feature.aesir.selected_date_to = "";
+
+_E.feature.aesir.selected_depts = "all";
+_E.feature.aesir.selected_location = "all";
+_E.feature.aesir.selected_classification = "all";
+
+_E.feature.aesir.selected_language = "all";
+_E.feature.aesir.selected_entry = "all";
+_E.feature.aesir.selected_useragent = "all";
+_E.feature.aesir.selected_offering = "all";
+
 _E.feature.aesir.cortex_chart_data_excluded = [];
+
+_E.feature.aesir.populate_filter_controls = function (control) {
+    let html_available = `<option value="all" selected>All</option>`;
+    for (let i = 0; i < _E.feature.aesir["available_" + control + "s"].length; i++) {
+        html_available += `<option value="${_E.feature.aesir["available_" + control + "s"][i]}">${(_E.feature.aesir["available_" + control + "s"][i] == "" ? "Blank" : _E.feature.aesir["available_" + control + "s"][i])}</option>`;
+    }
+    //alert(html_available_dates);
+    $("#selected_" + control).html(html_available);
+
+    //if (_E.feature.aesir.selected_depts == "") {
+    //    $("#selected_dept").val(_E.feature.aesir.available_depts[0]);
+    //} else {
+    $("#selected_" + control).val(_E.feature.aesir["selected_" + control]);
+    //}
+    $("#selected_" + control).on("change", function () {
+        //alert("from changed");
+        _E.feature.aesir["selected_" + control] = $("#selected_" + control).val();
+        _E.feature.aesir.cortex_get_survey(_E.feature.qparam.settings.sur);
+    });
+};
+_E.feature.aesir.populate_dept_filter_controls = function () {
+    let html_available_depts = `<option value="all" selected>All</option>`;
+    for (let i = 0; i < _E.feature.aesir.available_depts.length; i++) {
+        html_available_depts += `<option value="${_E.feature.aesir.available_depts[i]}">${(_E.feature.aesir.available_depts[i] == "" ? "Blank" : _E.feature.aesir.available_depts[i])}</option>`;
+    }
+    //alert(html_available_dates);
+    $("#selected_dept").html(html_available_depts);
+
+    //if (_E.feature.aesir.selected_depts == "") {
+    //    $("#selected_dept").val(_E.feature.aesir.available_depts[0]);
+    //} else {
+    $("#selected_dept").val(_E.feature.aesir.selected_depts);
+    //}
+    $("#selected_dept").on("change", function () {
+        //alert("from changed");
+        _E.feature.aesir.selected_depts = $("#selected_dept").val();
+        _E.feature.aesir.cortex_get_survey(_E.feature.qparam.settings.sur);
+    });
+};
 _E.feature.aesir.populate_date_filter_controls = function () {
     let html_available_dates = `<option value="" disabled selected></option>`;
     for (let i = 0; i < _E.feature.aesir.available_dates.length; i++) {
@@ -260,6 +320,8 @@ _E.feature.aesir.populate_date_filter_controls = function () {
 _E.feature.aesir.cortex_filter_survey_responses = function (response) {
     let required_responses = [];
     let excluded_responses = [];
+
+    // date selection
     let selected_date_from = "";
     let selected_date_to = "";
     if (_E.feature.aesir.selected_date_from == "") {
@@ -272,25 +334,108 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
     } else {
         selected_date_to = _E.feature.aesir.selected_date_to;
     }
-    //alert(selected_date_from + " -> " + selected_date_to);
-    let available_dates = [];
-    for (let i = 0; i < response.length; i++) {
-        let subtime = response[i]["meta_submission_time"].split("T")[0];
 
-        if (available_dates.includes(subtime) == false) {
-            available_dates.push(subtime);
-        }
+    // dept selection
+    let selected_depts = [];
+    //if (_E.feature.aesir.selected_depts == "") {
+    //    selected_depts = (typeof $("#selected_depts").val() === "undefined") ? "all" : $("#selected_depts").val();
+    //} else {
+    selected_depts = _E.feature.aesir.selected_depts;
+    //}
+    let selected_classification = [];
+    selected_classification = _E.feature.aesir.selected_classification;
+    let selected_location = [];
+    selected_location = _E.feature.aesir.selected_location;
+
+    let selected_language = [];
+    selected_language = _E.feature.aesir.selected_language;
+    let selected_entry = [];
+    selected_entry = _E.feature.aesir.selected_entry;
+    let selected_useragent = [];
+    selected_useragent = _E.feature.aesir.selected_useragent;
+    let selected_offering = [];
+    selected_offering = _E.feature.aesir.selected_offering;
+
+    // filter
+    let available_dates = [];
+    let available_depts = [];
+    let available_classifications = [];
+    let available_locations = [];
+
+    let available_languages = [];
+    let available_entrys = [];
+    let available_useragents = [];
+    let available_offerings = [];
+
+    for (let i = 0; i < response.length; i++) {
+
+        let subtime = response[i]["meta_submission_time"].split("T")[0];
+        if (available_dates.includes(subtime) == false) { available_dates.push(subtime); }
         let curr = new Date(subtime + "T00:00");
         let from = new Date(selected_date_from + "T00:00");
         let to = new Date(selected_date_to + "T00:00");
-        if (curr <= to && curr >= from) {
+        let date_condition = (curr <= to && curr >= from);
+
+        let tombstone_dept = response[i]["tombstone_department"];
+        if (available_depts.includes(tombstone_dept) == false) { available_depts.push(tombstone_dept); }
+        let dept_condition = (selected_depts == tombstone_dept || selected_depts == "all");
+
+        let tombstone_classification = response[i]["tombstone_classification"].split("-")[0];
+        if (available_classifications.includes(tombstone_classification) == false) { available_classifications.push(tombstone_classification); }
+        let classification_condition = (selected_classification == tombstone_classification || selected_classification == "all");
+
+        let tombstone_location = response[i]["tombstone_city"];
+        if (available_locations.includes(tombstone_location) == false) { available_locations.push(tombstone_location); }
+        let location_condition = (selected_location == tombstone_location || selected_location == "all");
+
+        // meta
+        let tombstone_language = response[i]["tombstone_language"];
+        if (available_languages.includes(tombstone_language) == false) { available_languages.push(tombstone_language); }
+        let language_condition = (selected_language == tombstone_language || selected_language == "all");
+
+        let meta_useragent = response[i]["meta_useragent"].split("(")[1].split(")")[0];
+        if (available_useragents.includes(meta_useragent) == false) { available_useragents.push(meta_useragent); }
+        let useragent_condition = (selected_useragent == meta_useragent || selected_useragent == "all");
+
+        let meta_entry = response[i]["meta_entry_method"];
+        if (available_entrys.includes(meta_entry) == false) { available_entrys.push(meta_entry); }
+        let entry_condition = (selected_entry == meta_entry || selected_entry == "all");
+
+        let tombstone_offering = response[i]["tombstone_offering_id"];
+        if (available_offerings.includes(tombstone_offering) == false) { available_offerings.push(tombstone_offering); }
+        let offering_condition = (selected_offering == tombstone_offering || selected_offering == "all");
+
+        //console.log(date_condition + " " + dept_condition);
+
+        if (date_condition == true &&
+            dept_condition == true &&
+            classification_condition == true &&
+            location_condition == true &&
+            language_condition == true &&
+            useragent_condition == true &&
+            entry_condition == true &&
+            offering_condition == true) {
             required_responses.push(response[i]);
         } else {
             excluded_responses.push(response[i]);
         }
         // TODO: Add multiday values
     }
+
+    //console.log(JSON.stringify(available_depts));
+    //console.log(JSON.stringify(selected_depts));
+
     _E.feature.aesir.available_dates = available_dates.sort();
+    _E.feature.aesir.available_depts = available_depts.sort();
+    _E.feature.aesir.available_classifications = available_classifications.sort();
+    _E.feature.aesir.available_locations = available_locations.sort();
+
+    _E.feature.aesir.available_languages = available_languages.sort();
+    _E.feature.aesir.available_useragents = available_useragents.sort();
+    _E.feature.aesir.available_entrys = available_entrys.sort();
+    _E.feature.aesir.available_offerings = available_offerings.sort();
+
+
     _E.feature.aesir.cortex_chart_data_excluded = excluded_responses;
 
     return required_responses;
@@ -506,11 +651,17 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12 m6">
-                            <button class="ctx_expand_charts btn purp-canada-ca">Grow/Shrink</button>
+                        <div class="col s12 m3">
+                            <button class="ctx_expand_charts btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">exposure</em></button>
                         </div>
-                        <div class="col s12 m6" >
-                            <button class="ctx_live_charts btn purp-canada-ca">Auto-Update</button>
+                        <div class="col s12 m3" >
+                            <button class="ctx_live_charts btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">repeat</em></button>
+                        </div>
+                        <div class="col s12 m3">
+                            <button class="ctx_advfilters btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">filter_list</em></button>
+                        </div>
+                        <div class="col s12 m3">
+                            <button class="ctx_tableview btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">grid_on</em></button>
                         </div>
                     </div>
                 </div>
@@ -535,7 +686,72 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
                             </select>
                         </div>
                     </div>
-                </div>`;
+                </div>
+            </div>
+            <div class="col s12 m12 advfilters" style="float:top;">
+                <div class="card-panel">
+                    <div class="row">   
+                        <div class="col s12 m4" >
+                            <label class="lg-lbl" for="selected_dept" id="lbl_selected_dept">
+                                <span class="en evh-parser-ignore">Department</span>
+                                <span class="fr evh-parser-ignore">Department</span>
+                            </label>
+                            <select class="browser-default" id="selected_dept" name="selected_dept" aria-labelledby="lbl_selected_dept">
+                            </select>
+                        </div>
+                        <div class="col s12 m4" >
+                            <label class="lg-lbl" for="selected_classification" id="lbl_selected_classification">
+                                <span class="en evh-parser-ignore">Classification</span>
+                                <span class="fr evh-parser-ignore">Niveau du post</span>
+                            </label>
+                            <select class="browser-default" id="selected_classification" name="selected_classification" aria-labelledby="lbl_selected_classification">
+                            </select>
+                        </div>
+                        <div class="col s12 m4" >
+                            <label class="lg-lbl" for="selected_location" id="lbl_selected_location">
+                                <span class="en evh-parser-ignore">City</span>
+                                <span class="fr evh-parser-ignore">Ville</span>
+                            </label>
+                            <select class="browser-default" id="selected_location" name="selected_location" aria-labelledby="lbl_selected_location">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">   
+                        <div class="col s12 m3" >
+                            <label class="lg-lbl" for="selected_language" id="lbl_selected_language">
+                                <span class="en evh-parser-ignore">Language</span>
+                                <span class="fr evh-parser-ignore">Langue</span>
+                            </label>
+                            <select class="browser-default" id="selected_language" name="selected_language" aria-labelledby="lbl_selected_language">
+                            </select>
+                        </div>
+                        <div class="col s12 m3" >
+                            <label class="lg-lbl" for="selected_useragent" id="lbl_selected_useragent">
+                                <span class="en evh-parser-ignore">User Agent</span>
+                                <span class="fr evh-parser-ignore">Agent d'User</span>
+                            </label>
+                            <select class="browser-default" id="selected_useragent" name="selected_useragent" aria-labelledby="lbl_selected_useragent">
+                            </select>
+                        </div>
+                        <div class="col s12 m3" >
+                            <label class="lg-lbl" for="selected_entry" id="lbl_selected_entry">
+                                <span class="en evh-parser-ignore">Entry</span>
+                                <span class="fr evh-parser-ignore">Entre</span>
+                            </label>
+                            <select class="browser-default" id="selected_entry" name="selected_entry" aria-labelledby="lbl_selected_entry">
+                            </select>
+                        </div>
+                        <div class="col s12 m3" >
+                            <label class="lg-lbl" for="selected_offering" id="lbl_selected_offering">
+                                <span class="en evh-parser-ignore">Offering</span>
+                                <span class="fr evh-parser-ignore">Offre</span>
+                            </label>
+                            <select class="browser-default" id="selected_offering" name="selected_offering" aria-labelledby="lbl_selected_offering">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
     return render_html;
 }
 
@@ -642,7 +858,7 @@ _E.feature.aesir.render_data = function (response) {
         for (let ii = 0; ii < statsKeys.length; ii++) {
             if (cr.questionType.includes('CLASSIFIED')) {
                 // accumulate grouped stats
-                let groupedStatsKey = statsKeys[ii].split("-")[0];
+                let groupedStatsKey = (cr.classifiedAs == "GC_ClsLvl") ? statsKeys[ii].split("-")[0] : statsKeys[ii];
                 if (typeof statsKeysGrouped[groupedStatsKey] === "undefined") {
                     statsKeysGrouped[groupedStatsKey] = parseInt(stats[statsKeys[ii]], 10);
                 } else {
@@ -784,10 +1000,21 @@ _E.feature.aesir.render_data = function (response) {
 
 
     _E.feature.aesir.populate_date_filter_controls();
+    _E.feature.aesir.populate_dept_filter_controls();
+    _E.feature.aesir.populate_filter_controls("classification");
+    _E.feature.aesir.populate_filter_controls("location");
+
+    _E.feature.aesir.populate_filter_controls("useragent");
+    _E.feature.aesir.populate_filter_controls("entry");
+    _E.feature.aesir.populate_filter_controls("language");
+    _E.feature.aesir.populate_filter_controls("offering");
+
     $(".ctx_msg").hide();
     $(".fr").hide();
     _E.feature.aesir.enable_expand_contract();
     _E.feature.aesir.enable_livepoll();
+    _E.feature.aesir.enable_tableviewbtn();
+    _E.feature.aesir.enable_filterbtn();
     $('.card-panel').matchHeight();
 }
 
@@ -824,6 +1051,34 @@ _E.feature.aesir.enable_expand_contract = function () {
     });
     _E.feature.aesir.exp_charts();
 }
+_E.feature.aesir.showfilter = true;
+_E.feature.aesir.hs_filter = function () {
+    if (_E.feature.aesir.showfilter != true) {
+        $(".advfilters").hide();
+    } else {
+        $(".advfilters").show();
+    }
+}
+_E.feature.aesir.enable_filterbtn = function () {
+    $(".ctx_advfilters").on("click", function () {
+        if (_E.feature.aesir.showfilter == true) {
+            // currently expanded, now compress
+            _E.feature.aesir.showfilter = false;
+            _E.feature.aesir.hs_filter();
+        } else {
+            // currently compressed, now expand
+            _E.feature.aesir.showfilter = true;
+            _E.feature.aesir.hs_filter();
+        }
+    });
+    _E.feature.aesir.hs_filter();
+}
+
+_E.feature.aesir.enable_tableviewbtn = function () {
+    $(".ctx_tableview").on("click", function () {
+        window.location = "https://app.evalhalla.ca/app/player/tableview/?sur=" + _E.feature.qparam.settings.sur;
+    });
+}
 
 _E.feature.aesir.livepoll = false;
 _E.feature.aesir.enable_livepoll = function () {
@@ -832,19 +1087,19 @@ _E.feature.aesir.enable_livepoll = function () {
             // currently polling, turn off
             _E.feature.aesir.livepoll = false;
             _E.feature.aesir.stop_auto_refresh();
-            $(".ctx_live_charts").html("Auto-Update");
+            $(".ctx_live_charts").html(`<em class="material-icons fab-align" aria-hidden="true">repeat</em>`);
         } else {
             // currently not polling, turn on
             _E.feature.aesir.livepoll = true;
             _E.feature.aesir.start_auto_refresh();
-            $(".ctx_live_charts").html("Pause Stream");
+            $(".ctx_live_charts").html(`<em class="material-icons fab-align" aria-hidden="true">pause</em>`);
         }
         _E.feature.aesir.exp_charts();
     });
     if (_E.feature.aesir.livepoll != true) {
-        $(".ctx_live_charts").html("Auto-Update");
+        $(".ctx_live_charts").html(`<em class="material-icons fab-align" aria-hidden="true">repeat</em>`);
     } else {
-        $(".ctx_live_charts").html("Pause Stream");
+        $(".ctx_live_charts").html(`<em class="material-icons fab-align" aria-hidden="true">pause</em>`);
     }
 }
 
