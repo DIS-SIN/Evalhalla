@@ -288,13 +288,13 @@ _E.feature.aesir.populate_dept_filter_controls = function () {
     });
 };
 _E.feature.aesir.populate_date_filter_controls = function () {
-    let html_available_dates = `<option value="" disabled selected></option>`;
+    let html_available_dates = ``;
     for (let i = 0; i < _E.feature.aesir.available_dates.length; i++) {
         html_available_dates += `<option value="${_E.feature.aesir.available_dates[i]}">${_E.feature.aesir.available_dates[i]}</option>`;
     }
     //alert(html_available_dates);
-    $("#selected_date_from").html(html_available_dates);
-    $("#selected_date_to").html(html_available_dates);
+    $("#selected_date_from").html(`<option value="2000-01-01" selected>All</option>` + html_available_dates);
+    $("#selected_date_to").html(html_available_dates + `<option value="2100-01-01" selected>All</option>`);
 
     if (_E.feature.aesir.selected_date_from == "") {
         $("#selected_date_from").val(_E.feature.aesir.available_dates[0]);
@@ -325,15 +325,17 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
     let selected_date_from = "";
     let selected_date_to = "";
     if (_E.feature.aesir.selected_date_from == "") {
-        selected_date_from = (typeof $("#selected_date_from").val() === "undefined") ? "2000-01-01" : $("#selected_date_from").val();
+        selected_date_from = (typeof $("#selected_date_from").val() === "undefined") ? "2000-01-01" : $("#selected_date_from option:first").val();
     } else {
         selected_date_from = _E.feature.aesir.selected_date_from;
     }
     if (_E.feature.aesir.selected_date_to == "") {
-        selected_date_to = (typeof $("#selected_date_to").val() === "undefined") ? "2100-01-01" : $("#selected_date_to").val();
+        selected_date_to = (typeof $("#selected_date_to").val() === "undefined") ? "2100-01-01" : $("#selected_date_to option:last").val();
     } else {
         selected_date_to = _E.feature.aesir.selected_date_to;
     }
+
+    //console.log("t: " + selected_date_to + " f:" + selected_date_from);
 
     // dept selection
     let selected_depts = [];
@@ -450,14 +452,17 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
         // sets: _E.feature.aesir.cortex_chart_data_excluded
         // sets: _E.feature.aesir.available_dates
         response = _E.feature.aesir.cortex_filter_survey_responses(response);
+        _E.feature.aesir.cache_incoming = response;
 
-        //alert(JSON.stringify(_E.feature.aesir.cortex_chart_data_excluded));
 
-        _E.feature.aesir.cortex_chart_data = _E.feature.cortex.messages.convert_survista_to_aesir(response);
         //$("#render_target").append(`<div><pre>${JSON.stringify(converted_aesir_format, null, 4)}</pre></div>`);
-        if (JSON.stringify(_E.feature.aesir.cache) !== JSON.stringify(_E.feature.aesir.cortex_chart_data)) {
+        if (JSON.stringify(_E.feature.aesir.cache) !== JSON.stringify(_E.feature.aesir.cache_incoming)) {
 
-            _E.feature.aesir.cache = _E.feature.aesir.cortex_chart_data;
+            //response = _E.feature.aesir.cortex_filter_survey_responses(response);
+
+            _E.feature.aesir.cortex_chart_data = _E.feature.cortex.messages.convert_survista_to_aesir(response);
+            //console.log(JSON.stringify(_E.feature.aesir.cache) + "\n\n" + JSON.stringify(_E.feature.aesir.cache_incoming));
+            _E.feature.aesir.cache = _E.feature.aesir.cache_incoming;
 
             _E.feature.aesir.cortex_get_survey_callback();
             // TODO: Renable for refresh
@@ -651,16 +656,16 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12 m3">
+                        <div class="col s3">
                             <button class="ctx_expand_charts btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">exposure</em></button>
                         </div>
-                        <div class="col s12 m3" >
+                        <div class="col s3" >
                             <button class="ctx_live_charts btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">repeat</em></button>
                         </div>
-                        <div class="col s12 m3">
+                        <div class="col s3">
                             <button class="ctx_advfilters btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">filter_list</em></button>
                         </div>
-                        <div class="col s12 m3">
+                        <div class="col s3">
                             <button class="ctx_tableview btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">grid_on</em></button>
                         </div>
                     </div>
