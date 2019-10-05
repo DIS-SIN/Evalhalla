@@ -451,13 +451,14 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
 
         // sets: _E.feature.aesir.cortex_chart_data_excluded
         // sets: _E.feature.aesir.available_dates
+        response = _E.feature.aesir.cortex_filter_survey_responses(response);
         _E.feature.aesir.cache_incoming = response;
 
 
         //$("#render_target").append(`<div><pre>${JSON.stringify(converted_aesir_format, null, 4)}</pre></div>`);
         if (JSON.stringify(_E.feature.aesir.cache) !== JSON.stringify(_E.feature.aesir.cache_incoming)) {
 
-            response = _E.feature.aesir.cortex_filter_survey_responses(response);
+            //response = _E.feature.aesir.cortex_filter_survey_responses(response);
 
             _E.feature.aesir.cortex_chart_data = _E.feature.cortex.messages.convert_survista_to_aesir(response);
             //console.log(JSON.stringify(_E.feature.aesir.cache) + "\n\n" + JSON.stringify(_E.feature.aesir.cache_incoming));
