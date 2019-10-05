@@ -453,11 +453,14 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
 
         //alert(JSON.stringify(_E.feature.aesir.cortex_chart_data_excluded));
 
+
+        _E.feature.aesir.cache_incoming = response;
         _E.feature.aesir.cortex_chart_data = _E.feature.cortex.messages.convert_survista_to_aesir(response);
         //$("#render_target").append(`<div><pre>${JSON.stringify(converted_aesir_format, null, 4)}</pre></div>`);
-        if (JSON.stringify(_E.feature.aesir.cache) !== JSON.stringify(_E.feature.aesir.cortex_chart_data)) {
+        if (JSON.stringify(_E.feature.aesir.cache) !== JSON.stringify(_E.feature.aesir.cache_incoming)) {
 
-            _E.feature.aesir.cache = _E.feature.aesir.cortex_chart_data;
+            //console.log(JSON.stringify(_E.feature.aesir.cache) + "\n\n" + JSON.stringify(_E.feature.aesir.cortex_chart_data));
+            _E.feature.aesir.cache = _E.feature.aesir.cache_incoming;
 
             _E.feature.aesir.cortex_get_survey_callback();
             // TODO: Renable for refresh
@@ -651,16 +654,16 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12 m3">
+                        <div class="col s3">
                             <button class="ctx_expand_charts btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">exposure</em></button>
                         </div>
-                        <div class="col s12 m3" >
+                        <div class="col s3" >
                             <button class="ctx_live_charts btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">repeat</em></button>
                         </div>
-                        <div class="col s12 m3">
+                        <div class="col s3">
                             <button class="ctx_advfilters btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">filter_list</em></button>
                         </div>
-                        <div class="col s12 m3">
+                        <div class="col s3">
                             <button class="ctx_tableview btn btn-large purp-canada-ca"><em class="material-icons fab-align" aria-hidden="true">grid_on</em></button>
                         </div>
                     </div>
