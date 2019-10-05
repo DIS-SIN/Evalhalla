@@ -288,14 +288,14 @@ _E.feature.instatable.g_render_table = function (etended) {
             if (record.hasOwnProperty(key)) {
                 let value = record[key];
                 html_output += `<td>${value.toString().replace(/\r\n/g, '')}</td>`;
-                tsv_output += `${value.toString().replace(/\r\n/g, '')}\t`;
+                tsv_output += `${value.toString().replace(/\r\n/g, '').replace(/\n/g, '')}\t`;
             } else {
                 html_output += `<td>blank</td>`;
                 tsv_output += `blank\t`;
             }
         }
         html_output += `</tr>`;
-        tsv_output += `\n`;
+        tsv_output += `\r\n`;
     }
     html_output += `</tbody></table>`;
     $("#render_target").html(html_output);
@@ -308,7 +308,7 @@ _E.feature.instatable.download_tsv = function () {
     let dt = new Date().toISOString().replace(/(\-\:)/g, "_");
     dt = dt.replace(".", "_")
         .replace("T", "_T");
-    $("#download_as_tsv").attr("href", "data:text/tab-separated-values," + encodeURIComponent(tsv)).attr("download", "evalhalla_" + _E.feature.qparam.settings.sur + "_" + dt + ".tsv");
+    $("#download_as_tsv").attr("href", "data:text/plain;charset=utf-8,\uFEFF" + encodeURIComponent(tsv)).attr("download", "evalhalla_" + _E.feature.qparam.settings.sur + "_" + dt + ".txt");
 }
 
 _E.feature.instatable.enable_feature = function () {
