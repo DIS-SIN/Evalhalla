@@ -1132,8 +1132,10 @@ _E.feature.aesir.showfilter = true;
 _E.feature.aesir.hs_filter = function () {
     if (_E.feature.aesir.showfilter != true) {
         $(".advfilters").hide();
+        $('.card-panel').matchHeight();
     } else {
         $(".advfilters").show();
+        $('.card-panel').matchHeight();
     }
 }
 _E.feature.aesir.enable_filterbtn = function () {
