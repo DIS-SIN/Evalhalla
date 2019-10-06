@@ -728,6 +728,9 @@ _E.feature.aesir.build_respondent_chart = function (chartd) {
             <div class="col s12 m12 advfilters" style="float:top;">
                 <div class="card-panel">
                     <div class="row">   
+                        <div class="col s12">
+                            <span><sup>Report filters (Allows multiple filters per report)</sup></span>
+                        </div>
                         <div class="col s12 m4" >
                             <label class="lg-lbl" for="selected_dept" id="lbl_selected_dept">
                                 <span class="en evh-parser-ignore">Department</span>
@@ -921,8 +924,8 @@ _E.feature.aesir.render_data = function (response) {
         $(`#edtable_filter_${'chart_' + cr.uid}`).html(`
             <div class="advfilters" >
                 <label class="lg-lbl" for="selected_edtable_filter_${'chart_' + cr.uid}" id="lbl_selected_edtable_filter_${'chart_' + cr.uid}">
-                    <span class="en evh-parser-ignore">Filter <sup>(Max 1 per report)</sup></span>
-                    <span class="fr evh-parser-ignore">Filtre <sup>(Max 1 pour report)</sup></span>
+                    <span class="en evh-parser-ignore">Question Filter <sup>(matching answer)</sup></span>
+                    <span class="fr evh-parser-ignore">Question Filtre <sup>(Max 1 pour report)</sup></span>
                 </label>
                 <select class="browser-default" id="selected_edtable_filter_${'chart_' + cr.uid}" name="selected_edtable_filter_${'chart_' + cr.uid}" aria-labelledby="lbl_selected_edtable_filter_${'chart_' + cr.uid}">
                 ${options_select}
@@ -930,7 +933,7 @@ _E.feature.aesir.render_data = function (response) {
             </div>
         `);
 
-        //alert((typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : (_E.feature.aesir.question_level_filter.test == "" ? "Blank" : _E.feature.aesir.question_level_filter.test));
+        /*alert((typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : (_E.feature.aesir.question_level_filter.test == "" ? "Blank" : _E.feature.aesir.question_level_filter.test));
         $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val(
             (typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : _E.feature.aesir.question_level_filter.test == "" ? encodeURIComponent("Blank") : _E.feature.aesir.question_level_filter.test
         );
@@ -938,6 +941,24 @@ _E.feature.aesir.render_data = function (response) {
         if ($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val() == null) {
             $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val("all");
         }
+        */
+        let set_val = "all";
+        if (typeof _E.feature.aesir.question_level_filter === "undefined") {
+            set_val = "all";
+        } else {
+            if (cr.uid == _E.feature.aesir.question_level_filter.qid) {
+                if (_E.feature.aesir.question_level_filter.test == "") {
+                    set_val = encodeURIComponent("Blank");
+                } else {
+                    set_val = _E.feature.aesir.question_level_filter.test;
+                }
+            }
+        }
+        $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val(set_val);
+        if ($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val() == null) {
+            $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val("all");
+        }
+
         $(`#selected_edtable_filter_${'chart_' + cr.uid}`).on("change", function () {
             let test_val = $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val();
             if (test_val == "all") {
