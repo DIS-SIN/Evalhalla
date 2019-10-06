@@ -252,7 +252,7 @@ _E.feature.aesir.cortex_chart_data_excluded = [];
 _E.feature.aesir.populate_filter_controls = function (control) {
     let html_available = `<option value="all" selected>All</option>`;
     for (let i = 0; i < _E.feature.aesir["available_" + control + "s"].length; i++) {
-        html_available += `<option value="${_E.feature.aesir["available_" + control + "s"][i]}">${(_E.feature.aesir["available_" + control + "s"][i] == "" ? "Blank" : _E.feature.aesir["available_" + control + "s"][i])}</option>`;
+        html_available += `<option value="${encodeURIComponent(_E.feature.aesir["available_" + control + "s"][i])}">${(_E.feature.aesir["available_" + control + "s"][i] == "" ? "Blank" : _E.feature.aesir["available_" + control + "s"][i])}</option>`;
     }
     //alert(html_available_dates);
     $("#selected_" + control).html(html_available);
@@ -271,7 +271,7 @@ _E.feature.aesir.populate_filter_controls = function (control) {
 _E.feature.aesir.populate_dept_filter_controls = function () {
     let html_available_depts = `<option value="all" selected>All</option>`;
     for (let i = 0; i < _E.feature.aesir.available_depts.length; i++) {
-        html_available_depts += `<option value="${_E.feature.aesir.available_depts[i]}">${(_E.feature.aesir.available_depts[i] == "" ? "Blank" : _E.feature.aesir.available_depts[i])}</option>`;
+        html_available_depts += `<option value="${encodeURIComponent(_E.feature.aesir.available_depts[i])}">${(_E.feature.aesir.available_depts[i] == "" ? "Blank" : _E.feature.aesir.available_depts[i])}</option>`;
     }
     //alert(html_available_dates);
     $("#selected_dept").html(html_available_depts);
@@ -290,7 +290,7 @@ _E.feature.aesir.populate_dept_filter_controls = function () {
 _E.feature.aesir.populate_date_filter_controls = function () {
     let html_available_dates = ``;
     for (let i = 0; i < _E.feature.aesir.available_dates.length; i++) {
-        html_available_dates += `<option value="${_E.feature.aesir.available_dates[i]}">${_E.feature.aesir.available_dates[i]}</option>`;
+        html_available_dates += `<option value="${encodeURIComponent(_E.feature.aesir.available_dates[i])}">${_E.feature.aesir.available_dates[i]}</option>`;
     }
     //alert(html_available_dates);
     $("#selected_date_from").html(`<option value="2000-01-01" selected>All</option>` + html_available_dates);
@@ -378,34 +378,34 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
         let to = new Date(selected_date_to + "T00:00");
         let date_condition = (curr <= to && curr >= from);
 
-        let tombstone_dept = response[i]["tombstone_department"];
+        let tombstone_dept = decodeURIComponent(response[i]["tombstone_department"]);
         if (available_depts.includes(tombstone_dept) == false) { available_depts.push(tombstone_dept); }
-        let dept_condition = (selected_depts == tombstone_dept || selected_depts == "all");
+        let dept_condition = (decodeURIComponent(selected_depts) == tombstone_dept || selected_depts == "all");
 
-        let tombstone_classification = response[i]["tombstone_classification"].split("-")[0];
+        let tombstone_classification = decodeURIComponent(response[i]["tombstone_classification"].split("-")[0]);
         if (available_classifications.includes(tombstone_classification) == false) { available_classifications.push(tombstone_classification); }
-        let classification_condition = (selected_classification == tombstone_classification || selected_classification == "all");
+        let classification_condition = (decodeURIComponent(selected_classification) == tombstone_classification || selected_classification == "all");
 
-        let tombstone_location = response[i]["tombstone_city"];
+        let tombstone_location = decodeURIComponent(response[i]["tombstone_city"]);
         if (available_locations.includes(tombstone_location) == false) { available_locations.push(tombstone_location); }
-        let location_condition = (selected_location == tombstone_location || selected_location == "all");
+        let location_condition = (decodeURIComponent(selected_location) == tombstone_location || selected_location == "all");
 
         // meta
-        let tombstone_language = response[i]["tombstone_language"];
+        let tombstone_language = decodeURIComponent(response[i]["tombstone_language"]);
         if (available_languages.includes(tombstone_language) == false) { available_languages.push(tombstone_language); }
-        let language_condition = (selected_language == tombstone_language || selected_language == "all");
+        let language_condition = (decodeURIComponent(selected_language) == tombstone_language || selected_language == "all");
 
-        let meta_useragent = response[i]["meta_useragent"].split("(")[1].split(")")[0];
+        let meta_useragent = decodeURIComponent(response[i]["meta_useragent"].split("(")[1].split(")")[0]);
         if (available_useragents.includes(meta_useragent) == false) { available_useragents.push(meta_useragent); }
-        let useragent_condition = (selected_useragent == meta_useragent || selected_useragent == "all");
+        let useragent_condition = (decodeURIComponent(selected_useragent) == meta_useragent || selected_useragent == "all");
 
-        let meta_entry = response[i]["meta_entry_method"];
+        let meta_entry = decodeURIComponent(response[i]["meta_entry_method"]);
         if (available_entrys.includes(meta_entry) == false) { available_entrys.push(meta_entry); }
-        let entry_condition = (selected_entry == meta_entry || selected_entry == "all");
+        let entry_condition = (decodeURIComponent(selected_entry) == meta_entry || selected_entry == "all");
 
-        let tombstone_offering = response[i]["tombstone_offering_id"];
+        let tombstone_offering = decodeURIComponent(response[i]["tombstone_offering_id"]);
         if (available_offerings.includes(tombstone_offering) == false) { available_offerings.push(tombstone_offering); }
-        let offering_condition = (selected_offering == tombstone_offering || selected_offering == "all");
+        let offering_condition = (decodeURIComponent(selected_offering) == tombstone_offering || selected_offering == "all");
 
         //console.log(date_condition + " " + dept_condition);
 
@@ -425,15 +425,17 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
                 let scaleddqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "dropdown").replace("_q_", "_qid_");
                 let scalergqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "rgroup").replace("_q_", "_qid_");
                 let scalecgqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "cgroup").replace("_q_", "_qid_");
+                //qfilter["test"] = encodeURIComponent(qfilter["test"]);
+                if (qfilter["test"] == "Blank") { qfilter["test"] = ""; }
 
                 q_condition = false ||
-                    response[i][scaleqf] == qfilter["test"] ||
-                    response[i][scale15qf] == qfilter["test"] ||
-                    response[i][scale110qf] == qfilter["test"] ||
-                    response[i][scaletxtqf] == qfilter["test"] ||
-                    response[i][scaleddqf] == qfilter["test"] ||
-                    response[i][scalergqf] == qfilter["test"] ||
-                    response[i][scalecgqf] == qfilter["test"];
+                    encodeURIComponent(response[i][scaleqf]) == qfilter["test"] ||
+                    encodeURIComponent(response[i][scale15qf]) == qfilter["test"] ||
+                    encodeURIComponent(response[i][scale110qf]) == qfilter["test"] ||
+                    encodeURIComponent(response[i][scaletxtqf]) == qfilter["test"] ||
+                    encodeURIComponent(response[i][scaleddqf]) == qfilter["test"] ||
+                    encodeURIComponent(response[i][scalergqf]) == qfilter["test"] ||
+                    encodeURIComponent(response[i][scalecgqf]) == qfilter["test"];
             }
         }
 
@@ -903,14 +905,14 @@ _E.feature.aesir.render_data = function (response) {
                 } else {
                     statsKeysGrouped[groupedStatsKey] += parseInt(stats[statsKeys[ii]], 10);
                 }
-                options_select += `<option value="${groupedStatsKey}">${groupedStatsKey}</option>`;
+                options_select += `<option value="${encodeURIComponent(groupedStatsKey)}">${groupedStatsKey}</option>`;
                 _E.feature.aesir.stat_data.total_responses += parseInt(stats[statsKeys[ii]], 10);
             } else {
                 (stats) ? statDataTable.push(
                     { "statKey": statsKeys[ii], "statValue": parseInt(stats[statsKeys[ii]], 10), "statBg": _E.feature.aesir.backgroundColors[ii] }
                 ) : true;
                 _E.feature.aesir.stat_data.total_responses += parseInt(stats[statsKeys[ii]], 10);
-                options_select += `<option value="${statsKeys[ii]}">${statsKeys[ii]}</option>`;
+                options_select += `<option value="${encodeURIComponent(statsKeys[ii])}">${statsKeys[ii]}</option>`;
             }
         }
         cr.total = _E.feature.aesir.stat_data.total_responses;
@@ -928,8 +930,9 @@ _E.feature.aesir.render_data = function (response) {
             </div>
         `);
 
+        //alert((typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : (_E.feature.aesir.question_level_filter.test == "" ? "Blank" : _E.feature.aesir.question_level_filter.test));
         $(`#selected_edtable_filter_${'chart_' + cr.uid}`).val(
-            (typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : _E.feature.aesir.question_level_filter.test
+            (typeof _E.feature.aesir.question_level_filter === "undefined") ? "all" : _E.feature.aesir.question_level_filter.test == "" ? encodeURIComponent("Blank") : _E.feature.aesir.question_level_filter.test
         );
         //console.log($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val());
         if ($(`#selected_edtable_filter_${'chart_' + cr.uid}`).val() == null) {
