@@ -1062,7 +1062,7 @@ _E.feature.aesir.render_data = function (response) {
 
         // console.log("ok 7")
 
-        let statDataTableHTML = `<table>`;//`${sentiment_html}<table>`;
+        let statDataTableHTML = `<table><tr><th>Answer</th><th>Stats</th></tr>`;//`${sentiment_html}<table>`;
         for (let iii = 0; iii < item_count; iii++) {
             // break obscenely large strings
             statDataTableHTML += `<tr>
