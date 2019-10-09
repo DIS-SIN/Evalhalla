@@ -592,3 +592,289 @@ Q:
 /en Other /; /fr  Autre /;
 
 */
+
+var eldp_b8_short = `
+
+# ELDPB8
+
+##
+/en EX04-05 ADM ELDP /;
+/fr EX04-05 PDLCS /;
+
+###
+/en Leading Into the Next Decade and Closing Ceremony /;
+/fr Diriger au cours de la prochaine décennie et cérémonie de clôture /;
+
+Q:
+/en Please select the appropriate day /;  
+/fr Veuillez choisir le jour approprié /;  
+/one
+/en Day 1 (Oct 22) /; /fr Jour 1 (Oct 22) /;
+/en Day 2 (Oct 23) /; /fr Jour 2 (Oct 23) /;
+;
+
+//
+/en Please rate each of the following statements by clicking the appropriate circle. /;
+/fr Veuillez cliquer sur le cercle qui correspond à votre opinion pour chacun des énoncés suivants. /;
+
+/pagebreak
+
+//
+/en Session 1: <b>LEADING CHANGE EFFECTIVELY IN GOVERNMENT</b> /;
+/fr Séance 1: <b>DIRIGER EFFICACEMENT LE CHANGEMENT AU SEIN DU GOUVERNEMENT</b> /;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this session on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de la séance, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please rate your satisfaction or dissatisfaction with the quality of the speakers (s) of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des conférenciers, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+//
+/en Session 2: <b>SETTING THE STAGE ON LEADERSHIP</b> /;
+/fr Séance 2: <b>MISE EN CONTEXTE DU LEADERSHIP</b> /;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this session on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de la séance, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please rate your satisfaction or dissatisfaction with the quality of the speakers (s) of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des conférenciers, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+//
+/en Session 3: <b>STUDY A LEADER - PRESENTATIONS</b> /;
+/fr Séance 3: <b>ÉTUDE D'UN LEADER - PRÉSENTATIONS</b> /;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this session on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de la séance, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please rate your satisfaction or dissatisfaction with the quality of the speakers (s) of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des conférenciers, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+Q:
+/en Please use the space below to provide any comments you may have. /;
+/fr Veuillez utiliser l’espace ci-dessous pour formuler vos commentaires. /;
+/open
+
+`;
+
+
+var eldpb8_long = `
+
+# ELDPB8_LONG
+
+##
+/en EX04-05 ADM ELDP /;
+/fr EX04-05 PDLCS /;
+
+###
+/en Leading Into the Next Decade and Closing Ceremony /;
+/fr Diriger au cours de la prochaine décennie et cérémonie de clôture /;
+
+Q:
+/en Please select the appropriate day /;  
+/fr Veuillez choisir le jour approprié /;  
+/one
+/en Day 1 (Oct 22) /; /fr Jour 1 (Oct 22) /;
+/en Day 2 (Oct 23) /; /fr Jour 2 (Oct 23) /;
+;
+
+//
+/en Please rate each of the following statements by clicking the appropriate circle. /;
+/fr Veuillez cliquer sur le cercle qui correspond à votre opinion pour chacun des énoncés suivants. /;
+
+/pagebreak
+
+//
+/en Session 1: <b>FUTURE OF WORK</b> /;
+/fr Séance 1: <b>L'AVERNIR DU TRAVAIL</b> /;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this session on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de la séance, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please rate your satisfaction or dissatisfaction with the quality of the speakers (s) of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des conférenciers, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+//
+/en Session 2: <b>LEADERSHIP STYLES</b> /;
+/fr Séance 2: <b>STYLES DE LEADERSHIP</b> /;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this session on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de la séance, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please rate your satisfaction or dissatisfaction with the quality of the speakers (s) of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des conférenciers, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+//
+/en Session 3: <b>ENVIRONMENT AND CLIMATE CHANGE</b> /;
+/fr Séance 3: <b>ENVIRONNEMENT ET CHANGEMENTS CLIMATIQUES</b> /;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this session on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de la séance, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please rate your satisfaction or dissatisfaction with the quality of the speakers (s) of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des conférenciers, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+Q:
+/en Please use the space below to provide any comments you may have. /;
+/fr Veuillez utiliser l’espace ci-dessous pour formuler vos commentaires. /;
+/open
+/pagebreak
+
+//
+/en Please provide your overall feedback on the two day learning activity /;
+/fr Veuillez fournir votre rétroaction sur l'activité d'apprentissage de deuxjours dans son ensemble. /;
+
+Q:
+/en Your group and level /;
+/fr Quel est votre groupe et niveau /;
+/one
+/en EX-03 /; /fr EX-03 /;
+/en EX-04 /; /fr EX-04 /;
+/en EX-05 /; /fr EX-05 /;
+;
+
+Q:
+/en Please rate your overall satisfaction or dissatisfaction with this learning activity on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard de l’activité d’apprentissage, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en Please tell us why you gave this score. /;
+/fr Veuillez nous dire les raisons pour lesquelles vous avez attribué cette note à l’activité d’apprentissage. /;
+/open
+
+Q:
+/en Would you say your expectations of this learning activity were exceeded, met, or not met? /;
+/fr Diriez-vous que l’activité d’apprentissage a dépassé vos attentes, répondu à vos attentes ou déçu vos attentes? /;
+/one
+/en Exceeded /; /fr Dépassé mes attentes /;
+/en Met /; /fr Répondu à mes attentes /;
+/en Not met /; /fr Déçu mes attentes /;
+/en Unsure /; /fr Incertain /;
+;
+
+/pagebreak
+
+//
+/en Please rate your satisfaction or dissatisfaction with the following components of this learning event on a scale of 1 to 10, where 1 is 'very dissatisfied' and 10 is 'very satisfied'. /;
+/fr Veuillez indiquer votre degré de satisfaction à l’égard des éléments suivants de l’activité d’apprentissage, sur une échelle de 1 (très insatisfait) à 10 (très satisfait). /;
+
+Q:
+/en Language quality of the materials /;
+/fr Qualité de la langue du matériel /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+Q:
+/en The level of linguistic duality /;
+/fr Le niveau de dualité linguistique /;
+/scale
+/en Very dissatisfied /; /fr Très insatisfait /;,
+/en Very satisfied /; /fr Très satisfait /;,
+/en Unsure /; /fr Incertain /;
+
+//
+/en Reflecting on the learning activity, please rate the following statements, where 1 is “a very negative impression” and 10 is “a very positive impression,” in terms of your impression of the experience and potential impact, if any, of the learning activity. /;
+/fr En réfléchissant à l’activité, veuillez évaluer les énoncés suivants sur une échelle de 1 à 10 en fonction de vos impressions sur l’expérience d’apprentissage et sur l’incidence possible de l’activité en question (1 = impression très défavorable, et 10 = impression très favorable). /;
+
+Q:
+/en This learning activity is a valuable use of my time. /;
+/fr Le temps consacré à l’activité d’apprentissage a été une utilisation judicieuse de mon temps. /;
+/scale
+/en Very negative impression /; /fr Impression très défavorable /;,
+/en Very positive impression /; /fr Impression très favorable /;,
+/en Unsure /; /fr Incertain /;
+
+/pagebreak
+
+Q:
+/en What have been the most useful elements of this learning activity for you as a leader?  /;
+/fr Quels ont été les éléments les plus utiles de cette activité d’apprentissage pour vous-même en tant que leader? /;
+/open
+
+Q:
+/en Do you have suggestions for improving this learning activity? /;
+/fr Avez-vous des suggestions pour améliorer cette activité d’apprentissage? /;
+/open
+
+Q:
+/en Please provide your department or agency (please start typing to get a list of available options) /;
+/fr Veuillez commencer à taper pour obtenir une liste des options disponibles /;
+/department
+`;
