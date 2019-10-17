@@ -425,6 +425,7 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
                 let scaleddqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "dropdown").replace("_q_", "_qid_");
                 let scalergqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "rgroup").replace("_q_", "_qid_");
                 let scalecgqf = qfilter["qid"].replace(_E.feature.qparam.settings.sur.toUpperCase(), "cgroup").replace("_q_", "_qid_");
+
                 //qfilter["test"] = encodeURIComponent(qfilter["test"]);
                 if (qfilter["test"] == "Blank") { qfilter["test"] = ""; }
 
@@ -435,7 +436,7 @@ _E.feature.aesir.cortex_filter_survey_responses = function (response) {
                     encodeURIComponent(response[i][scaletxtqf]) == qfilter["test"] ||
                     encodeURIComponent(response[i][scaleddqf]) == qfilter["test"] ||
                     encodeURIComponent(response[i][scalergqf]) == qfilter["test"] ||
-                    encodeURIComponent(response[i][scalecgqf]) == qfilter["test"];
+                    encodeURIComponent(response[i][scalecgqf]).includes(qfilter["test"]);
             }
         }
 

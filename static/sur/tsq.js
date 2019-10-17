@@ -207,3 +207,41 @@ Q: Is there anything more you would like to share with?
 
 
 `;
+
+var moonshot = `
+# MOON_LUNE
+
+## 
+/en Moonshot  Pre-Survey /;
+/fr Tir de la lune pré-sondage /;
+
+### 
+/en We want to gather some information from you in preparation of the Moonshot event. Please answer the following questions. /;
+/fr Nous souhaitons recueillir des informations auprès de vous pour préparer l'événement Moonshot. Merci de répondre aux questions suivantes. /;
+
+Q: 
+/en How comfortable are you when dealing with a new problem? /;
+/fr Êtes-vous à l'aise face à un nouveau problème? /;
+/one
+/en Extremely Comfortable /; /fr Extrêmement confortable /; 
+/en Very Comfortable /; /fr Très confortable /; 
+/en Comfortable /; /fr Confortable /; 
+/en Somewhat Comfortable /; /fr Plutôt confortable /; 
+/en Not at all Comfortable /; /fr Pas du tout confortable /;
+;
+
+Q: 
+/en What topics do you want to learn more about? Check all that apply. /;
+/fr Sur quels sujets souhaitez-vous en savoir plus? Cochez toutes les cases. /;
+/any
+/en How to define a problem before trying to solve it /; /fr Comment définir un problème avant d'essayer de le résoudre /;
+/en How to prevent jumping to solutions early on /; /fr Comment prévenir le saut aux solutions dès le début /;
+/en How to look at a problem from a different perspective /; /fr Comment regarder un problème sous un angle différent /;
+/en How to distinguish problem symptoms versus actual problems /; /fr Comment distinguer les symptômes du problème des problèmes réels /;
+;
+
+// 
+/en Thank you! /;
+/fr Merci! /;
+
+`;
