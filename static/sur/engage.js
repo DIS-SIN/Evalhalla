@@ -113,3 +113,110 @@ Q:
 
 ;
 `;
+
+var hubs_labs = `
+
+# HUBS_LABS
+
+## 
+/en Hubs and Labs /;
+/fr Hubs et laboratoires d'innovation /;
+
+###
+/en Getting out of our own way /;
+/fr Arrêter de se mettre des bâtons dans les roues /;
+
+/TOMBSTONEPAGE
+
+//
+/en Thank you for attending the Hubs and Labs gathering on Friday October 11th 2019. We are constantly trying to build a stronger community of practice so we love to hear your feedback. This survey will take no longer than 4 minutes. Thank you for taking the time to share your thoughts with us! /;
+/fr Merci d'avoir assisté à la réunion des Hubs et Labs le vendredi 11 octobre 2019. Nous essayons constamment de bâtir une communauté de pratique plus forte, c'est pourquoi nous sommes heureux d'entendre vos commentaires. Ce sondage ne prendra pas plus de 4 minutes. Merci d'avoir pris le temps de nous faire part de vos réflexions! /;
+
+Q: 
+/en 1.1 What was your over all impression of the hubs and labs meet up for your learning and development? /;
+/fr 1.1 Quelle a été votre impression générale sur les centres et les laboratoires qui se réunissent pour votre apprentissage et votre développement ? /;
+/one
+/en Not useful /; /fr Pas utile /; 
+/en Neutral /; /fr Neutre /; 
+/en Somewhat helpful /; /fr Un peu utile /; 
+/en Very helpful /; /fr Très utile /; 
+;
+
+Q: 
+/en 1.2 Please feel free to share any further insights you have on this community of practice. /;
+/fr 1.2 N'hésitez pas à nous faire part de vos commentaires sur cette communauté de pratique. /;
+/open
+
+Q:
+/en 2. Participating in this workshop was a good use of my time /;
+/fr 2. Participer à cet atelier a été une bonne utilisation de mon temps /;
+/one
+/en Not useful /; /fr Pas utile /; 
+/en Neutral /; /fr Neutre /; 
+/en Somewhat helpful /; /fr Un peu utile /; 
+/en Very helpful /; /fr Très utile /; 
+;
+
+Q:
+/en 3. The challenge we worked on solving was interesting to me /;
+/fr 3. Le défi sur lequel nous avons travaillé était intéressant pour moi /;
+/one
+/en Strongly Disagree /; /fr Pas du tout d'accord /;
+/en Disagree /; /fr Pas d'accord /;
+/en Neutral /; /fr Neutre /;
+/en Agree /; /fr D'accord /;
+/en Strongly Agree /; /fr Tout à fait d'accord /;
+;
+
+Q:
+/en 4. The problem we explored has given me ideas I can take back to my department /;
+/fr 4. Le problème que nous avons exploré m'a donné des idées que je peux rapporter à mon ministère. /;
+/one
+/en Strongly Disagree /; /fr Pas du tout d'accord /;
+/en Disagree /; /fr Pas d'accord /;
+/en Neutral /; /fr Neutre /;
+/en Agree /; /fr D'accord /;
+/en Strongly Agree /; /fr Tout à fait d'accord /;
+;
+
+Q:
+/en 5. The design of the workshop enabled me to understand the problem, ideate solutions with others, and debrief on the experience /;
+/fr 5. La conception de l'atelier m'a permis de comprendre le problème, de trouver des solutions avec d'autres et de faire un compte rendu de l'expérience. /; 
+/one
+/en Strongly Disagree /; /fr Pas du tout d'accord /;
+/en Disagree /; /fr Pas d'accord /;
+/en Neutral /; /fr Neutre /;
+/en Agree /; /fr D'accord /;
+/en Strongly Agree /; /fr Tout à fait d'accord /;
+;
+
+Q:
+/en 6. The facilitation made the workshop go smoothly /;
+/fr 6. La facilitation a facilité le déroulement de l'atelier /;
+/one
+/en Strongly Disagree /; /fr Pas du tout d'accord /;
+/en Disagree /; /fr Pas d'accord /;
+/en Neutral /; /fr Neutre /;
+/en Agree /; /fr D'accord /;
+/en Strongly Agree /; /fr Tout à fait d'accord /;
+;
+
+Q:
+/en 7. What compliments or suggestions for improvement would you like to share with the facilitators?  /;
+/fr 7. Quels compliments ou suggestions d'amélioration aimeriez-vous partager avec les animateurs ? /;
+/open
+
+Q:
+/en 8. Do you have any suggestions for topics at future hubs and labs meet ups?  (50 word limit) /; 
+/fr 8. Avez-vous des suggestions de sujets à aborder lors de futures réunions de hubs et de laboratoires d'innovation ?  (limite de 50 mots) /;
+/open
+
+Q:
+/en 9. Would you attend a future Hubs and Labs meet up? /;
+/fr 9. Aimeriez-vous participer à une future rencontre entre de hubs et de laboratoires d'innovation ? /;
+/one
+/en Yes I would attend /; /fr Oui, j'y assisterais /;
+/en No, I would not attend again /; /fr Non, je n'y retournerai pas. /;
+;
+
+`;

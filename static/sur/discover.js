@@ -60,10 +60,10 @@ Q:
  */
 
 var discover_dig = `
- # DISCOVER_DIGITAL
+# DISCOVER_DIGITAL
 
 ## 
-/en Discover Digital -1205 /;
+/en Discover Digital - 1205 /;
 /fr Découvrez le numérique – 1205 /;
 
 ### 
@@ -173,4 +173,3 @@ Q:
 /fr  Que recommanderiez-vous que nous ajoutions et/ou changions dans le cours ? /;
 /open
  `;
-// joe bonamassa riding withe the king
