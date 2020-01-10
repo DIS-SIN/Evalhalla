@@ -17,7 +17,10 @@ _E.feature.instatable.get_survey_data = function (survey) {
     if (survey == "" || typeof survey === "undefined") {
         survey = "test_sur";
     }
-    $.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
+
+    let api_route = _C.apiroute.responses(_E.fxn.common.safe(survey));
+    //"https://survistaapp.com/api/surveys/schemaless?title=" + survey
+    $.get(api_route, function (response) {
         let rsp = `[]`;
         try {
             rsp = JSON.stringify(response);

@@ -12,7 +12,7 @@ _E.feature.qparam.settings = {
     "sur_evh": "",
     "fallback": false
 };
-_E.feature.qparam.cortex = {
+_E.feature.qparam.evalhalla_backend = {
     //"evalese": ///
 
 };
@@ -35,7 +35,7 @@ _E.feature.qparam.startup_builtinsurveys = {
 };
 _E.feature.qparam.startupcallback = function () { };
 _E.feature.qparam.consume_evalese_error = function () {
-    console.log("CORTEX Connection Issue, CREATE or FALLBACK check");
+    console.log("EvalhallaBackend Connection Issue, CREATE or FALLBACK check");
     // WARN: Messing with the sur lookup case. fix this with slugify and detangling demo code
     if (typeof _E.feature.qparam.startup_builtinsurveys[_E.feature.qparam.settings.sur.toLowerCase()] !== "undefined") {
         console.log("... Using pre-baked survey from demo");
@@ -55,15 +55,17 @@ _E.feature.qparam.consume_evalese_error = function () {
     _E.feature.qparam.startupcallback();
 };
 _E.feature.qparam.consume_evalese_success = function () {
-    console.log("Evalhalla <-[consumeEvalese]- CORTEX");
-    let jo = JSON.parse(_E.feature.qparam.cortex.evalese);
+    console.log("Evalhalla <-[consumeEvalese]- EvalhallaBackend");
+    let jo = {
+        "sur_evalese": _E.feature.qparam.evalhalla_backend.evalese//JSON.parse(_E.feature.qparam.evalhalla_backend.evalese)
+    };
     //console.log(jo.sur_evalese);
 
     g_intro_script = jo.sur_evalese; //_E.feature.qparam.settings.sur_evh;
     _E.feature.qparam.settings.auto_display_mode = true;
     _E.feature.qparam.settings.sur_evh = jo.sur_evalese;
 
-    console.log("Evalhalla startupcallback post CORTEX");
+    console.log("Evalhalla startupcallback post EvalhallaBackend");
 
     console.log("Evalhalla qparam statup, using sur = " + _E.feature.qparam.settings.sur);
     _E.feature.qparam.startupcallback();
@@ -120,7 +122,7 @@ _E.feature.qparam.startup = function (callback) {
     // REFACTOR: detangly player/designer/dash
     consumeEvalese(
         _E.feature.qparam.settings.sur,
-        _E.feature.qparam.cortex,
+        _E.feature.qparam.evalhalla_backend,
         (_E.feature.qparam.settings.fallback == "true") ? _E.feature.qparam.consume_evalese_error : _E.feature.qparam.consume_evalese_success,
         _E.feature.qparam.consume_evalese_error
     );

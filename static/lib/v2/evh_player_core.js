@@ -13,7 +13,7 @@
         $(".hide-on-player").hide();
         $(".loader-prep").hide();
         _E.feature.qparam.startup(function () {
-            console.log("Evalhalla qparam startup callback post CORTEX");
+            console.log("Evalhalla qparam startup callback post data fetch");
             // from evh_feature_unloadconfirmation.js
             _E.feature.unloadconfirmation.enable_feature();
             // from evh_feature_local_storage.js

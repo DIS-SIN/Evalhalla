@@ -17,7 +17,7 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
     // upload to survista/cortex: stub
     // TODO: Fix with correct code (right now just obj/deobj for test)
     _E.core.state.store["el"]["btn_upload"].on("click", function () {
-        (_E.feature.designer.debug) ? console.log("CORTEX Upload") : true;
+        (_E.feature.designer.debug) ? console.log("EvalhallaBackend Upload") : true;
         let pc = _E.fxn.common.safe($("#pc").val());
         pc = (pc == "mw11") ? (11 * 11) : (11 * 0);
 
@@ -31,32 +31,36 @@ _E.feature.designer.enable_ls_ui_buttons = function () {
         );
 
         // cortex feature
-        (_E.feature.designer.debug) ? alert("STUB: Upload Full Survey JSON to CORTEX.") : true;
+        (_E.feature.designer.debug) ? alert("STUB: Upload Full Survey JSON to EvalhallaBackend.") : true;
         (_E.feature.designer.debug) ? console.log(
             JSON.stringify(_E.feature.cortex.messages.create_survey_template_msg(jo), null, 4)
         ) : true;
-        (_E.feature.designer.debug) ? alert("STUB: Upload Survey Evalese to CORTEX.") : true;
+        (_E.feature.designer.debug) ? alert("STUB: Upload Survey Evalese to EvalhallaBackend.") : true;
         (_E.feature.designer.debug) ? console.log(
             JSON.stringify(_E.feature.cortex.messages.create_survey_evalese_msg(jo), null, 4)
         ) : true;
 
-        console.log("Evalhalla -[produceSurveyTemplate]-> CORTEX");
+        /* CORTEX deprecation
+        Removing template push for now.
+        console.log("Evalhalla -[produceSurveyTemplate]-> EvalhallaBackend");
         (_E.feature.designer.debug || pc == 0) ? true : produceSurveyTemplate(
             //_E.feature.qparam.settings.sur,
             JSON.stringify(
                 _E.feature.cortex.messages.create_survey_template_msg(jo)
             )
         );
-        console.log("Evalhalla -[produceEvalese]-> CORTEX");
+        */
+        console.log("Evalhalla -[produceEvalese]-> EvalhallaBackend");
         (_E.feature.designer.debug || pc == 0) ? true : produceEvalese(
             _E.feature.qparam.settings.sur,
-            JSON.stringify(
-                _E.feature.cortex.messages.create_survey_evalese_msg(jo)
-            )
+            _E.feature.cortex.messages.create_survey_evalese_msg(jo)
+            //JSON.stringify(
+            //    _E.feature.cortex.messages.create_survey_evalese_msg(jo)
+            //)
         );
-        console.log("Evalhalla CORTEX Upload Complete");
+        console.log("Evalhalla EvalhallaBackend Upload Complete");
 
-        //alert("CORTEX Upload Complete");
+        //alert("EvalhallaBackend Upload Complete");
         $(".cortex_conduct_survey").trigger("click");
     });
 

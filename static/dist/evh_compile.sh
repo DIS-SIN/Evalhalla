@@ -117,6 +117,7 @@ EVH_TABLEVIEW_PKG=$(cat <<-END
 ~/Development/Evalhalla/static/lib/v2/evh_g_common.js \
 ~/Development/Evalhalla/static/lib/v2/evh_g_state.js \
 ~/Development/Evalhalla/static/lib/v2/evh_feature_query_param_load_cortex.js \
+~/Development/Evalhalla/static/lib/v2/evh_cortex_messages.js \
 ~/Development/Evalhalla/static/lib/v2/evh_feature_instant_table.js \
 ~/Development/Evalhalla/static/lib/v2/evh_player_core_tableview.js \
 
@@ -422,7 +423,7 @@ evhcompile_tableview () {
     fi
 }
 evhcompile_qrs () {
-    MODULE="<tableview>"
+    MODULE="<qrs>"
     if [ "$COMPILE_MODE" == "$COMPILE_OPTS_QRS" ] || [ "$COMPILE_MODE" == "$COMPILE_OPTS_ALL" ]; then
         echo -e "\nCompiling $MODULE... Start"
         COMBINED="$EVH_QRS_PKG"
