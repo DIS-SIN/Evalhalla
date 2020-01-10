@@ -6,30 +6,106 @@ Evalhalla - and experiment in making form generation easy as writing an email.
 
 A little bit of HTML, JS, and CSS. Nice styles by Materialize. Horsepower thanks to standing on the shoulders of giants.
 
-See it in action: COMING SOON
-
 # Getting it Running
 
-Here's a sample survey script, it's not a real one yet, but you can get the general idea of how you'd use it to build a "real world" survey. This "Evalese" script is consumed by the "Evalese" interpreter to product HTML and JSON representations of the form. With a little bit of API and some JSON you can get everything working.
+## Get the Backend
+
+First thing to do is to head over and get [EvalhallaBackend](https://github.com/DIS-SIN/EvalhallaBackend)
+
+Then follow the instructions there to get it up and running locally. Here's a quick start:
 
 ```bash
-# TEST_SUR
+source .dev.env
+export APP_ENV=development
+export EVALHALLA_USE_SENTIMENT=False
+docker-compose up --build 
+```
+
+Note, this will use PyPi, so if for some reason the network you're on blocks traffic here, you'll need to connect to a
+network that doesnt. 
+
+Once it builds and fires up you should be able to hit the following URLS. Let's assume our survey id is `MY_UNIQUE_SURVEY_ID`
+
+```bash
+# For the Evalese template of TEST_SUR
+http://localhost:5000/evalese/MY_UNIQUE_SURVEY_ID
+# For the Responses of TEST_SUR
+http://localhost:5000/responses/MY_UNIQUE_SURVEY_ID
+```
+
+Great. Now the backend is working. Time to get the frontend working.
+
+## Get the Frontend
+
+Clone this repository and then get started. By default it's wired for production, you'll need to make a minor modification
+to point it at the local dockers.
+
+In `Evalhalla/integrations/cortex/cortex-functions.js` update the following:
+
+```bash
+// original prod backend connection
+_C.connectedBackend = backendUrl;
+
+// change the above to use the dev version of the url:
+_C.connectedBackend = backendUrlDev;
+```
+
+That's all you'll need to update, but be sure to revert if you're deploying to production.
+
+Now let's go ahead and build and run the front end
+
+```bash
+# closure compiler crunches everything together
+sh static/dist/evh_compile.sh all
+# build the docker wonders this will produce an ID like "84e0498d5272" you can then run 
+docker build .
+# the command above will output something like "Successfully built 84e0498d5272"
+# run the image
+docker run -p 8000:80 84e0498d5272
+```
+
+There wont be logging that indicates it's running, but if nothing errors out you should be able to go to the following
+URLs to start everything up
+
+```bash
+# The survey builder/editor
+http://localhost:8000/app/designer/basic/?sur=MY_UNIQUE_SURVEY_ID
+
+# The Survey App
+http://localhost:8000/app/player/survey/?sur=MY_UNIQUE_SURVEY_ID
+
+# The Survey Dashboard
+http://localhost:8000/app/player/dashboard/?sur=MY_UNIQUE_SURVEY_ID
+
+# The QR Code Generator (note it will go to the prod version not dev)
+http://localhost:8000/app/player/qrs/?sur=MY_UNIQUE_SURVEY_ID
+
+# The Survey Data Table
+http://localhost:8000/app/player/tableview/?sur=MY_UNIQUE_SURVEY_ID
+
+```
+
+## Make a survey!
+
+Load up the designer from the `http://localhost:8000/app/designer/basic/` URL. You'll be prompted for an ID. Enter something like
+`My unique survey id` this will become `MY_UNIQUE_SURVEY_ID` automatically.
+
+*Note* Please dont use IE, it just doesn't work right. Chrome or Firefox are your friends. Edge works most of the time, but we have run into weird edge cases (pun not intended). Mobile phones also work great.
+
+Here's a sample survey script - should give the general idea of how you'd use it to build a "real world" survey. This "Evalese" script is consumed by the "Evalese" interpreter to product HTML and JSON representations of the form. With a little bit of API and some JSON you can get everything working.
+
+*note* The first line of any Evalhalla survey references the unique survey ID in this case by using the `# MY_UNIQUE_SURVEY_ID` command if your survey ID was instead `FISH` you'd have `# FISH` as the first line of your Evalese. The URL you'd visit would also have this ID defined like `http://localhost:8000/app/designer/basic/?sur=FISH`
+
+```bash
+# MY_UNIQUE_SURVEY_ID
 
 ##
 /en Evalhalla /;
 /fr Evalhalla /;
 
 ###
-/en Thank you for taking part in this survey. The results of this survey will be used to demonstrate how Evalhalla can be used to quickly collect valuable data and provide instant access to survey results through a real-time dashboard for immediate consumption. <br>
-<br>
-Please take a few minutes to answer the following questions. /; 
-/fr Merci de participer à cette sondage. Les résultats de cette sondage serviront à vous montrer comment Evalhalla peut être utilisé pour la collecte rapide des données utiles ainsi que pour fournir un accès instantané aux résultats de sondage via un tableau de bord en temps réel pour une consommation immédiate.<br>
-<br>
-Veuillez prendre quelques minutes pour répondre aux questions suivantes. /;
-
-/NOTOMBSTONEPAGE
-
-/NOOFFERINGPAGE
+/en Thank you for taking part in this survey. /; 
+/fr Merci de participer à cette sondage. /;
 
 /pagebreak 
 
@@ -186,16 +262,59 @@ Q:
 /en Is there anything else you would like to share about the presentation, demo or Evalhalla? /;
 /fr Y a-t-il autre chose que vous voudriez partager au sujet de la présentation, de la démo ou d'Evalhalla? /;
 /open
+
 ```
 
-You can also add some preprocessing commands to turn off some of our pre-canned pages
+You can also add some preprocessing commands to turn on some of our pre-canned pages. These should appear after the `###` part of the evalese (before your first Q:)
 
 ```bash
-/NOOFFERINGPAGE
+/OFFERINGPAGE
 
-/NOTOMBSTONEPAGE
+/TOMBSTONEPAGE
 ```
+
+Once you've put your Evalese in the editor, it's time to publish. You will need an `EDIT PIN`. Right now, you'll need to contact the CSPS Digital Academy, Innovation Services team to get the pin, but that's a quick email to one of the team members. Let's say the edit pin was `ABC123` (it isn't, but examples and all that)
+
+Open the edit pin entry by using the top menu of the designer to toggle the storage screen
+```bash
+View > Storage
+```
+
+Enter `ABC123` into the field. Then untoggle the storage screen (same menu action again):
+
+```bash
+View > Storage
+```
+
+Now you're ready to publish. Using the top menu:
+
+```bash
+Menu > Publish
+```
+
+This will push the evalese into the backend and create a QR code (note: it's wired for the production verion), so to least locally you'll need to use the local urls as stated above. That's it. It's ready to use.
+
+Now load the survey
+```bash
+http://localhost:8000/app/player/survey/?sur=MY_UNIQUE_SURVEY_ID
+```
+
+Great. It loaded. enter some values, and then submit the response. Awesome. Now let's see the results
+
+```bash
+http://localhost:8000/app/player/dashboard/?sur=MY_UNIQUE_SURVEY_ID
+```
+
+There we have the results. It should look sweet. Enjoy the fruits of your labors.
 
 # Notes
 
-This is only aimed to serve as a proof of concept. Alpha technology. Expect changes.
+This is only aimed to serve as a proof of concept. POC Alpha technology. Expect changes.
+
+The code base here has been through many quick and loose changes, so we don't recommend using this as your production starting point, but instead use it to quickly test out some ideas so you can get the right requirements in place to build a prod-worthy MVP. 
+
+Our first POC was built in under 30 days and helped answer a ton of questions, and let us try things out with real users and get real feedback to help inform our way forward. The POC doesn't have a bunch of feature's we'd want in a prod-ready version (such as profiles, user-auth, various admin level functions for administration of surveys, there's no mailer to send out links to a distribution list etc). But those parts are pretty common to most apps, we wanted to answer the unknown questions first.
+
+The goal here is to answer questions like "do users want dashboards that build themselves", "will users write in markdown",
+"is there value in being able to build a survey, dash, and app without having to code".
+
