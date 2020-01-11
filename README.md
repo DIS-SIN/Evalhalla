@@ -52,7 +52,15 @@ _C.connectedBackend = backendUrlDev;
 
 That's all you'll need to update, but be sure to revert if you're deploying to production.
 
-Now let's go ahead and build and run the front end
+Now let's go ahead and build and run the front end. 
+
+We've tried to group features together so you can turn them on and off with minimal refactoring, and to bundle them together we're using the [Closure Compiler](https://developers.google.com/closure/compiler/docs/gettingstarted_app). Go there and download the tool then update the path to the compiler in `static/dist/evh_compile.sh`. Look for the variable `CMP_JAR` in the script and change it to point at where you have your jar file. Ours is currently set here:
+
+```bash
+~/Development/closure-compiler/closure-compiler.jar
+```
+
+Once you have the compiler in place we can go ahead and bundle everything up. The compiler will produce `*_dist.js` files in the `static/dist/` folder which the HTML templates `/app` use to run everything. 
 
 ```bash
 # closure compiler crunches everything together
@@ -90,9 +98,9 @@ http://localhost:8000/app/player/tableview/?sur=MY_UNIQUE_SURVEY_ID
 Load up the designer from the `http://localhost:8000/app/designer/basic/` URL. You'll be prompted for an ID. Enter something like
 `My unique survey id` this will become `MY_UNIQUE_SURVEY_ID` automatically.
 
-*Note* Please dont use IE, it just doesn't work right. Chrome or Firefox are your friends. Edge works most of the time, but we have run into weird edge cases (pun not intended). Mobile phones also work great.
+*Note* Please dont use IE, it just doesn't work right reliably. Chrome or Firefox are your friends. Edge works most of the time, but we have run into weird edge cases (pun not intended). Mobile phones also work great.
 
-Here's a sample survey script - should give the general idea of how you'd use it to build a "real world" survey. This "Evalese" script is consumed by the "Evalese" interpreter to product HTML and JSON representations of the form. With a little bit of API and some JSON you can get everything working.
+Here's a sample "Evalese" (modified markdown) survey script - should give the general idea of how you'd use it to build a "real world" survey. This "Evalese" script is consumed by the "Evalese" interpreter to product HTML and JSON representations of the form. With a little bit of API and some JSON you can get everything working.
 
 *note* The first line of any Evalhalla survey references the unique survey ID in this case by using the `# MY_UNIQUE_SURVEY_ID` command if your survey ID was instead `FISH` you'd have `# FISH` as the first line of your Evalese. The URL you'd visit would also have this ID defined like `http://localhost:8000/app/designer/basic/?sur=FISH`
 
