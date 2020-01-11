@@ -1,6 +1,6 @@
 # Evalhalla. Forms that function. Simply.
 
-Evalhalla - and experiment in making form generation easy as writing an email.
+Evalhalla - an experiment in making form generation easy as writing an email.
 
 # General Information
 
@@ -273,7 +273,9 @@ You can also add some preprocessing commands to turn on some of our pre-canned p
 /TOMBSTONEPAGE
 ```
 
-Once you've put your Evalese in the editor, it's time to publish. You will need an `EDIT PIN`. Right now, you'll need to contact the CSPS Digital Academy, Innovation Services team to get the pin, but that's a quick email to one of the team members. Let's say the edit pin was `ABC123` (it isn't, but examples and all that)
+Once you've put your Evalese in the editor, it's time to publish. You will need an `EDIT PIN`. Right now, we're keeping the pool of editors small while we test out our ideas and see what works with real users, once everything is baked we hope to enable others to replicate it for themselves. 
+
+Let's say the edit pin was `ABC123` (it isn't, but examples and all that)
 
 Open the edit pin entry by using the top menu of the designer to toggle the storage screen
 ```bash
@@ -311,10 +313,9 @@ There we have the results. It should look sweet. Enjoy the fruits of your labors
 
 This is only aimed to serve as a proof of concept. POC Alpha technology. Expect changes.
 
-The code base here has been through many quick and loose changes, so we don't recommend using this as your production starting point, but instead use it to quickly test out some ideas so you can get the right requirements in place to build a prod-worthy MVP. 
-
-Our first POC was built in under 30 days and helped answer a ton of questions, and let us try things out with real users and get real feedback to help inform our way forward. The POC doesn't have a bunch of feature's we'd want in a prod-ready version (such as profiles, user-auth, various admin level functions for administration of surveys, there's no mailer to send out links to a distribution list etc). But those parts are pretty common to most apps, we wanted to answer the unknown questions first.
+The code base here has had many different experimental features added and removed over the course of iterating on it, so we don't recommend using this as your production starting point (our suggestion is to base it on a collection of microservices that provide profile, user auth, and leverage some kind of graph enabled backend like Prisma to really capitalize on the potential.) 
 
 The goal here is to answer questions like "do users want dashboards that build themselves", "will users write in markdown",
 "is there value in being able to build a survey, dash, and app without having to code".
 
+Experiment early. Correct often. Listen to your users more than you listen to yourself.
