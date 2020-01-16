@@ -7,10 +7,12 @@ var _C = {};
 const adminUrl = "https://cortex.da-an.ca/admin"
 // EvalhallaBackend
 const backendUrl = "https://api.app.evalhalla.ca";
+// EvalhallaBackend Preprod
+const backendUrlPP = "https://preproduction.api.app.evalhalla.ca";
 // local docker test
 const backendUrlDev = "http://localhost:5000";
 // set backend
-_C.connectedBackend = backendUrl; // TODO: Change this to alter backend connection
+_C.connectedBackend = backendUrlPP; // TODO: Change this to alter backend connection
 // prod: backendUrl
 // dev: backendUrlDev
 // suggest environment variable or similar for this.
