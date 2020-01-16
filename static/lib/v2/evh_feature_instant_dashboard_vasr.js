@@ -187,7 +187,7 @@ _E.feature.aesir.truncate_length = 10;
 _E.feature.aesir.g_chart_data_counter = 0;
 _E.feature.aesir.cortex_get_survey_callback = function () {
     // TODO: Correct for CORTEX reply
-    console.log("Cortex GetSurvey Callback ");
+    console.log("Get Survey Callback ");
     _E.feature.aesir.cortex_reply = _E.feature.aesir.cortex_chart_data.payload.data;
     _E.feature.aesir.render_data(_E.feature.aesir.cortex_reply);
     //_E.feature.aesir.g_chart_data_counter = _E.feature.aesir.g_chart_data_counter + 1;
@@ -479,7 +479,9 @@ _E.feature.aesir.cortex_get_survey = function (survey) {
     //$.get("https://survistaapp.com/api/surveys/schemaless?title=" + survey, function (response) {
     //console.log(_E.feature.aesir.g_chart_data.length);
 
-    $.get("https://survistaapp.com/api/surveys/schemaless?title=" + _E.feature.qparam.settings.sur.toUpperCase(), function (response) {
+    let api_route = _C.apiroute.responses(_E.fxn.common.safe(_E.feature.qparam.settings.sur));
+    //"https://survistaapp.com/api/surveys/schemaless?title=" + _E.feature.qparam.settings.sur.toUpperCase()    
+    $.get(api_route, function (response) {
         //_E.feature.instadash.render_data(response);
 
         // sets: _E.feature.aesir.cortex_chart_data_excluded

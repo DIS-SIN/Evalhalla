@@ -3,72 +3,48 @@
 //
 
 var _C = {};
+// CORTEX. Deprecated.
 const adminUrl = "https://cortex.da-an.ca/admin"
+// EvalhallaBackend
+const backendUrl = "https://api.app.evalhalla.ca";
+// local docker test
+const backendUrlDev = "http://localhost:5000";
+// set backend
+_C.connectedBackend = backendUrl; // TODO: Change this to alter backend connection
+// prod: backendUrl
+// dev: backendUrlDev
+// suggest environment variable or similar for this.
 
+/*
+[evhbak]
+docker-compose up --build
+local:host:5000
+
+[evhfe]
+docker build .
+docker image ls
+docker run -p 8000:80 123imgid
+localhost:8000
+If you're making changes you might need
+docker container ls
+docker stop container_name_whatever
+then repeat above
+*/
+
+// route helpers
+_C.apiroute = {};
+_C.apiroute.evalese = function (survey_name) {
+  return _C.connectedBackend + "/evalese/" + survey_name.toUpperCase();
+}
+_C.apiroute.responses = function (survey_name) {
+  return _C.connectedBackend + "/responses/" + survey_name.toUpperCase();
+}
 //
 // Messages
 //
 
 const survey_metrics_avro_template = {}
-/*
-{
-  "namespace": "cortex.evalhalla.surveyMetrics",
-  "name": "survey_metrics",
-  "type": "record",
-  "fields": [
-    {
-      "name": "payload",
-      "type": {
-        "name": "payload",
-        "type": "record",
-        "fields": [
-          {
-            "name": "uid",
-            "type": "string"
-          },
-          {
-            "name": "survey_uid",
-            "type": "string"
-          },
-          {
-            "name": "data",
-            "type": {
-              "name": "data",
-              "type": "record",
-              "fields": [
-                {
-                  "name": "uid",
-                  "type": "string" // "uid": "test_sur_q_1",
-                },
-                {
-                  "name": "total",
-                  "type": "int" // "total": 1,
-                },
-                {
-                  "name": "question",
-                  "type": "array" //  "question": "[\"What is your first official language?\",\"Quelle est votre première langue officielle?\"]",
-                },
-                {
-                  "name": "stats",
-                  "type": "record" //  "stats": "{\"Latvian\":1}",
-                },
-                {
-                  "name": "questionType",
-                  "type": "string" //  "questionType": "CLASSIFIED",
-                },
-                {
-                  "name": "classifiedAs",
-                  "type": "string" // "classifiedAs": "GC_Language"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-}
-*/
+
 
 const evalese_avro_template = {
   "namespace": "cortex.evalhalla.evalese",
@@ -93,189 +69,6 @@ const survey_template_avro_template =
     { "name": "content", "type": "string" }
   ]
 }
-/*
-{
-  "namespace": "CORTEX",
-  "name": "survey_json",
-  "type": "record",
-  "fields": [
-    {
-      "name": "response",
-      "type": {
-        "name": "response",
-        "type": "record",
-        "fields": [
-          {
-            "name": "uid",
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "type": "string"
-          },
-          {
-            "name": "title",
-            "type": {
-              "name": "title",
-              "type": "record",
-              "fields": [
-                {
-                  "name": "en",
-                  "type": ["string", "null"],
-                  "default": ""
-                },
-                {
-                  "name": "fr",
-                  "type": ["string", "null"],
-                  "default": ""
-                }
-              ]
-            }
-          },
-          {
-            "name": "description",
-            "type": {
-              "name": "description",
-              "type": "record",
-              "fields": [
-                {
-                  "name": "en",
-                  "type": ["string", "null"],
-                  "default": ""
-                },
-                {
-                  "name": "fr",
-                  "type": ["string", "null"],
-                  "default": ""
-                }
-              ]
-            }
-          },
-          {
-            "name": "questions",
-            "type": {
-              //"name": "questions",
-              "type": "array",
-              "items": {
-                "name": "questions_record",
-                "type": "record",
-                "fields": [
-                  {
-                    "name": "qid",
-                    "type": "string"
-                  },
-                  {
-                    "name": "language",
-                    "type": "string"
-                  },
-                  {
-                    "name": "questionType",
-                    "type": "string"
-                  },
-                  {
-                    "name": "randomOrder",
-                    "type": "string"
-                  },
-                  {
-                    "name": "randomOptions",
-                    "type": "string"
-                  },
-                  {
-                    "name": "options",
-                    "type": "array"
-                  },
-                  {
-                    "name": "cortex",
-                    "type": {
-                      "name": "cortex",
-                      "type": "record",
-                      "fields": [
-                        {
-                          "name": "uid",
-                          "type": "string"
-                        },
-                        {
-                          "name": "atOrder",
-                          "type": "string"
-                        },
-                        {
-                          "name": "questionType",
-                          "type": "string"
-                        },
-                        {
-                          "name": "classifiedAs",
-                          "type": "string"
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "question",
-                    "type": {
-                      "name": "question",
-                      "type": "record",
-                      "fields": [
-                        {
-                          "name": "en",
-                          "type": ["string", "null"],
-                          "default": ""
-                        },
-                        {
-                          "name": "fr",
-                          "type": ["string", "null"],
-                          "default": ""
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "name": "description",
-                    "type": {
-                      "name": "description",
-                      "type": "record",
-                      "fields": [
-                        {
-                          "name": "en",
-                          "type": ["string", "null"],
-                          "default": ""
-                        },
-                        {
-                          "name": "fr",
-                          "type": ["string", "null"],
-                          "default": ""
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "name": "valid",
-            "type": {
-              "name": "valid",
-              "type": "record",
-              "fields": [
-                {
-                  "name": "from",
-                  "type": "string",
-                  "logicalType": "date"
-                },
-                {
-                  "name": "to",
-                  "type": "string",
-                  "logicalType": "date"
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-}
-*/
 
 const survey_response_avro_template =
 {
@@ -287,137 +80,6 @@ const survey_response_avro_template =
     { "name": "content", "type": "string" }
   ]
 }
-/*
-{
-  "namespace": "cortex.evalhalla.surveyResponse",
-  "name": "survey_response",
-  "type": "record",
-  "fields": [
-    {
-      "name": "response",
-      "type": {
-        "name": "response",
-        "type": "record",
-        "fields": [
-          {
-            "name": "userAgent",
-            "type": "string"
-          },
-          {
-            "name": "surveyEntryMethod",
-            "type": "string"
-          },
-          {
-            "name": "conducted",
-            "type": "string"
-          }
-        ]
-      }
-    },
-    {
-      "name": "respondent",
-      "type": {
-        "name": "respondent",
-        "type": "record",
-        "fields": [
-          {
-            "name": "fluent_at",
-            "type": "string"
-          },
-          {
-            "name": "in_department",
-            "type": "string"
-          },
-          {
-            "name": "located_in",
-            "type": "string"
-          },
-          {
-            "name": "work_as",
-            "type": "string"
-          }
-        ]
-      }
-    },
-    {
-      "name": "questions",
-      "type": {
-        "type": "array",
-        "items": {
-          "name": "questions_record",
-          "type": "record",
-          "fields": [
-            {
-              "name": "uid",
-              "type": "string"
-            },
-            {
-              "name": "questionType",
-              "type": "string"
-            },
-            {
-              "name": "classifiedAs",
-              "type": "string"
-            },
-            {
-              "name": "atOrder",
-              "type": "string"
-            },
-            {
-              "name": "questionAnswer",
-              "type": "string"
-            },
-            {
-              "name": "questionText",
-              "type": {
-                "name": "questionText",
-                "type": "record",
-                "fields": [
-                  {
-                    "name": "en",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "default": ""
-                  },
-                  {
-                    "name": "fr",
-                    "type": [
-                      "string",
-                      "null"
-                    ],
-                    "default": ""
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "created",
-      "type": {
-        "name": "created",
-        "type": "record",
-        "fields": [
-          {
-            "name": "from",
-            "type": "string",
-            "logicalType": "date"
-          },
-          {
-            "name": "to",
-            "type": "string",
-            "logicalType": "date"
-          }
-        ]
-      }
-    }
-  ]
-}
-*/
 
 //
 // Consumers
@@ -426,7 +88,7 @@ const survey_response_avro_template =
 _C.consumeEvaleseCallback = function () { };
 _C.consumeEvaleseCallbackError = function () { };
 const consumeEvalese = function (survey_name, variable, callback, callbackerror) {
-  console.log(`Message to CORTEX (consumeEvalese) ${survey_name.toUpperCase()}`);
+  console.log(`Message to EvalhallaBackend (consumeEvalese) ${survey_name.toUpperCase()}`);
 
   if (typeof callback !== "undefined") {
     _C.consumeEvaleseCallback = callback;
@@ -439,9 +101,16 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
   //survey_name = "survey_evalese";
   // end WARN
 
-  var url = adminUrl + "/topics/" + survey_name.toUpperCase() + "_survey_evalese/consume";
+  //var url = adminUrl + "/topics/" + survey_name.toUpperCase() + "_survey_evalese/consume";
+  //var url = "https://api.app.evalhalla.ca/evalese?surveyName=" + survey_name.toUpperCase();
+
+  var url = _C.connectedBackend + "/evalese?surveyName=" + survey_name.toUpperCase();
   $.ajax(
     url
+    //,{
+    //  crossDomain: true,
+    //  dataType: 'jsonp'
+    //}
   ).success(
     function (data, textStatus, jqXHR) {
       if (typeof data.evalese === "undefined") {
@@ -452,7 +121,8 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
         );
       }
       else {
-        console.log("CORTEX Success");
+        console.log("EvalhallaBackend Success");
+        // note: this is _E.feature.qparam.evalhalla_backend
         variable.evalese = data.evalese;
         //console.log(variable);
         _C.consumeEvaleseCallback();
@@ -473,7 +143,7 @@ const consumeEvalese = function (survey_name, variable, callback, callbackerror)
 _C.consumeSurveyMetricsCallback = function () { };
 _C.consumeSurveyMetricsCallbackError = function () { };
 const consumeSurveyMetrics = function (survey_name, variable, callback, callbackerror) {
-  console.log(`Message to CORTEX (consumeSurveyMetrics) ${survey_name.toUpperCase()}`);
+  console.log(`Message to EvalhallaBackend (consumeSurveyMetrics) ${survey_name.toUpperCase()}`);
 
   if (typeof callback !== "undefined") {
     _C.consumeSurveyMetricsCallback = callback;
@@ -485,9 +155,12 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
   // TODO: Update cortex to provide targeted survey metrics vs. most recent
 
 
-  var url = adminUrl + "/topics/" + survey_name.toUpperCase() + "/consume";
+  /*var url = adminUrl + "/topics/" + survey_name.toUpperCase() + "/consume";
   console.log("WARN: Overriding " + survey_name.toUpperCase() + " to survey_metrics");
   url = adminUrl + "/topics/survey_metrics/consume";
+  */
+  var url = _C.connectedBackend + "/responses/" + survey_name.toUpperCase();
+
   $.ajax(
     url
   ).success(
@@ -500,7 +173,7 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
         );
       }
       else {
-        console.log("CORTEX Success");
+        console.log("EvalhallaBackend Success");
         variable.payload = data.payload;
         //console.log(variable);
         _C.consumeSurveyMetricsCallback();
@@ -524,16 +197,23 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
 //
 
 const produceEvalese = function (survey_name, evalese) {
-  var data = {
+  /*var data = {
     "topic": survey_name.toUpperCase() + "_survey_evalese",
     "avro_schema": evalese_avro_template,
     "message": {
       "evalese": evalese
     }
+  }*/
+  var data = {
+    "surveyName": survey_name.toUpperCase(),
+    "evalese": evalese
   }
 
   $.ajax(
-    adminUrl + "/produce",
+    //adminUrl + "/produce"
+    //"https://api.app.evalhalla.ca/evalese/" + survey_name.toUpperCase()
+    _C.connectedBackend + "/evalese/" + survey_name.toUpperCase()
+    ,
     {
       data: JSON.stringify(data),
       contentType: "application/json",
@@ -553,7 +233,13 @@ const produceEvalese = function (survey_name, evalese) {
 
 const produceSurveyTemplate = function (survey_template) {
   // TODO: Unstub, Check AVRO format
-  console.log("Message to CORTEX (produceSurveyTemplate)");
+  console.log("Message to EvalhallaBackend (produceSurveyTemplate)");
+
+  // turn off function for now
+  if (true == true) {
+    console.log("produceSurveyTemplate Deprecation Note: Disconnecting Template for Evalese Render");
+    return null;
+  }
 
   var data = {
     "topic": "survey_json",
@@ -581,18 +267,21 @@ const produceSurveyTemplate = function (survey_template) {
 }
 
 const produceSurveyResponse = function (survey_response) {
-  console.log("Message to CORTEX (produceSurveyResponse)");
+  console.log("Message to EvalhallaBackend (produceSurveyResponse)");
 
-  var data = {
+  /*var data = {
     "topic": "survey_response",
     "avro_schema": survey_response_avro_template,
     "message": survey_response
-  }
+  }*/
+
+  var data_r = survey_response;
+  var url = _C.connectedBackend + "/responses/" + survey_name.toUpperCase();
 
   $.ajax(
-    adminUrl + "/produce",
+    url,//adminUrl + "/produce",
     {
-      data: JSON.stringify(data),
+      data: JSON.stringify(data_r),
       contentType: "application/json",
       dataType: "text",
       method: "POST"

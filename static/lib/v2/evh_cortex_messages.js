@@ -460,6 +460,9 @@ _E.feature.cortex.messages.create_survey_template_msg = function (jo) {
 
 _E.feature.cortex.messages.create_survey_evalese_msg = function (jo) {
     (_E.feature.cortex.messages.debug) ? console.log(`create_survey_evalese_msg`) : true;
+
+    return _E.core.interpreter.sur_evalese.trim();
+    /*
     let msg_cortex = {
         "uid": "",//
         "sur_evalese": ""
@@ -469,7 +472,7 @@ _E.feature.cortex.messages.create_survey_evalese_msg = function (jo) {
     msg_cortex.sur_evalese = _E.core.interpreter.sur_evalese.trim();
     msg_cortex = _E.fxn.common.trim_json_object_keyvalues(msg_cortex);
 
-    return msg_cortex;
+    return msg_cortex;*/
 };
 
 

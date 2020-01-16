@@ -264,8 +264,10 @@ _E.feature.player.ui_activate_pagedirection_buttons = function () {
 _E.feature.player.api_upload_survey_result = function (data_in) {
     //return;
     // upload the survey reponse to our integrations
-    let api_route = "";
-    api_route = sv_api_post_surv_resp_route + sv_api_key;
+    console.log("EvalhallaBackend api_upload_survey_result");
+    let api_route = _C.apiroute.responses(_E.fxn.common.safe(_E.feature.qparam.settings.sur));
+    // Note: from integrations/survista/survista_key
+    //api_route = sv_api_post_surv_resp_route + sv_api_key;
     _E.fxn.common.api_post_to_route(api_route, data_in);
 };
 
@@ -375,8 +377,8 @@ _E.feature.player.evalhalla_submit = function () {
     //    cortex_json_o.questions[ii]["questionText"] = derefQuestionText(cortex_json_o.questions[ii].uid)
     //}
 
-    console.log("HEY ");
-    console.log(cortex_json_o);
+    console.log("Saving... ");
+    //console.log(cortex_json_o);
 
     //
     // SAVE RESPONSES
@@ -385,8 +387,8 @@ _E.feature.player.evalhalla_submit = function () {
     //(_E.feature.player.debug) ? true : _E.feature.localstore.ls_save_survey_response(json_o_string);
     // TODO: turn back on (survista)
     (_E.feature.player.debug) ? true : _E.feature.player.api_upload_survey_result(json_o_string);
-    // TODO: Add CORTEX send here
-    (_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o);
+    // CORTEX Deprecation
+    //(_E.feature.player.debug) ? true : _E.feature.player.cortex_upload_survey_result(cortex_json_o);
 
     (_E.feature.player.debug) ? console.log(json_o_string) : true;
     //console.log(_E.core.interpreter.g_qindex);
