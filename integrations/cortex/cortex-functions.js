@@ -3,16 +3,17 @@
 //
 
 var _C = {};
-// CORTEX. Deprecated.
+// CORTEX Endpoint. Deprecated.
 const adminUrl = "https://cortex.da-an.ca/admin"
-// EvalhallaBackend
+// EvalhallaBackend Production
 const backendUrl = "https://api.app.evalhalla.ca";
-// EvalhallaBackend Preprod
+// EvalhallaBackend Pre-prod
 const backendUrlPP = "https://preproduction.api.app.evalhalla.ca";
-// local docker test
+// Development Backend (Local Docker)
 const backendUrlDev = "http://localhost:5000";
+
 // set backend
-_C.connectedBackend = backendUrlPP; // TODO: Change this to alter backend connection
+_C.connectedBackend = backendUrl; // TODO: Change this to alter backend connection
 // prod: backendUrl
 // dev: backendUrlDev
 // suggest environment variable or similar for this.
@@ -199,21 +200,12 @@ const consumeSurveyMetrics = function (survey_name, variable, callback, callback
 //
 
 const produceEvalese = function (survey_name, evalese) {
-  /*var data = {
-    "topic": survey_name.toUpperCase() + "_survey_evalese",
-    "avro_schema": evalese_avro_template,
-    "message": {
-      "evalese": evalese
-    }
-  }*/
   var data = {
     "surveyName": survey_name.toUpperCase(),
     "evalese": evalese
   }
 
   $.ajax(
-    //adminUrl + "/produce"
-    //"https://api.app.evalhalla.ca/evalese/" + survey_name.toUpperCase()
     _C.connectedBackend + "/evalese/" + survey_name.toUpperCase()
     ,
     {
@@ -270,12 +262,6 @@ const produceSurveyTemplate = function (survey_template) {
 
 const produceSurveyResponse = function (survey_response) {
   console.log("Message to EvalhallaBackend (produceSurveyResponse)");
-
-  /*var data = {
-    "topic": "survey_response",
-    "avro_schema": survey_response_avro_template,
-    "message": survey_response
-  }*/
 
   var data_r = survey_response;
   var url = _C.connectedBackend + "/responses/" + survey_name.toUpperCase();
