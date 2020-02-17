@@ -22,6 +22,24 @@
 <body>
     <div class="navbar-fixed">
         <nav class="white nav-extended">
+            <!-- Alpha Notice Snip -->
+            <div id="evh_alpha_notice"
+                style="background-color: #c2e3ec; color:#145062; width:100%; padding: 2px;line-height: 24px;">
+                <a href="#" style="float:right;"
+                    onclick="document.querySelector('#evh_alpha_notice').parentNode.removeChild(document.querySelector('#evh_alpha_notice'));">
+                    <em class="material-icons" aria-hidden="true" style="color:#145062;">cancel</em>
+                </a>
+                <strong style="font-weight: bold;">Evalhalla</strong>
+                <span class="en" lang="en">
+                    is a prototype developed by the CSPS Digital Academy as an experiment for building surveys and
+                    conducting evaluations.
+                </span>
+                <span class="fr" lang="fr">
+                    est un prototype développé par l'Académie numérique du CSPS à titre expérimental pour les enquêtes
+                    sur les bâtiments et la réalisation d'évaluations.
+                </span>
+            </div>
+            <!-- End Alpha Notice -->
             <div class="nav-wrapper container">
                 <a id="logo-container" class="brand-logo">Evalhalla</a>
                 <a data-target="mobile-demo" href="#logo-container" class="adm-function sidenav-trigger"
@@ -483,6 +501,7 @@
             </a>
         </li>-->
     </ul>
+
     <!-- Modal Structure -->
     <div id="cortex_test_data_modal" class="modal">
         <div class="modal-content">
